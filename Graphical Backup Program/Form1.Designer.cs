@@ -37,7 +37,7 @@ namespace Graphical_Backup_Program
             this.label1 = new System.Windows.Forms.Label();
             this.whereToBackupBox = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.path2CheckBox = new System.Windows.Forms.CheckBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.path1CheckBox = new System.Windows.Forms.CheckBox();
             this.clearingFoldersGroupBox = new System.Windows.Forms.GroupBox();
@@ -58,6 +58,7 @@ namespace Graphical_Backup_Program
             this.AllFilesBtn.TabIndex = 0;
             this.AllFilesBtn.Text = "Backup All Files";
             this.AllFilesBtn.UseVisualStyleBackColor = true;
+            this.AllFilesBtn.Click += new System.EventHandler(this.AllFilesBtn_Click);
             // 
             // CommonFilesBtn
             // 
@@ -69,6 +70,7 @@ namespace Graphical_Backup_Program
             this.CommonFilesBtn.TabIndex = 1;
             this.CommonFilesBtn.Text = "Backup Only Common Files";
             this.CommonFilesBtn.UseVisualStyleBackColor = true;
+            this.CommonFilesBtn.Click += new System.EventHandler(this.CommonFilesBtn_Click);
             // 
             // TextBoxLabel
             // 
@@ -103,7 +105,7 @@ namespace Graphical_Backup_Program
             // whereToBackupBox
             // 
             this.whereToBackupBox.Controls.Add(this.textBox2);
-            this.whereToBackupBox.Controls.Add(this.checkBox1);
+            this.whereToBackupBox.Controls.Add(this.path2CheckBox);
             this.whereToBackupBox.Controls.Add(this.textBox1);
             this.whereToBackupBox.Controls.Add(this.path1CheckBox);
             this.whereToBackupBox.Location = new System.Drawing.Point(8, 420);
@@ -123,17 +125,18 @@ namespace Graphical_Backup_Program
             this.textBox2.Size = new System.Drawing.Size(277, 27);
             this.textBox2.TabIndex = 3;
             // 
-            // checkBox1
+            // path2CheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.checkBox1.Location = new System.Drawing.Point(3, 65);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(102, 24);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "Use Path 2:";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.path2CheckBox.AutoSize = true;
+            this.path2CheckBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.path2CheckBox.Location = new System.Drawing.Point(3, 65);
+            this.path2CheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.path2CheckBox.Name = "path2CheckBox";
+            this.path2CheckBox.Size = new System.Drawing.Size(102, 24);
+            this.path2CheckBox.TabIndex = 2;
+            this.path2CheckBox.Text = "Use Path 2:";
+            this.path2CheckBox.UseVisualStyleBackColor = true;
+            this.path2CheckBox.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
             // textBox1
             // 
@@ -156,6 +159,7 @@ namespace Graphical_Backup_Program
             this.path1CheckBox.TabIndex = 0;
             this.path1CheckBox.Text = "Use Path 1:";
             this.path1CheckBox.UseVisualStyleBackColor = true;
+            this.path1CheckBox.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
             // clearingFoldersGroupBox
             // 
@@ -245,7 +249,7 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox whereToBackupBox;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox path2CheckBox;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.CheckBox path1CheckBox;
         private System.Windows.Forms.GroupBox clearingFoldersGroupBox;
