@@ -15,3 +15,5 @@ Some nice features of GBP (compared to FC) are:
 <br>GBP icon from: https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Afolder_open<br>
 
 ## How to Use
+
+<!-- TODO: talk about how stuff is saved to disk for next time (and where it's stored) -->

@@ -1,0 +1,1 @@
+Get AppData folder in C#: https://stackoverflow.com/a/915276

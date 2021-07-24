@@ -91,6 +91,7 @@ namespace Graphical_Backup_Program
             this.pathsTextBox.Name = "pathsTextBox";
             this.pathsTextBox.Size = new System.Drawing.Size(394, 301);
             this.pathsTextBox.TabIndex = 3;
+            this.pathsTextBox.TextChanged += new System.EventHandler(this.PathsTextBox_TextChanged);
             // 
             // label1
             // 
@@ -233,6 +234,7 @@ namespace Graphical_Backup_Program
             this.MaximizeBox = false;
             this.Name = "Form";
             this.Text = "Graphical Backup Program (GBP)";
+            this.Shown += new System.EventHandler(this.Form_Shown);
             this.whereToBackupBox.ResumeLayout(false);
             this.whereToBackupBox.PerformLayout();
             this.clearingFoldersGroupBox.ResumeLayout(false);
