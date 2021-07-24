@@ -51,9 +51,10 @@ namespace Graphical_Backup_Program
             // AllFilesBtn
             // 
             this.AllFilesBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.AllFilesBtn.Location = new System.Drawing.Point(7, 254);
+            this.AllFilesBtn.Location = new System.Drawing.Point(8, 337);
+            this.AllFilesBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.AllFilesBtn.Name = "AllFilesBtn";
-            this.AllFilesBtn.Size = new System.Drawing.Size(172, 40);
+            this.AllFilesBtn.Size = new System.Drawing.Size(197, 53);
             this.AllFilesBtn.TabIndex = 0;
             this.AllFilesBtn.Text = "Backup All Files";
             this.AllFilesBtn.UseVisualStyleBackColor = true;
@@ -61,9 +62,10 @@ namespace Graphical_Backup_Program
             // CommonFilesBtn
             // 
             this.CommonFilesBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.CommonFilesBtn.Location = new System.Drawing.Point(180, 254);
+            this.CommonFilesBtn.Location = new System.Drawing.Point(206, 337);
+            this.CommonFilesBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CommonFilesBtn.Name = "CommonFilesBtn";
-            this.CommonFilesBtn.Size = new System.Drawing.Size(172, 40);
+            this.CommonFilesBtn.Size = new System.Drawing.Size(197, 53);
             this.CommonFilesBtn.TabIndex = 1;
             this.CommonFilesBtn.Text = "Backup Only Common Files";
             this.CommonFilesBtn.UseVisualStyleBackColor = true;
@@ -72,28 +74,29 @@ namespace Graphical_Backup_Program
             // 
             this.TextBoxLabel.AutoSize = true;
             this.TextBoxLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.TextBoxLabel.Location = new System.Drawing.Point(7, 3);
+            this.TextBoxLabel.Location = new System.Drawing.Point(8, 4);
             this.TextBoxLabel.Name = "TextBoxLabel";
-            this.TextBoxLabel.Size = new System.Drawing.Size(280, 15);
+            this.TextBoxLabel.Size = new System.Drawing.Size(341, 20);
             this.TextBoxLabel.TabIndex = 2;
             this.TextBoxLabel.Text = "Paths to Backup. C for Common; U for Uncommon.";
             // 
             // pathsTextBox
             // 
             this.pathsTextBox.AcceptsReturn = true;
-            this.pathsTextBox.Location = new System.Drawing.Point(7, 21);
+            this.pathsTextBox.Location = new System.Drawing.Point(8, 28);
+            this.pathsTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pathsTextBox.Multiline = true;
             this.pathsTextBox.Name = "pathsTextBox";
-            this.pathsTextBox.Size = new System.Drawing.Size(345, 227);
+            this.pathsTextBox.Size = new System.Drawing.Size(394, 301);
             this.pathsTextBox.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(7, 297);
+            this.label1.Location = new System.Drawing.Point(8, 396);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 15);
+            this.label1.Size = new System.Drawing.Size(61, 20);
             this.label1.TabIndex = 4;
             this.label1.Text = "Options";
             // 
@@ -103,36 +106,41 @@ namespace Graphical_Backup_Program
             this.whereToBackupBox.Controls.Add(this.checkBox1);
             this.whereToBackupBox.Controls.Add(this.textBox1);
             this.whereToBackupBox.Controls.Add(this.path1CheckBox);
-            this.whereToBackupBox.Location = new System.Drawing.Point(7, 315);
+            this.whereToBackupBox.Location = new System.Drawing.Point(8, 420);
+            this.whereToBackupBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.whereToBackupBox.Name = "whereToBackupBox";
-            this.whereToBackupBox.Size = new System.Drawing.Size(345, 77);
+            this.whereToBackupBox.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.whereToBackupBox.Size = new System.Drawing.Size(394, 103);
             this.whereToBackupBox.TabIndex = 5;
             this.whereToBackupBox.TabStop = false;
             this.whereToBackupBox.Text = "Where to Backup";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(83, 47);
+            this.textBox2.Location = new System.Drawing.Point(104, 65);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(243, 23);
+            this.textBox2.Size = new System.Drawing.Size(277, 27);
             this.textBox2.TabIndex = 3;
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.checkBox1.Location = new System.Drawing.Point(3, 49);
+            this.checkBox1.Location = new System.Drawing.Point(3, 65);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(84, 19);
+            this.checkBox1.Size = new System.Drawing.Size(102, 24);
             this.checkBox1.TabIndex = 2;
             this.checkBox1.Text = "Use Path 2:";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(83, 18);
+            this.textBox1.Location = new System.Drawing.Point(104, 24);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(243, 23);
+            this.textBox1.Size = new System.Drawing.Size(277, 27);
             this.textBox1.TabIndex = 1;
             // 
             // path1CheckBox
@@ -141,9 +149,10 @@ namespace Graphical_Backup_Program
             this.path1CheckBox.Checked = true;
             this.path1CheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.path1CheckBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.path1CheckBox.Location = new System.Drawing.Point(3, 20);
+            this.path1CheckBox.Location = new System.Drawing.Point(3, 27);
+            this.path1CheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.path1CheckBox.Name = "path1CheckBox";
-            this.path1CheckBox.Size = new System.Drawing.Size(84, 19);
+            this.path1CheckBox.Size = new System.Drawing.Size(102, 24);
             this.path1CheckBox.TabIndex = 0;
             this.path1CheckBox.Text = "Use Path 1:";
             this.path1CheckBox.UseVisualStyleBackColor = true;
@@ -153,9 +162,11 @@ namespace Graphical_Backup_Program
             this.clearingFoldersGroupBox.Controls.Add(this.dontClearRadio);
             this.clearingFoldersGroupBox.Controls.Add(this.clearWithPromptRadio);
             this.clearingFoldersGroupBox.Controls.Add(this.autoClearRadio);
-            this.clearingFoldersGroupBox.Location = new System.Drawing.Point(7, 396);
+            this.clearingFoldersGroupBox.Location = new System.Drawing.Point(8, 528);
+            this.clearingFoldersGroupBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.clearingFoldersGroupBox.Name = "clearingFoldersGroupBox";
-            this.clearingFoldersGroupBox.Size = new System.Drawing.Size(345, 100);
+            this.clearingFoldersGroupBox.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.clearingFoldersGroupBox.Size = new System.Drawing.Size(394, 133);
             this.clearingFoldersGroupBox.TabIndex = 0;
             this.clearingFoldersGroupBox.TabStop = false;
             this.clearingFoldersGroupBox.Text = "Clearing Backup Folders";
@@ -164,11 +175,11 @@ namespace Graphical_Backup_Program
             // 
             this.dontClearRadio.AutoSize = true;
             this.dontClearRadio.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dontClearRadio.Location = new System.Drawing.Point(3, 72);
+            this.dontClearRadio.Location = new System.Drawing.Point(3, 96);
+            this.dontClearRadio.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dontClearRadio.Name = "dontClearRadio";
-            this.dontClearRadio.Size = new System.Drawing.Size(125, 19);
+            this.dontClearRadio.Size = new System.Drawing.Size(156, 24);
             this.dontClearRadio.TabIndex = 3;
-            this.dontClearRadio.TabStop = true;
             this.dontClearRadio.Text = "Don\'t Clear Folders";
             this.dontClearRadio.UseVisualStyleBackColor = true;
             // 
@@ -176,21 +187,23 @@ namespace Graphical_Backup_Program
             // 
             this.clearWithPromptRadio.AutoSize = true;
             this.clearWithPromptRadio.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.clearWithPromptRadio.Location = new System.Drawing.Point(3, 47);
+            this.clearWithPromptRadio.Location = new System.Drawing.Point(3, 63);
+            this.clearWithPromptRadio.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.clearWithPromptRadio.Name = "clearWithPromptRadio";
-            this.clearWithPromptRadio.Size = new System.Drawing.Size(162, 19);
+            this.clearWithPromptRadio.Size = new System.Drawing.Size(201, 24);
             this.clearWithPromptRadio.TabIndex = 2;
-            this.clearWithPromptRadio.TabStop = true;
             this.clearWithPromptRadio.Text = "Clear Folders with Prompt";
             this.clearWithPromptRadio.UseVisualStyleBackColor = true;
             // 
             // autoClearRadio
             // 
             this.autoClearRadio.AutoSize = true;
+            this.autoClearRadio.Checked = true;
             this.autoClearRadio.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.autoClearRadio.Location = new System.Drawing.Point(3, 22);
+            this.autoClearRadio.Location = new System.Drawing.Point(3, 29);
+            this.autoClearRadio.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.autoClearRadio.Name = "autoClearRadio";
-            this.autoClearRadio.Size = new System.Drawing.Size(240, 19);
+            this.autoClearRadio.Size = new System.Drawing.Size(299, 24);
             this.autoClearRadio.TabIndex = 0;
             this.autoClearRadio.TabStop = true;
             this.autoClearRadio.Text = "Clear Folders Automatically (No Prompt)";
@@ -198,9 +211,9 @@ namespace Graphical_Backup_Program
             // 
             // Form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(359, 501);
+            this.ClientSize = new System.Drawing.Size(410, 668);
             this.Controls.Add(this.clearingFoldersGroupBox);
             this.Controls.Add(this.whereToBackupBox);
             this.Controls.Add(this.label1);
@@ -210,7 +223,7 @@ namespace Graphical_Backup_Program
             this.Controls.Add(this.AllFilesBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "Form";
             this.Text = "Graphical Backup Program (GBP)";
