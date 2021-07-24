@@ -48,8 +48,23 @@ namespace Graphical_Backup_Program
 
         private void CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            //If both of these are disabled, don't allow user to push buttons cuz that doesn't make sense.
+            //If both of these are disabled, don't allow user to push buttons cuz that doesn't make any sense.
             if (path1CheckBox.Checked == false && path2CheckBox.Checked == false)
+            {
+                AllFilesBtn.Enabled = false;
+                CommonFilesBtn.Enabled = false;
+            }
+            else
+            {
+                AllFilesBtn.Enabled = true;
+                CommonFilesBtn.Enabled = true;
+            }
+        }
+
+        public void PathTextBox_TextChanged(object sender, EventArgs e)
+        {
+            //If both of these are blank, don't allow user to push buttons cuz that doesn't make any sense.
+            if (path1TextBox.Text == string.Empty && path2TextBox.Text == string.Empty)
             {
                 AllFilesBtn.Enabled = false;
                 CommonFilesBtn.Enabled = false;

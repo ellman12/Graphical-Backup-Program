@@ -36,9 +36,9 @@ namespace Graphical_Backup_Program
             this.pathsTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.whereToBackupBox = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.path2TextBox = new System.Windows.Forms.TextBox();
             this.path2CheckBox = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.path1TextBox = new System.Windows.Forms.TextBox();
             this.path1CheckBox = new System.Windows.Forms.CheckBox();
             this.clearingFoldersGroupBox = new System.Windows.Forms.GroupBox();
             this.dontClearRadio = new System.Windows.Forms.RadioButton();
@@ -104,9 +104,9 @@ namespace Graphical_Backup_Program
             // 
             // whereToBackupBox
             // 
-            this.whereToBackupBox.Controls.Add(this.textBox2);
+            this.whereToBackupBox.Controls.Add(this.path2TextBox);
             this.whereToBackupBox.Controls.Add(this.path2CheckBox);
-            this.whereToBackupBox.Controls.Add(this.textBox1);
+            this.whereToBackupBox.Controls.Add(this.path1TextBox);
             this.whereToBackupBox.Controls.Add(this.path1CheckBox);
             this.whereToBackupBox.Location = new System.Drawing.Point(8, 420);
             this.whereToBackupBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -117,13 +117,14 @@ namespace Graphical_Backup_Program
             this.whereToBackupBox.TabStop = false;
             this.whereToBackupBox.Text = "Where to Backup";
             // 
-            // textBox2
+            // path2TextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(104, 65);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(277, 27);
-            this.textBox2.TabIndex = 3;
+            this.path2TextBox.Location = new System.Drawing.Point(104, 65);
+            this.path2TextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.path2TextBox.Name = "path2TextBox";
+            this.path2TextBox.Size = new System.Drawing.Size(277, 27);
+            this.path2TextBox.TabIndex = 3;
+            this.path2TextBox.TextChanged += new System.EventHandler(this.PathTextBox_TextChanged);
             // 
             // path2CheckBox
             // 
@@ -138,13 +139,14 @@ namespace Graphical_Backup_Program
             this.path2CheckBox.UseVisualStyleBackColor = true;
             this.path2CheckBox.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
-            // textBox1
+            // path1TextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(104, 24);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(277, 27);
-            this.textBox1.TabIndex = 1;
+            this.path1TextBox.Location = new System.Drawing.Point(104, 24);
+            this.path1TextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.path1TextBox.Name = "path1TextBox";
+            this.path1TextBox.Size = new System.Drawing.Size(277, 27);
+            this.path1TextBox.TabIndex = 1;
+            this.path1TextBox.TextChanged += new System.EventHandler(this.PathTextBox_TextChanged);
             // 
             // path1CheckBox
             // 
@@ -248,9 +250,9 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.TextBox pathsTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox whereToBackupBox;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox path2TextBox;
         private System.Windows.Forms.CheckBox path2CheckBox;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox path1TextBox;
         private System.Windows.Forms.CheckBox path1CheckBox;
         private System.Windows.Forms.GroupBox clearingFoldersGroupBox;
         private System.Windows.Forms.RadioButton dontClearRadio;
