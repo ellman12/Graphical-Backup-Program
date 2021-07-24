@@ -10,5 +10,8 @@ Some nice features of GBP (compared to FC) are:
 * Easily switch between where backups are created
 * Create multiple GBP backups
 * Clear backups folder before backing up to prevent extra, unnecessary backups from consuming disk space
+* Ability to save time by only backing up common items that frequently change
 
-<br>GBP icon from: https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Afolder_open
+<br>GBP icon from: https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Afolder_open<br>
+
+## How to Use
