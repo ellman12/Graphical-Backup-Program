@@ -78,6 +78,17 @@ namespace Graphical_Backup_Program
         private void PathsTextBox_TextChanged(object sender, EventArgs e)
         {
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
+
+            if (pathsTextBox.Text == string.Empty)
+            {
+                AllFilesBtn.Enabled = false;
+                CommonFilesBtn.Enabled = false;
+            }
+            else
+            {
+                AllFilesBtn.Enabled = true;
+                CommonFilesBtn.Enabled = true;
+            }
         }
 
         //Perform some necessary initialization stuff when program is ran.
@@ -94,6 +105,18 @@ namespace Graphical_Backup_Program
                 clearWithPromptRadio.Checked = bool.Parse(ConfigurationManager.AppSettings.Get("clearWithPromptRadioChecked") ?? throw new InvalidOperationException());
                 dontClearRadio.Checked = bool.Parse(ConfigurationManager.AppSettings.Get("dontClearRadioChecked") ?? throw new InvalidOperationException());
             }
+
+            if (pathsTextBox.Text == string.Empty || (path1TextBox.Text == string.Empty && path2TextBox.Text == string.Empty) || (path1CheckBox.Checked == false && path2CheckBox.Checked == false))
+            {
+                AllFilesBtn.Enabled = false;
+                CommonFilesBtn.Enabled = false;
+            }
+            else
+            {
+                AllFilesBtn.Enabled = true;
+                CommonFilesBtn.Enabled = true;
+            }
+
         }
 
         //On exit, write stuff to config file for next time.
