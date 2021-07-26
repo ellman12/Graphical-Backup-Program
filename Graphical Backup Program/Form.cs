@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Configuration;
+using System.Collections.Specialized;
 
 namespace Graphical_Backup_Program
 {
     public partial class Form : System.Windows.Forms.Form
     {
+        //https://stackoverflow.com/a/11882118
+        private readonly string _projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
+
         public Form()
         {
             InitializeComponent();
@@ -30,6 +27,7 @@ namespace Graphical_Backup_Program
                 path = p;
             }
         }
+
 
         public Path[] CreateStructArray(string[] textBoxPaths)
         {
@@ -79,35 +77,42 @@ namespace Graphical_Backup_Program
 
         private void PathsTextBox_TextChanged(object sender, EventArgs e)
         {
-            string filePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "GBP", "paths.txt");
-            File.WriteAllText(filePath, pathsTextBox.Text);
+            File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
         }
 
         //Perform some necessary initialization stuff when program is ran.
         private void Form_Shown(object sender, EventArgs e)
         {
-            //Create necessary folders and files, if they don't already exist.
-            //Path to GBP folder in AppData/Local. Stores files used by GBP.
-            string appDataPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "GBP");
-            if (!Directory.Exists(appDataPath))
-                Directory.CreateDirectory(System.IO.Path.Combine(appDataPath));
-
-            //Path to paths.txt in this ↑ folder. Stores what user wants backed up.
-            //If exists already, pfor the paths in the TextBox.
-            string pathsTxtPath = System.IO.Path.Combine(appDataPath, "paths.txt");
-            if (!File.Exists(pathsTxtPath))
-                File.Create(pathsTxtPath);
-            else
-                pathsTextBox.Text = File.ReadAllText(pathsTxtPath);
-
-            //If the config file doesn't exist, create it. If it does, read its contents and apply them to the GUI.
-            string configPath = System.IO.Path.Combine(appDataPath, "App.config");
-            if (!File.Exists(configPath))
-                File.Create(configPath);
-            else
+            if (File.Exists(_projectDirectory + "/App.config"))
             {
+                path1CheckBox.Checked = bool.Parse(ConfigurationManager.AppSettings.Get("path1Checked") ?? throw new InvalidOperationException()); //https://stackoverflow.com/questions/446835/what-do-two-question-marks-together-mean-in-c
+                path1TextBox.Text = ConfigurationManager.AppSettings.Get("path1Text");
+                path2CheckBox.Checked = bool.Parse(ConfigurationManager.AppSettings.Get("path2Checked") ?? throw new InvalidOperationException());
+                path2TextBox.Text = ConfigurationManager.AppSettings.Get("path2Text");
 
+                autoClearRadio.Checked = bool.Parse(ConfigurationManager.AppSettings.Get("autoClearRadioChecked") ?? throw new InvalidOperationException());
+                clearWithPromptRadio.Checked = bool.Parse(ConfigurationManager.AppSettings.Get("clearWithPromptRadioChecked") ?? throw new InvalidOperationException());
+                dontClearRadio.Checked = bool.Parse(ConfigurationManager.AppSettings.Get("dontClearRadioChecked") ?? throw new InvalidOperationException());
             }
+        }
+
+        //On exit, write stuff to config file for next time.
+        private void Form_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
+        {
+            File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
+
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            config.AppSettings.Settings["path1Checked"].Value = path1CheckBox.Checked.ToString();
+            config.AppSettings.Settings["path1Text"].Value = path1TextBox.Text;
+            config.AppSettings.Settings["path2Checked"].Value = path2CheckBox.Checked.ToString();
+            config.AppSettings.Settings["path2Text"].Value = path2TextBox.Text;
+
+            config.AppSettings.Settings["autoClearRadioChecked"].Value = autoClearRadio.Checked.ToString();
+            config.AppSettings.Settings["clearWithPromptRadioChecked"].Value = clearWithPromptRadio.Checked.ToString();
+            config.AppSettings.Settings["dontClearRadioChecked"].Value = dontClearRadio.Checked.ToString();
+
+            config.Save(ConfigurationSaveMode.Modified);
         }
     }
 }

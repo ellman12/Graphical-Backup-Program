@@ -152,8 +152,6 @@ namespace Graphical_Backup_Program
             // path1CheckBox
             // 
             this.path1CheckBox.AutoSize = true;
-            this.path1CheckBox.Checked = true;
-            this.path1CheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.path1CheckBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.path1CheckBox.Location = new System.Drawing.Point(3, 27);
             this.path1CheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -233,7 +231,8 @@ namespace Graphical_Backup_Program
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "Form";
-            this.Text = "Graphical Backup Program (GBP)";
+            this.Text = "Graphical Backup Program";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form_FormClosed);
             this.Shown += new System.EventHandler(this.Form_Shown);
             this.whereToBackupBox.ResumeLayout(false);
             this.whereToBackupBox.PerformLayout();

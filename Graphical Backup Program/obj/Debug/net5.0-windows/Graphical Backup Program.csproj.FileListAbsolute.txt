@@ -16,3 +16,4 @@ C:\Users\Elliott\Documents\GitHub\Graphical-Backup-Program\Graphical Backup Prog
 C:\Users\Elliott\Documents\GitHub\Graphical-Backup-Program\Graphical Backup Program\obj\Debug\net5.0-windows\Graphical Backup Program.pdb
 C:\Users\Elliott\Documents\GitHub\Graphical-Backup-Program\Graphical Backup Program\obj\Debug\net5.0-windows\Graphical Backup Program.genruntimeconfig.cache
 C:\Users\Elliott\Documents\GitHub\Graphical-Backup-Program\Graphical Backup Program\obj\Debug\net5.0-windows\Graphical_Backup_Program.Form.resources
+C:\Users\Elliott\Documents\GitHub\Graphical-Backup-Program\Graphical Backup Program\bin\Debug\net5.0-windows\Graphical Backup Program.dll.config
