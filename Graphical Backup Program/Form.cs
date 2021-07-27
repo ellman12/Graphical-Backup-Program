@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using FileSystem = Microsoft.VisualBasic.FileIO.FileSystem;
 
 namespace Graphical_Backup_Program
@@ -15,31 +16,10 @@ namespace Graphical_Backup_Program
             InitializeComponent();
         }
 
-        //TODO: ParseAllPaths()
-
-        //When user wants to begin copying just the Common Paths, go through line by line and determine which ones are marked 'common'.
-        private List<string> ParseCommonPaths()
-        {
-            string[] allPaths = pathsTextBox.Text.Split("\r\n");
-            List<string> commonPaths = new();
-
-            foreach (string path in allPaths)
-            {
-                if (Char.ToLower(path[0]) == 'c')
-                {
-                    string splitPath = path.Substring(2);
-                    commonPaths.Add(splitPath);
-                }
-            }
-
-            return commonPaths;
-        }
-
-        //Used for copying a single item to path1 and/or path2, and for putting some log output in the paths TextBox.
-        //pathNum is either 1 or 2.
+        //Used for copying a single item to path1 and/or path2, and for putting some log output in the paths TextBox. pathNum is either 1 or 2.
         private void CopyAndLog(string src, string dest, int pathNum)
         {
-            if (Path.HasExtension(src)) //If a file
+            if (Path.HasExtension(src)) //if a file
             {
                 pathsTextBox.Text += "Copying file " + src + " to path" + pathNum + "\r\n";
                 string srcFileName = Path.GetFileName(src);
@@ -51,7 +31,7 @@ namespace Graphical_Backup_Program
                 else
                     pathsTextBox.Text += "ERROR. File " + src + " was NOT successfully copied to path" + pathNum + "\r\n\r\n";
             }
-            else
+            else //if a folder
             {
                 pathsTextBox.Text += "Copying folder " + src + " to path" + pathNum + "\r\n";
 
@@ -69,16 +49,36 @@ namespace Graphical_Backup_Program
 
         private void AllPathsBtn_Click(object sender, EventArgs e)
         {
-            //File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
-            //TODO
+            File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
+
+            //When user wants to begin copying all C and U paths, go through line by line and determine which ones are marked C or U.
+            string[] splitText = pathsTextBox.Text.Split("\r\n");
+            List<string> allPaths = (from path in splitText where Char.ToLower(path[0]) is 'c' or 'u' select path.Substring(2)).ToList();
+
+            pathsTextBox.Text = "Backing up all C and U items...\r\n---------------------------------------------------------------\r\n";
+
+            foreach (string path in allPaths)
+            {
+                //Copy each item to path1 and/or path2, as long as the box is checked AND the TextBox isn't blank.
+                if (path1CheckBox.Checked && path1TextBox.Text != String.Empty)
+                    CopyAndLog(path, path1TextBox.Text, 1);
+
+                if (path2CheckBox.Checked && path2TextBox.Text != String.Empty)
+                    CopyAndLog(path, path2TextBox.Text, 2);
+            }
+
+            pathsTextBox.Text += "---------------------------------------------------------------";
         }
 
         private void CommonPathsBtn_Click(object sender, EventArgs e)
         {
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
-            List<string> commonPaths = ParseCommonPaths();
-            pathsTextBox.Text =
-                "Backing up items...\r\n---------------------------------------------------------------\r\n";
+
+            //When user wants to begin copying just the Common Paths, go through line by line and determine which ones are marked 'common' (c).
+            string[] allPaths = pathsTextBox.Text.Split("\r\n");
+            List<string> commonPaths = (from path in allPaths where Char.ToLower(path[0]) == 'c' select path.Substring(2)).ToList();
+
+            pathsTextBox.Text = "Backing up common items...\r\n---------------------------------------------------------------\r\n";
 
             foreach (string path in commonPaths)
             {
@@ -125,6 +125,7 @@ namespace Graphical_Backup_Program
 
         private void PathsTextBox_TextChanged(object sender, EventArgs e)
         {
+            //Don't allow buttons to be pressed if the paths TextBox is empty.
             if (pathsTextBox.Text == String.Empty)
             {
                 AllFilesBtn.Enabled = false;
@@ -137,7 +138,7 @@ namespace Graphical_Backup_Program
             }
         }
 
-        //Perform some necessary initialization stuff when program is ran.
+        //On startup, assign GUI controls values from files, and disable any controls, if necessary.
         private void Form_Shown(object sender, EventArgs e)
         {
             pathsTextBox.Text = File.ReadAllText(_projectDirectory + "/paths.txt");
@@ -167,15 +168,11 @@ namespace Graphical_Backup_Program
                 AllFilesBtn.Enabled = true;
                 CommonFilesBtn.Enabled = true;
             }
-
         }
 
         //On exit, save config stuff for next time.
         private void Form_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
         {
-            File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
-
-            //Save config stuff to disk.
             string fileText = path1CheckBox.Checked.ToString() + "\r\n" + path1TextBox.Text + "\r\n" + path2CheckBox.Checked.ToString() + "\r\n" + path2TextBox.Text + "\r\n" + autoClearRadio.Checked.ToString() + "\r\n" + clearWithPromptRadio.Checked.ToString() + "\r\n" + dontClearRadio.Checked.ToString() + "\r\n" + backupModeBtn.Checked.ToString() + "\r\n" + fileExlorerBtn.Checked.ToString() + "\r\n" + createTimestampFolderBtn.Checked.ToString() + "\r\n" + dontCreateFolderBtn.Checked.ToString();
             File.WriteAllText(_projectDirectory + "/Config.txt", fileText);
         }
