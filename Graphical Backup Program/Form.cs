@@ -9,22 +9,6 @@ namespace Graphical_Backup_Program
 {
     public partial class Form : System.Windows.Forms.Form
     {
-        //private struct Config //GBP config
-        //{
-        bool path1Checked;
-        string path1Text;
-        bool path2Checked;
-        string path2Text;
-        bool autoClearRadioChecked;
-        bool clearWithPromptRadioChecked;
-        bool dontClearRadioChecked;
-        bool normalModeChecked;
-        bool explorerModeChecked;
-        bool createTimestampChecked;
-
-        bool dontCreateChecked;
-        //}
-
         //https://stackoverflow.com/a/11882118
         private readonly string _projectDirectory =
             Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName;
@@ -94,9 +78,7 @@ namespace Graphical_Backup_Program
                 if (Directory.Exists(src))
                     pathsTextBox.Text += "Successfully copied folder " + src + " to path" + pathNum + "\r\n\r\n";
                 else
-                    pathsTextBox.Text += "ERROR. Folder " + src + " was NOT successfully copied to path" + pathNum +
-                                         "\r\n\r\n";
-
+                    pathsTextBox.Text += "ERROR. Folder " + src + " was NOT successfully copied to path" + pathNum + "\r\n\r\n";
             }
         }
 
@@ -141,7 +123,7 @@ namespace Graphical_Backup_Program
             }
         }
 
-        public void PathTextBox_TextChanged(object sender, EventArgs e)
+        private void PathTextBox_TextChanged(object sender, EventArgs e)
         {
             //If both of these are blank, don't allow user to push buttons cuz that doesn't make any sense.
             if (path1TextBox.Text == String.Empty && path2TextBox.Text == String.Empty)
