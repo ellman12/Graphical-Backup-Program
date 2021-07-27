@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Collections.Specialized;
-using Microsoft.VisualBasic;
 using FileSystem = Microsoft.VisualBasic.FileIO.FileSystem;
 
 namespace Graphical_Backup_Program
@@ -10,8 +8,7 @@ namespace Graphical_Backup_Program
     public partial class Form : System.Windows.Forms.Form
     {
         //https://stackoverflow.com/a/11882118
-        private readonly string _projectDirectory =
-            Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName;
+        private readonly string _projectDirectory = Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName;
 
         public Form()
         {
@@ -32,48 +29,36 @@ namespace Graphical_Backup_Program
                 {
                     string splitPath = path.Substring(2);
                     commonPaths.Add(splitPath);
-                    if (splitPath[0] == ' ')
-                        splitPath = splitPath.Substring(1);
                 }
             }
 
             return commonPaths;
         }
 
-        //Returns true if path is a file, false if not (folder). Might not be best method...
-        private bool IsFile(string path)
-        {
-            return Path.HasExtension(path);
-        }
-
         //Used for copying a single item to path1 and/or path2, and for putting some log output in the paths TextBox.
         //pathNum is either 1 or 2.
         private void CopyAndLog(string src, string dest, int pathNum)
         {
-            if (IsFile(src))
+            if (Path.HasExtension(src)) //If a file
             {
                 pathsTextBox.Text += "Copying file " + src + " to path" + pathNum + "\r\n";
                 string srcFileName = Path.GetFileName(src);
                 string finalDest = Path.Combine(dest, srcFileName);
                 File.Copy(src, finalDest);
 
-
                 if (File.Exists(src))
                     pathsTextBox.Text += "Successfully copied file " + src + " to path" + pathNum + "\r\n\r\n";
                 else
-                    pathsTextBox.Text += "ERROR. File " + src + " was NOT successfully copied to path" + pathNum +
-                                         "\r\n\r\n";
+                    pathsTextBox.Text += "ERROR. File " + src + " was NOT successfully copied to path" + pathNum + "\r\n\r\n";
             }
             else
             {
                 pathsTextBox.Text += "Copying folder " + src + " to path" + pathNum + "\r\n";
-                //CopyDirectory(src, dest);
 
                 //Get the name of the folder and copy stuff there. CopyDirectory() doesn't do that automatically for some reason... https://stackoverflow.com/a/5229311
                 string dirName = new DirectoryInfo(src).Name;
                 string fullPath = Path.Combine(dest, dirName);
-                FileSystem.CopyDirectory(src,
-                    fullPath); //https://docs.microsoft.com/en-us/dotnet/api/microsoft.visualbasic.fileio.filesystem.copydirectory?view=net-5.0
+                FileSystem.CopyDirectory(src, fullPath); //https://docs.microsoft.com/en-us/dotnet/api/microsoft.visualbasic.fileio.filesystem.copydirectory?view=net-5.0
 
                 if (Directory.Exists(src))
                     pathsTextBox.Text += "Successfully copied folder " + src + " to path" + pathNum + "\r\n\r\n";
