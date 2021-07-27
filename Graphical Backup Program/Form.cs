@@ -1,7 +1,10 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Configuration;
 using System.Collections.Specialized;
+using Microsoft.VisualBasic;
+using FileSystem = Microsoft.VisualBasic.FileIO.FileSystem;
 
 namespace Graphical_Backup_Program
 {
@@ -15,35 +18,91 @@ namespace Graphical_Backup_Program
             InitializeComponent();
         }
 
-        //Struct representing each path in the TextBox.
-        public struct Path
-        {
-            public char type; //Either 'c' or 'u'
-            public string path;
+        //TODO: ParseAllPaths()
 
-            public Path(char t, string p)
+        //When user wants to begin copying just the Common Paths, go through line by line and determine which ones are marked 'common'.
+        private List<string> ParseCommonPaths()
+        {
+            string[] allPaths = pathsTextBox.Text.Split("\r\n");
+            List<string> commonPaths = new();
+
+            foreach (string path in allPaths)
             {
-                type = t;
-                path = p;
+                if (Char.ToLower(path[0]) == 'c')
+                {
+                    string splitPath = path.Substring(2);
+                    commonPaths.Add(splitPath);
+                    if (splitPath[0] == ' ')
+                        splitPath = splitPath.Substring(1);
+                }
+            }
+
+            return commonPaths;
+        }
+
+        //Returns true if path is a file, false if not (folder). Might not be best method...
+        private bool IsFile(string path)
+        {
+            return Path.HasExtension(path);
+        }
+
+        //Used for copying a single item to path1 and/or path2, and for putting some log output in the paths TextBox.
+        //pathNum is either 1 or 2.
+        private void CopyAndLog(string src, string dest, int pathNum)
+        {
+            if (IsFile(src))
+            {
+                pathsTextBox.Text += "Copying file " + src + " to path" + pathNum + "\r\n";
+                string srcFileName = Path.GetFileName(src);
+                string finalDest = Path.Combine(dest, srcFileName);
+                File.Copy(src, finalDest);
+
+
+                if (File.Exists(src))
+                    pathsTextBox.Text += "Successfully copied file " + src + " to path" + pathNum + "\r\n\r\n";
+                else
+                    pathsTextBox.Text += "ERROR. File " + src + " was NOT successfully copied to path" + pathNum + "\r\n\r\n";
+            }
+            else
+            {
+                pathsTextBox.Text += "Copying folder " + src + " to path" + pathNum + "\r\n";
+                //CopyDirectory(src, dest);
+
+                //Get the name of the folder and copy stuff there. CopyDirectory() doesn't do that automatically for some reason... https://stackoverflow.com/a/5229311
+                string dirName = new DirectoryInfo(src).Name;
+                string fullPath = Path.Combine(dest, dirName);
+                FileSystem.CopyDirectory(src, fullPath); //https://docs.microsoft.com/en-us/dotnet/api/microsoft.visualbasic.fileio.filesystem.copydirectory?view=net-5.0
+
+                if (Directory.Exists(src))
+                    pathsTextBox.Text += "Successfully copied folder " + src + " to path" + pathNum + "\r\n\r\n";
+                else
+                    pathsTextBox.Text += "ERROR. Folder " + src + " was NOT successfully copied to path" + pathNum + "\r\n\r\n";
+
             }
         }
 
-
-        public Path[] CreateStructArray(string[] textBoxPaths)
+        private void AllPathsBtn_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
-            return new Path[10];
-        }
-
-        private void AllFilesBtn_Click(object sender, EventArgs e)
-        {
-
+            //File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
+            //TODO
         }
 
         private void CommonPathsBtn_Click(object sender, EventArgs e)
         {
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
+            List<string> commonPaths = ParseCommonPaths();
+            pathsTextBox.Text = "Backing up items...\r\n---------------------------------------------------------------\r\n";
 
+            foreach (string path in commonPaths)
+            {
+                //Copy each item to path1 and/or path2, as long as the box is checked AND the TextBox isn't blank.
+                if (path1CheckBox.Checked && path1TextBox.Text != String.Empty)
+                    CopyAndLog(path, path1TextBox.Text, 1);
+
+                if (path2CheckBox.Checked && path2TextBox.Text != String.Empty)
+                    CopyAndLog(path, path2TextBox.Text, 2);
+            }
+            pathsTextBox.Text += "---------------------------------------------------------------";
         }
 
         private void CheckBox_CheckedChanged(object sender, EventArgs e)

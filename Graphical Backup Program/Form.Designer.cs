@@ -89,8 +89,10 @@ namespace Graphical_Backup_Program
             this.pathsTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pathsTextBox.Multiline = true;
             this.pathsTextBox.Name = "pathsTextBox";
+            this.pathsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.pathsTextBox.Size = new System.Drawing.Size(394, 301);
             this.pathsTextBox.TabIndex = 3;
+            this.pathsTextBox.WordWrap = false;
             this.pathsTextBox.TextChanged += new System.EventHandler(this.PathsTextBox_TextChanged);
             // 
             // label1
