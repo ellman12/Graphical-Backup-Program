@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Configuration;
 using System.Collections.Specialized;
 using Microsoft.VisualBasic;
 using FileSystem = Microsoft.VisualBasic.FileIO.FileSystem;
@@ -10,8 +9,25 @@ namespace Graphical_Backup_Program
 {
     public partial class Form : System.Windows.Forms.Form
     {
+        //private struct Config //GBP config
+        //{
+        bool path1Checked;
+        string path1Text;
+        bool path2Checked;
+        string path2Text;
+        bool autoClearRadioChecked;
+        bool clearWithPromptRadioChecked;
+        bool dontClearRadioChecked;
+        bool normalModeChecked;
+        bool explorerModeChecked;
+        bool createTimestampChecked;
+
+        bool dontCreateChecked;
+        //}
+
         //https://stackoverflow.com/a/11882118
-        private readonly string _projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
+        private readonly string _projectDirectory =
+            Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName;
 
         public Form()
         {
@@ -61,7 +77,8 @@ namespace Graphical_Backup_Program
                 if (File.Exists(src))
                     pathsTextBox.Text += "Successfully copied file " + src + " to path" + pathNum + "\r\n\r\n";
                 else
-                    pathsTextBox.Text += "ERROR. File " + src + " was NOT successfully copied to path" + pathNum + "\r\n\r\n";
+                    pathsTextBox.Text += "ERROR. File " + src + " was NOT successfully copied to path" + pathNum +
+                                         "\r\n\r\n";
             }
             else
             {
@@ -71,12 +88,14 @@ namespace Graphical_Backup_Program
                 //Get the name of the folder and copy stuff there. CopyDirectory() doesn't do that automatically for some reason... https://stackoverflow.com/a/5229311
                 string dirName = new DirectoryInfo(src).Name;
                 string fullPath = Path.Combine(dest, dirName);
-                FileSystem.CopyDirectory(src, fullPath); //https://docs.microsoft.com/en-us/dotnet/api/microsoft.visualbasic.fileio.filesystem.copydirectory?view=net-5.0
+                FileSystem.CopyDirectory(src,
+                    fullPath); //https://docs.microsoft.com/en-us/dotnet/api/microsoft.visualbasic.fileio.filesystem.copydirectory?view=net-5.0
 
                 if (Directory.Exists(src))
                     pathsTextBox.Text += "Successfully copied folder " + src + " to path" + pathNum + "\r\n\r\n";
                 else
-                    pathsTextBox.Text += "ERROR. Folder " + src + " was NOT successfully copied to path" + pathNum + "\r\n\r\n";
+                    pathsTextBox.Text += "ERROR. Folder " + src + " was NOT successfully copied to path" + pathNum +
+                                         "\r\n\r\n";
 
             }
         }
@@ -91,7 +110,8 @@ namespace Graphical_Backup_Program
         {
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
             List<string> commonPaths = ParseCommonPaths();
-            pathsTextBox.Text = "Backing up items...\r\n---------------------------------------------------------------\r\n";
+            pathsTextBox.Text =
+                "Backing up items...\r\n---------------------------------------------------------------\r\n";
 
             foreach (string path in commonPaths)
             {
@@ -102,6 +122,7 @@ namespace Graphical_Backup_Program
                 if (path2CheckBox.Checked && path2TextBox.Text != String.Empty)
                     CopyAndLog(path, path2TextBox.Text, 2);
             }
+
             pathsTextBox.Text += "---------------------------------------------------------------";
         }
 
@@ -154,17 +175,20 @@ namespace Graphical_Backup_Program
         {
             pathsTextBox.Text = File.ReadAllText(_projectDirectory + "/paths.txt");
 
-            if (File.Exists(_projectDirectory + "/App.config"))
-            {
-                path1CheckBox.Checked = Boolean.Parse(ConfigurationManager.AppSettings.Get("path1Checked") ?? throw new InvalidOperationException()); //https://stackoverflow.com/questions/446835/what-do-two-question-marks-together-mean-in-c
-                path1TextBox.Text = ConfigurationManager.AppSettings.Get("path1Text");
-                path2CheckBox.Checked = Boolean.Parse(ConfigurationManager.AppSettings.Get("path2Checked") ?? throw new InvalidOperationException());
-                path2TextBox.Text = ConfigurationManager.AppSettings.Get("path2Text");
-
-                autoClearRadio.Checked = Boolean.Parse(ConfigurationManager.AppSettings.Get("autoClearRadioChecked") ?? throw new InvalidOperationException());
-                clearWithPromptRadio.Checked = Boolean.Parse(ConfigurationManager.AppSettings.Get("clearWithPromptRadioChecked") ?? throw new InvalidOperationException());
-                dontClearRadio.Checked = Boolean.Parse(ConfigurationManager.AppSettings.Get("dontClearRadioChecked") ?? throw new InvalidOperationException());
-            }
+            //Read in config stuff. Is this stupid? Yes. Does it work? Also yes.
+            string configFileTxt = File.ReadAllText(_projectDirectory + "/Config.txt");
+            string[] config = configFileTxt.Split("\r\n");
+            path1CheckBox.Checked = Boolean.Parse(config[0]);
+            path1TextBox.Text = config[1];
+            path2CheckBox.Checked = Boolean.Parse(config[2]);
+            path2TextBox.Text = config[3];
+            autoClearRadio.Checked = Boolean.Parse(config[4]);
+            clearWithPromptRadio.Checked = Boolean.Parse(config[5]);
+            dontClearRadio.Checked = Boolean.Parse(config[6]);
+            backupModeBtn.Checked = Boolean.Parse(config[7]);
+            fileExlorerBtn.Checked = Boolean.Parse(config[8]);
+            createTimestampFolderBtn.Checked = Boolean.Parse(config[9]);
+            dontCreateFolderBtn.Checked = Boolean.Parse(config[10]);
 
             if (pathsTextBox.Text == String.Empty || (path1TextBox.Text == String.Empty && path2TextBox.Text == String.Empty) || (path1CheckBox.Checked == false && path2CheckBox.Checked == false))
             {
@@ -179,23 +203,14 @@ namespace Graphical_Backup_Program
 
         }
 
-        //On exit, write stuff to config file for next time.
+        //On exit, save config stuff for next time.
         private void Form_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
         {
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
 
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-            config.AppSettings.Settings["path1Checked"].Value = path1CheckBox.Checked.ToString();
-            config.AppSettings.Settings["path1Text"].Value = path1TextBox.Text;
-            config.AppSettings.Settings["path2Checked"].Value = path2CheckBox.Checked.ToString();
-            config.AppSettings.Settings["path2Text"].Value = path2TextBox.Text;
-
-            config.AppSettings.Settings["autoClearRadioChecked"].Value = autoClearRadio.Checked.ToString();
-            config.AppSettings.Settings["clearWithPromptRadioChecked"].Value = clearWithPromptRadio.Checked.ToString();
-            config.AppSettings.Settings["dontClearRadioChecked"].Value = dontClearRadio.Checked.ToString();
-
-            config.Save(ConfigurationSaveMode.Modified);
+            //Save config stuff to disk.
+            string fileText = path1CheckBox.Checked.ToString() + "\r\n" + path1TextBox.Text + "\r\n" + path2CheckBox.Checked.ToString() + "\r\n" + path2TextBox.Text + "\r\n" + autoClearRadio.Checked.ToString() + "\r\n" + clearWithPromptRadio.Checked.ToString() + "\r\n" + dontClearRadio.Checked.ToString() + "\r\n" + backupModeBtn.Checked.ToString() + "\r\n" + fileExlorerBtn.Checked.ToString() + "\r\n" + createTimestampFolderBtn.Checked.ToString() + "\r\n" + dontCreateFolderBtn.Checked.ToString();
+            File.WriteAllText(_projectDirectory + "/Config.txt", fileText);
         }
     }
 }

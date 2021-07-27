@@ -1,0 +1,11 @@
+path1Checked
+path1Text
+path2Checked
+path2Text
+autoClearRadioChecked
+clearWithPromptRadioChecked
+dontClearRadioChecked
+normalModeChecked
+explorerModeChecked
+createTimestampChecked
+dontCreateChecked
