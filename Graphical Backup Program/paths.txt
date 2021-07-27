@@ -1,1 +1,3 @@
-a
+c C:/Users/Elliott/Desktop/Interview Questions Template (1).docx
+c C:\Users\Elliott\Documents\GitHub\AutoHotkey\Other\Memes
+u C:\Users\Elliott\Documents\GitHub\AutoHotkey\Other\Memes\Cats

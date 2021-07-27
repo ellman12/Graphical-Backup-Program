@@ -56,9 +56,9 @@ namespace Graphical_Backup_Program
             this.AllFilesBtn.Name = "AllFilesBtn";
             this.AllFilesBtn.Size = new System.Drawing.Size(197, 53);
             this.AllFilesBtn.TabIndex = 0;
-            this.AllFilesBtn.Text = "Backup All Files";
+            this.AllFilesBtn.Text = "Backup All Paths";
             this.AllFilesBtn.UseVisualStyleBackColor = true;
-            this.AllFilesBtn.Click += new System.EventHandler(this.AllFilesBtn_Click);
+            this.AllFilesBtn.Click += new System.EventHandler(this.AllPathsBtn_Click);
             // 
             // CommonFilesBtn
             // 
@@ -68,9 +68,9 @@ namespace Graphical_Backup_Program
             this.CommonFilesBtn.Name = "CommonFilesBtn";
             this.CommonFilesBtn.Size = new System.Drawing.Size(197, 53);
             this.CommonFilesBtn.TabIndex = 1;
-            this.CommonFilesBtn.Text = "Backup Only Common Files";
+            this.CommonFilesBtn.Text = "Backup Just Common Paths";
             this.CommonFilesBtn.UseVisualStyleBackColor = true;
-            this.CommonFilesBtn.Click += new System.EventHandler(this.CommonFilesBtn_Click);
+            this.CommonFilesBtn.Click += new System.EventHandler(this.CommonPathsBtn_Click);
             // 
             // TextBoxLabel
             // 

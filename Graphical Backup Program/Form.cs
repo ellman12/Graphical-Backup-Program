@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Configuration;
 using System.Collections.Specialized;
@@ -40,8 +40,9 @@ namespace Graphical_Backup_Program
 
         }
 
-        private void CommonFilesBtn_Click(object sender, EventArgs e)
+        private void CommonPathsBtn_Click(object sender, EventArgs e)
         {
+            File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
 
         }
 
@@ -63,7 +64,7 @@ namespace Graphical_Backup_Program
         public void PathTextBox_TextChanged(object sender, EventArgs e)
         {
             //If both of these are blank, don't allow user to push buttons cuz that doesn't make any sense.
-            if (path1TextBox.Text == string.Empty && path2TextBox.Text == string.Empty)
+            if (path1TextBox.Text == String.Empty && path2TextBox.Text == String.Empty)
             {
                 AllFilesBtn.Enabled = false;
                 CommonFilesBtn.Enabled = false;
@@ -77,9 +78,7 @@ namespace Graphical_Backup_Program
 
         private void PathsTextBox_TextChanged(object sender, EventArgs e)
         {
-            File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
-
-            if (pathsTextBox.Text == string.Empty)
+            if (pathsTextBox.Text == String.Empty)
             {
                 AllFilesBtn.Enabled = false;
                 CommonFilesBtn.Enabled = false;
@@ -94,19 +93,21 @@ namespace Graphical_Backup_Program
         //Perform some necessary initialization stuff when program is ran.
         private void Form_Shown(object sender, EventArgs e)
         {
+            pathsTextBox.Text = File.ReadAllText(_projectDirectory + "/paths.txt");
+
             if (File.Exists(_projectDirectory + "/App.config"))
             {
-                path1CheckBox.Checked = bool.Parse(ConfigurationManager.AppSettings.Get("path1Checked") ?? throw new InvalidOperationException()); //https://stackoverflow.com/questions/446835/what-do-two-question-marks-together-mean-in-c
+                path1CheckBox.Checked = Boolean.Parse(ConfigurationManager.AppSettings.Get("path1Checked") ?? throw new InvalidOperationException()); //https://stackoverflow.com/questions/446835/what-do-two-question-marks-together-mean-in-c
                 path1TextBox.Text = ConfigurationManager.AppSettings.Get("path1Text");
-                path2CheckBox.Checked = bool.Parse(ConfigurationManager.AppSettings.Get("path2Checked") ?? throw new InvalidOperationException());
+                path2CheckBox.Checked = Boolean.Parse(ConfigurationManager.AppSettings.Get("path2Checked") ?? throw new InvalidOperationException());
                 path2TextBox.Text = ConfigurationManager.AppSettings.Get("path2Text");
 
-                autoClearRadio.Checked = bool.Parse(ConfigurationManager.AppSettings.Get("autoClearRadioChecked") ?? throw new InvalidOperationException());
-                clearWithPromptRadio.Checked = bool.Parse(ConfigurationManager.AppSettings.Get("clearWithPromptRadioChecked") ?? throw new InvalidOperationException());
-                dontClearRadio.Checked = bool.Parse(ConfigurationManager.AppSettings.Get("dontClearRadioChecked") ?? throw new InvalidOperationException());
+                autoClearRadio.Checked = Boolean.Parse(ConfigurationManager.AppSettings.Get("autoClearRadioChecked") ?? throw new InvalidOperationException());
+                clearWithPromptRadio.Checked = Boolean.Parse(ConfigurationManager.AppSettings.Get("clearWithPromptRadioChecked") ?? throw new InvalidOperationException());
+                dontClearRadio.Checked = Boolean.Parse(ConfigurationManager.AppSettings.Get("dontClearRadioChecked") ?? throw new InvalidOperationException());
             }
 
-            if (pathsTextBox.Text == string.Empty || (path1TextBox.Text == string.Empty && path2TextBox.Text == string.Empty) || (path1CheckBox.Checked == false && path2CheckBox.Checked == false))
+            if (pathsTextBox.Text == String.Empty || (path1TextBox.Text == String.Empty && path2TextBox.Text == String.Empty) || (path1CheckBox.Checked == false && path2CheckBox.Checked == false))
             {
                 AllFilesBtn.Enabled = false;
                 CommonFilesBtn.Enabled = false;
