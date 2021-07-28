@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -36,11 +36,13 @@ namespace Graphical_Backup_Program
                 }
                 catch (DirectoryNotFoundException)
                 {
-                    pathsTextBox.Text += "ERROR when trying to copy folder " + src + "... Could not find path. Did you enter the path correctly?\r\n\r\n";
+                    pathsTextBox.Text += "ERROR when trying to copy file " + src + "\r\nCould not find path. Did you enter the path correctly?\r\n\r\n";
+                    return;
                 }
                 catch (IOException)
                 {
-                    pathsTextBox.Text += "ERROR when trying to copy folder " + src + "... Most likely the path already exists\r\n\r\n";
+                    pathsTextBox.Text += "ERROR when trying to copy file " + src + "\r\nMost likely the path already exists\r\n\r\n";
+                    return;
                 }
 
                 if (File.Exists(finalDest))
@@ -65,11 +67,13 @@ namespace Graphical_Backup_Program
                 }
                 catch (DirectoryNotFoundException)
                 {
-                    pathsTextBox.Text += "ERROR when trying to copy folder " + src + "... Could not find path. Did you enter the path correctly?\r\n\r\n";
+                    pathsTextBox.Text += "ERROR when trying to copy folder " + src + "\r\nCould not find path. Did you enter the path correctly?\r\n\r\n";
+                    return;
                 }
                 catch (IOException)
                 {
-                    pathsTextBox.Text += "ERROR when trying to copy folder " + src + "... Most likely the path already exists\r\n\r\n";
+                    pathsTextBox.Text += "ERROR when trying to copy folder " + src + "\r\nMost likely the path already exists\r\n\r\n";
+                    return;
                 }
 
                 if (Directory.Exists(fullPath))
@@ -84,19 +88,24 @@ namespace Graphical_Backup_Program
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
 
             //When user wants to begin copying all C and U paths, go through line by line and determine which ones are marked C or U.
-            string[] splitText = pathsTextBox.Text.Split("\r\n");
-            List<string> allPaths = (from path in splitText where Char.ToLower(path[0]) is 'c' or 'u' select path.Substring(2)).ToList();
-
+            string[] allPaths = pathsTextBox.Text.Split("\r\n");
             pathsTextBox.Text = "Backing up all C and U items...\r\n---------------------------------------------------------------\r\n";
 
             foreach (string path in allPaths)
             {
-                //Copy each item to path1 and/or path2, as long as the box is checked AND the TextBox isn't blank.
-                if (path1CheckBox.Checked && path1TextBox.Text != String.Empty)
-                    CopyAndLog(path, path1TextBox.Text, 1);
+                string trimmedPath = path.Substring(2); //path without char and ' '.
 
-                if (path2CheckBox.Checked && path2TextBox.Text != String.Empty)
-                    CopyAndLog(path, path2TextBox.Text, 2);
+                if (char.ToLower(path[0]) is 'c' or 'u')
+                {
+                    //Copy each item to path1 and/or path2, as long as the box is checked AND the TextBox isn't blank.
+                    if (path1CheckBox.Checked && path1TextBox.Text != String.Empty)
+                        CopyAndLog(trimmedPath, path1TextBox.Text, 1);
+
+                    if (path2CheckBox.Checked && path2TextBox.Text != String.Empty)
+                        CopyAndLog(trimmedPath, path2TextBox.Text, 2);
+                }
+                else
+                    pathsTextBox.Text += "\r\nSkipping path " + trimmedPath + "\r\nGBP cannot understand this line\r\n";
             }
 
             pathsTextBox.Text += "---------------------------------------------------------------";
@@ -108,18 +117,25 @@ namespace Graphical_Backup_Program
 
             //When user wants to begin copying just the Common Paths, go through line by line and determine which ones are marked 'common' (c).
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
-            List<string> commonPaths = (from path in allPaths where Char.ToLower(path[0]) == 'c' select path.Substring(2)).ToList();
+            pathsTextBox.Text = "Backing up just common items...\r\n---------------------------------------------------------------\r\n";
 
-            pathsTextBox.Text = "Backing up common items...\r\n---------------------------------------------------------------\r\n";
-
-            foreach (string path in commonPaths)
+            foreach (string path in allPaths)
             {
-                //Copy each item to path1 and/or path2, as long as the box is checked AND the TextBox isn't blank.
-                if (path1CheckBox.Checked && path1TextBox.Text != String.Empty)
-                    CopyAndLog(path, path1TextBox.Text, 1);
+                string trimmedPath = path.Substring(2); //path without char and ' '.
 
-                if (path2CheckBox.Checked && path2TextBox.Text != String.Empty)
-                    CopyAndLog(path, path2TextBox.Text, 2);
+                if (Char.ToLower(path[0]) == 'c')
+                {
+                    //Copy each item to path1 and/or path2, as long as the box is checked AND the TextBox isn't blank.
+                    if (path1CheckBox.Checked && path1TextBox.Text != String.Empty)
+                        CopyAndLog(trimmedPath, path1TextBox.Text, 1);
+
+                    if (path2CheckBox.Checked && path2TextBox.Text != String.Empty)
+                        CopyAndLog(trimmedPath, path2TextBox.Text, 2);
+                }
+                else if (Char.ToLower(path[0]) == 'u')
+                    pathsTextBox.Text += "Skipping path " + trimmedPath + "\r\nbecause it is marked 'U'\r\n";
+                else
+                    pathsTextBox.Text += "\r\nSkipping path " + trimmedPath + "\r\nGBP cannot understand this line\r\n";
             }
 
             pathsTextBox.Text += "---------------------------------------------------------------";
