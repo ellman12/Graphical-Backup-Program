@@ -88,6 +88,8 @@ namespace Graphical_Backup_Program
         //When backup completes, open path1 and/or path2 in File Explorer if user checks their box.
         private void ShowPath1And2()
         {
+            if (fileExplorerBtn.Checked) return;
+
             if (openPath1Box.Checked)
                 OpenInExplorer(path1TextBox.Text);
 
