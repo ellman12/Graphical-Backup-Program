@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,6 +19,8 @@ namespace Graphical_Backup_Program
         //Used for copying a single item to path1 and/or path2, and for putting some log output in the paths TextBox. pathNum is either 1 or 2.
         private void CopyAndLog(string src, string dest, int pathNum)
         {
+            src = src.Trim(); //Remove pesky whitespace from start and end of path.
+
             if (Path.HasExtension(src)) //if a file
             {
                 pathsTextBox.Text += "Copying file " + src + " to path" + pathNum + "\r\n";
@@ -28,9 +30,20 @@ namespace Graphical_Backup_Program
                 if (!Directory.Exists(dest))
                     Directory.CreateDirectory(dest);
 
-                File.Copy(src, finalDest);
+                try
+                {
+                    File.Copy(src, finalDest);
+                }
+                catch (DirectoryNotFoundException)
+                {
+                    pathsTextBox.Text += "ERROR when trying to copy folder " + src + "... Could not find path. Did you enter the path correctly?\r\n\r\n";
+                }
+                catch (IOException)
+                {
+                    pathsTextBox.Text += "ERROR when trying to copy folder " + src + "... Most likely the path already exists\r\n\r\n";
+                }
 
-                if (File.Exists(src))
+                if (File.Exists(finalDest))
                     pathsTextBox.Text += "Successfully copied file " + src + " to path" + pathNum + "\r\n\r\n";
                 else
                     pathsTextBox.Text += "ERROR. File " + src + " was NOT successfully copied to path" + pathNum + "\r\n\r\n";
@@ -46,9 +59,20 @@ namespace Graphical_Backup_Program
                 if (!Directory.Exists(dest))
                     Directory.CreateDirectory(dest);
 
-                FileSystem.CopyDirectory(src, fullPath); //https://docs.microsoft.com/en-us/dotnet/api/microsoft.visualbasic.fileio.filesystem.copydirectory?view=net-5.0
+                try
+                {
+                    FileSystem.CopyDirectory(src, fullPath); //https://docs.microsoft.com/en-us/dotnet/api/microsoft.visualbasic.fileio.filesystem.copydirectory?view=net-5.0
+                }
+                catch (DirectoryNotFoundException)
+                {
+                    pathsTextBox.Text += "ERROR when trying to copy folder " + src + "... Could not find path. Did you enter the path correctly?\r\n\r\n";
+                }
+                catch (IOException)
+                {
+                    pathsTextBox.Text += "ERROR when trying to copy folder " + src + "... Most likely the path already exists\r\n\r\n";
+                }
 
-                if (Directory.Exists(src))
+                if (Directory.Exists(fullPath))
                     pathsTextBox.Text += "Successfully copied folder " + src + " to path" + pathNum + "\r\n\r\n";
                 else
                     pathsTextBox.Text += "ERROR. Folder " + src + " was NOT successfully copied to path" + pathNum + "\r\n\r\n";
