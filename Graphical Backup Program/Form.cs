@@ -85,6 +85,23 @@ namespace Graphical_Backup_Program
             }
         }
 
+        //When backup completes, open path1 and/or path2 in File Explorer if user checks their box.
+        private void ShowPath1And2()
+        {
+            if (openPath1Box.Checked)
+                OpenInExplorer(path1TextBox.Text);
+
+            if (openPath2Box.Checked)
+                OpenInExplorer(path2TextBox.Text);
+        }
+        
+        //Open an item in Explorer. https://stackoverflow.com/a/13680458
+        private void OpenInExplorer(string path)
+        {
+            path = System.IO.Path.GetFullPath(path);
+            System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{path}\"");
+        }
+
         private void AllPathsBtn_Click(object sender, EventArgs e)
         {
             TextBoxLabel.Text = "Log";
@@ -115,6 +132,7 @@ namespace Graphical_Backup_Program
             allPathsBtn.Enabled = false;
             CommonFilesBtn.Enabled = false;
             resetBtn.Enabled = true;
+            ShowPath1And2();
         }
 
         private void CommonPathsBtn_Click(object sender, EventArgs e)
@@ -149,6 +167,7 @@ namespace Graphical_Backup_Program
             allPathsBtn.Enabled = false;
             CommonFilesBtn.Enabled = false;
             resetBtn.Enabled = true;
+            ShowPath1And2();
         }
 
         private void CheckBox_CheckedChanged(object sender, EventArgs e)

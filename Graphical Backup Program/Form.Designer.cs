@@ -53,6 +53,8 @@ namespace Graphical_Backup_Program
             this.resetBtn = new System.Windows.Forms.Button();
             this.clearPath1 = new System.Windows.Forms.Button();
             this.clearPath2 = new System.Windows.Forms.Button();
+            this.openPath1Box = new System.Windows.Forms.CheckBox();
+            this.openPath2Box = new System.Windows.Forms.CheckBox();
             this.whereToBackupBox.SuspendLayout();
             this.clearingFoldersGroupBox.SuspendLayout();
             this.backupMode.SuspendLayout();
@@ -108,6 +110,8 @@ namespace Graphical_Backup_Program
             // 
             // whereToBackupBox
             // 
+            this.whereToBackupBox.Controls.Add(this.openPath2Box);
+            this.whereToBackupBox.Controls.Add(this.openPath1Box);
             this.whereToBackupBox.Controls.Add(this.clearPath2);
             this.whereToBackupBox.Controls.Add(this.clearPath1);
             this.whereToBackupBox.Controls.Add(this.path2TextBox);
@@ -118,7 +122,7 @@ namespace Graphical_Backup_Program
             this.whereToBackupBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.whereToBackupBox.Name = "whereToBackupBox";
             this.whereToBackupBox.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.whereToBackupBox.Size = new System.Drawing.Size(571, 103);
+            this.whereToBackupBox.Size = new System.Drawing.Size(744, 103);
             this.whereToBackupBox.TabIndex = 5;
             this.whereToBackupBox.TabStop = false;
             this.whereToBackupBox.Text = "Where to Backup";
@@ -260,7 +264,7 @@ namespace Graphical_Backup_Program
             this.modeBox.Controls.Add(this.backupModeBtn);
             this.modeBox.Location = new System.Drawing.Point(535, 532);
             this.modeBox.Name = "modeBox";
-            this.modeBox.Size = new System.Drawing.Size(200, 86);
+            this.modeBox.Size = new System.Drawing.Size(197, 86);
             this.modeBox.TabIndex = 6;
             this.modeBox.TabStop = false;
             this.modeBox.Text = "GBP Mode";
@@ -327,6 +331,34 @@ namespace Graphical_Backup_Program
             this.clearPath2.Text = "Clear";
             this.clearPath2.UseVisualStyleBackColor = true;
             // 
+            // openPath1Box
+            // 
+            this.openPath1Box.AutoSize = true;
+            this.openPath1Box.Checked = true;
+            this.openPath1Box.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.openPath1Box.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.openPath1Box.Location = new System.Drawing.Point(571, 26);
+            this.openPath1Box.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.openPath1Box.Name = "openPath1Box";
+            this.openPath1Box.Size = new System.Drawing.Size(170, 24);
+            this.openPath1Box.TabIndex = 6;
+            this.openPath1Box.Text = "Open on Completion";
+            this.openPath1Box.UseVisualStyleBackColor = true;
+            // 
+            // openPath2Box
+            // 
+            this.openPath2Box.AutoSize = true;
+            this.openPath2Box.Checked = true;
+            this.openPath2Box.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.openPath2Box.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.openPath2Box.Location = new System.Drawing.Point(571, 67);
+            this.openPath2Box.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.openPath2Box.Name = "openPath2Box";
+            this.openPath2Box.Size = new System.Drawing.Size(170, 24);
+            this.openPath2Box.TabIndex = 7;
+            this.openPath2Box.Text = "Open on Completion";
+            this.openPath2Box.UseVisualStyleBackColor = true;
+            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -388,6 +420,8 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.Button resetBtn;
         private System.Windows.Forms.Button clearPath2;
         private System.Windows.Forms.Button clearPath1;
+        private System.Windows.Forms.CheckBox openPath2Box;
+        private System.Windows.Forms.CheckBox openPath1Box;
     }
 }
 
