@@ -35,6 +35,10 @@ namespace Graphical_Backup_Program
             this.TextBoxLabel = new System.Windows.Forms.Label();
             this.pathsTextBox = new System.Windows.Forms.TextBox();
             this.whereToBackupBox = new System.Windows.Forms.GroupBox();
+            this.openPath2Box = new System.Windows.Forms.CheckBox();
+            this.openPath1Box = new System.Windows.Forms.CheckBox();
+            this.clearPath2 = new System.Windows.Forms.Button();
+            this.clearPath1 = new System.Windows.Forms.Button();
             this.path2TextBox = new System.Windows.Forms.TextBox();
             this.path2CheckBox = new System.Windows.Forms.CheckBox();
             this.path1TextBox = new System.Windows.Forms.TextBox();
@@ -51,10 +55,6 @@ namespace Graphical_Backup_Program
             this.backupModeBtn = new System.Windows.Forms.RadioButton();
             this.optionsLabel = new System.Windows.Forms.Label();
             this.resetBtn = new System.Windows.Forms.Button();
-            this.clearPath1 = new System.Windows.Forms.Button();
-            this.clearPath2 = new System.Windows.Forms.Button();
-            this.openPath1Box = new System.Windows.Forms.CheckBox();
-            this.openPath2Box = new System.Windows.Forms.CheckBox();
             this.whereToBackupBox.SuspendLayout();
             this.clearingFoldersGroupBox.SuspendLayout();
             this.backupMode.SuspendLayout();
@@ -126,6 +126,54 @@ namespace Graphical_Backup_Program
             this.whereToBackupBox.TabIndex = 5;
             this.whereToBackupBox.TabStop = false;
             this.whereToBackupBox.Text = "Where to Backup";
+            // 
+            // openPath2Box
+            // 
+            this.openPath2Box.AutoSize = true;
+            this.openPath2Box.Checked = true;
+            this.openPath2Box.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.openPath2Box.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.openPath2Box.Location = new System.Drawing.Point(571, 67);
+            this.openPath2Box.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.openPath2Box.Name = "openPath2Box";
+            this.openPath2Box.Size = new System.Drawing.Size(170, 24);
+            this.openPath2Box.TabIndex = 7;
+            this.openPath2Box.Text = "Open on Completion";
+            this.openPath2Box.UseVisualStyleBackColor = true;
+            // 
+            // openPath1Box
+            // 
+            this.openPath1Box.AutoSize = true;
+            this.openPath1Box.Checked = true;
+            this.openPath1Box.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.openPath1Box.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.openPath1Box.Location = new System.Drawing.Point(571, 26);
+            this.openPath1Box.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.openPath1Box.Name = "openPath1Box";
+            this.openPath1Box.Size = new System.Drawing.Size(170, 24);
+            this.openPath1Box.TabIndex = 6;
+            this.openPath1Box.Text = "Open on Completion";
+            this.openPath1Box.UseVisualStyleBackColor = true;
+            // 
+            // clearPath2
+            // 
+            this.clearPath2.Location = new System.Drawing.Point(495, 65);
+            this.clearPath2.Name = "clearPath2";
+            this.clearPath2.Size = new System.Drawing.Size(70, 27);
+            this.clearPath2.TabIndex = 5;
+            this.clearPath2.Text = "Clear";
+            this.clearPath2.UseVisualStyleBackColor = true;
+            this.clearPath2.Click += new System.EventHandler(this.clearPath2_Click);
+            // 
+            // clearPath1
+            // 
+            this.clearPath1.Location = new System.Drawing.Point(495, 24);
+            this.clearPath1.Name = "clearPath1";
+            this.clearPath1.Size = new System.Drawing.Size(70, 27);
+            this.clearPath1.TabIndex = 4;
+            this.clearPath1.Text = "Clear";
+            this.clearPath1.UseVisualStyleBackColor = true;
+            this.clearPath1.Click += new System.EventHandler(this.clearPath1_Click);
             // 
             // path2TextBox
             // 
@@ -312,52 +360,6 @@ namespace Graphical_Backup_Program
             this.resetBtn.Text = "Reset GBP";
             this.resetBtn.UseVisualStyleBackColor = true;
             this.resetBtn.Click += new System.EventHandler(this.ResetBtn_Click);
-            // 
-            // clearPath1
-            // 
-            this.clearPath1.Location = new System.Drawing.Point(495, 24);
-            this.clearPath1.Name = "clearPath1";
-            this.clearPath1.Size = new System.Drawing.Size(70, 27);
-            this.clearPath1.TabIndex = 4;
-            this.clearPath1.Text = "Clear";
-            this.clearPath1.UseVisualStyleBackColor = true;
-            // 
-            // clearPath2
-            // 
-            this.clearPath2.Location = new System.Drawing.Point(495, 65);
-            this.clearPath2.Name = "clearPath2";
-            this.clearPath2.Size = new System.Drawing.Size(70, 27);
-            this.clearPath2.TabIndex = 5;
-            this.clearPath2.Text = "Clear";
-            this.clearPath2.UseVisualStyleBackColor = true;
-            // 
-            // openPath1Box
-            // 
-            this.openPath1Box.AutoSize = true;
-            this.openPath1Box.Checked = true;
-            this.openPath1Box.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.openPath1Box.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.openPath1Box.Location = new System.Drawing.Point(571, 26);
-            this.openPath1Box.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.openPath1Box.Name = "openPath1Box";
-            this.openPath1Box.Size = new System.Drawing.Size(170, 24);
-            this.openPath1Box.TabIndex = 6;
-            this.openPath1Box.Text = "Open on Completion";
-            this.openPath1Box.UseVisualStyleBackColor = true;
-            // 
-            // openPath2Box
-            // 
-            this.openPath2Box.AutoSize = true;
-            this.openPath2Box.Checked = true;
-            this.openPath2Box.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.openPath2Box.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.openPath2Box.Location = new System.Drawing.Point(571, 67);
-            this.openPath2Box.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.openPath2Box.Name = "openPath2Box";
-            this.openPath2Box.Size = new System.Drawing.Size(170, 24);
-            this.openPath2Box.TabIndex = 7;
-            this.openPath2Box.Text = "Open on Completion";
-            this.openPath2Box.UseVisualStyleBackColor = true;
             // 
             // Form
             // 

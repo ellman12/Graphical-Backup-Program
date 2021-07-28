@@ -263,5 +263,15 @@ namespace Graphical_Backup_Program
             CommonFilesBtn.Enabled = true;
             resetBtn.Enabled = false;
         }
+
+        private void clearPath1_Click(object sender, EventArgs e)
+        {
+            path1TextBox.Text = "";
+        }
+
+        private void clearPath2_Click(object sender, EventArgs e)
+        {
+            path2TextBox.Text = "";
+        }
     }
 }
