@@ -44,12 +44,12 @@ namespace Graphical_Backup_Program
             this.clearWithPromptRadio = new System.Windows.Forms.RadioButton();
             this.autoClearRadio = new System.Windows.Forms.RadioButton();
             this.backupMode = new System.Windows.Forms.GroupBox();
+            this.dontCreateFolderBtn = new System.Windows.Forms.RadioButton();
+            this.createTimestampFolderBtn = new System.Windows.Forms.RadioButton();
             this.modeBox = new System.Windows.Forms.GroupBox();
             this.fileExlorerBtn = new System.Windows.Forms.RadioButton();
             this.backupModeBtn = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.createTimestampFolderBtn = new System.Windows.Forms.RadioButton();
-            this.dontCreateFolderBtn = new System.Windows.Forms.RadioButton();
+            this.optionsLabel = new System.Windows.Forms.Label();
             this.whereToBackupBox.SuspendLayout();
             this.clearingFoldersGroupBox.SuspendLayout();
             this.backupMode.SuspendLayout();
@@ -227,6 +227,28 @@ namespace Graphical_Backup_Program
             this.backupMode.TabStop = false;
             this.backupMode.Text = "Backup Mode";
             // 
+            // dontCreateFolderBtn
+            // 
+            this.dontCreateFolderBtn.AutoSize = true;
+            this.dontCreateFolderBtn.Location = new System.Drawing.Point(6, 56);
+            this.dontCreateFolderBtn.Name = "dontCreateFolderBtn";
+            this.dontCreateFolderBtn.Size = new System.Drawing.Size(159, 24);
+            this.dontCreateFolderBtn.TabIndex = 2;
+            this.dontCreateFolderBtn.Text = "Don\'t Create Folder";
+            this.dontCreateFolderBtn.UseVisualStyleBackColor = true;
+            // 
+            // createTimestampFolderBtn
+            // 
+            this.createTimestampFolderBtn.AutoSize = true;
+            this.createTimestampFolderBtn.Checked = true;
+            this.createTimestampFolderBtn.Location = new System.Drawing.Point(6, 26);
+            this.createTimestampFolderBtn.Name = "createTimestampFolderBtn";
+            this.createTimestampFolderBtn.Size = new System.Drawing.Size(197, 24);
+            this.createTimestampFolderBtn.TabIndex = 2;
+            this.createTimestampFolderBtn.TabStop = true;
+            this.createTimestampFolderBtn.Text = "Create Timestamp Folder";
+            this.createTimestampFolderBtn.UseVisualStyleBackColor = true;
+            // 
             // modeBox
             // 
             this.modeBox.Controls.Add(this.fileExlorerBtn);
@@ -260,43 +282,21 @@ namespace Graphical_Backup_Program
             this.backupModeBtn.Text = "Normal Mode (Backup)";
             this.backupModeBtn.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // optionsLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 397);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 20);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Options";
-            // 
-            // createTimestampFolderBtn
-            // 
-            this.createTimestampFolderBtn.AutoSize = true;
-            this.createTimestampFolderBtn.Checked = true;
-            this.createTimestampFolderBtn.Location = new System.Drawing.Point(6, 26);
-            this.createTimestampFolderBtn.Name = "createTimestampFolderBtn";
-            this.createTimestampFolderBtn.Size = new System.Drawing.Size(197, 24);
-            this.createTimestampFolderBtn.TabIndex = 2;
-            this.createTimestampFolderBtn.TabStop = true;
-            this.createTimestampFolderBtn.Text = "Create Timestamp Folder";
-            this.createTimestampFolderBtn.UseVisualStyleBackColor = true;
-            // 
-            // dontCreateFolderBtn
-            // 
-            this.dontCreateFolderBtn.AutoSize = true;
-            this.dontCreateFolderBtn.Location = new System.Drawing.Point(6, 56);
-            this.dontCreateFolderBtn.Name = "dontCreateFolderBtn";
-            this.dontCreateFolderBtn.Size = new System.Drawing.Size(159, 24);
-            this.dontCreateFolderBtn.TabIndex = 2;
-            this.dontCreateFolderBtn.Text = "Don\'t Create Folder";
-            this.dontCreateFolderBtn.UseVisualStyleBackColor = true;
+            this.optionsLabel.AutoSize = true;
+            this.optionsLabel.Location = new System.Drawing.Point(8, 397);
+            this.optionsLabel.Name = "optionsLabel";
+            this.optionsLabel.Size = new System.Drawing.Size(61, 20);
+            this.optionsLabel.TabIndex = 8;
+            this.optionsLabel.Text = "Options";
             // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(631, 680);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.optionsLabel);
             this.Controls.Add(this.backupMode);
             this.Controls.Add(this.modeBox);
             this.Controls.Add(this.pathsTextBox);
@@ -345,7 +345,7 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.RadioButton fileExlorerBtn;
         private System.Windows.Forms.RadioButton backupModeBtn;
         private System.Windows.Forms.GroupBox backupMode;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label optionsLabel;
         private System.Windows.Forms.RadioButton dontCreateFolderBtn;
         private System.Windows.Forms.RadioButton createTimestampFolderBtn;
     }

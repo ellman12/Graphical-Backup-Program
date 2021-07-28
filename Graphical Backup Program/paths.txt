@@ -1,5 +1,3 @@
 c C:\Users\Elliott\Documents\GitHub\AutoHotkey\Other\Memes
 c C:/Users/Elliott/Pictures/413150_20210121210037_1.png
 u C:\Users\Elliott\Documents\GitHub\AutoHotkey\Other\Memes\Cats
-# I am ignored
-# I am also a comment

@@ -91,6 +91,7 @@ namespace Graphical_Backup_Program
         private void AllPathsBtn_Click(object sender, EventArgs e)
         {
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
+            TextBoxLabel.Hide();
 
             //When user wants to begin copying all C and U paths, go through line by line and determine which ones are marked C or U.
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
@@ -119,6 +120,7 @@ namespace Graphical_Backup_Program
         private void CommonPathsBtn_Click(object sender, EventArgs e)
         {
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
+            TextBoxLabel.Hide();
 
             //When user wants to begin copying just the Common Paths, go through line by line and determine which ones are marked 'common' (c).
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
