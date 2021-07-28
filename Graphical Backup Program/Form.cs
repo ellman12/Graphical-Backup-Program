@@ -24,6 +24,10 @@ namespace Graphical_Backup_Program
                 pathsTextBox.Text += "Copying file " + src + " to path" + pathNum + "\r\n";
                 string srcFileName = Path.GetFileName(src);
                 string finalDest = Path.Combine(dest, srcFileName);
+
+                if (!Directory.Exists(dest))
+                    Directory.CreateDirectory(dest);
+
                 File.Copy(src, finalDest);
 
                 if (File.Exists(src))
@@ -38,6 +42,10 @@ namespace Graphical_Backup_Program
                 //Get the name of the folder and copy stuff there. CopyDirectory() doesn't do that automatically for some reason... https://stackoverflow.com/a/5229311
                 string dirName = new DirectoryInfo(src).Name;
                 string fullPath = Path.Combine(dest, dirName);
+
+                if (!Directory.Exists(dest))
+                    Directory.CreateDirectory(dest);
+
                 FileSystem.CopyDirectory(src, fullPath); //https://docs.microsoft.com/en-us/dotnet/api/microsoft.visualbasic.fileio.filesystem.copydirectory?view=net-5.0
 
                 if (Directory.Exists(src))
@@ -173,7 +181,7 @@ namespace Graphical_Backup_Program
         //On exit, save config stuff for next time.
         private void Form_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
         {
-            string fileText = path1CheckBox.Checked.ToString() + "\r\n" + path1TextBox.Text + "\r\n" + path2CheckBox.Checked.ToString() + "\r\n" + path2TextBox.Text + "\r\n" + autoClearRadio.Checked.ToString() + "\r\n" + clearWithPromptRadio.Checked.ToString() + "\r\n" + dontClearRadio.Checked.ToString() + "\r\n" + backupModeBtn.Checked.ToString() + "\r\n" + fileExlorerBtn.Checked.ToString() + "\r\n" + createTimestampFolderBtn.Checked.ToString() + "\r\n" + dontCreateFolderBtn.Checked.ToString();
+            string fileText = path1CheckBox.Checked + "\r\n" + path1TextBox.Text + "\r\n" + path2CheckBox.Checked + "\r\n" + path2TextBox.Text + "\r\n" + autoClearRadio.Checked + "\r\n" + clearWithPromptRadio.Checked + "\r\n" + dontClearRadio.Checked + "\r\n" + backupModeBtn.Checked + "\r\n" + fileExlorerBtn.Checked + "\r\n" + createTimestampFolderBtn.Checked + "\r\n" + dontCreateFolderBtn.Checked;
             File.WriteAllText(_projectDirectory + "/Config.txt", fileText);
         }
     }
