@@ -114,7 +114,9 @@ namespace Graphical_Backup_Program
 
             //When user wants to begin copying all C and U paths, go through line by line and determine which ones are marked C or U.
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
-            pathsTextBox.Text = "Backing up all C and U items...\r\n----------------------------------------------------------------------------------------------------------------------------\r\n";
+
+            pathsTextBox.Text = backupModeBtn.Checked ? "Backing up all items..." : "Opening all items in File Explorer...";
+            pathsTextBox.Text += "\r\n----------------------------------------------------------------------------------------------------------------------------\r\n";
 
             foreach (string path in allPaths)
             {
@@ -138,7 +140,9 @@ namespace Graphical_Backup_Program
                     pathsTextBox.Text += "\r\nSkipping path " + trimmedPath + "\r\nGBP cannot understand this line\r\n";
             }
 
-            pathsTextBox.Text += "----------------------------------------------------------------------------------------------------------------------------\r\nGBP has finished the backup.";
+            pathsTextBox.Text += "----------------------------------------------------------------------------------------------------------------------------\r\n";
+            pathsTextBox.Text += backupModeBtn.Checked ? "Backup completed" : "Opened all items";
+
             allPathsBtn.Enabled = false;
             commonPathsBtn.Enabled = false;
             resetBtn.Enabled = true;
@@ -152,7 +156,8 @@ namespace Graphical_Backup_Program
 
             //When user wants to begin copying just the Common Paths, go through line by line and determine which ones are marked 'common' (c).
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
-            pathsTextBox.Text = "Backing up just common items...\r\n-----------------------------------------------------------------\r\n";
+            pathsTextBox.Text = backupModeBtn.Checked ? "Backing up just common items..." : "Opening just common items in File Explorer...";
+            pathsTextBox.Text += "\r\n----------------------------------------------------------------------------------------------------------------------------\r\n";
 
             foreach (string path in allPaths)
             {
@@ -178,7 +183,9 @@ namespace Graphical_Backup_Program
                     pathsTextBox.Text += "\r\nSkipping path " + trimmedPath + "\r\nGBP cannot understand this line\r\n";
             }
 
-            pathsTextBox.Text += "----------------------------------------------------------------------------------------------------------------------------\r\nGBP has finished the backup.";
+            pathsTextBox.Text += "----------------------------------------------------------------------------------------------------------------------------\r\n";
+            pathsTextBox.Text += backupModeBtn.Checked ? "Common items backup completed" : "Opened all common items";
+
             allPathsBtn.Enabled = false;
             commonPathsBtn.Enabled = false;
             resetBtn.Enabled = true;
