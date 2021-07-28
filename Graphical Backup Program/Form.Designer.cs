@@ -31,7 +31,7 @@ namespace Graphical_Backup_Program
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form));
             this.allPathsBtn = new System.Windows.Forms.Button();
-            this.CommonFilesBtn = new System.Windows.Forms.Button();
+            this.commonPathsBtn = new System.Windows.Forms.Button();
             this.TextBoxLabel = new System.Windows.Forms.Label();
             this.pathsTextBox = new System.Windows.Forms.TextBox();
             this.whereToBackupBox = new System.Windows.Forms.GroupBox();
@@ -51,7 +51,7 @@ namespace Graphical_Backup_Program
             this.dontCreateFolderBtn = new System.Windows.Forms.RadioButton();
             this.createTimestampFolderBtn = new System.Windows.Forms.RadioButton();
             this.modeBox = new System.Windows.Forms.GroupBox();
-            this.fileExlorerBtn = new System.Windows.Forms.RadioButton();
+            this.fileExplorerBtn = new System.Windows.Forms.RadioButton();
             this.backupModeBtn = new System.Windows.Forms.RadioButton();
             this.optionsLabel = new System.Windows.Forms.Label();
             this.resetBtn = new System.Windows.Forms.Button();
@@ -73,17 +73,17 @@ namespace Graphical_Backup_Program
             this.allPathsBtn.UseVisualStyleBackColor = true;
             this.allPathsBtn.Click += new System.EventHandler(this.AllPathsBtn_Click);
             // 
-            // CommonFilesBtn
+            // commonPathsBtn
             // 
-            this.CommonFilesBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.CommonFilesBtn.Location = new System.Drawing.Point(267, 337);
-            this.CommonFilesBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.CommonFilesBtn.Name = "CommonFilesBtn";
-            this.CommonFilesBtn.Size = new System.Drawing.Size(254, 53);
-            this.CommonFilesBtn.TabIndex = 1;
-            this.CommonFilesBtn.Text = "Backup Just Common Paths";
-            this.CommonFilesBtn.UseVisualStyleBackColor = true;
-            this.CommonFilesBtn.Click += new System.EventHandler(this.CommonPathsBtn_Click);
+            this.commonPathsBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.commonPathsBtn.Location = new System.Drawing.Point(267, 337);
+            this.commonPathsBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.commonPathsBtn.Name = "commonPathsBtn";
+            this.commonPathsBtn.Size = new System.Drawing.Size(254, 53);
+            this.commonPathsBtn.TabIndex = 1;
+            this.commonPathsBtn.Text = "Backup Just Common Paths";
+            this.commonPathsBtn.UseVisualStyleBackColor = true;
+            this.commonPathsBtn.Click += new System.EventHandler(this.CommonPathsBtn_Click);
             // 
             // TextBoxLabel
             // 
@@ -308,7 +308,7 @@ namespace Graphical_Backup_Program
             // 
             // modeBox
             // 
-            this.modeBox.Controls.Add(this.fileExlorerBtn);
+            this.modeBox.Controls.Add(this.fileExplorerBtn);
             this.modeBox.Controls.Add(this.backupModeBtn);
             this.modeBox.Location = new System.Drawing.Point(535, 532);
             this.modeBox.Name = "modeBox";
@@ -317,15 +317,16 @@ namespace Graphical_Backup_Program
             this.modeBox.TabStop = false;
             this.modeBox.Text = "GBP Mode";
             // 
-            // fileExlorerBtn
+            // fileExplorerBtn
             // 
-            this.fileExlorerBtn.AutoSize = true;
-            this.fileExlorerBtn.Location = new System.Drawing.Point(6, 54);
-            this.fileExlorerBtn.Name = "fileExlorerBtn";
-            this.fileExlorerBtn.Size = new System.Drawing.Size(190, 24);
-            this.fileExlorerBtn.TabIndex = 1;
-            this.fileExlorerBtn.Text = "Open All in File Explorer";
-            this.fileExlorerBtn.UseVisualStyleBackColor = true;
+            this.fileExplorerBtn.AutoSize = true;
+            this.fileExplorerBtn.Location = new System.Drawing.Point(6, 54);
+            this.fileExplorerBtn.Name = "fileExplorerBtn";
+            this.fileExplorerBtn.Size = new System.Drawing.Size(190, 24);
+            this.fileExplorerBtn.TabIndex = 1;
+            this.fileExplorerBtn.Text = "Open All in File Explorer";
+            this.fileExplorerBtn.UseVisualStyleBackColor = true;
+            this.fileExplorerBtn.CheckedChanged += new System.EventHandler(this.fileExplorerBtn_CheckedChanged);
             // 
             // backupModeBtn
             // 
@@ -338,6 +339,7 @@ namespace Graphical_Backup_Program
             this.backupModeBtn.TabStop = true;
             this.backupModeBtn.Text = "Normal Mode (Backup)";
             this.backupModeBtn.UseVisualStyleBackColor = true;
+            this.backupModeBtn.CheckedChanged += new System.EventHandler(this.backupModeBtn_CheckedChanged);
             // 
             // optionsLabel
             // 
@@ -374,7 +376,7 @@ namespace Graphical_Backup_Program
             this.Controls.Add(this.whereToBackupBox);
             this.Controls.Add(this.clearingFoldersGroupBox);
             this.Controls.Add(this.TextBoxLabel);
-            this.Controls.Add(this.CommonFilesBtn);
+            this.Controls.Add(this.commonPathsBtn);
             this.Controls.Add(this.allPathsBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -400,7 +402,7 @@ namespace Graphical_Backup_Program
         #endregion
 
         private System.Windows.Forms.Button allPathsBtn;
-        private System.Windows.Forms.Button CommonFilesBtn;
+        private System.Windows.Forms.Button commonPathsBtn;
         private System.Windows.Forms.Label TextBoxLabel;
         private System.Windows.Forms.TextBox pathsTextBox;
         private System.Windows.Forms.GroupBox whereToBackupBox;
@@ -413,7 +415,7 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.RadioButton clearWithPromptRadio;
         private System.Windows.Forms.RadioButton autoClearRadio;
         private System.Windows.Forms.GroupBox modeBox;
-        private System.Windows.Forms.RadioButton fileExlorerBtn;
+        private System.Windows.Forms.RadioButton fileExplorerBtn;
         private System.Windows.Forms.RadioButton backupModeBtn;
         private System.Windows.Forms.GroupBox backupMode;
         private System.Windows.Forms.Label optionsLabel;
