@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using FileSystem = Microsoft.VisualBasic.FileIO.FileSystem;
 
 namespace Graphical_Backup_Program
@@ -20,6 +18,13 @@ namespace Graphical_Backup_Program
         private void CopyAndLog(string src, string dest, int pathNum)
         {
             src = src.Trim(); //Remove pesky whitespace from start and end of path.
+
+            //If user wants stuff to be copied to a special timestamp folder, this is where it's done at.
+            if (createTimestampFolderBtn.Checked)
+            {
+                string timestamp = DateTime.Now.ToString("M-d-yyyy hh;mm tt"); //'/' and ':' won't work in paths because Windows.
+                dest = Path.Combine(dest, "GBP backup " + timestamp);
+            }
 
             if (Path.HasExtension(src)) //if a file
             {
