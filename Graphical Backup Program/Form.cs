@@ -28,7 +28,6 @@ namespace Graphical_Backup_Program
 
             if (Path.HasExtension(src)) //if a file
             {
-                pathsTextBox.Text += "Copying file " + src + " to path" + pathNum + "\r\n";
                 string srcFileName = Path.GetFileName(src);
                 string finalDest = Path.Combine(dest, srcFileName);
 
@@ -57,8 +56,6 @@ namespace Graphical_Backup_Program
             }
             else //if a folder
             {
-                pathsTextBox.Text += "Copying folder " + src + " to path" + pathNum + "\r\n";
-
                 //Get the name of the folder and copy stuff there. CopyDirectory() doesn't do that automatically for some reason... https://stackoverflow.com/a/5229311
                 string dirName = new DirectoryInfo(src).Name;
                 string fullPath = Path.Combine(dest, dirName);
@@ -95,7 +92,7 @@ namespace Graphical_Backup_Program
 
             //When user wants to begin copying all C and U paths, go through line by line and determine which ones are marked C or U.
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
-            pathsTextBox.Text = "Backing up all C and U items...\r\n---------------------------------------------------------------\r\n";
+            pathsTextBox.Text = "Backing up all C and U items...\r\n----------------------------------------------------------------------------------------------------------------------------\r\n";
 
             foreach (string path in allPaths)
             {
@@ -113,8 +110,6 @@ namespace Graphical_Backup_Program
                 else
                     pathsTextBox.Text += "\r\nSkipping path " + trimmedPath + "\r\nGBP cannot understand this line\r\n";
             }
-
-            pathsTextBox.Text += "---------------------------------------------------------------";
         }
 
         private void CommonPathsBtn_Click(object sender, EventArgs e)
@@ -124,7 +119,7 @@ namespace Graphical_Backup_Program
 
             //When user wants to begin copying just the Common Paths, go through line by line and determine which ones are marked 'common' (c).
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
-            pathsTextBox.Text = "Backing up just common items...\r\n---------------------------------------------------------------\r\n";
+            pathsTextBox.Text = "Backing up just common items...\r\n-----------------------------------------------------------------\r\n";
 
             foreach (string path in allPaths)
             {
@@ -144,8 +139,6 @@ namespace Graphical_Backup_Program
                 else
                     pathsTextBox.Text += "\r\nSkipping path " + trimmedPath + "\r\nGBP cannot understand this line\r\n";
             }
-
-            pathsTextBox.Text += "---------------------------------------------------------------";
         }
 
         private void CheckBox_CheckedChanged(object sender, EventArgs e)
@@ -230,6 +223,12 @@ namespace Graphical_Backup_Program
         {
             string fileText = path1CheckBox.Checked + "\r\n" + path1TextBox.Text + "\r\n" + path2CheckBox.Checked + "\r\n" + path2TextBox.Text + "\r\n" + autoClearRadio.Checked + "\r\n" + clearWithPromptRadio.Checked + "\r\n" + dontClearRadio.Checked + "\r\n" + backupModeBtn.Checked + "\r\n" + fileExlorerBtn.Checked + "\r\n" + createTimestampFolderBtn.Checked + "\r\n" + dontCreateFolderBtn.Checked;
             File.WriteAllText(_projectDirectory + "/Config.txt", fileText);
+        }
+
+        //Clear the log and add paths back into the TextBox, allowing user to do another backup without having to reload the program.
+        private void ResetBtn_Click(object sender, EventArgs e)
+        {
+            pathsTextBox.Text = File.ReadAllText(_projectDirectory + "/paths.txt");
         }
     }
 }

@@ -50,6 +50,7 @@ namespace Graphical_Backup_Program
             this.fileExlorerBtn = new System.Windows.Forms.RadioButton();
             this.backupModeBtn = new System.Windows.Forms.RadioButton();
             this.optionsLabel = new System.Windows.Forms.Label();
+            this.resetBtn = new System.Windows.Forms.Button();
             this.whereToBackupBox.SuspendLayout();
             this.clearingFoldersGroupBox.SuspendLayout();
             this.backupMode.SuspendLayout();
@@ -62,7 +63,7 @@ namespace Graphical_Backup_Program
             this.AllFilesBtn.Location = new System.Drawing.Point(8, 337);
             this.AllFilesBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.AllFilesBtn.Name = "AllFilesBtn";
-            this.AllFilesBtn.Size = new System.Drawing.Size(197, 53);
+            this.AllFilesBtn.Size = new System.Drawing.Size(205, 53);
             this.AllFilesBtn.TabIndex = 0;
             this.AllFilesBtn.Text = "Backup All Paths";
             this.AllFilesBtn.UseVisualStyleBackColor = true;
@@ -71,10 +72,10 @@ namespace Graphical_Backup_Program
             // CommonFilesBtn
             // 
             this.CommonFilesBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.CommonFilesBtn.Location = new System.Drawing.Point(208, 337);
+            this.CommonFilesBtn.Location = new System.Drawing.Point(213, 337);
             this.CommonFilesBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CommonFilesBtn.Name = "CommonFilesBtn";
-            this.CommonFilesBtn.Size = new System.Drawing.Size(197, 53);
+            this.CommonFilesBtn.Size = new System.Drawing.Size(205, 53);
             this.CommonFilesBtn.TabIndex = 1;
             this.CommonFilesBtn.Text = "Backup Just Common Paths";
             this.CommonFilesBtn.UseVisualStyleBackColor = true;
@@ -98,7 +99,7 @@ namespace Graphical_Backup_Program
             this.pathsTextBox.Multiline = true;
             this.pathsTextBox.Name = "pathsTextBox";
             this.pathsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.pathsTextBox.Size = new System.Drawing.Size(615, 301);
+            this.pathsTextBox.Size = new System.Drawing.Size(772, 301);
             this.pathsTextBox.TabIndex = 3;
             this.pathsTextBox.WordWrap = false;
             this.pathsTextBox.TextChanged += new System.EventHandler(this.PathsTextBox_TextChanged);
@@ -291,11 +292,24 @@ namespace Graphical_Backup_Program
             this.optionsLabel.TabIndex = 8;
             this.optionsLabel.Text = "Options";
             // 
+            // resetBtn
+            // 
+            this.resetBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.resetBtn.Location = new System.Drawing.Point(418, 337);
+            this.resetBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.resetBtn.Name = "resetBtn";
+            this.resetBtn.Size = new System.Drawing.Size(205, 53);
+            this.resetBtn.TabIndex = 9;
+            this.resetBtn.Text = "Reset GBP";
+            this.resetBtn.UseVisualStyleBackColor = true;
+            this.resetBtn.Click += new System.EventHandler(this.ResetBtn_Click);
+            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(631, 680);
+            this.ClientSize = new System.Drawing.Size(790, 663);
+            this.Controls.Add(this.resetBtn);
             this.Controls.Add(this.optionsLabel);
             this.Controls.Add(this.backupMode);
             this.Controls.Add(this.modeBox);
@@ -348,6 +362,7 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.Label optionsLabel;
         private System.Windows.Forms.RadioButton dontCreateFolderBtn;
         private System.Windows.Forms.RadioButton createTimestampFolderBtn;
+        private System.Windows.Forms.Button resetBtn;
     }
 }
 

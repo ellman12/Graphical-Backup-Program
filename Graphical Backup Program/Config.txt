@@ -1,7 +1,7 @@
 True
-C:\Users\Elliott\Desktop\hi
-False
-
+C:\Users\Elliott\Desktop\hi\hi
+True
+C:\Users\Elliott\Desktop\hi\hi2
 True
 False
 False
