@@ -50,9 +50,9 @@ namespace Graphical_Backup_Program
                 }
 
                 if (File.Exists(finalDest))
-                    pathsTextBox.Text += "Successfully copied file " + src + " to path" + pathNum + "\r\n\r\n";
+                    pathsTextBox.Text += "Successfully copied file " + src + " to path" + pathNum + "\r\n";
                 else
-                    pathsTextBox.Text += "ERROR. File " + src + " was NOT successfully copied to path" + pathNum + "\r\n\r\n";
+                    pathsTextBox.Text += "ERROR. File " + src + " was NOT successfully copied to path" + pathNum + "\r\n";
             }
             else //if a folder
             {
@@ -87,8 +87,8 @@ namespace Graphical_Backup_Program
 
         private void AllPathsBtn_Click(object sender, EventArgs e)
         {
+            TextBoxLabel.Text = "Log";
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
-            TextBoxLabel.Hide();
 
             //When user wants to begin copying all C and U paths, go through line by line and determine which ones are marked C or U.
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
@@ -98,7 +98,7 @@ namespace Graphical_Backup_Program
             {
                 string trimmedPath = path.Substring(2); //path without char and ' '.
 
-                if (char.ToLower(path[0]) is 'c' or 'u')
+                if (Char.ToLower(path[0]) is 'c' or 'u')
                 {
                     //Copy each item to path1 and/or path2, as long as the box is checked AND the TextBox isn't blank.
                     if (path1CheckBox.Checked && path1TextBox.Text != String.Empty)
@@ -110,12 +110,17 @@ namespace Graphical_Backup_Program
                 else
                     pathsTextBox.Text += "\r\nSkipping path " + trimmedPath + "\r\nGBP cannot understand this line\r\n";
             }
+
+            pathsTextBox.Text += "----------------------------------------------------------------------------------------------------------------------------\r\nGBP has finished the backup.";
+            allPathsBtn.Enabled = false;
+            CommonFilesBtn.Enabled = false;
+            resetBtn.Enabled = true;
         }
 
         private void CommonPathsBtn_Click(object sender, EventArgs e)
         {
+            TextBoxLabel.Text = "Log";
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
-            TextBoxLabel.Hide();
 
             //When user wants to begin copying just the Common Paths, go through line by line and determine which ones are marked 'common' (c).
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
@@ -139,6 +144,11 @@ namespace Graphical_Backup_Program
                 else
                     pathsTextBox.Text += "\r\nSkipping path " + trimmedPath + "\r\nGBP cannot understand this line\r\n";
             }
+
+            pathsTextBox.Text += "----------------------------------------------------------------------------------------------------------------------------\r\nGBP has finished the backup.";
+            allPathsBtn.Enabled = false;
+            CommonFilesBtn.Enabled = false;
+            resetBtn.Enabled = true;
         }
 
         private void CheckBox_CheckedChanged(object sender, EventArgs e)
@@ -225,10 +235,14 @@ namespace Graphical_Backup_Program
             File.WriteAllText(_projectDirectory + "/Config.txt", fileText);
         }
 
-        //Clear the log and add paths back into the TextBox, allowing user to do another backup without having to reload the program.
+        //Press this to run another backup without having to restart the whole program.
         private void ResetBtn_Click(object sender, EventArgs e)
         {
             pathsTextBox.Text = File.ReadAllText(_projectDirectory + "/paths.txt");
+            TextBoxLabel.Text = "Paths to Backup. C for Common, U for Uncommon, other characters are ignored.";
+            allPathsBtn.Enabled = true;
+            CommonFilesBtn.Enabled = true;
+            resetBtn.Enabled = false;
         }
     }
 }

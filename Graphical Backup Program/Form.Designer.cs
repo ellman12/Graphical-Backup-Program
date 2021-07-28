@@ -294,6 +294,7 @@ namespace Graphical_Backup_Program
             // 
             // resetBtn
             // 
+            this.resetBtn.Enabled = false;
             this.resetBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.resetBtn.Location = new System.Drawing.Point(526, 337);
             this.resetBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -308,7 +309,7 @@ namespace Graphical_Backup_Program
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(786, 663);
+            this.ClientSize = new System.Drawing.Size(787, 663);
             this.Controls.Add(this.resetBtn);
             this.Controls.Add(this.optionsLabel);
             this.Controls.Add(this.backupMode);
