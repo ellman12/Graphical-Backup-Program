@@ -1,4 +1,4 @@
-﻿
+
 namespace Graphical_Backup_Program
 {
     partial class Form
@@ -63,7 +63,7 @@ namespace Graphical_Backup_Program
             this.allPathsBtn.Location = new System.Drawing.Point(8, 337);
             this.allPathsBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.allPathsBtn.Name = "allPathsBtn";
-            this.allPathsBtn.Size = new System.Drawing.Size(205, 53);
+            this.allPathsBtn.Size = new System.Drawing.Size(254, 53);
             this.allPathsBtn.TabIndex = 0;
             this.allPathsBtn.Text = "Backup All Paths";
             this.allPathsBtn.UseVisualStyleBackColor = true;
@@ -72,10 +72,10 @@ namespace Graphical_Backup_Program
             // CommonFilesBtn
             // 
             this.CommonFilesBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.CommonFilesBtn.Location = new System.Drawing.Point(213, 337);
+            this.CommonFilesBtn.Location = new System.Drawing.Point(267, 337);
             this.CommonFilesBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CommonFilesBtn.Name = "CommonFilesBtn";
-            this.CommonFilesBtn.Size = new System.Drawing.Size(205, 53);
+            this.CommonFilesBtn.Size = new System.Drawing.Size(254, 53);
             this.CommonFilesBtn.TabIndex = 1;
             this.CommonFilesBtn.Text = "Backup Just Common Paths";
             this.CommonFilesBtn.UseVisualStyleBackColor = true;
@@ -295,10 +295,10 @@ namespace Graphical_Backup_Program
             // resetBtn
             // 
             this.resetBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.resetBtn.Location = new System.Drawing.Point(418, 337);
+            this.resetBtn.Location = new System.Drawing.Point(526, 337);
             this.resetBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.resetBtn.Name = "resetBtn";
-            this.resetBtn.Size = new System.Drawing.Size(205, 53);
+            this.resetBtn.Size = new System.Drawing.Size(254, 53);
             this.resetBtn.TabIndex = 9;
             this.resetBtn.Text = "Reset GBP";
             this.resetBtn.UseVisualStyleBackColor = true;
@@ -308,7 +308,7 @@ namespace Graphical_Backup_Program
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(790, 663);
+            this.ClientSize = new System.Drawing.Size(786, 663);
             this.Controls.Add(this.resetBtn);
             this.Controls.Add(this.optionsLabel);
             this.Controls.Add(this.backupMode);
