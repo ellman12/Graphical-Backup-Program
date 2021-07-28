@@ -14,6 +14,22 @@ namespace Graphical_Backup_Program
             InitializeComponent();
         }
 
+        //Used in the foreach loops in the 2 backup button functions for determining which action to take.
+        private void CopyAndLogOrOpen(string trimmedPath)
+        {
+            if (backupModeBtn.Checked)
+            {
+                //Copy each item to path1 and/or path2, as long as the box is checked AND the TextBox isn't blank.
+                if (path1CheckBox.Checked && path1TextBox.Text != String.Empty)
+                    CopyAndLog(trimmedPath, path1TextBox.Text, 1);
+
+                if (path2CheckBox.Checked && path2TextBox.Text != String.Empty)
+                    CopyAndLog(trimmedPath, path2TextBox.Text, 2);
+            }
+            else if (fileExplorerBtn.Checked)
+                OpenInExplorer(trimmedPath);
+        }
+
         //Used for copying a single item to path1 and/or path2, and for putting some log output in the paths TextBox. pathNum is either 1 or 2.
         private void CopyAndLog(string src, string dest, int pathNum)
         {
@@ -124,17 +140,7 @@ namespace Graphical_Backup_Program
 
                 if (Char.ToLower(path[0]) is 'c' or 'u')
                 {
-                    if (backupModeBtn.Checked)
-                    {
-                        //Copy each item to path1 and/or path2, as long as the box is checked AND the TextBox isn't blank.
-                        if (path1CheckBox.Checked && path1TextBox.Text != String.Empty)
-                            CopyAndLog(trimmedPath, path1TextBox.Text, 1);
-
-                        if (path2CheckBox.Checked && path2TextBox.Text != String.Empty)
-                            CopyAndLog(trimmedPath, path2TextBox.Text, 2);
-                    }
-                    else if (fileExplorerBtn.Checked)
-                        OpenInExplorer(trimmedPath);
+                    CopyAndLogOrOpen(trimmedPath);
                 }
                 else
                     pathsTextBox.Text += "\r\nSkipping path " + trimmedPath + "\r\nGBP cannot understand this line\r\n";
@@ -165,17 +171,7 @@ namespace Graphical_Backup_Program
 
                 if (Char.ToLower(path[0]) == 'c')
                 {
-                    if (backupModeBtn.Checked)
-                    {
-                        //Copy each item to path1 and/or path2, as long as the box is checked AND the TextBox isn't blank.
-                        if (path1CheckBox.Checked && path1TextBox.Text != String.Empty)
-                            CopyAndLog(trimmedPath, path1TextBox.Text, 1);
-
-                        if (path2CheckBox.Checked && path2TextBox.Text != String.Empty)
-                            CopyAndLog(trimmedPath, path2TextBox.Text, 2);
-                    }
-                    else if (fileExplorerBtn.Checked)
-                        OpenInExplorer(trimmedPath);
+                    CopyAndLogOrOpen(trimmedPath);
                 }
                 else if (Char.ToLower(path[0]) == 'u')
                     pathsTextBox.Text += "Skipping path " + trimmedPath + "\r\nbecause it is marked 'U'\r\n";
