@@ -146,12 +146,12 @@ namespace Graphical_Backup_Program
             //If both of these are disabled, don't allow user to push buttons cuz that doesn't make any sense.
             if (path1CheckBox.Checked == false && path2CheckBox.Checked == false)
             {
-                AllFilesBtn.Enabled = false;
+                allPathsBtn.Enabled = false;
                 CommonFilesBtn.Enabled = false;
             }
             else
             {
-                AllFilesBtn.Enabled = true;
+                allPathsBtn.Enabled = true;
                 CommonFilesBtn.Enabled = true;
             }
         }
@@ -161,12 +161,12 @@ namespace Graphical_Backup_Program
             //If both of these are blank, don't allow user to push buttons cuz that doesn't make any sense.
             if (path1TextBox.Text == String.Empty && path2TextBox.Text == String.Empty)
             {
-                AllFilesBtn.Enabled = false;
+                allPathsBtn.Enabled = false;
                 CommonFilesBtn.Enabled = false;
             }
             else
             {
-                AllFilesBtn.Enabled = true;
+                allPathsBtn.Enabled = true;
                 CommonFilesBtn.Enabled = true;
             }
         }
@@ -176,12 +176,12 @@ namespace Graphical_Backup_Program
             //Don't allow buttons to be pressed if the paths TextBox is empty.
             if (pathsTextBox.Text == String.Empty)
             {
-                AllFilesBtn.Enabled = false;
+                allPathsBtn.Enabled = false;
                 CommonFilesBtn.Enabled = false;
             }
             else
             {
-                AllFilesBtn.Enabled = true;
+                allPathsBtn.Enabled = true;
                 CommonFilesBtn.Enabled = true;
             }
         }
@@ -208,12 +208,12 @@ namespace Graphical_Backup_Program
 
             if (pathsTextBox.Text == String.Empty || (path1TextBox.Text == String.Empty && path2TextBox.Text == String.Empty) || (path1CheckBox.Checked == false && path2CheckBox.Checked == false))
             {
-                AllFilesBtn.Enabled = false;
+                allPathsBtn.Enabled = false;
                 CommonFilesBtn.Enabled = false;
             }
             else
             {
-                AllFilesBtn.Enabled = true;
+                allPathsBtn.Enabled = true;
                 CommonFilesBtn.Enabled = true;
             }
         }

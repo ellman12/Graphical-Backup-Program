@@ -30,7 +30,7 @@ namespace Graphical_Backup_Program
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form));
-            this.AllFilesBtn = new System.Windows.Forms.Button();
+            this.allPathsBtn = new System.Windows.Forms.Button();
             this.CommonFilesBtn = new System.Windows.Forms.Button();
             this.TextBoxLabel = new System.Windows.Forms.Label();
             this.pathsTextBox = new System.Windows.Forms.TextBox();
@@ -57,17 +57,17 @@ namespace Graphical_Backup_Program
             this.modeBox.SuspendLayout();
             this.SuspendLayout();
             // 
-            // AllFilesBtn
+            // allPathsBtn
             // 
-            this.AllFilesBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.AllFilesBtn.Location = new System.Drawing.Point(8, 337);
-            this.AllFilesBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.AllFilesBtn.Name = "AllFilesBtn";
-            this.AllFilesBtn.Size = new System.Drawing.Size(205, 53);
-            this.AllFilesBtn.TabIndex = 0;
-            this.AllFilesBtn.Text = "Backup All Paths";
-            this.AllFilesBtn.UseVisualStyleBackColor = true;
-            this.AllFilesBtn.Click += new System.EventHandler(this.AllPathsBtn_Click);
+            this.allPathsBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.allPathsBtn.Location = new System.Drawing.Point(8, 337);
+            this.allPathsBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.allPathsBtn.Name = "allPathsBtn";
+            this.allPathsBtn.Size = new System.Drawing.Size(205, 53);
+            this.allPathsBtn.TabIndex = 0;
+            this.allPathsBtn.Text = "Backup All Paths";
+            this.allPathsBtn.UseVisualStyleBackColor = true;
+            this.allPathsBtn.Click += new System.EventHandler(this.AllPathsBtn_Click);
             // 
             // CommonFilesBtn
             // 
@@ -318,7 +318,7 @@ namespace Graphical_Backup_Program
             this.Controls.Add(this.clearingFoldersGroupBox);
             this.Controls.Add(this.TextBoxLabel);
             this.Controls.Add(this.CommonFilesBtn);
-            this.Controls.Add(this.AllFilesBtn);
+            this.Controls.Add(this.allPathsBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -342,7 +342,7 @@ namespace Graphical_Backup_Program
 
         #endregion
 
-        private System.Windows.Forms.Button AllFilesBtn;
+        private System.Windows.Forms.Button allPathsBtn;
         private System.Windows.Forms.Button CommonFilesBtn;
         private System.Windows.Forms.Label TextBoxLabel;
         private System.Windows.Forms.TextBox pathsTextBox;
