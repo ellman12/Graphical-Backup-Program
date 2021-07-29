@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Windows.Forms;
 using FileSystem = Microsoft.VisualBasic.FileIO.FileSystem;
@@ -215,7 +215,6 @@ namespace Graphical_Backup_Program
             if (ClearFolders() == false)
                 return;
 
-
             //When user wants to begin copying just the Common Paths, go through line by line and determine which ones are marked 'common' (c).
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
             pathsTextBox.Text = backupModeBtn.Checked ? "Backing up just common items..." : "Opening just common items in File Explorer...";
@@ -345,10 +344,9 @@ namespace Graphical_Backup_Program
         }
 
         //On exit, save config stuff for next time.
-        private void Form_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
+        private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
-            string fileText = path1CheckBox.Checked + "\r\n" + path1TextBox.Text + "\r\n" + path2CheckBox.Checked + "\r\n" + path2TextBox.Text + "\r\n" + autoClearRadio.Checked + "\r\n" + clearWithPromptRadio.Checked + "\r\n" + dontClearRadio.Checked + "\r\n" + backupModeBtn.Checked + "\r\n" + fileExplorerBtn.Checked + "\r\n" + createTimestampFolderBtn.Checked + "\r\n" + dontCreateFolderBtn.Checked;
-            File.WriteAllText(_projectDirectory + "/Config.txt", fileText);
+            SaveToConfigFiles();
         }
 
         //Press this to run another backup without having to restart the whole program.
@@ -430,6 +428,18 @@ namespace Graphical_Backup_Program
             backupMode.Enabled = false;
             createTimestampFolderBtn.Enabled = false;
             dontCreateFolderBtn.Enabled = false;
+        }
+
+        private void SaveToConfigFiles()
+        {
+            File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
+            string fileText = path1CheckBox.Checked + "\r\n" + path1TextBox.Text + "\r\n" + path2CheckBox.Checked + "\r\n" + path2TextBox.Text + "\r\n" + autoClearRadio.Checked + "\r\n" + clearWithPromptRadio.Checked + "\r\n" + dontClearRadio.Checked + "\r\n" + backupModeBtn.Checked + "\r\n" + fileExplorerBtn.Checked + "\r\n" + createTimestampFolderBtn.Checked + "\r\n" + dontCreateFolderBtn.Checked;
+            File.WriteAllText(_projectDirectory + "/Config.txt", fileText);
+        }
+
+        private void saveToConfigFiles_Click(object sender, EventArgs e)
+        {
+            SaveToConfigFiles();
         }
     }
 }

@@ -55,6 +55,7 @@ namespace Graphical_Backup_Program
             this.backupModeBtn = new System.Windows.Forms.RadioButton();
             this.optionsLabel = new System.Windows.Forms.Label();
             this.resetBtn = new System.Windows.Forms.Button();
+            this.saveToConfigFiles = new System.Windows.Forms.Button();
             this.whereToBackupBox.SuspendLayout();
             this.clearingFoldersGroupBox.SuspendLayout();
             this.backupMode.SuspendLayout();
@@ -361,11 +362,22 @@ namespace Graphical_Backup_Program
             this.resetBtn.UseVisualStyleBackColor = true;
             this.resetBtn.Click += new System.EventHandler(this.ResetBtn_Click);
             // 
+            // saveToConfigFiles
+            // 
+            this.saveToConfigFiles.Location = new System.Drawing.Point(535, 625);
+            this.saveToConfigFiles.Name = "saveToConfigFiles";
+            this.saveToConfigFiles.Size = new System.Drawing.Size(197, 29);
+            this.saveToConfigFiles.TabIndex = 10;
+            this.saveToConfigFiles.Text = "Save Values to Config Files";
+            this.saveToConfigFiles.UseVisualStyleBackColor = true;
+            this.saveToConfigFiles.Click += new System.EventHandler(this.saveToConfigFiles_Click);
+            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(787, 663);
+            this.Controls.Add(this.saveToConfigFiles);
             this.Controls.Add(this.resetBtn);
             this.Controls.Add(this.optionsLabel);
             this.Controls.Add(this.backupMode);
@@ -424,6 +436,7 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.Button clearPath1;
         private System.Windows.Forms.CheckBox openPath2Box;
         private System.Windows.Forms.CheckBox openPath1Box;
+        private System.Windows.Forms.Button saveToConfigFiles;
     }
 }
 
