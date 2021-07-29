@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Windows.Forms;
 using FileSystem = Microsoft.VisualBasic.FileIO.FileSystem;
@@ -55,14 +55,14 @@ namespace Graphical_Backup_Program
                 {
                     File.Copy(src, finalDest);
                 }
-                catch (DirectoryNotFoundException)
+                catch (DirectoryNotFoundException e)
                 {
-                    pathsTextBox.Text += "ERROR when trying to copy file " + src + "\r\nCould not find path. Did you enter the path correctly?\r\n\r\n";
+                    pathsTextBox.Text += "ERROR when trying to copy file " + src + "\r\nCould not find path. Did you enter the path correctly?\r\n" + e.Message + Environment.NewLine;
                     return;
                 }
-                catch (IOException)
+                catch (IOException e)
                 {
-                    pathsTextBox.Text += "ERROR when trying to copy file " + src + "\r\nMost likely the path already exists\r\n\r\n";
+                    pathsTextBox.Text += "ERROR when trying to copy file " + src + "\r\nMost likely the path already exists\r\n" + e.Message + Environment.NewLine;
                     return;
                 }
 
@@ -84,14 +84,14 @@ namespace Graphical_Backup_Program
                 {
                     FileSystem.CopyDirectory(src, fullPath); //https://docs.microsoft.com/en-us/dotnet/api/microsoft.visualbasic.fileio.filesystem.copydirectory?view=net-5.0
                 }
-                catch (DirectoryNotFoundException)
+                catch (DirectoryNotFoundException e)
                 {
-                    pathsTextBox.Text += "ERROR when trying to copy folder " + src + "\r\nCould not find path. Did you enter the path correctly?\r\n\r\n";
+                    pathsTextBox.Text += "ERROR when trying to copy folder " + src + "\r\nCould not find path. Did you enter the path correctly?\r\n" + e.Message + Environment.NewLine;
                     return;
                 }
-                catch (IOException)
+                catch (IOException e)
                 {
-                    pathsTextBox.Text += "ERROR when trying to copy folder " + src + "\r\nMost likely the path already exists\r\n\r\n";
+                    pathsTextBox.Text += "ERROR when trying to copy folder " + src + "\r\nMost likely the path already exists\r\n\r\n" + e.Message + Environment.NewLine;
                     return;
                 }
 
