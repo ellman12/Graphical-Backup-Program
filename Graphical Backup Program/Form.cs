@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Windows.Forms;
 using FileSystem = Microsoft.VisualBasic.FileIO.FileSystem;
 
 namespace Graphical_Backup_Program
@@ -123,10 +124,48 @@ namespace Graphical_Backup_Program
             }
         }
 
+        //Does something based on which of the 3 buttons is selected.
+        //Returns false if user presses 'Cancel'; true otherwise (false is what really matters).
+        private bool ClearFolders()
+        {
+            bool clrPath1 = false, clrPath2 = false;
+            if (path1CheckBox.Checked && path1TextBox.Text != String.Empty) clrPath1 = true;
+            if (path2CheckBox.Checked && path2TextBox.Text != String.Empty) clrPath2 = true;
+
+            if (autoClearRadio.Checked) //Clear them without any prompt/warning.
+            {
+                if (clrPath1)
+                    Directory.Delete(path1TextBox.Text, true);
+                if (clrPath2)
+                    Directory.Delete(path2TextBox.Text, true);
+            }
+            else if (clearWithPromptRadio.Checked)
+            {
+                string text = "";
+                if (clrPath1 && clrPath2) text = "Clear path1 and path2 before backing up?";
+                else if (clrPath1) text = "Clear just path1 before backing up?";
+                else if (clrPath2) text = "Clear just path2 before backing up?";
+                DialogResult dialogResult = MessageBox.Show(text, "Clear Folders", MessageBoxButtons.YesNoCancel);
+
+                if (dialogResult == DialogResult.Yes) //https://stackoverflow.com/a/3036851
+                {
+                    if (clrPath1)
+                        Directory.Delete(path1TextBox.Text, true);
+                    if (clrPath2)
+                        Directory.Delete(path2TextBox.Text, true);
+                }
+                else if (dialogResult == DialogResult.Cancel)
+                    return false; //Signify pressing 'cancel' button.
+            }
+            return true;
+        }
+
         private void AllPathsBtn_Click(object sender, EventArgs e)
         {
             TextBoxLabel.Text = "Log";
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
+            if (ClearFolders() == false) //Cancel the backup and clearing of folders.
+                return;
 
             //When user wants to begin copying all C and U paths, go through line by line and determine which ones are marked C or U.
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
@@ -159,6 +198,9 @@ namespace Graphical_Backup_Program
         {
             TextBoxLabel.Text = "Log";
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
+            if (ClearFolders() == false)
+                return;
+
 
             //When user wants to begin copying just the Common Paths, go through line by line and determine which ones are marked 'common' (c).
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
