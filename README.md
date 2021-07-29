@@ -4,6 +4,8 @@ On my main PC, I like to run a full PC backup occasionally. In addition, I like 
 
 Graphical Backup Program (GBP) is a significantly improved version of [Folder Copy (FC)](https://github.com/ellman12/Folder-Copy). FC was pretty bad, but it got the job done. FC also had a lot of dumb: It was a command line tool, I went with Python as the language, and it could only backup folders. My original plan was to modify FC to be able to do files, but I put that off for a while, and eventually decided to create a whole new project with a GUI. It was originally going to be called FC2 (terrible name). Eventually, I came up with Graphical Backup Program (GBP), which I think is a much better (albeit fairly generic) name. A program called Folder Copy that can do both doesn't really make much sense.
 
+One night, I was getting ready to go to bed, and for some reason I just started to do some serious thinking about FC2 (that was still what I was going to call it at the time). I got out the pen and paper and started drawing out the GUI and how I wanted it to work, and most, if not all of my ideas from that night ended up in the final product. I'm still amazed at how I just came up with all the ideas for it in like 1 night.
+
 I am extremely happy with how well GBP turned out. C# was definitely the way to go with this project. I am also very satisfied with how the GUI looks. Considering I am usually terrible at UI design, I think this GUI turned out real nice.
 
 One nice thing about GBP is that it saves the items you want backed up to a file so you don't have to re-enter it each time you run a backup. It also has a config file that stores which options you checked, etc. in the GUI so that the next time you open it, it's ready to go. These are both stored in the project directory, and if they don't exist, it automatically creates them on startup.
@@ -20,14 +22,14 @@ One nice thing about GBP is that it saves the items you want backed up to a file
 * Easily switch between 2 different backup locations (or do 2 backups at the same time)
 * Ability to back up only common items that frequently change: mark items as conmon or uncommon. E.g., a video game save file would change often, but a ROM file wouldn't.
 * GBP's log/output is a lot better than FC's
-* GBP performs signicicantly faster than FC, even when copying large folders
+* GBP performs signicicantly faster than FC, even when copying large folders (just be warned, if you throw large folders at GBP, it will massively slow down your PC and GBP will act like it is frozen, but it's not. Just be patient.)
 
-GBP icon from: https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Afolder_open
+GBP icon from [Google Material Icons](https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Afolder_open)
 
 ## How to Setup and Use
 GBP is designed to be easy-to-use and easy to setup. The GUI should be sufficiently idiot-proof, and all the options should speak for themselves, but I will explain them a little more in-depth here.
 
-![GBP GUI](README_Images/GBP_GUI.png)
+![GBP GUI](GBP_GUI.png)
 
 This is the GBP GUI. In-depth explanations of the GUI:<br>
 1. This is where you enter the paths to the files and folders that you want backed up. Marking a path as common ('c') tells GBP that this is an item that constantly changes; marking one as uncommon ('u') tells GBP that this item doesn't change as much as a common one does, and if you choose to backup just common paths, any items marked as 'u' will be ignored.
