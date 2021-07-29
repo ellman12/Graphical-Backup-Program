@@ -16,32 +16,29 @@ namespace Graphical_Backup_Program
         }
 
         //Used in the foreach loops in the 2 backup button functions for determining which action to take.
-        private void CopyAndLogOrOpen(string trimmedPath)
+        private void CopyAndLogOrOpen(string trimmedPath, string timestamp)
         {
             if (backupModeBtn.Checked)
             {
                 //Copy each item to path1 and/or path2, as long as the box is checked AND the TextBox isn't blank.
                 if (path1CheckBox.Checked && path1TextBox.Text != String.Empty)
-                    CopyAndLog(trimmedPath, path1TextBox.Text, 1);
+                    CopyAndLog(trimmedPath, path1TextBox.Text, 1, timestamp);
 
                 if (path2CheckBox.Checked && path2TextBox.Text != String.Empty)
-                    CopyAndLog(trimmedPath, path2TextBox.Text, 2);
+                    CopyAndLog(trimmedPath, path2TextBox.Text, 2, timestamp);
             }
             else if (fileExplorerBtn.Checked)
                 OpenInExplorer(trimmedPath);
         }
 
         //Used for copying a single item to path1 and/or path2, and for putting some log output in the paths TextBox. pathNum is either 1 or 2.
-        private void CopyAndLog(string src, string dest, int pathNum)
+        private void CopyAndLog(string src, string dest, int pathNum, string timestamp)
         {
             src = src.Trim(); //Remove pesky whitespace from start and end of path.
 
             //If user wants stuff to be copied to a special timestamp folder, this is where it's done at.
             if (createTimestampFolderBtn.Checked)
-            {
-                string timestamp = DateTime.Now.ToString("M-d-yyyy hh;mm tt"); //'/' and ':' won't work in paths because Windows.
                 dest = Path.Combine(dest, "GBP backup " + timestamp);
-            }
 
             if (Path.HasExtension(src)) //if a file
             {
@@ -119,7 +116,7 @@ namespace Graphical_Backup_Program
         {
             if (path != String.Empty)
             {
-                path = System.IO.Path.GetFullPath(path);
+                path = Path.GetFullPath(path);
                 System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{path}\"");
             }
         }
@@ -181,6 +178,10 @@ namespace Graphical_Backup_Program
             if (ClearFolders() == false) //Cancel the backup and clearing of folders.
                 return;
 
+            string timestamp = ""; //Create timestamp if needed.
+            if (createTimestampFolderBtn.Checked)
+                timestamp = DateTime.Now.ToString("M-d-yyyy hh;mm tt"); //'/' and ':' won't work in paths because Windows.
+
             //When user wants to begin copying all C and U paths, go through line by line and determine which ones are marked C or U.
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
 
@@ -193,7 +194,7 @@ namespace Graphical_Backup_Program
 
                 if (Char.ToLower(path[0]) is 'c' or 'u')
                 {
-                    CopyAndLogOrOpen(trimmedPath);
+                    CopyAndLogOrOpen(trimmedPath, timestamp);
                 }
                 else
                     pathsTextBox.Text += "\r\nSkipping path " + trimmedPath + "\r\nGBP cannot understand this line\r\n";
@@ -215,6 +216,10 @@ namespace Graphical_Backup_Program
             if (ClearFolders() == false)
                 return;
 
+            string timestamp = "";
+            if (createTimestampFolderBtn.Checked)
+                timestamp = DateTime.Now.ToString("M-d-yyyy hh;mm tt"); //'/' and ':' won't work in paths because Windows.
+
             //When user wants to begin copying just the Common Paths, go through line by line and determine which ones are marked 'common' (c).
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
             pathsTextBox.Text = backupModeBtn.Checked ? "Backing up just common items..." : "Opening just common items in File Explorer...";
@@ -226,7 +231,7 @@ namespace Graphical_Backup_Program
 
                 if (Char.ToLower(path[0]) == 'c')
                 {
-                    CopyAndLogOrOpen(trimmedPath);
+                    CopyAndLogOrOpen(trimmedPath, timestamp);
                 }
                 else if (Char.ToLower(path[0]) == 'u')
                     pathsTextBox.Text += "Skipping path " + trimmedPath + "\r\nbecause it is marked 'U'\r\n";
