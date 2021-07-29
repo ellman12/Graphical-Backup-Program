@@ -130,8 +130,6 @@ namespace Graphical_Backup_Program
             // openPath2Box
             // 
             this.openPath2Box.AutoSize = true;
-            this.openPath2Box.Checked = true;
-            this.openPath2Box.CheckState = System.Windows.Forms.CheckState.Checked;
             this.openPath2Box.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.openPath2Box.Location = new System.Drawing.Point(571, 67);
             this.openPath2Box.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);

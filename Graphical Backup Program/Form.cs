@@ -124,6 +124,26 @@ namespace Graphical_Backup_Program
             }
         }
 
+        //Delete a single directory, ignoring exception about it not existing/found.
+        private void DeleteDirectory(string dir)
+        {
+            try
+            {
+                Directory.Delete(dir, true);
+            }
+            catch (DirectoryNotFoundException)
+            {
+            }
+        }
+
+        private void DeletePath1AndOr2(bool clrPath1, bool clrPath2)
+        {
+            if (clrPath1)
+                DeleteDirectory(path1TextBox.Text);
+            if (clrPath2)
+                DeleteDirectory(path2TextBox.Text);
+        }
+
         //Does something based on which of the 3 buttons is selected.
         //Returns false if user presses 'Cancel'; true otherwise (false is what really matters).
         private bool ClearFolders()
@@ -134,10 +154,7 @@ namespace Graphical_Backup_Program
 
             if (autoClearRadio.Checked) //Clear them without any prompt/warning.
             {
-                if (clrPath1)
-                    Directory.Delete(path1TextBox.Text, true);
-                if (clrPath2)
-                    Directory.Delete(path2TextBox.Text, true);
+                DeletePath1AndOr2(clrPath1, clrPath2);
             }
             else if (clearWithPromptRadio.Checked)
             {
@@ -149,10 +166,7 @@ namespace Graphical_Backup_Program
 
                 if (dialogResult == DialogResult.Yes) //https://stackoverflow.com/a/3036851
                 {
-                    if (clrPath1)
-                        Directory.Delete(path1TextBox.Text, true);
-                    if (clrPath2)
-                        Directory.Delete(path2TextBox.Text, true);
+                    DeletePath1AndOr2(clrPath1, clrPath2);
                 }
                 else if (dialogResult == DialogResult.Cancel)
                     return false; //Signify pressing 'cancel' button.
@@ -278,10 +292,27 @@ namespace Graphical_Backup_Program
         //On startup, assign GUI controls values from files, and disable any controls, if necessary.
         private void Form_Shown(object sender, EventArgs e)
         {
-            pathsTextBox.Text = File.ReadAllText(_projectDirectory + "/paths.txt");
+            if (!File.Exists(_projectDirectory + "/paths.txt"))
+                File.Create(_projectDirectory + "/paths.txt");
+            else
+                pathsTextBox.Text = File.ReadAllText(_projectDirectory + "/paths.txt");
 
-            //Read in config stuff. Is this stupid? Yes. Does it work? Also yes.
+            if (!File.Exists(_projectDirectory + "/Config.txt"))
+            {
+                FileStream file = File.Create(_projectDirectory + "/Config.txt");
+                file.Close();
+            }
+
+            //Read in config stuff. Is this extremely stupid and sub-optimal? Yes. Does it work? Also yes.
             string configFileTxt = File.ReadAllText(_projectDirectory + "/Config.txt");
+
+            //If config file has no text, write default values to file.
+            if (configFileTxt == String.Empty)
+            {
+                File.WriteAllText(_projectDirectory + "/Config.txt", "True\r\n\r\nFalse\r\n\r\nFalse\r\nTrue\r\nFalse\r\nTrue\r\nFalse\r\nTrue\r\nFalse");
+                configFileTxt = "True\r\n\r\nFalse\r\n\r\nFalse\r\nTrue\r\nFalse\r\nTrue\r\nFalse\r\nTrue\r\nFalse";
+            }
+
             string[] config = configFileTxt.Split("\r\n");
             path1CheckBox.Checked = Boolean.Parse(config[0]);
             path1TextBox.Text = config[1];
