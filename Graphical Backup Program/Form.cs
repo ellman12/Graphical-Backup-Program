@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Windows.Forms;
 using FileSystem = Microsoft.VisualBasic.FileIO.FileSystem;
@@ -173,7 +173,8 @@ namespace Graphical_Backup_Program
 
         private void AllPathsBtn_Click(object sender, EventArgs e)
         {
-            TextBoxLabel.Text = "Log";
+            //Idiot-proofing
+            TextBoxLabel.Hide();
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
             if (ClearFolders() == false) //Cancel the backup and clearing of folders.
                 return;
@@ -211,7 +212,8 @@ namespace Graphical_Backup_Program
 
         private void CommonPathsBtn_Click(object sender, EventArgs e)
         {
-            TextBoxLabel.Text = "Log";
+            //Idiot-proofing
+            TextBoxLabel.Hide();
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
             if (ClearFolders() == false)
                 return;
@@ -358,7 +360,7 @@ namespace Graphical_Backup_Program
         private void ResetBtn_Click(object sender, EventArgs e)
         {
             pathsTextBox.Text = File.ReadAllText(_projectDirectory + "/paths.txt");
-            TextBoxLabel.Text = "Paths to Backup. C for Common, U for Uncommon, other characters are ignored.";
+            TextBoxLabel.Show();
             allPathsBtn.Enabled = true;
             commonPathsBtn.Enabled = true;
             resetBtn.Enabled = false;
