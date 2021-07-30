@@ -26,12 +26,12 @@ One nice thing about GBP is that it saves the items you want backed up to a file
 
 GBP icon from [Google Material Icons](https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Afolder_open)
 
-## How to Install
-Setting up GBP should be pretty simple and straightforward. Just download the Program.zip from [GitHub](https://github.com/ellman12/Graphical-Backup-Program/releases/tag/v1.0), extract it to somewhere appropriate like <code>C:\Program Files\GBP</code> and you should be good to go. If it's the first time running it, GBP should automatically create the 2 files it needs.
+## How to Install and Setup
+The best way to run this thing is, unfortunately, through the command line. You can try downloading Program.zip and running that .exe, but it doesn't seem to work that great for some reason. You *could* also run it through Visual Studio. If you want to run it through the command line, do it like this:
+![PowerShell](Running_GBP.png)
+In my [AutoHotkey](https://github.com/ellman12/AutoHotkey) repo, I plan to somehow add something to automate doing this.
 
 ## How to Use
-GBP is designed to be easy-to-use and easy to setup. The GUI should be sufficiently idiot-proof, and all the options should speak for themselves, but I will explain them a little more in-depth here.
-
 ![GBP GUI](GBP_GUI.png)
 
 This is the GBP GUI. In-depth explanations of the GUI:<br>
