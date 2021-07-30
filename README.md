@@ -20,9 +20,9 @@ One nice thing about GBP is that it saves the items you want backed up to a file
 * Easy-to-use GUI: No crappy command line "interface" here!
 * Ability to backup files now
 * Easily switch between 2 different backup locations (or do 2 backups at the same time)
-* Ability to back up only common items that frequently change: mark items as conmon or uncommon. E.g., a video game save file would change often, but a ROM file wouldn't.
+* Ability to back up only common items that frequently change: mark items as common or uncommon. E.g., a video game save file would change often, but a ROM file wouldn't.
 * GBP's log/output is a lot better than FC's
-* GBP performs signicicantly faster than FC, even when copying large folders (just be warned, if you throw large folders at GBP, it will massively slow down your PC and GBP will act like it is frozen, but it's not. Just be patient.)
+* GBP performs significantly faster than FC, even when copying large folders (just be warned, if you throw large folders at GBP, it will massively slow down your PC and GBP will act like it is frozen, but it's not. Just be patient.)
 
 GBP icon from [Google Material Icons](https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Afolder_open)
 
@@ -39,13 +39,13 @@ Case doesn't matter: you can enter 'c' or 'C'.
 
 3. This button will backup just the items marked as 'c'.
 
-4. After a backup is finished, press this button to get GBP ready for another backup. Pressing this button will clear the log, and put the paths you previously entered back into their TextBox.
+4. After a backup is finished, press this button to get GBP ready for another backup (if you want to. If you are done, you can just close the GUI). Pressing this button will clear the log, and put the paths you previously entered back into their TextBox.
 
 5. This GroupBox controls where the paths entered above are backed up. Checking a box tells GBP to copy all the paths there. If it's not checked, it won't use it (even if the TextBox isn't empty). If you want to create 2 backups, or switch between backup locations, you can do that with this. You can also clear a TextBox with a push of the 'Clear' button. If you want to open this folder in File Explorer when the backup finishes, check the 'Open on Completion' box.
 
-6. GBP has the ability to clear path1 and path2 before the backup begins. If you use the same folder for backups over and over again, this can be handy to remove old backups you no longer need. It can be done completely automatically without a prompt, or with a yes-or-no prompt asking if you want to clear the folder(s). Can also be totally disabled by checking the 3rd button.
+6. GBP has the ability to clear path1 and path2 before the backup begins. If you use the same folder for backups over and over again, this can be handy to remove old backups you no longer need. It can be done completely automatically without a prompt, or with a yes-or-no prompt asking if you want to clear the folder(s). Can also be totally disabled by checking the 3rd button, which won't remove anything.
 
-7. This enables/disables GBP copying everything into a folder with a timestamp as its name. This can be useful for keeping track of when your last backup was.
+7. This enables/disables GBP copying everything into a folder with a timestamp as its name. This can be useful for keeping track of when your last backup was. I reconmend turning this setting on.
 
 8. If instead of copying all the items, you instead want them opened in File Explorer, you can also do that with GBP.
 
