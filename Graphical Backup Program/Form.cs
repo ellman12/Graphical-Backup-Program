@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Windows.Forms;
 using FileSystem = Microsoft.VisualBasic.FileIO.FileSystem;
@@ -171,9 +171,43 @@ namespace Graphical_Backup_Program
             return true;
         }
 
+        //Yells at the user if they try to be an idiot and put the same path for path1 and 2 (but only if they're both checked).
+        private bool SamePaths()
+        {
+            if (path1CheckBox.Checked && path2CheckBox.Checked)
+            {
+                if (path1TextBox.Text == path2TextBox.Text)
+                {
+                    MessageBox.Show("You cannot have the same path for path1 and path2!", "Error: Duplicate Paths", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        //Returns true if path1 or path2 is a file instead of a folder (as long as they're checked though).
+        private bool InvalidPaths()
+        {
+            if (path1CheckBox.Checked && Path.HasExtension(path1TextBox.Text))
+            {
+                MessageBox.Show("path1 cannot be a file!", "Error: File Path Specified for path1", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return true;
+            }
+
+            if (path2CheckBox.Checked && Path.HasExtension(path2TextBox.Text))
+            {
+                MessageBox.Show("path2 cannot be a file!", "Error: File Path Specified for path2", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return true;
+            }
+            return false;
+        }
+
         private void AllPathsBtn_Click(object sender, EventArgs e)
         {
             //Idiot-proofing
+            if (SamePaths()) return;
+            if (InvalidPaths()) return;
+
             TextBoxLabel.Hide();
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
             if (ClearFolders() == false) //Cancel the backup and clearing of folders.
@@ -213,6 +247,9 @@ namespace Graphical_Backup_Program
         private void CommonPathsBtn_Click(object sender, EventArgs e)
         {
             //Idiot-proofing
+            if (SamePaths()) return;
+            if (InvalidPaths()) return;
+
             TextBoxLabel.Hide();
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
             if (ClearFolders() == false)

@@ -26,7 +26,9 @@ One nice thing about GBP is that it saves the items you want backed up to a file
 
 GBP icon from [Google Material Icons](https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Afolder_open)
 
-## How to Setup and Use
+## How to Install
+
+## How to Use
 GBP is designed to be easy-to-use and easy to setup. The GUI should be sufficiently idiot-proof, and all the options should speak for themselves, but I will explain them a little more in-depth here.
 
 ![GBP GUI](GBP_GUI.png)

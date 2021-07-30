@@ -1,3 +1,2 @@
-c C:\Users\Elliott\Documents\GitHub
-c C:\Users\Elliott\Documents\temp switch screenshots 1-10-2020
-c C:\Users\Elliott\Music\Music - Definitive Edition (7-5-2020)
+c C:\Users\Elliott\Documents\GitHub\DSU-CSC-250
+u C:\Users\Elliott\Documents\GitHub\AutoHotkey
