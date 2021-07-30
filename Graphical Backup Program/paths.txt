@@ -1,2 +1,0 @@
-c C:\Users\Elliott\Documents\GitHub\DSU-CSC-250
-u C:\Users\Elliott\Documents\GitHub\AutoHotkey
