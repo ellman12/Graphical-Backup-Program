@@ -8,7 +8,11 @@ namespace Graphical_Backup_Program
     public partial class Form : System.Windows.Forms.Form
     {
         //https://stackoverflow.com/a/11882118
-        private readonly string _projectDirectory = Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName;
+        //If you're compiling and running this through Visual Studio 2019, use this one.
+        //private readonly string _projectDirectory = Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName;
+
+        //Else, use this one.
+        private readonly string _projectDirectory = Environment.CurrentDirectory;
 
         public Form()
         {
