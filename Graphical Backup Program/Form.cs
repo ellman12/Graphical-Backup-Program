@@ -126,7 +126,7 @@ namespace Graphical_Backup_Program
             if (path != String.Empty)
             {
                 path = Path.GetFullPath(path);
-                System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{path}\"");
+                Process.Start("explorer.exe", $"/select,\"{path}\"");
             }
         }
 
@@ -139,6 +139,7 @@ namespace Graphical_Backup_Program
             }
             catch (DirectoryNotFoundException)
             {
+                //Ignore error lol ;)
             }
         }
 
