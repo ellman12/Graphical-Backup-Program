@@ -24,15 +24,16 @@ One nice thing about GBP is that it saves the items you want backed up to a file
 * GBP's log/output is a lot better than FC's
 * GBP performs significantly faster than FC, even when copying large folders (just be warned, if you throw large folders at GBP, it will massively slow down your PC and GBP will act like it is frozen, but it's not. Just be patient.)
 
-GBP icon from [Google Material Icons](https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Afolder_open)
+## How to Compile Into a Portable .exe
+You probably don't need to do this, but I figured I should include this in the README.<br>
+The way I compiled this into a portable .exe for the GitHub release was by running this command:<br>
+`dotnet publish -o GBP -r win-x64 /p:PublishSingleFile=true`
+<br>(Thanks [@pythondude325](https://github.com/pythondude325))
 
 ## How to Install and Setup
-Install .NET first. GBP requires it.
+<b>Install .NET first. GBP requires it.</b>
 
-The best way to run this thing is, unfortunately, through the command line. You can try downloading Program.zip and running that .exe, but it doesn't seem to work that great for some reason. You *could* also run it through Visual Studio. If you want to run it through the command line, do it like this:
-
-![PowerShell](Running_GBP.png)
-In my [AutoHotkey](https://github.com/ellman12/AutoHotkey) repo, I plan to somehow add something to automate doing this.
+Running GBP is easy. Just download the Program.zip from GitHub, add the GBP folder to someplace like `C:\Program Files\\`, and run the .exe. GBP should run without any issues. You can then pin the .exe to the Start menu, create a Desktop shortcut, or whatever you want to easily access GBP whenever you want.
 
 ## How to Use
 ![GBP GUI](GBP_GUI.png)
@@ -59,3 +60,6 @@ Case doesn't matter: you can enter 'c' or 'C'.
 
 ## Contributing
 Feel free to open a PR or shoot me a message if you have ideas for GBP or you spot a bug 🐛.
+<br>
+
+GBP icon from [Google Material Icons](https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Afolder_open)

@@ -8,6 +8,7 @@ namespace Graphical_Backup_Program
     public partial class Form : System.Windows.Forms.Form
     {
         //https://stackoverflow.com/a/11882118
+        //The folder structure for where the .exe is stored varies between these 2.
         //If you're compiling and running this through Visual Studio 2019, use this one.
         //private readonly string _projectDirectory = Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName;
 
