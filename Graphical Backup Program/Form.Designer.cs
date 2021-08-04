@@ -65,10 +65,9 @@ namespace Graphical_Backup_Program
             // allPathsBtn
             // 
             this.allPathsBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.allPathsBtn.Location = new System.Drawing.Point(8, 337);
-            this.allPathsBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.allPathsBtn.Location = new System.Drawing.Point(7, 253);
             this.allPathsBtn.Name = "allPathsBtn";
-            this.allPathsBtn.Size = new System.Drawing.Size(254, 53);
+            this.allPathsBtn.Size = new System.Drawing.Size(222, 40);
             this.allPathsBtn.TabIndex = 0;
             this.allPathsBtn.Text = "Backup All Paths";
             this.allPathsBtn.UseVisualStyleBackColor = true;
@@ -77,10 +76,9 @@ namespace Graphical_Backup_Program
             // commonPathsBtn
             // 
             this.commonPathsBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.commonPathsBtn.Location = new System.Drawing.Point(267, 337);
-            this.commonPathsBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.commonPathsBtn.Location = new System.Drawing.Point(234, 253);
             this.commonPathsBtn.Name = "commonPathsBtn";
-            this.commonPathsBtn.Size = new System.Drawing.Size(254, 53);
+            this.commonPathsBtn.Size = new System.Drawing.Size(222, 40);
             this.commonPathsBtn.TabIndex = 1;
             this.commonPathsBtn.Text = "Backup Just Common Paths";
             this.commonPathsBtn.UseVisualStyleBackColor = true;
@@ -90,21 +88,20 @@ namespace Graphical_Backup_Program
             // 
             this.TextBoxLabel.AutoSize = true;
             this.TextBoxLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.TextBoxLabel.Location = new System.Drawing.Point(8, 4);
+            this.TextBoxLabel.Location = new System.Drawing.Point(7, 3);
             this.TextBoxLabel.Name = "TextBoxLabel";
-            this.TextBoxLabel.Size = new System.Drawing.Size(535, 20);
+            this.TextBoxLabel.Size = new System.Drawing.Size(434, 15);
             this.TextBoxLabel.TabIndex = 2;
             this.TextBoxLabel.Text = "Paths to Backup. C for Common, U for Uncommon, other characters are ignored.";
             // 
             // pathsTextBox
             // 
             this.pathsTextBox.AcceptsReturn = true;
-            this.pathsTextBox.Location = new System.Drawing.Point(8, 28);
-            this.pathsTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pathsTextBox.Location = new System.Drawing.Point(7, 21);
             this.pathsTextBox.Multiline = true;
             this.pathsTextBox.Name = "pathsTextBox";
             this.pathsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.pathsTextBox.Size = new System.Drawing.Size(772, 301);
+            this.pathsTextBox.Size = new System.Drawing.Size(676, 227);
             this.pathsTextBox.TabIndex = 3;
             this.pathsTextBox.WordWrap = false;
             this.pathsTextBox.TextChanged += new System.EventHandler(this.PathsTextBox_TextChanged);
@@ -119,11 +116,9 @@ namespace Graphical_Backup_Program
             this.whereToBackupBox.Controls.Add(this.path2CheckBox);
             this.whereToBackupBox.Controls.Add(this.path1TextBox);
             this.whereToBackupBox.Controls.Add(this.path1CheckBox);
-            this.whereToBackupBox.Location = new System.Drawing.Point(8, 421);
-            this.whereToBackupBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.whereToBackupBox.Location = new System.Drawing.Point(7, 316);
             this.whereToBackupBox.Name = "whereToBackupBox";
-            this.whereToBackupBox.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.whereToBackupBox.Size = new System.Drawing.Size(744, 103);
+            this.whereToBackupBox.Size = new System.Drawing.Size(651, 77);
             this.whereToBackupBox.TabIndex = 5;
             this.whereToBackupBox.TabStop = false;
             this.whereToBackupBox.Text = "Where to Backup";
@@ -132,10 +127,9 @@ namespace Graphical_Backup_Program
             // 
             this.openPath2Box.AutoSize = true;
             this.openPath2Box.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.openPath2Box.Location = new System.Drawing.Point(571, 67);
-            this.openPath2Box.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.openPath2Box.Location = new System.Drawing.Point(500, 50);
             this.openPath2Box.Name = "openPath2Box";
-            this.openPath2Box.Size = new System.Drawing.Size(170, 24);
+            this.openPath2Box.Size = new System.Drawing.Size(138, 19);
             this.openPath2Box.TabIndex = 7;
             this.openPath2Box.Text = "Open on Completion";
             this.openPath2Box.UseVisualStyleBackColor = true;
@@ -146,19 +140,19 @@ namespace Graphical_Backup_Program
             this.openPath1Box.Checked = true;
             this.openPath1Box.CheckState = System.Windows.Forms.CheckState.Checked;
             this.openPath1Box.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.openPath1Box.Location = new System.Drawing.Point(571, 26);
-            this.openPath1Box.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.openPath1Box.Location = new System.Drawing.Point(500, 20);
             this.openPath1Box.Name = "openPath1Box";
-            this.openPath1Box.Size = new System.Drawing.Size(170, 24);
+            this.openPath1Box.Size = new System.Drawing.Size(138, 19);
             this.openPath1Box.TabIndex = 6;
             this.openPath1Box.Text = "Open on Completion";
             this.openPath1Box.UseVisualStyleBackColor = true;
             // 
             // clearPath2
             // 
-            this.clearPath2.Location = new System.Drawing.Point(495, 65);
+            this.clearPath2.Location = new System.Drawing.Point(433, 49);
+            this.clearPath2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.clearPath2.Name = "clearPath2";
-            this.clearPath2.Size = new System.Drawing.Size(70, 27);
+            this.clearPath2.Size = new System.Drawing.Size(61, 20);
             this.clearPath2.TabIndex = 5;
             this.clearPath2.Text = "Clear";
             this.clearPath2.UseVisualStyleBackColor = true;
@@ -166,9 +160,10 @@ namespace Graphical_Backup_Program
             // 
             // clearPath1
             // 
-            this.clearPath1.Location = new System.Drawing.Point(495, 24);
+            this.clearPath1.Location = new System.Drawing.Point(433, 18);
+            this.clearPath1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.clearPath1.Name = "clearPath1";
-            this.clearPath1.Size = new System.Drawing.Size(70, 27);
+            this.clearPath1.Size = new System.Drawing.Size(61, 20);
             this.clearPath1.TabIndex = 4;
             this.clearPath1.Text = "Clear";
             this.clearPath1.UseVisualStyleBackColor = true;
@@ -176,10 +171,9 @@ namespace Graphical_Backup_Program
             // 
             // path2TextBox
             // 
-            this.path2TextBox.Location = new System.Drawing.Point(104, 65);
-            this.path2TextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.path2TextBox.Location = new System.Drawing.Point(91, 49);
             this.path2TextBox.Name = "path2TextBox";
-            this.path2TextBox.Size = new System.Drawing.Size(385, 27);
+            this.path2TextBox.Size = new System.Drawing.Size(337, 23);
             this.path2TextBox.TabIndex = 3;
             this.path2TextBox.TextChanged += new System.EventHandler(this.PathTextBox_TextChanged);
             // 
@@ -187,10 +181,9 @@ namespace Graphical_Backup_Program
             // 
             this.path2CheckBox.AutoSize = true;
             this.path2CheckBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.path2CheckBox.Location = new System.Drawing.Point(3, 65);
-            this.path2CheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.path2CheckBox.Location = new System.Drawing.Point(3, 49);
             this.path2CheckBox.Name = "path2CheckBox";
-            this.path2CheckBox.Size = new System.Drawing.Size(102, 24);
+            this.path2CheckBox.Size = new System.Drawing.Size(84, 19);
             this.path2CheckBox.TabIndex = 2;
             this.path2CheckBox.Text = "Use Path 2:";
             this.path2CheckBox.UseVisualStyleBackColor = true;
@@ -198,10 +191,9 @@ namespace Graphical_Backup_Program
             // 
             // path1TextBox
             // 
-            this.path1TextBox.Location = new System.Drawing.Point(104, 24);
-            this.path1TextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.path1TextBox.Location = new System.Drawing.Point(91, 18);
             this.path1TextBox.Name = "path1TextBox";
-            this.path1TextBox.Size = new System.Drawing.Size(385, 27);
+            this.path1TextBox.Size = new System.Drawing.Size(337, 23);
             this.path1TextBox.TabIndex = 1;
             this.path1TextBox.TextChanged += new System.EventHandler(this.PathTextBox_TextChanged);
             // 
@@ -211,10 +203,9 @@ namespace Graphical_Backup_Program
             this.path1CheckBox.Checked = true;
             this.path1CheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.path1CheckBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.path1CheckBox.Location = new System.Drawing.Point(3, 27);
-            this.path1CheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.path1CheckBox.Location = new System.Drawing.Point(3, 20);
             this.path1CheckBox.Name = "path1CheckBox";
-            this.path1CheckBox.Size = new System.Drawing.Size(102, 24);
+            this.path1CheckBox.Size = new System.Drawing.Size(84, 19);
             this.path1CheckBox.TabIndex = 0;
             this.path1CheckBox.Text = "Use Path 1:";
             this.path1CheckBox.UseVisualStyleBackColor = true;
@@ -225,11 +216,9 @@ namespace Graphical_Backup_Program
             this.clearingFoldersGroupBox.Controls.Add(this.dontClearRadio);
             this.clearingFoldersGroupBox.Controls.Add(this.clearWithPromptRadio);
             this.clearingFoldersGroupBox.Controls.Add(this.autoClearRadio);
-            this.clearingFoldersGroupBox.Location = new System.Drawing.Point(8, 532);
-            this.clearingFoldersGroupBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.clearingFoldersGroupBox.Location = new System.Drawing.Point(7, 399);
             this.clearingFoldersGroupBox.Name = "clearingFoldersGroupBox";
-            this.clearingFoldersGroupBox.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.clearingFoldersGroupBox.Size = new System.Drawing.Size(310, 123);
+            this.clearingFoldersGroupBox.Size = new System.Drawing.Size(271, 92);
             this.clearingFoldersGroupBox.TabIndex = 0;
             this.clearingFoldersGroupBox.TabStop = false;
             this.clearingFoldersGroupBox.Text = "Clearing Backup Folders";
@@ -238,10 +227,9 @@ namespace Graphical_Backup_Program
             // 
             this.dontClearRadio.AutoSize = true;
             this.dontClearRadio.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dontClearRadio.Location = new System.Drawing.Point(6, 95);
-            this.dontClearRadio.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dontClearRadio.Location = new System.Drawing.Point(5, 71);
             this.dontClearRadio.Name = "dontClearRadio";
-            this.dontClearRadio.Size = new System.Drawing.Size(156, 24);
+            this.dontClearRadio.Size = new System.Drawing.Size(125, 19);
             this.dontClearRadio.TabIndex = 3;
             this.dontClearRadio.Text = "Don\'t Clear Folders";
             this.dontClearRadio.UseVisualStyleBackColor = true;
@@ -250,10 +238,9 @@ namespace Graphical_Backup_Program
             // 
             this.clearWithPromptRadio.AutoSize = true;
             this.clearWithPromptRadio.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.clearWithPromptRadio.Location = new System.Drawing.Point(6, 62);
-            this.clearWithPromptRadio.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.clearWithPromptRadio.Location = new System.Drawing.Point(5, 46);
             this.clearWithPromptRadio.Name = "clearWithPromptRadio";
-            this.clearWithPromptRadio.Size = new System.Drawing.Size(201, 24);
+            this.clearWithPromptRadio.Size = new System.Drawing.Size(162, 19);
             this.clearWithPromptRadio.TabIndex = 2;
             this.clearWithPromptRadio.Text = "Clear Folders with Prompt";
             this.clearWithPromptRadio.UseVisualStyleBackColor = true;
@@ -263,10 +250,9 @@ namespace Graphical_Backup_Program
             this.autoClearRadio.AutoSize = true;
             this.autoClearRadio.Checked = true;
             this.autoClearRadio.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.autoClearRadio.Location = new System.Drawing.Point(6, 28);
-            this.autoClearRadio.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.autoClearRadio.Location = new System.Drawing.Point(5, 21);
             this.autoClearRadio.Name = "autoClearRadio";
-            this.autoClearRadio.Size = new System.Drawing.Size(299, 24);
+            this.autoClearRadio.Size = new System.Drawing.Size(240, 19);
             this.autoClearRadio.TabIndex = 0;
             this.autoClearRadio.TabStop = true;
             this.autoClearRadio.Text = "Clear Folders Automatically (No Prompt)";
@@ -276,9 +262,11 @@ namespace Graphical_Backup_Program
             // 
             this.backupMode.Controls.Add(this.dontCreateFolderBtn);
             this.backupMode.Controls.Add(this.createTimestampFolderBtn);
-            this.backupMode.Location = new System.Drawing.Point(324, 532);
+            this.backupMode.Location = new System.Drawing.Point(284, 399);
+            this.backupMode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.backupMode.Name = "backupMode";
-            this.backupMode.Size = new System.Drawing.Size(205, 86);
+            this.backupMode.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.backupMode.Size = new System.Drawing.Size(179, 64);
             this.backupMode.TabIndex = 7;
             this.backupMode.TabStop = false;
             this.backupMode.Text = "Backup Mode";
@@ -286,9 +274,10 @@ namespace Graphical_Backup_Program
             // dontCreateFolderBtn
             // 
             this.dontCreateFolderBtn.AutoSize = true;
-            this.dontCreateFolderBtn.Location = new System.Drawing.Point(6, 56);
+            this.dontCreateFolderBtn.Location = new System.Drawing.Point(5, 42);
+            this.dontCreateFolderBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dontCreateFolderBtn.Name = "dontCreateFolderBtn";
-            this.dontCreateFolderBtn.Size = new System.Drawing.Size(159, 24);
+            this.dontCreateFolderBtn.Size = new System.Drawing.Size(127, 19);
             this.dontCreateFolderBtn.TabIndex = 2;
             this.dontCreateFolderBtn.Text = "Don\'t Create Folder";
             this.dontCreateFolderBtn.UseVisualStyleBackColor = true;
@@ -297,9 +286,10 @@ namespace Graphical_Backup_Program
             // 
             this.createTimestampFolderBtn.AutoSize = true;
             this.createTimestampFolderBtn.Checked = true;
-            this.createTimestampFolderBtn.Location = new System.Drawing.Point(6, 26);
+            this.createTimestampFolderBtn.Location = new System.Drawing.Point(5, 20);
+            this.createTimestampFolderBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.createTimestampFolderBtn.Name = "createTimestampFolderBtn";
-            this.createTimestampFolderBtn.Size = new System.Drawing.Size(197, 24);
+            this.createTimestampFolderBtn.Size = new System.Drawing.Size(157, 19);
             this.createTimestampFolderBtn.TabIndex = 2;
             this.createTimestampFolderBtn.TabStop = true;
             this.createTimestampFolderBtn.Text = "Create Timestamp Folder";
@@ -309,9 +299,11 @@ namespace Graphical_Backup_Program
             // 
             this.modeBox.Controls.Add(this.fileExplorerBtn);
             this.modeBox.Controls.Add(this.backupModeBtn);
-            this.modeBox.Location = new System.Drawing.Point(535, 532);
+            this.modeBox.Location = new System.Drawing.Point(468, 399);
+            this.modeBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.modeBox.Name = "modeBox";
-            this.modeBox.Size = new System.Drawing.Size(197, 86);
+            this.modeBox.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.modeBox.Size = new System.Drawing.Size(172, 64);
             this.modeBox.TabIndex = 6;
             this.modeBox.TabStop = false;
             this.modeBox.Text = "GBP Mode";
@@ -319,9 +311,10 @@ namespace Graphical_Backup_Program
             // fileExplorerBtn
             // 
             this.fileExplorerBtn.AutoSize = true;
-            this.fileExplorerBtn.Location = new System.Drawing.Point(6, 54);
+            this.fileExplorerBtn.Location = new System.Drawing.Point(5, 40);
+            this.fileExplorerBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.fileExplorerBtn.Name = "fileExplorerBtn";
-            this.fileExplorerBtn.Size = new System.Drawing.Size(190, 24);
+            this.fileExplorerBtn.Size = new System.Drawing.Size(151, 19);
             this.fileExplorerBtn.TabIndex = 1;
             this.fileExplorerBtn.Text = "Open All in File Explorer";
             this.fileExplorerBtn.UseVisualStyleBackColor = true;
@@ -331,9 +324,10 @@ namespace Graphical_Backup_Program
             // 
             this.backupModeBtn.AutoSize = true;
             this.backupModeBtn.Checked = true;
-            this.backupModeBtn.Location = new System.Drawing.Point(6, 24);
+            this.backupModeBtn.Location = new System.Drawing.Point(5, 18);
+            this.backupModeBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.backupModeBtn.Name = "backupModeBtn";
-            this.backupModeBtn.Size = new System.Drawing.Size(185, 24);
+            this.backupModeBtn.Size = new System.Drawing.Size(149, 19);
             this.backupModeBtn.TabIndex = 0;
             this.backupModeBtn.TabStop = true;
             this.backupModeBtn.Text = "Normal Mode (Backup)";
@@ -343,9 +337,9 @@ namespace Graphical_Backup_Program
             // optionsLabel
             // 
             this.optionsLabel.AutoSize = true;
-            this.optionsLabel.Location = new System.Drawing.Point(8, 397);
+            this.optionsLabel.Location = new System.Drawing.Point(7, 298);
             this.optionsLabel.Name = "optionsLabel";
-            this.optionsLabel.Size = new System.Drawing.Size(61, 20);
+            this.optionsLabel.Size = new System.Drawing.Size(49, 15);
             this.optionsLabel.TabIndex = 8;
             this.optionsLabel.Text = "Options";
             // 
@@ -353,10 +347,9 @@ namespace Graphical_Backup_Program
             // 
             this.resetBtn.Enabled = false;
             this.resetBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.resetBtn.Location = new System.Drawing.Point(526, 337);
-            this.resetBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.resetBtn.Location = new System.Drawing.Point(460, 253);
             this.resetBtn.Name = "resetBtn";
-            this.resetBtn.Size = new System.Drawing.Size(254, 53);
+            this.resetBtn.Size = new System.Drawing.Size(222, 40);
             this.resetBtn.TabIndex = 9;
             this.resetBtn.Text = "Reset GBP";
             this.resetBtn.UseVisualStyleBackColor = true;
@@ -364,9 +357,10 @@ namespace Graphical_Backup_Program
             // 
             // saveToConfigFiles
             // 
-            this.saveToConfigFiles.Location = new System.Drawing.Point(535, 625);
+            this.saveToConfigFiles.Location = new System.Drawing.Point(468, 469);
+            this.saveToConfigFiles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.saveToConfigFiles.Name = "saveToConfigFiles";
-            this.saveToConfigFiles.Size = new System.Drawing.Size(197, 29);
+            this.saveToConfigFiles.Size = new System.Drawing.Size(172, 25);
             this.saveToConfigFiles.TabIndex = 10;
             this.saveToConfigFiles.Text = "Save Values to Config Files";
             this.saveToConfigFiles.UseVisualStyleBackColor = true;
@@ -374,9 +368,9 @@ namespace Graphical_Backup_Program
             // 
             // Form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(787, 663);
+            this.ClientSize = new System.Drawing.Size(689, 505);
             this.Controls.Add(this.saveToConfigFiles);
             this.Controls.Add(this.resetBtn);
             this.Controls.Add(this.optionsLabel);
@@ -390,7 +384,6 @@ namespace Graphical_Backup_Program
             this.Controls.Add(this.allPathsBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "Form";
             this.Text = "Graphical Backup Program";
