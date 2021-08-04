@@ -33,7 +33,7 @@ The way I compiled this into a portable .exe for the GitHub release was by runni
 ## How to Install and Setup
 <b>Install .NET first. GBP requires it.</b>
 
-Running GBP is easy. Just download the Program.zip from GitHub, add the GBP folder to someplace like `C:\Program Files\\`, and run the .exe. GBP should run without any issues. You can then pin the .exe to the Start menu, create a Desktop shortcut, or whatever you want to easily access GBP whenever you want.
+Running GBP is easy. Just download the Program.zip from GitHub, add the GBP folder to someplace like `C:\Program Files\`, and run the .exe. GBP should run without any issues. You can then pin the .exe to the Start menu, create a Desktop shortcut, or whatever you want to easily access GBP whenever you want.
 
 ## How to Use
 ![GBP GUI](GBP_GUI.png)
