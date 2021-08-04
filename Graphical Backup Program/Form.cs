@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using FileSystem = Microsoft.VisualBasic.FileIO.FileSystem;
@@ -7,16 +8,19 @@ namespace Graphical_Backup_Program
 {
     public partial class Form : System.Windows.Forms.Form
     {
-        //https://stackoverflow.com/a/11882118
-        //The folder structure for where the .exe is stored varies between these 2.
-        //If you're compiling and running this through Visual Studio 2019, use this one.
-        //private readonly string _projectDirectory = Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName;
-
-        //Else, use this one.
-        private readonly string _projectDirectory = Environment.CurrentDirectory;
+        private readonly string _projectDirectory;
 
         public Form()
         {
+            //https://stackoverflow.com/questions/1343053/detecting-if-a-program-was-run-by-visual-studio-as-opposed-to-run-from-windows
+            //https://stackoverflow.com/a/11882118
+            //The folder structure for where the .exe is stored varies between these 2.
+            //If you're compiling and running this through Visual Studio 2019, this needs to be used.
+            if (Debugger.IsAttached)
+                _projectDirectory = Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName;
+            else //Else, use this one.
+                _projectDirectory = Environment.CurrentDirectory;
+
             InitializeComponent();
         }
 
@@ -207,14 +211,14 @@ namespace Graphical_Backup_Program
             return false;
         }
 
-        private void AllPathsBtn_Click(object sender, EventArgs e)
+        private async void AllPathsBtn_Click(object sender, EventArgs e)
         {
             //Idiot-proofing
             if (SamePaths()) return;
             if (InvalidPaths()) return;
 
             TextBoxLabel.Hide();
-            File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
+            await File.WriteAllTextAsync(_projectDirectory + "/paths.txt", pathsTextBox.Text);
             if (ClearFolders() == false) //Cancel the backup and clearing of folders.
                 return;
 

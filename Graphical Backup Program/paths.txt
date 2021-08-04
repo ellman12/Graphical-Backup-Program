@@ -1,0 +1,6 @@
+c C:\Users\Elliott\Documents\My Games
+c C:\Users\Elliott\AppData\Roaming\Citra
+c C:\Users\Elliott\AppData\Roaming\StardewValley
+c C:\Users\Elliott\Desktop
+u G:\Games\Steam Game Backups
+u G:\Games\Game Emulation
