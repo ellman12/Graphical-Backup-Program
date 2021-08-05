@@ -10,6 +10,7 @@ namespace Graphical_Backup_Program
 {
     public partial class Form : System.Windows.Forms.Form
     {
+        private string _logText = "";
         private readonly string _projectDirectory;
 
         public Form()
@@ -24,6 +25,16 @@ namespace Graphical_Backup_Program
                 _projectDirectory = Environment.CurrentDirectory;
 
             InitializeComponent();
+        }
+
+        private void LogWrite(string text)
+        {
+            _logText = text;
+        }
+
+        private void LogAppend(string text)
+        {
+            _logText += text;
         }
 
         //Used in the foreach loops in the 2 backup button functions for determining which action to take.
@@ -65,19 +76,19 @@ namespace Graphical_Backup_Program
                 }
                 catch (DirectoryNotFoundException e)
                 {
-                    pathsTextBox.Text += "ERROR when trying to copy file " + src + "\r\nCould not find path. Did you enter the path correctly?\r\n" + e.Message + Environment.NewLine;
+                    LogAppend("ERROR when trying to copy file " + src + "\r\nCould not find path. Did you enter the path correctly?\r\n" + e.Message + Environment.NewLine);
                     return;
                 }
                 catch (IOException e)
                 {
-                    pathsTextBox.Text += "ERROR when trying to copy file " + src + "\r\nMost likely the path already exists\r\n" + e.Message + Environment.NewLine;
+                    LogAppend("ERROR when trying to copy file " + src + "\r\nMost likely the path already exists\r\n" + e.Message + Environment.NewLine);
                     return;
                 }
 
                 if (File.Exists(finalDest))
-                    pathsTextBox.Text += "Successfully copied file " + src + " to path" + pathNum + "\r\n";
+                    LogAppend("Successfully copied file " + src + " to path" + pathNum + "\r\n");
                 else
-                    pathsTextBox.Text += "ERROR. File " + src + " was NOT successfully copied to path" + pathNum + "\r\n";
+                    LogAppend("ERROR. File " + src + " was NOT successfully copied to path" + pathNum + "\r\n");
             }
             else //if a folder
             {
@@ -94,19 +105,19 @@ namespace Graphical_Backup_Program
                 }
                 catch (DirectoryNotFoundException e)
                 {
-                    pathsTextBox.Text += "ERROR when trying to copy folder " + src + "\r\nCould not find path. Did you enter the path correctly?\r\n" + e.Message + Environment.NewLine;
+                    LogAppend("ERROR when trying to copy folder " + src + "\r\nCould not find path. Did you enter the path correctly?\r\n" + e.Message + Environment.NewLine);
                     return;
                 }
                 catch (IOException e)
                 {
-                    pathsTextBox.Text += "ERROR when trying to copy folder " + src + "\r\nMost likely the path already exists\r\n\r\n" + e.Message + Environment.NewLine;
+                    LogAppend("ERROR when trying to copy folder " + src + "\r\nMost likely the path already exists\r\n\r\n" + e.Message + Environment.NewLine);
                     return;
                 }
 
                 if (Directory.Exists(fullPath))
-                    pathsTextBox.Text += "Successfully copied folder " + src + " to path" + pathNum + "\r\n\r\n";
+                    LogAppend("Successfully copied folder " + src + " to path" + pathNum + "\r\n\r\n");
                 else
-                    pathsTextBox.Text += "ERROR. Folder " + src + " was NOT successfully copied to path" + pathNum + "\r\n\r\n";
+                    LogAppend("ERROR. Folder " + src + " was NOT successfully copied to path" + pathNum + "\r\n\r\n");
             }
         }
 
@@ -138,6 +149,10 @@ namespace Graphical_Backup_Program
             try
             {
                 Directory.Delete(dir, true);
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                MessageBox.Show("An error occurred: " + e.Message);
             }
             catch (DirectoryNotFoundException)
             {
@@ -221,7 +236,7 @@ namespace Graphical_Backup_Program
             if (InvalidPaths()) return;
 
             TextBoxLabel.Hide();
-            File.WriteAllTextAsync(_projectDirectory + "/paths.txt", pathsTextBox.Text);
+            File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
             if (ClearFolders() == false) //Cancel the backup and clearing of folders.
                 return;
 
@@ -233,7 +248,7 @@ namespace Graphical_Backup_Program
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
 
             pathsTextBox.Text = backupModeBtn.Checked ? "Backing up all items..." : "Opening all items in File Explorer...";
-            pathsTextBox.Text += "\r\n----------------------------------------------------------------------------------------------------------------------------\r\n";
+            pathsTextBox.Text += ("\r\n----------------------------------------------------------------------------------------------------------------------------\r\n");
 
             List<Thread> threads = new();
             foreach (string path in allPaths)
@@ -242,20 +257,21 @@ namespace Graphical_Backup_Program
 
                 if (Char.ToLower(path[0]) is 'c' or 'u')
                 {
-                    //CopyAndLogOrOpen(trimmedPath, timestamp); //Old way: 1 at a time
                     Thread t = new(() => CopyAndLogOrOpen(trimmedPath, timestamp));
                     t.Start();
                     threads.Add(t);
                 }
                 else
-                    pathsTextBox.Text += "\r\nSkipping path " + trimmedPath + "\r\nGBP cannot understand this line\r\n";
+                    LogAppend("\r\nSkipping path " + trimmedPath + "\r\nGBP cannot understand this line\r\n");
             }
 
             foreach (Thread thread in threads) //Wait for all threads to finish.
                 thread.Join();
 
-            pathsTextBox.Text += "----------------------------------------------------------------------------------------------------------------------------\r\n";
-            pathsTextBox.Text += backupModeBtn.Checked ? "Backup completed" : "Opened all items";
+            LogAppend("----------------------------------------------------------------------------------------------------------------------------\r\n");
+            LogAppend(backupModeBtn.Checked ? "Backup completed" : "Opened all items");
+
+            pathsTextBox.Text = _logText;
 
             allPathsBtn.Enabled = false;
             commonPathsBtn.Enabled = false;
@@ -280,8 +296,8 @@ namespace Graphical_Backup_Program
 
             //When user wants to begin copying just the Common Paths, go through line by line and determine which ones are marked 'common' (c).
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
-            pathsTextBox.Text = backupModeBtn.Checked ? "Backing up just common items..." : "Opening just common items in File Explorer...";
-            pathsTextBox.Text += "\r\n----------------------------------------------------------------------------------------------------------------------------\r\n";
+            LogWrite(backupModeBtn.Checked ? "Backing up just common items..." : "Opening just common items in File Explorer...");
+            LogAppend("\r\n----------------------------------------------------------------------------------------------------------------------------\r\n");
 
             foreach (string path in allPaths)
             {
@@ -292,13 +308,13 @@ namespace Graphical_Backup_Program
                     CopyAndLogOrOpen(trimmedPath, timestamp);
                 }
                 else if (Char.ToLower(path[0]) == 'u')
-                    pathsTextBox.Text += "Skipping path " + trimmedPath + "\r\nbecause it is marked 'U'\r\n";
+                    LogAppend("Skipping path " + trimmedPath + "\r\nbecause it is marked 'U'\r\n");
                 else
-                    pathsTextBox.Text += "\r\nSkipping path " + trimmedPath + "\r\nGBP cannot understand this line\r\n";
+                    LogAppend("\r\nSkipping path " + trimmedPath + "\r\nGBP cannot understand this line\r\n");
             }
 
-            pathsTextBox.Text += "----------------------------------------------------------------------------------------------------------------------------\r\n";
-            pathsTextBox.Text += backupModeBtn.Checked ? "Common items backup completed" : "Opened all common items";
+            LogAppend("----------------------------------------------------------------------------------------------------------------------------\r\n");
+            LogAppend(backupModeBtn.Checked ? "Common items backup completed" : "Opened all common items");
 
             allPathsBtn.Enabled = false;
             commonPathsBtn.Enabled = false;
@@ -409,6 +425,7 @@ namespace Graphical_Backup_Program
         //On exit, save config stuff for next time.
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
+            File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
             SaveToConfigFiles();
         }
 
