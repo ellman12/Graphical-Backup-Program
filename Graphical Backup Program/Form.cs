@@ -212,14 +212,14 @@ namespace Graphical_Backup_Program
             return false;
         }
 
-        private async void AllPathsBtn_Click(object sender, EventArgs e)
+        private void AllPathsBtn_Click(object sender, EventArgs e)
         {
             //Idiot-proofing
             if (SamePaths()) return;
             if (InvalidPaths()) return;
 
             TextBoxLabel.Hide();
-            await File.WriteAllTextAsync(_projectDirectory + "/paths.txt", pathsTextBox.Text);
+            File.WriteAllTextAsync(_projectDirectory + "/paths.txt", pathsTextBox.Text);
             if (ClearFolders() == false) //Cancel the backup and clearing of folders.
                 return;
 
