@@ -1,6 +1,8 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 using FileSystem = Microsoft.VisualBasic.FileIO.FileSystem;
 
@@ -233,17 +235,24 @@ namespace Graphical_Backup_Program
             pathsTextBox.Text = backupModeBtn.Checked ? "Backing up all items..." : "Opening all items in File Explorer...";
             pathsTextBox.Text += "\r\n----------------------------------------------------------------------------------------------------------------------------\r\n";
 
+            List<Thread> threads = new();
             foreach (string path in allPaths)
             {
                 string trimmedPath = path.Substring(2); //path without char and ' '.
 
                 if (Char.ToLower(path[0]) is 'c' or 'u')
                 {
-                    CopyAndLogOrOpen(trimmedPath, timestamp);
+                    //CopyAndLogOrOpen(trimmedPath, timestamp); //Old way: 1 at a time
+                    Thread t = new(() => CopyAndLogOrOpen(trimmedPath, timestamp));
+                    t.Start();
+                    threads.Add(t);
                 }
                 else
                     pathsTextBox.Text += "\r\nSkipping path " + trimmedPath + "\r\nGBP cannot understand this line\r\n";
             }
+
+            foreach (Thread thread in threads) //Wait for all threads to finish.
+                thread.Join();
 
             pathsTextBox.Text += "----------------------------------------------------------------------------------------------------------------------------\r\n";
             pathsTextBox.Text += backupModeBtn.Checked ? "Backup completed" : "Opened all items";
