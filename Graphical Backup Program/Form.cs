@@ -270,7 +270,7 @@ namespace Graphical_Backup_Program
                     threads.Add(t);
                 }
                 else if (Char.ToLower(path[0]) is not '#')
-                    LogAppend("\r\nSkipping path " + trimmedPath + "\r\nGBP cannot understand this line\r\n");
+                    LogAppend($"\r\nGBP cannot understand this line: \"{path}\"\r\n");
             }
 
             foreach (Thread thread in threads) //Wait for all threads to finish.
@@ -431,6 +431,7 @@ namespace Graphical_Backup_Program
         //On exit, save config stuff for next time.
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
+            pathsTextBox.Text = File.ReadAllText(_projectDirectory + "/paths.txt"); //Don't want log stuff written to paths.txt
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
             SaveToConfigFiles();
         }
