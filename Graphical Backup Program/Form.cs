@@ -124,15 +124,15 @@ namespace Graphical_Backup_Program
             }
         }
 
-        //When backup completes, open path1 and/or path2 in File Explorer if user checks their box.
+        //When backup completes, open path1 and/or path2 in File Explorer if user checks the box to copy stuff there and to open it in File Explorer.
         private void ShowPath1And2(string timestamp)
         {
             if (fileExplorerBtn.Checked) return;
 
-            if (openPath1Box.Checked)
+            if (path1CheckBox.Checked && openPath1Box.Checked)
                 OpenInExplorer(createTimestampFolderBtn.Checked ? Path.Combine(path1TextBox.Text, "GBP backup " + timestamp) : path1TextBox.Text);
 
-            if (openPath2Box.Checked)
+            if (path2CheckBox.Checked && openPath2Box.Checked)
                 OpenInExplorer(createTimestampFolderBtn.Checked ? Path.Combine(path2TextBox.Text, "GBP backup " + timestamp) : path2TextBox.Text);
         }
 
