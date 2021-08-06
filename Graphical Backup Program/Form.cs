@@ -33,7 +33,7 @@ namespace Graphical_Backup_Program
         }
 
         //Used in the foreach loops in the 2 backup button functions for determining which action to take.
-        private void CopyAndLogOrOpen(string trimmedPath, string timestamp)
+        private void CopyOrOpenAndLog(string trimmedPath, string timestamp)
         {
             if (backupModeBtn.Checked)
             {
@@ -259,7 +259,7 @@ namespace Graphical_Backup_Program
 
                 if (Char.ToLower(path[0]) is 'c' or 'u')
                 {
-                    Thread t = new(() => CopyAndLogOrOpen(trimmedPath, timestamp));
+                    Thread t = new(() => CopyOrOpenAndLog(trimmedPath, timestamp));
                     t.Start();
                     threads.Add(t);
                 }
@@ -306,7 +306,7 @@ namespace Graphical_Backup_Program
 
                 if (Char.ToLower(path[0]) is 'c')
                 {
-                    Thread t = new(() => CopyAndLogOrOpen(trimmedPath, timestamp));
+                    Thread t = new(() => CopyOrOpenAndLog(trimmedPath, timestamp));
                     t.Start();
                     threads.Add(t);
                 }
