@@ -254,9 +254,8 @@ namespace Graphical_Backup_Program
 
             //When user wants to begin copying all C and U paths, go through line by line and determine which ones are marked C or U.
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
-
             pathsTextBox.Text = backupModeBtn.Checked ? "Backing up all items..." : "Opening all items in File Explorer...";
-            pathsTextBox.Text += ("\r\n----------------------------------------------------------------------------------------------------------------------------");
+            pathsTextBox.Text += "\r\n----------------------------------------------------------------------------------------------------------------------------";
 
             List<Thread> threads = new();
             foreach (string path in allPaths)
@@ -302,26 +301,30 @@ namespace Graphical_Backup_Program
 
             //When user wants to begin copying just the Common Paths, go through line by line and determine which ones are marked 'common' (c).
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
-            LogWrite(backupModeBtn.Checked ? "Backing up just common items..." : "Opening just common items in File Explorer...");
-            LogAppend("\r\n----------------------------------------------------------------------------------------------------------------------------\r\n");
+            pathsTextBox.Text = backupModeBtn.Checked ? "Backing up just common items..." : "Opening just common items in File Explorer...";
+            pathsTextBox.Text += "\r\n----------------------------------------------------------------------------------------------------------------------------\r\n";
 
+            List<Thread> threads = new();
             foreach (string path in allPaths)
             {
                 string trimmedPath = path.Substring(2); //path without char and ' '.
 
                 if (Char.ToLower(path[0]) == 'c')
                 {
-                    CopyAndLogOrOpen(trimmedPath, timestamp);
+                    Thread t = new(() => CopyAndLogOrOpen(trimmedPath, timestamp));
+                    t.Start();
+                    threads.Add(t);
                 }
-                else if (Char.ToLower(path[0]) == 'u')
-                    LogAppend("Skipping path " + trimmedPath + "\r\nbecause it is marked 'U'\r\n");
                 else if (Char.ToLower(path[0]) is not '#')
-                    LogAppend("\r\nSkipping path " + trimmedPath + "\r\nGBP cannot understand this line\r\n");
+                    LogAppend($"\r\nGBP cannot understand this line: \"{path}\"\r\n");
             }
+
+            foreach (Thread thread in threads) //Wait for all threads to finish.
+                thread.Join();
 
             LogAppend("----------------------------------------------------------------------------------------------------------------------------\r\n");
             LogAppend(backupModeBtn.Checked ? "Common items backup completed" : "Opened all common items");
-
+            pathsTextBox.Text += _logText;
             allPathsBtn.Enabled = false;
             commonPathsBtn.Enabled = false;
             resetBtn.Enabled = true;
