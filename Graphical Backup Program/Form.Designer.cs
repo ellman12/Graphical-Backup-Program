@@ -126,7 +126,7 @@ namespace Graphical_Backup_Program
             // 
             this.openPath2Box.AutoSize = true;
             this.openPath2Box.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.openPath2Box.Location = new System.Drawing.Point(497, 51);
+            this.openPath2Box.Location = new System.Drawing.Point(497, 52);
             this.openPath2Box.Name = "openPath2Box";
             this.openPath2Box.Size = new System.Drawing.Size(138, 19);
             this.openPath2Box.TabIndex = 7;
@@ -139,7 +139,7 @@ namespace Graphical_Backup_Program
             this.openPath1Box.Checked = true;
             this.openPath1Box.CheckState = System.Windows.Forms.CheckState.Checked;
             this.openPath1Box.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.openPath1Box.Location = new System.Drawing.Point(497, 20);
+            this.openPath1Box.Location = new System.Drawing.Point(497, 21);
             this.openPath1Box.Name = "openPath1Box";
             this.openPath1Box.Size = new System.Drawing.Size(138, 19);
             this.openPath1Box.TabIndex = 6;
@@ -180,7 +180,7 @@ namespace Graphical_Backup_Program
             // 
             this.path2CheckBox.AutoSize = true;
             this.path2CheckBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.path2CheckBox.Location = new System.Drawing.Point(6, 51);
+            this.path2CheckBox.Location = new System.Drawing.Point(6, 52);
             this.path2CheckBox.Name = "path2CheckBox";
             this.path2CheckBox.Size = new System.Drawing.Size(84, 19);
             this.path2CheckBox.TabIndex = 2;
@@ -202,7 +202,7 @@ namespace Graphical_Backup_Program
             this.path1CheckBox.Checked = true;
             this.path1CheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.path1CheckBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.path1CheckBox.Location = new System.Drawing.Point(6, 20);
+            this.path1CheckBox.Location = new System.Drawing.Point(6, 21);
             this.path1CheckBox.Name = "path1CheckBox";
             this.path1CheckBox.Size = new System.Drawing.Size(84, 19);
             this.path1CheckBox.TabIndex = 0;
