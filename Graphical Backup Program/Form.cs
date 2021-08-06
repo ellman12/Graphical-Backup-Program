@@ -243,6 +243,10 @@ namespace Graphical_Backup_Program
             if (ClearFolders() == false) //Cancel the backup and clearing of folders.
                 return;
 
+            allPathsBtn.Enabled = true;
+            commonPathsBtn.Enabled = true;
+            resetBtn.Enabled = false;
+
             string timestamp = ""; //Create timestamp if needed.
             if (createTimestampFolderBtn.Checked)
                 timestamp = DateTime.Now.ToString("M-d-yyyy hh;mm;ss tt"); //'/' and ':' won't work in paths because Windows.
@@ -289,6 +293,10 @@ namespace Graphical_Backup_Program
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
             if (ClearFolders() == false)
                 return;
+
+            allPathsBtn.Enabled = true;
+            commonPathsBtn.Enabled = true;
+            resetBtn.Enabled = false;
 
             string timestamp = "";
             if (createTimestampFolderBtn.Checked)
