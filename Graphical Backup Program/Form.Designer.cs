@@ -75,7 +75,7 @@ namespace Graphical_Backup_Program
             // commonPathsBtn
             // 
             this.commonPathsBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.commonPathsBtn.Location = new System.Drawing.Point(220, 253);
+            this.commonPathsBtn.Location = new System.Drawing.Point(221, 253);
             this.commonPathsBtn.Name = "commonPathsBtn";
             this.commonPathsBtn.Size = new System.Drawing.Size(209, 40);
             this.commonPathsBtn.TabIndex = 1;
@@ -341,7 +341,7 @@ namespace Graphical_Backup_Program
             this.resetBtn.Name = "resetBtn";
             this.resetBtn.Size = new System.Drawing.Size(209, 40);
             this.resetBtn.TabIndex = 9;
-            this.resetBtn.Text = "Reset GBP";
+            this.resetBtn.Text = "Reset";
             this.resetBtn.UseVisualStyleBackColor = true;
             this.resetBtn.Click += new System.EventHandler(this.ResetBtn_Click);
             // 
@@ -360,7 +360,7 @@ namespace Graphical_Backup_Program
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(648, 482);
+            this.ClientSize = new System.Drawing.Size(650, 483);
             this.Controls.Add(this.saveToConfigFiles);
             this.Controls.Add(this.resetBtn);
             this.Controls.Add(this.backupMode);
