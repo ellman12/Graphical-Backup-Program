@@ -130,15 +130,15 @@ namespace Graphical_Backup_Program
         }
 
         //When backup completes, open path1 and/or path2 in File Explorer if user checks their box.
-        private void ShowPath1And2()
+        private void ShowPath1And2(string timestamp)
         {
             if (fileExplorerBtn.Checked) return;
 
             if (openPath1Box.Checked)
-                OpenInExplorer(path1TextBox.Text);
+                OpenInExplorer(createTimestampFolderBtn.Checked ? Path.Combine(path1TextBox.Text, "GBP backup " + timestamp) : path1TextBox.Text);
 
             if (openPath2Box.Checked)
-                OpenInExplorer(path2TextBox.Text);
+                OpenInExplorer(createTimestampFolderBtn.Checked ? Path.Combine(path2TextBox.Text, "GBP backup " + timestamp) : path2TextBox.Text);
         }
 
         //Open an item in Explorer. https://stackoverflow.com/a/13680458
@@ -282,7 +282,7 @@ namespace Graphical_Backup_Program
             allPathsBtn.Enabled = false;
             commonPathsBtn.Enabled = false;
             resetBtn.Enabled = true;
-            ShowPath1And2();
+            ShowPath1And2(timestamp);
         }
 
         private void CommonPathsBtn_Click(object sender, EventArgs e)
@@ -325,7 +325,7 @@ namespace Graphical_Backup_Program
             allPathsBtn.Enabled = false;
             commonPathsBtn.Enabled = false;
             resetBtn.Enabled = true;
-            ShowPath1And2();
+            ShowPath1And2(timestamp);
         }
 
         private void CheckBox_CheckedChanged(object sender, EventArgs e)
