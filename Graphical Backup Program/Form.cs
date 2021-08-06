@@ -216,7 +216,7 @@ namespace Graphical_Backup_Program
         }
 
         //Returns true if path1 or path2 is a file instead of a folder (as long as they're checked though).
-        private bool InvalidPaths()
+        private bool Path1Or2Invalid()
         {
             if (path1CheckBox.Checked && Path.HasExtension(path1TextBox.Text))
             {
@@ -229,6 +229,18 @@ namespace Graphical_Backup_Program
                 MessageBox.Show("path2 cannot be a file!", "Error: File Path Specified for path2", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return true;
             }
+
+            if (path1CheckBox.Checked && path1TextBox.Text == String.Empty)
+            {
+                MessageBox.Show("If you want to copy items to path1, enter a folder path. If not, uncheck the box.", "Error: No folder path specified for path1 but box checked", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return true;
+            }
+
+            if (path2CheckBox.Checked && path2TextBox.Text == String.Empty)
+            {
+                MessageBox.Show("If you want to copy items to path2, enter a folder path. If not, uncheck the box.", "Error: No folder path specified for path2 but box checked", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return true;
+            }
             return false;
         }
 
@@ -236,7 +248,7 @@ namespace Graphical_Backup_Program
         {
             //Idiot-proofing
             if (SamePaths()) return;
-            if (InvalidPaths()) return;
+            if (Path1Or2Invalid()) return;
 
             TextBoxLabel.Hide();
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
@@ -287,7 +299,7 @@ namespace Graphical_Backup_Program
         {
             //Idiot-proofing
             if (SamePaths()) return;
-            if (InvalidPaths()) return;
+            if (Path1Or2Invalid()) return;
 
             TextBoxLabel.Hide();
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
