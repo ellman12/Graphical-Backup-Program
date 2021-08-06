@@ -67,7 +67,7 @@ namespace Graphical_Backup_Program
             this.allPathsBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.allPathsBtn.Location = new System.Drawing.Point(7, 253);
             this.allPathsBtn.Name = "allPathsBtn";
-            this.allPathsBtn.Size = new System.Drawing.Size(222, 40);
+            this.allPathsBtn.Size = new System.Drawing.Size(221, 40);
             this.allPathsBtn.TabIndex = 0;
             this.allPathsBtn.Text = "Backup All Paths";
             this.allPathsBtn.UseVisualStyleBackColor = true;
@@ -78,7 +78,7 @@ namespace Graphical_Backup_Program
             this.commonPathsBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.commonPathsBtn.Location = new System.Drawing.Point(234, 253);
             this.commonPathsBtn.Name = "commonPathsBtn";
-            this.commonPathsBtn.Size = new System.Drawing.Size(222, 40);
+            this.commonPathsBtn.Size = new System.Drawing.Size(221, 40);
             this.commonPathsBtn.TabIndex = 1;
             this.commonPathsBtn.Text = "Backup Just Common Paths";
             this.commonPathsBtn.UseVisualStyleBackColor = true;
@@ -101,7 +101,7 @@ namespace Graphical_Backup_Program
             this.pathsTextBox.Multiline = true;
             this.pathsTextBox.Name = "pathsTextBox";
             this.pathsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.pathsTextBox.Size = new System.Drawing.Size(676, 227);
+            this.pathsTextBox.Size = new System.Drawing.Size(674, 227);
             this.pathsTextBox.TabIndex = 3;
             this.pathsTextBox.WordWrap = false;
             this.pathsTextBox.TextChanged += new System.EventHandler(this.PathsTextBox_TextChanged);
@@ -347,9 +347,9 @@ namespace Graphical_Backup_Program
             // 
             this.resetBtn.Enabled = false;
             this.resetBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.resetBtn.Location = new System.Drawing.Point(460, 253);
+            this.resetBtn.Location = new System.Drawing.Point(461, 253);
             this.resetBtn.Name = "resetBtn";
-            this.resetBtn.Size = new System.Drawing.Size(222, 40);
+            this.resetBtn.Size = new System.Drawing.Size(221, 40);
             this.resetBtn.TabIndex = 9;
             this.resetBtn.Text = "Reset GBP";
             this.resetBtn.UseVisualStyleBackColor = true;
