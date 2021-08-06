@@ -269,7 +269,7 @@ namespace Graphical_Backup_Program
                     t.Start();
                     threads.Add(t);
                 }
-                else
+                else if (Char.ToLower(path[0]) is not '#')
                     LogAppend("\r\nSkipping path " + trimmedPath + "\r\nGBP cannot understand this line\r\n");
             }
 
@@ -315,7 +315,7 @@ namespace Graphical_Backup_Program
                 }
                 else if (Char.ToLower(path[0]) == 'u')
                     LogAppend("Skipping path " + trimmedPath + "\r\nbecause it is marked 'U'\r\n");
-                else
+                else if (Char.ToLower(path[0]) is not '#')
                     LogAppend("\r\nSkipping path " + trimmedPath + "\r\nGBP cannot understand this line\r\n");
             }
 
