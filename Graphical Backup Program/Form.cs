@@ -84,11 +84,15 @@ namespace Graphical_Backup_Program
                     LogAppend("ERROR when trying to copy file " + src + "\r\nMost likely the path already exists\r\n" + e.Message + Environment.NewLine);
                     return;
                 }
+                catch (Exception e)
+                {
+                    LogAppend("ERROR: " + e.Message);
+                }
 
                 if (File.Exists(finalDest))
-                    LogAppend("Successfully copied file " + src + " to path" + pathNum + "\r\n");
+                    LogAppend("\r\nSuccessfully copied file " + src + " to path" + pathNum + "\r\n");
                 else
-                    LogAppend("ERROR. File " + src + " was NOT successfully copied to path" + pathNum + "\r\n");
+                    LogAppend("\r\nERROR. File " + src + " was NOT successfully copied to path" + pathNum + "\r\n");
             }
             else //if a folder
             {
@@ -113,11 +117,15 @@ namespace Graphical_Backup_Program
                     LogAppend("ERROR when trying to copy folder " + src + "\r\nMost likely the path already exists\r\n\r\n" + e.Message + Environment.NewLine);
                     return;
                 }
+                catch (Exception e)
+                {
+                    LogAppend("ERROR: " + e.Message);
+                }
 
                 if (Directory.Exists(fullPath))
-                    LogAppend("Successfully copied folder " + src + " to path" + pathNum + "\r\n\r\n");
+                    LogAppend("\r\nSuccessfully copied folder " + src + " to path" + pathNum + "\r\n");
                 else
-                    LogAppend("ERROR. Folder " + src + " was NOT successfully copied to path" + pathNum + "\r\n\r\n");
+                    LogAppend("\r\nERROR. Folder " + src + " was NOT successfully copied to path" + pathNum + "\r\n");
             }
         }
 
@@ -248,7 +256,7 @@ namespace Graphical_Backup_Program
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
 
             pathsTextBox.Text = backupModeBtn.Checked ? "Backing up all items..." : "Opening all items in File Explorer...";
-            pathsTextBox.Text += ("\r\n----------------------------------------------------------------------------------------------------------------------------\r\n");
+            pathsTextBox.Text += ("\r\n----------------------------------------------------------------------------------------------------------------------------");
 
             List<Thread> threads = new();
             foreach (string path in allPaths)
@@ -271,7 +279,7 @@ namespace Graphical_Backup_Program
             LogAppend("----------------------------------------------------------------------------------------------------------------------------\r\n");
             LogAppend(backupModeBtn.Checked ? "Backup completed" : "Opened all items");
 
-            pathsTextBox.Text = _logText;
+            pathsTextBox.Text += _logText;
 
             allPathsBtn.Enabled = false;
             commonPathsBtn.Enabled = false;
@@ -434,6 +442,7 @@ namespace Graphical_Backup_Program
         {
             pathsTextBox.Text = File.ReadAllText(_projectDirectory + "/paths.txt");
             TextBoxLabel.Show();
+            _logText = String.Empty;
             allPathsBtn.Enabled = true;
             commonPathsBtn.Enabled = true;
             resetBtn.Enabled = false;
