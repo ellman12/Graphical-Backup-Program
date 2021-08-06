@@ -11,6 +11,7 @@ namespace Graphical_Backup_Program
     public partial class Form : System.Windows.Forms.Form
     {
         private string _logText = "";
+        private string _backupType = ""; //Either "Common" or "Full"
         private readonly string _projectDirectory;
 
         public Form()
@@ -54,8 +55,14 @@ namespace Graphical_Backup_Program
             src = src.Trim(); //Remove pesky whitespace from start and end of path.
 
             //If user wants stuff to be copied to a special timestamp folder, this is where it's done at.
+            //It also marks this backup folder as a "Common" or "Full" backup.
             if (createTimestampFolderBtn.Checked)
-                dest = Path.Combine(dest, "GBP backup " + timestamp);
+            {
+                if (_backupType is "Common")
+                    dest = Path.Combine(dest, "GBP Backup " + timestamp + " (Common Items)");
+                else if (_backupType is "Full")
+                    dest = Path.Combine(dest, "GBP Backup " + timestamp + " (All Items)");
+            }
 
             if (Path.HasExtension(src)) //if a file
             {
@@ -259,6 +266,7 @@ namespace Graphical_Backup_Program
             commonPathsBtn.Enabled = true;
             resetBtn.Enabled = false;
 
+            _backupType = "Full";
             string timestamp = ""; //Create timestamp if needed.
             if (createTimestampFolderBtn.Checked)
                 timestamp = DateTime.Now.ToString("M-d-yyyy hh;mm;ss tt"); //'/' and ':' won't work in paths because Windows.
@@ -310,6 +318,7 @@ namespace Graphical_Backup_Program
             commonPathsBtn.Enabled = true;
             resetBtn.Enabled = false;
 
+            _backupType = "Common";
             string timestamp = "";
             if (createTimestampFolderBtn.Checked)
                 timestamp = DateTime.Now.ToString("M-d-yyyy hh;mm;ss tt"); //'/' and ':' won't work in paths because Windows.
