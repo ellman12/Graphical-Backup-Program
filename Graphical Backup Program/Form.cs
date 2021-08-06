@@ -27,11 +27,6 @@ namespace Graphical_Backup_Program
             InitializeComponent();
         }
 
-        private void LogWrite(string text)
-        {
-            _logText = text;
-        }
-
         private void LogAppend(string text)
         {
             _logText += text;
