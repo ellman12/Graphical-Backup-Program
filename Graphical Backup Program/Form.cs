@@ -250,7 +250,7 @@ namespace Graphical_Backup_Program
 
             string timestamp = ""; //Create timestamp if needed.
             if (createTimestampFolderBtn.Checked)
-                timestamp = DateTime.Now.ToString("M-d-yyyy hh;mm tt"); //'/' and ':' won't work in paths because Windows.
+                timestamp = DateTime.Now.ToString("M-d-yyyy hh;mm;ss tt"); //'/' and ':' won't work in paths because Windows.
 
             //When user wants to begin copying all C and U paths, go through line by line and determine which ones are marked C or U.
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
@@ -278,9 +278,7 @@ namespace Graphical_Backup_Program
 
             LogAppend("----------------------------------------------------------------------------------------------------------------------------\r\n");
             LogAppend(backupModeBtn.Checked ? "Backup completed" : "Opened all items");
-
             pathsTextBox.Text += _logText;
-
             allPathsBtn.Enabled = false;
             commonPathsBtn.Enabled = false;
             resetBtn.Enabled = true;
@@ -300,7 +298,7 @@ namespace Graphical_Backup_Program
 
             string timestamp = "";
             if (createTimestampFolderBtn.Checked)
-                timestamp = DateTime.Now.ToString("M-d-yyyy hh;mm tt"); //'/' and ':' won't work in paths because Windows.
+                timestamp = DateTime.Now.ToString("M-d-yyyy hh;mm;ss tt"); //'/' and ':' won't work in paths because Windows.
 
             //When user wants to begin copying just the Common Paths, go through line by line and determine which ones are marked 'common' (c).
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
