@@ -305,7 +305,6 @@ namespace Graphical_Backup_Program
             this.saveToConfigFiles.TabIndex = 10;
             this.saveToConfigFiles.Text = "Save Values to Config Files";
             this.saveToConfigFiles.UseVisualStyleBackColor = true;
-            this.saveToConfigFiles.Click += new System.EventHandler(this.saveToConfigFiles_Click);
             // 
             // groupsGroupBox
             // 
@@ -514,7 +513,7 @@ namespace Graphical_Backup_Program
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 614);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(976, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(822, 22);
             this.statusStrip1.TabIndex = 12;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -565,7 +564,7 @@ namespace Graphical_Backup_Program
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(976, 636);
+            this.ClientSize = new System.Drawing.Size(822, 636);
             this.Controls.Add(this.deselectAllBtn);
             this.Controls.Add(this.zipCheckBox);
             this.Controls.Add(this.groupBox1);
