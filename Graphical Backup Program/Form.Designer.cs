@@ -1,4 +1,4 @@
-﻿
+
 namespace Graphical_Backup_Program
 {
     partial class Form
@@ -129,7 +129,7 @@ namespace Graphical_Backup_Program
             // 
             this.openPath2Box.AutoSize = true;
             this.openPath2Box.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.openPath2Box.Location = new System.Drawing.Point(497, 51);
+            this.openPath2Box.Location = new System.Drawing.Point(502, 51);
             this.openPath2Box.Name = "openPath2Box";
             this.openPath2Box.Size = new System.Drawing.Size(138, 19);
             this.openPath2Box.TabIndex = 7;
@@ -142,7 +142,7 @@ namespace Graphical_Backup_Program
             this.openPath1Box.Checked = true;
             this.openPath1Box.CheckState = System.Windows.Forms.CheckState.Checked;
             this.openPath1Box.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.openPath1Box.Location = new System.Drawing.Point(497, 20);
+            this.openPath1Box.Location = new System.Drawing.Point(502, 20);
             this.openPath1Box.Name = "openPath1Box";
             this.openPath1Box.Size = new System.Drawing.Size(138, 19);
             this.openPath1Box.TabIndex = 6;
@@ -151,7 +151,7 @@ namespace Graphical_Backup_Program
             // 
             // clearPath2
             // 
-            this.clearPath2.Location = new System.Drawing.Point(430, 48);
+            this.clearPath2.Location = new System.Drawing.Point(435, 48);
             this.clearPath2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.clearPath2.Name = "clearPath2";
             this.clearPath2.Size = new System.Drawing.Size(61, 25);
@@ -162,7 +162,7 @@ namespace Graphical_Backup_Program
             // 
             // clearPath1
             // 
-            this.clearPath1.Location = new System.Drawing.Point(430, 17);
+            this.clearPath1.Location = new System.Drawing.Point(435, 17);
             this.clearPath1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.clearPath1.Name = "clearPath1";
             this.clearPath1.Size = new System.Drawing.Size(61, 25);
@@ -175,7 +175,7 @@ namespace Graphical_Backup_Program
             // 
             this.path2TextBox.Location = new System.Drawing.Point(87, 49);
             this.path2TextBox.Name = "path2TextBox";
-            this.path2TextBox.Size = new System.Drawing.Size(337, 23);
+            this.path2TextBox.Size = new System.Drawing.Size(342, 23);
             this.path2TextBox.TabIndex = 3;
             this.path2TextBox.TextChanged += new System.EventHandler(this.PathTextBox_TextChanged);
             // 
@@ -195,7 +195,7 @@ namespace Graphical_Backup_Program
             // 
             this.path1TextBox.Location = new System.Drawing.Point(87, 18);
             this.path1TextBox.Name = "path1TextBox";
-            this.path1TextBox.Size = new System.Drawing.Size(337, 23);
+            this.path1TextBox.Size = new System.Drawing.Size(342, 23);
             this.path1TextBox.TabIndex = 1;
             this.path1TextBox.TextChanged += new System.EventHandler(this.PathTextBox_TextChanged);
             // 
@@ -218,9 +218,9 @@ namespace Graphical_Backup_Program
             this.clearingFoldersGroupBox.Controls.Add(this.dontClearRadio);
             this.clearingFoldersGroupBox.Controls.Add(this.clearWithPromptRadio);
             this.clearingFoldersGroupBox.Controls.Add(this.autoClearRadio);
-            this.clearingFoldersGroupBox.Location = new System.Drawing.Point(7, 417);
+            this.clearingFoldersGroupBox.Location = new System.Drawing.Point(654, 354);
             this.clearingFoldersGroupBox.Name = "clearingFoldersGroupBox";
-            this.clearingFoldersGroupBox.Size = new System.Drawing.Size(271, 92);
+            this.clearingFoldersGroupBox.Size = new System.Drawing.Size(151, 92);
             this.clearingFoldersGroupBox.TabIndex = 0;
             this.clearingFoldersGroupBox.TabStop = false;
             this.clearingFoldersGroupBox.Text = "Clearing Backup Folders";
@@ -242,9 +242,9 @@ namespace Graphical_Backup_Program
             this.clearWithPromptRadio.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.clearWithPromptRadio.Location = new System.Drawing.Point(5, 46);
             this.clearWithPromptRadio.Name = "clearWithPromptRadio";
-            this.clearWithPromptRadio.Size = new System.Drawing.Size(162, 19);
+            this.clearWithPromptRadio.Size = new System.Drawing.Size(121, 19);
             this.clearWithPromptRadio.TabIndex = 2;
-            this.clearWithPromptRadio.Text = "Clear Folders with Prompt";
+            this.clearWithPromptRadio.Text = "Clear with Prompt";
             this.clearWithPromptRadio.UseVisualStyleBackColor = true;
             // 
             // autoClearRadio
@@ -254,21 +254,21 @@ namespace Graphical_Backup_Program
             this.autoClearRadio.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.autoClearRadio.Location = new System.Drawing.Point(5, 21);
             this.autoClearRadio.Name = "autoClearRadio";
-            this.autoClearRadio.Size = new System.Drawing.Size(240, 19);
+            this.autoClearRadio.Size = new System.Drawing.Size(129, 19);
             this.autoClearRadio.TabIndex = 0;
             this.autoClearRadio.TabStop = true;
-            this.autoClearRadio.Text = "Clear Folders Automatically (No Prompt)";
+            this.autoClearRadio.Text = "Clear Automatically";
             this.autoClearRadio.UseVisualStyleBackColor = true;
             // 
             // modeBox
             // 
             this.modeBox.Controls.Add(this.fileExplorerBtn);
             this.modeBox.Controls.Add(this.backupModeBtn);
-            this.modeBox.Location = new System.Drawing.Point(284, 417);
+            this.modeBox.Location = new System.Drawing.Point(509, 387);
             this.modeBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.modeBox.Name = "modeBox";
             this.modeBox.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.modeBox.Size = new System.Drawing.Size(175, 64);
+            this.modeBox.Size = new System.Drawing.Size(139, 64);
             this.modeBox.TabIndex = 6;
             this.modeBox.TabStop = false;
             this.modeBox.Text = "GBP Mode";
@@ -279,9 +279,9 @@ namespace Graphical_Backup_Program
             this.fileExplorerBtn.Location = new System.Drawing.Point(5, 40);
             this.fileExplorerBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.fileExplorerBtn.Name = "fileExplorerBtn";
-            this.fileExplorerBtn.Size = new System.Drawing.Size(151, 19);
+            this.fileExplorerBtn.Size = new System.Drawing.Size(134, 19);
             this.fileExplorerBtn.TabIndex = 1;
-            this.fileExplorerBtn.Text = "Open All in File Explorer";
+            this.fileExplorerBtn.Text = "Open in File Explorer";
             this.fileExplorerBtn.UseVisualStyleBackColor = true;
             this.fileExplorerBtn.CheckedChanged += new System.EventHandler(this.fileExplorerBtn_CheckedChanged);
             // 
@@ -292,10 +292,10 @@ namespace Graphical_Backup_Program
             this.backupModeBtn.Location = new System.Drawing.Point(5, 18);
             this.backupModeBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.backupModeBtn.Name = "backupModeBtn";
-            this.backupModeBtn.Size = new System.Drawing.Size(149, 19);
+            this.backupModeBtn.Size = new System.Drawing.Size(98, 19);
             this.backupModeBtn.TabIndex = 0;
             this.backupModeBtn.TabStop = true;
-            this.backupModeBtn.Text = "Normal Mode (Backup)";
+            this.backupModeBtn.Text = "Backup Mode";
             this.backupModeBtn.UseVisualStyleBackColor = true;
             this.backupModeBtn.CheckedChanged += new System.EventHandler(this.backupModeBtn_CheckedChanged);
             // 
@@ -524,7 +524,7 @@ namespace Graphical_Backup_Program
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip.Location = new System.Drawing.Point(0, 614);
+            this.statusStrip.Location = new System.Drawing.Point(0, 461);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(822, 22);
             this.statusStrip.TabIndex = 12;
@@ -540,7 +540,7 @@ namespace Graphical_Backup_Program
             // zipCheckBox
             // 
             this.zipCheckBox.AutoSize = true;
-            this.zipCheckBox.Location = new System.Drawing.Point(339, 264);
+            this.zipCheckBox.Location = new System.Drawing.Point(339, 265);
             this.zipCheckBox.Name = "zipCheckBox";
             this.zipCheckBox.Size = new System.Drawing.Size(155, 19);
             this.zipCheckBox.TabIndex = 0;
@@ -567,7 +567,7 @@ namespace Graphical_Backup_Program
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(516, 387);
+            this.button1.Location = new System.Drawing.Point(436, 385);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(61, 25);
@@ -577,9 +577,9 @@ namespace Graphical_Backup_Program
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(173, 388);
+            this.textBox10.Location = new System.Drawing.Point(167, 386);
             this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(337, 23);
+            this.textBox10.Size = new System.Drawing.Size(263, 23);
             this.textBox10.TabIndex = 9;
             // 
             // urlCheckBox
@@ -588,7 +588,7 @@ namespace Graphical_Backup_Program
             this.urlCheckBox.Checked = true;
             this.urlCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.urlCheckBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.urlCheckBox.Location = new System.Drawing.Point(13, 390);
+            this.urlCheckBox.Location = new System.Drawing.Point(7, 388);
             this.urlCheckBox.Name = "urlCheckBox";
             this.urlCheckBox.Size = new System.Drawing.Size(165, 19);
             this.urlCheckBox.TabIndex = 8;
@@ -599,7 +599,7 @@ namespace Graphical_Backup_Program
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(822, 636);
+            this.ClientSize = new System.Drawing.Size(822, 483);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox10);
             this.Controls.Add(this.urlCheckBox);
