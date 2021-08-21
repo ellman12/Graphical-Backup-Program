@@ -76,6 +76,9 @@ namespace Graphical_Backup_Program
             this.zipCheckBox = new System.Windows.Forms.CheckBox();
             this.beginBackupBtn = new System.Windows.Forms.Button();
             this.sortBtn = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.urlCheckBox = new System.Windows.Forms.CheckBox();
             this.whereToBackupBox.SuspendLayout();
             this.clearingFoldersGroupBox.SuspendLayout();
             this.modeBox.SuspendLayout();
@@ -215,7 +218,7 @@ namespace Graphical_Backup_Program
             this.clearingFoldersGroupBox.Controls.Add(this.dontClearRadio);
             this.clearingFoldersGroupBox.Controls.Add(this.clearWithPromptRadio);
             this.clearingFoldersGroupBox.Controls.Add(this.autoClearRadio);
-            this.clearingFoldersGroupBox.Location = new System.Drawing.Point(7, 388);
+            this.clearingFoldersGroupBox.Location = new System.Drawing.Point(7, 417);
             this.clearingFoldersGroupBox.Name = "clearingFoldersGroupBox";
             this.clearingFoldersGroupBox.Size = new System.Drawing.Size(271, 92);
             this.clearingFoldersGroupBox.TabIndex = 0;
@@ -261,7 +264,7 @@ namespace Graphical_Backup_Program
             // 
             this.modeBox.Controls.Add(this.fileExplorerBtn);
             this.modeBox.Controls.Add(this.backupModeBtn);
-            this.modeBox.Location = new System.Drawing.Point(284, 389);
+            this.modeBox.Location = new System.Drawing.Point(284, 417);
             this.modeBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.modeBox.Name = "modeBox";
             this.modeBox.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -530,8 +533,9 @@ namespace Graphical_Backup_Program
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(319, 17);
-            this.toolStripStatusLabel1.Text = "add some text like \"ready (to backup)\" or \"missing <field>\"";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(668, 17);
+            this.toolStripStatusLabel1.Text = "add some text like \"ready (to backup)\" or \"missing <field>\". Also display total (" +
+    "estimated) backup size and a progress bar too?";
             // 
             // zipCheckBox
             // 
@@ -558,14 +562,47 @@ namespace Graphical_Backup_Program
             this.sortBtn.Name = "sortBtn";
             this.sortBtn.Size = new System.Drawing.Size(160, 38);
             this.sortBtn.TabIndex = 16;
-            this.sortBtn.Text = "Sort Paths ↑";
+            this.sortBtn.Text = "Sort Paths";
             this.sortBtn.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(516, 387);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(61, 25);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Clear";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // textBox10
+            // 
+            this.textBox10.Location = new System.Drawing.Point(173, 388);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(337, 23);
+            this.textBox10.TabIndex = 9;
+            // 
+            // urlCheckBox
+            // 
+            this.urlCheckBox.AutoSize = true;
+            this.urlCheckBox.Checked = true;
+            this.urlCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.urlCheckBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.urlCheckBox.Location = new System.Drawing.Point(13, 390);
+            this.urlCheckBox.Name = "urlCheckBox";
+            this.urlCheckBox.Size = new System.Drawing.Size(165, 19);
+            this.urlCheckBox.TabIndex = 8;
+            this.urlCheckBox.Text = "Open URL on Completion:";
+            this.urlCheckBox.UseVisualStyleBackColor = true;
             // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(822, 636);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBox10);
+            this.Controls.Add(this.urlCheckBox);
             this.Controls.Add(this.sortBtn);
             this.Controls.Add(this.beginBackupBtn);
             this.Controls.Add(this.zipCheckBox);
@@ -646,6 +683,9 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.Button deselectAllBtn;
         private System.Windows.Forms.Button beginBackupBtn;
         private System.Windows.Forms.Button sortBtn;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.CheckBox urlCheckBox;
     }
 }
 
