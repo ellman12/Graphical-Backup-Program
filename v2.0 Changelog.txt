@@ -5,4 +5,4 @@ TODO:
 • Removed GroupBox that toggles the creation of a timestamp folder because I have no idea why you wouldn't want that.
 
 Try WaitCursor and explore other properties
-Log should output to a file now. Open on completion
+Log should output to a file now. Open in either Notepad or a Form or something on completion

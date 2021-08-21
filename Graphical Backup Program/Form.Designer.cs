@@ -1,4 +1,4 @@
-
+﻿
 namespace Graphical_Backup_Program
 {
     partial class Form
@@ -48,11 +48,12 @@ namespace Graphical_Backup_Program
             this.modeBox = new System.Windows.Forms.GroupBox();
             this.fileExplorerBtn = new System.Windows.Forms.RadioButton();
             this.backupModeBtn = new System.Windows.Forms.RadioButton();
-            this.saveToConfigFiles = new System.Windows.Forms.Button();
             this.groupsGroupBox = new System.Windows.Forms.GroupBox();
+            this.deselectAllBtn = new System.Windows.Forms.Button();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
+            this.selectAllBtn = new System.Windows.Forms.Button();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.checkBox7 = new System.Windows.Forms.CheckBox();
@@ -70,17 +71,16 @@ namespace Graphical_Backup_Program
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.textBox0 = new System.Windows.Forms.TextBox();
             this.checkBox0 = new System.Windows.Forms.CheckBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.selectAllBtn = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.zipCheckBox = new System.Windows.Forms.CheckBox();
-            this.deselectAllBtn = new System.Windows.Forms.Button();
+            this.beginBackupBtn = new System.Windows.Forms.Button();
+            this.sortBtn = new System.Windows.Forms.Button();
             this.whereToBackupBox.SuspendLayout();
             this.clearingFoldersGroupBox.SuspendLayout();
             this.modeBox.SuspendLayout();
             this.groupsGroupBox.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // TextBoxLabel
@@ -100,7 +100,7 @@ namespace Graphical_Backup_Program
             this.pathsTextBox.Multiline = true;
             this.pathsTextBox.Name = "pathsTextBox";
             this.pathsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.pathsTextBox.Size = new System.Drawing.Size(636, 227);
+            this.pathsTextBox.Size = new System.Drawing.Size(641, 227);
             this.pathsTextBox.TabIndex = 3;
             this.pathsTextBox.WordWrap = false;
             this.pathsTextBox.TextChanged += new System.EventHandler(this.PathsTextBox_TextChanged);
@@ -115,9 +115,9 @@ namespace Graphical_Backup_Program
             this.whereToBackupBox.Controls.Add(this.path2CheckBox);
             this.whereToBackupBox.Controls.Add(this.path1TextBox);
             this.whereToBackupBox.Controls.Add(this.path1CheckBox);
-            this.whereToBackupBox.Location = new System.Drawing.Point(7, 254);
+            this.whereToBackupBox.Location = new System.Drawing.Point(7, 300);
             this.whereToBackupBox.Name = "whereToBackupBox";
-            this.whereToBackupBox.Size = new System.Drawing.Size(636, 82);
+            this.whereToBackupBox.Size = new System.Drawing.Size(641, 82);
             this.whereToBackupBox.TabIndex = 5;
             this.whereToBackupBox.TabStop = false;
             this.whereToBackupBox.Text = "Where to Backup";
@@ -215,7 +215,7 @@ namespace Graphical_Backup_Program
             this.clearingFoldersGroupBox.Controls.Add(this.dontClearRadio);
             this.clearingFoldersGroupBox.Controls.Add(this.clearWithPromptRadio);
             this.clearingFoldersGroupBox.Controls.Add(this.autoClearRadio);
-            this.clearingFoldersGroupBox.Location = new System.Drawing.Point(7, 342);
+            this.clearingFoldersGroupBox.Location = new System.Drawing.Point(7, 388);
             this.clearingFoldersGroupBox.Name = "clearingFoldersGroupBox";
             this.clearingFoldersGroupBox.Size = new System.Drawing.Size(271, 92);
             this.clearingFoldersGroupBox.TabIndex = 0;
@@ -261,7 +261,7 @@ namespace Graphical_Backup_Program
             // 
             this.modeBox.Controls.Add(this.fileExplorerBtn);
             this.modeBox.Controls.Add(this.backupModeBtn);
-            this.modeBox.Location = new System.Drawing.Point(7, 439);
+            this.modeBox.Location = new System.Drawing.Point(284, 389);
             this.modeBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.modeBox.Name = "modeBox";
             this.modeBox.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -296,21 +296,13 @@ namespace Graphical_Backup_Program
             this.backupModeBtn.UseVisualStyleBackColor = true;
             this.backupModeBtn.CheckedChanged += new System.EventHandler(this.backupModeBtn_CheckedChanged);
             // 
-            // saveToConfigFiles
-            // 
-            this.saveToConfigFiles.Location = new System.Drawing.Point(424, 552);
-            this.saveToConfigFiles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.saveToConfigFiles.Name = "saveToConfigFiles";
-            this.saveToConfigFiles.Size = new System.Drawing.Size(172, 25);
-            this.saveToConfigFiles.TabIndex = 10;
-            this.saveToConfigFiles.Text = "Save Values to Config Files";
-            this.saveToConfigFiles.UseVisualStyleBackColor = true;
-            // 
             // groupsGroupBox
             // 
+            this.groupsGroupBox.Controls.Add(this.deselectAllBtn);
             this.groupsGroupBox.Controls.Add(this.textBox9);
             this.groupsGroupBox.Controls.Add(this.checkBox9);
             this.groupsGroupBox.Controls.Add(this.textBox8);
+            this.groupsGroupBox.Controls.Add(this.selectAllBtn);
             this.groupsGroupBox.Controls.Add(this.checkBox8);
             this.groupsGroupBox.Controls.Add(this.textBox7);
             this.groupsGroupBox.Controls.Add(this.checkBox7);
@@ -330,16 +322,25 @@ namespace Graphical_Backup_Program
             this.groupsGroupBox.Controls.Add(this.checkBox0);
             this.groupsGroupBox.Location = new System.Drawing.Point(654, 13);
             this.groupsGroupBox.Name = "groupsGroupBox";
-            this.groupsGroupBox.Size = new System.Drawing.Size(160, 312);
+            this.groupsGroupBox.Size = new System.Drawing.Size(160, 335);
             this.groupsGroupBox.TabIndex = 11;
             this.groupsGroupBox.TabStop = false;
             this.groupsGroupBox.Text = "Groups to Back up";
+            // 
+            // deselectAllBtn
+            // 
+            this.deselectAllBtn.Location = new System.Drawing.Point(80, 306);
+            this.deselectAllBtn.Name = "deselectAllBtn";
+            this.deselectAllBtn.Size = new System.Drawing.Size(77, 23);
+            this.deselectAllBtn.TabIndex = 15;
+            this.deselectAllBtn.Text = "Deselect All";
+            this.deselectAllBtn.UseVisualStyleBackColor = true;
             // 
             // textBox9
             // 
             this.textBox9.Location = new System.Drawing.Point(36, 278);
             this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(106, 23);
+            this.textBox9.Size = new System.Drawing.Size(118, 23);
             this.textBox9.TabIndex = 19;
             // 
             // checkBox9
@@ -356,8 +357,17 @@ namespace Graphical_Backup_Program
             // 
             this.textBox8.Location = new System.Drawing.Point(36, 249);
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(106, 23);
+            this.textBox8.Size = new System.Drawing.Size(118, 23);
             this.textBox8.TabIndex = 17;
+            // 
+            // selectAllBtn
+            // 
+            this.selectAllBtn.Location = new System.Drawing.Point(3, 306);
+            this.selectAllBtn.Name = "selectAllBtn";
+            this.selectAllBtn.Size = new System.Drawing.Size(77, 23);
+            this.selectAllBtn.TabIndex = 13;
+            this.selectAllBtn.Text = "Select All";
+            this.selectAllBtn.UseVisualStyleBackColor = true;
             // 
             // checkBox8
             // 
@@ -373,7 +383,7 @@ namespace Graphical_Backup_Program
             // 
             this.textBox7.Location = new System.Drawing.Point(36, 221);
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(106, 23);
+            this.textBox7.Size = new System.Drawing.Size(118, 23);
             this.textBox7.TabIndex = 15;
             // 
             // checkBox7
@@ -390,7 +400,7 @@ namespace Graphical_Backup_Program
             // 
             this.textBox6.Location = new System.Drawing.Point(36, 192);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(106, 23);
+            this.textBox6.Size = new System.Drawing.Size(118, 23);
             this.textBox6.TabIndex = 13;
             // 
             // checkBox6
@@ -407,7 +417,7 @@ namespace Graphical_Backup_Program
             // 
             this.textBox5.Location = new System.Drawing.Point(36, 163);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(106, 23);
+            this.textBox5.Size = new System.Drawing.Size(118, 23);
             this.textBox5.TabIndex = 11;
             // 
             // checkBox5
@@ -424,7 +434,7 @@ namespace Graphical_Backup_Program
             // 
             this.textBox4.Location = new System.Drawing.Point(36, 134);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(106, 23);
+            this.textBox4.Size = new System.Drawing.Size(118, 23);
             this.textBox4.TabIndex = 9;
             // 
             // checkBox4
@@ -441,7 +451,7 @@ namespace Graphical_Backup_Program
             // 
             this.textBox3.Location = new System.Drawing.Point(36, 105);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(106, 23);
+            this.textBox3.Size = new System.Drawing.Size(118, 23);
             this.textBox3.TabIndex = 7;
             // 
             // checkBox3
@@ -458,7 +468,7 @@ namespace Graphical_Backup_Program
             // 
             this.textBox2.Location = new System.Drawing.Point(36, 76);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(106, 23);
+            this.textBox2.Size = new System.Drawing.Size(118, 23);
             this.textBox2.TabIndex = 5;
             // 
             // checkBox2
@@ -475,7 +485,7 @@ namespace Graphical_Backup_Program
             // 
             this.textBox1.Location = new System.Drawing.Point(36, 47);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(106, 23);
+            this.textBox1.Size = new System.Drawing.Size(118, 23);
             this.textBox1.TabIndex = 3;
             this.textBox1.Text = "...labelling groups";
             // 
@@ -493,7 +503,7 @@ namespace Graphical_Backup_Program
             // 
             this.textBox0.Location = new System.Drawing.Point(36, 18);
             this.textBox0.Name = "textBox0";
-            this.textBox0.Size = new System.Drawing.Size(106, 23);
+            this.textBox0.Size = new System.Drawing.Size(118, 23);
             this.textBox0.TabIndex = 1;
             this.textBox0.Text = "Use these for...";
             // 
@@ -507,15 +517,15 @@ namespace Graphical_Backup_Program
             this.checkBox0.Text = "0";
             this.checkBox0.UseVisualStyleBackColor = true;
             // 
-            // statusStrip1
+            // statusStrip
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 614);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(822, 22);
-            this.statusStrip1.TabIndex = 12;
-            this.statusStrip1.Text = "statusStrip1";
+            this.statusStrip.Location = new System.Drawing.Point(0, 614);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(822, 22);
+            this.statusStrip.TabIndex = 12;
+            this.statusStrip.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
@@ -523,55 +533,44 @@ namespace Graphical_Backup_Program
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(319, 17);
             this.toolStripStatusLabel1.Text = "add some text like \"ready (to backup)\" or \"missing <field>\"";
             // 
-            // selectAllBtn
-            // 
-            this.selectAllBtn.Location = new System.Drawing.Point(653, 327);
-            this.selectAllBtn.Name = "selectAllBtn";
-            this.selectAllBtn.Size = new System.Drawing.Size(80, 23);
-            this.selectAllBtn.TabIndex = 13;
-            this.selectAllBtn.Text = "Select All";
-            this.selectAllBtn.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Location = new System.Drawing.Point(284, 342);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 100);
-            this.groupBox1.TabIndex = 14;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
-            // 
             // zipCheckBox
             // 
             this.zipCheckBox.AutoSize = true;
-            this.zipCheckBox.Location = new System.Drawing.Point(245, 530);
+            this.zipCheckBox.Location = new System.Drawing.Point(339, 264);
             this.zipCheckBox.Name = "zipCheckBox";
-            this.zipCheckBox.Size = new System.Drawing.Size(121, 19);
+            this.zipCheckBox.Size = new System.Drawing.Size(155, 19);
             this.zipCheckBox.TabIndex = 0;
-            this.zipCheckBox.Text = "Compress Backup";
+            this.zipCheckBox.Text = "Compress Backup to Zip";
             this.zipCheckBox.UseVisualStyleBackColor = true;
             // 
-            // deselectAllBtn
+            // beginBackupBtn
             // 
-            this.deselectAllBtn.Location = new System.Drawing.Point(735, 327);
-            this.deselectAllBtn.Name = "deselectAllBtn";
-            this.deselectAllBtn.Size = new System.Drawing.Size(80, 23);
-            this.deselectAllBtn.TabIndex = 15;
-            this.deselectAllBtn.Text = "Deselect All";
-            this.deselectAllBtn.UseVisualStyleBackColor = true;
+            this.beginBackupBtn.Location = new System.Drawing.Point(7, 254);
+            this.beginBackupBtn.Name = "beginBackupBtn";
+            this.beginBackupBtn.Size = new System.Drawing.Size(160, 38);
+            this.beginBackupBtn.TabIndex = 15;
+            this.beginBackupBtn.Text = "Backup";
+            this.beginBackupBtn.UseVisualStyleBackColor = true;
+            // 
+            // sortBtn
+            // 
+            this.sortBtn.Location = new System.Drawing.Point(173, 254);
+            this.sortBtn.Name = "sortBtn";
+            this.sortBtn.Size = new System.Drawing.Size(160, 38);
+            this.sortBtn.TabIndex = 16;
+            this.sortBtn.Text = "Sort Paths ↑";
+            this.sortBtn.UseVisualStyleBackColor = true;
             // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(822, 636);
-            this.Controls.Add(this.deselectAllBtn);
+            this.Controls.Add(this.sortBtn);
+            this.Controls.Add(this.beginBackupBtn);
             this.Controls.Add(this.zipCheckBox);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.selectAllBtn);
-            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.groupsGroupBox);
-            this.Controls.Add(this.saveToConfigFiles);
             this.Controls.Add(this.modeBox);
             this.Controls.Add(this.pathsTextBox);
             this.Controls.Add(this.whereToBackupBox);
@@ -581,6 +580,7 @@ namespace Graphical_Backup_Program
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Graphical Backup Program";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form_FormClosed);
             this.Shown += new System.EventHandler(this.Form_Shown);
@@ -592,8 +592,8 @@ namespace Graphical_Backup_Program
             this.modeBox.PerformLayout();
             this.groupsGroupBox.ResumeLayout(false);
             this.groupsGroupBox.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -618,11 +618,10 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.Button clearPath1;
         private System.Windows.Forms.CheckBox openPath2Box;
         private System.Windows.Forms.CheckBox openPath1Box;
-        private System.Windows.Forms.Button saveToConfigFiles;
         private System.Windows.Forms.GroupBox groupsGroupBox;
         private System.Windows.Forms.TextBox textBox0;
         private System.Windows.Forms.CheckBox checkBox0;
-        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.CheckBox checkBox9;
@@ -643,9 +642,10 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button selectAllBtn;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox zipCheckBox;
         private System.Windows.Forms.Button deselectAllBtn;
+        private System.Windows.Forms.Button beginBackupBtn;
+        private System.Windows.Forms.Button sortBtn;
     }
 }
 
