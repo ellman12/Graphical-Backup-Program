@@ -72,9 +72,10 @@ namespace Graphical_Backup_Program
             this.checkBox0 = new System.Windows.Forms.CheckBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.selectAllBtn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.zipCheckBox = new System.Windows.Forms.CheckBox();
+            this.deselectAllBtn = new System.Windows.Forms.Button();
             this.whereToBackupBox.SuspendLayout();
             this.clearingFoldersGroupBox.SuspendLayout();
             this.modeBox.SuspendLayout();
@@ -328,9 +329,9 @@ namespace Graphical_Backup_Program
             this.groupsGroupBox.Controls.Add(this.checkBox1);
             this.groupsGroupBox.Controls.Add(this.textBox0);
             this.groupsGroupBox.Controls.Add(this.checkBox0);
-            this.groupsGroupBox.Location = new System.Drawing.Point(649, 13);
+            this.groupsGroupBox.Location = new System.Drawing.Point(654, 13);
             this.groupsGroupBox.Name = "groupsGroupBox";
-            this.groupsGroupBox.Size = new System.Drawing.Size(149, 312);
+            this.groupsGroupBox.Size = new System.Drawing.Size(160, 312);
             this.groupsGroupBox.TabIndex = 11;
             this.groupsGroupBox.TabStop = false;
             this.groupsGroupBox.Text = "Groups to Back up";
@@ -523,14 +524,14 @@ namespace Graphical_Backup_Program
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(319, 17);
             this.toolStripStatusLabel1.Text = "add some text like \"ready (to backup)\" or \"missing <field>\"";
             // 
-            // button1
+            // selectAllBtn
             // 
-            this.button1.Location = new System.Drawing.Point(649, 331);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.selectAllBtn.Location = new System.Drawing.Point(653, 327);
+            this.selectAllBtn.Name = "selectAllBtn";
+            this.selectAllBtn.Size = new System.Drawing.Size(80, 23);
+            this.selectAllBtn.TabIndex = 13;
+            this.selectAllBtn.Text = "Select All";
+            this.selectAllBtn.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -551,14 +552,24 @@ namespace Graphical_Backup_Program
             this.zipCheckBox.Text = "Compress Backup";
             this.zipCheckBox.UseVisualStyleBackColor = true;
             // 
+            // deselectAllBtn
+            // 
+            this.deselectAllBtn.Location = new System.Drawing.Point(735, 327);
+            this.deselectAllBtn.Name = "deselectAllBtn";
+            this.deselectAllBtn.Size = new System.Drawing.Size(80, 23);
+            this.deselectAllBtn.TabIndex = 15;
+            this.deselectAllBtn.Text = "Deselect All";
+            this.deselectAllBtn.UseVisualStyleBackColor = true;
+            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(976, 636);
+            this.Controls.Add(this.deselectAllBtn);
             this.Controls.Add(this.zipCheckBox);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.selectAllBtn);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupsGroupBox);
             this.Controls.Add(this.saveToConfigFiles);
@@ -632,9 +643,10 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button selectAllBtn;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox zipCheckBox;
+        private System.Windows.Forms.Button deselectAllBtn;
     }
 }
 

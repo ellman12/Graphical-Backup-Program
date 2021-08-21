@@ -556,5 +556,10 @@ namespace Graphical_Backup_Program
         {
             SaveToConfigFiles();
         }
+
+        private void deselectAllBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
