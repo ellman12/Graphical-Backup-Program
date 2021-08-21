@@ -45,39 +45,38 @@ namespace Graphical_Backup_Program
             this.dontClearRadio = new System.Windows.Forms.RadioButton();
             this.clearWithPromptRadio = new System.Windows.Forms.RadioButton();
             this.autoClearRadio = new System.Windows.Forms.RadioButton();
-            this.backupMode = new System.Windows.Forms.GroupBox();
-            this.dontCreateFolderBtn = new System.Windows.Forms.RadioButton();
-            this.createTimestampFolderBtn = new System.Windows.Forms.RadioButton();
             this.modeBox = new System.Windows.Forms.GroupBox();
             this.fileExplorerBtn = new System.Windows.Forms.RadioButton();
             this.backupModeBtn = new System.Windows.Forms.RadioButton();
             this.saveToConfigFiles = new System.Windows.Forms.Button();
             this.groupsGroupBox = new System.Windows.Forms.GroupBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.checkBox0 = new System.Windows.Forms.CheckBox();
-            this.textBox0 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.textBox0 = new System.Windows.Forms.TextBox();
+            this.checkBox0 = new System.Windows.Forms.CheckBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.zipCheckBox = new System.Windows.Forms.CheckBox();
             this.whereToBackupBox.SuspendLayout();
             this.clearingFoldersGroupBox.SuspendLayout();
-            this.backupMode.SuspendLayout();
             this.modeBox.SuspendLayout();
             this.groupsGroupBox.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -115,7 +114,7 @@ namespace Graphical_Backup_Program
             this.whereToBackupBox.Controls.Add(this.path2CheckBox);
             this.whereToBackupBox.Controls.Add(this.path1TextBox);
             this.whereToBackupBox.Controls.Add(this.path1CheckBox);
-            this.whereToBackupBox.Location = new System.Drawing.Point(7, 298);
+            this.whereToBackupBox.Location = new System.Drawing.Point(7, 254);
             this.whereToBackupBox.Name = "whereToBackupBox";
             this.whereToBackupBox.Size = new System.Drawing.Size(636, 82);
             this.whereToBackupBox.TabIndex = 5;
@@ -215,7 +214,7 @@ namespace Graphical_Backup_Program
             this.clearingFoldersGroupBox.Controls.Add(this.dontClearRadio);
             this.clearingFoldersGroupBox.Controls.Add(this.clearWithPromptRadio);
             this.clearingFoldersGroupBox.Controls.Add(this.autoClearRadio);
-            this.clearingFoldersGroupBox.Location = new System.Drawing.Point(7, 385);
+            this.clearingFoldersGroupBox.Location = new System.Drawing.Point(7, 342);
             this.clearingFoldersGroupBox.Name = "clearingFoldersGroupBox";
             this.clearingFoldersGroupBox.Size = new System.Drawing.Size(271, 92);
             this.clearingFoldersGroupBox.TabIndex = 0;
@@ -257,48 +256,11 @@ namespace Graphical_Backup_Program
             this.autoClearRadio.Text = "Clear Folders Automatically (No Prompt)";
             this.autoClearRadio.UseVisualStyleBackColor = true;
             // 
-            // backupMode
-            // 
-            this.backupMode.Controls.Add(this.dontCreateFolderBtn);
-            this.backupMode.Controls.Add(this.createTimestampFolderBtn);
-            this.backupMode.Location = new System.Drawing.Point(284, 385);
-            this.backupMode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.backupMode.Name = "backupMode";
-            this.backupMode.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.backupMode.Size = new System.Drawing.Size(179, 64);
-            this.backupMode.TabIndex = 7;
-            this.backupMode.TabStop = false;
-            this.backupMode.Text = "Backup Mode";
-            // 
-            // dontCreateFolderBtn
-            // 
-            this.dontCreateFolderBtn.AutoSize = true;
-            this.dontCreateFolderBtn.Location = new System.Drawing.Point(5, 42);
-            this.dontCreateFolderBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dontCreateFolderBtn.Name = "dontCreateFolderBtn";
-            this.dontCreateFolderBtn.Size = new System.Drawing.Size(127, 19);
-            this.dontCreateFolderBtn.TabIndex = 2;
-            this.dontCreateFolderBtn.Text = "Don\'t Create Folder";
-            this.dontCreateFolderBtn.UseVisualStyleBackColor = true;
-            // 
-            // createTimestampFolderBtn
-            // 
-            this.createTimestampFolderBtn.AutoSize = true;
-            this.createTimestampFolderBtn.Checked = true;
-            this.createTimestampFolderBtn.Location = new System.Drawing.Point(5, 20);
-            this.createTimestampFolderBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.createTimestampFolderBtn.Name = "createTimestampFolderBtn";
-            this.createTimestampFolderBtn.Size = new System.Drawing.Size(157, 19);
-            this.createTimestampFolderBtn.TabIndex = 2;
-            this.createTimestampFolderBtn.TabStop = true;
-            this.createTimestampFolderBtn.Text = "Create Timestamp Folder";
-            this.createTimestampFolderBtn.UseVisualStyleBackColor = true;
-            // 
             // modeBox
             // 
             this.modeBox.Controls.Add(this.fileExplorerBtn);
             this.modeBox.Controls.Add(this.backupModeBtn);
-            this.modeBox.Location = new System.Drawing.Point(468, 385);
+            this.modeBox.Location = new System.Drawing.Point(7, 439);
             this.modeBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.modeBox.Name = "modeBox";
             this.modeBox.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -335,7 +297,7 @@ namespace Graphical_Backup_Program
             // 
             // saveToConfigFiles
             // 
-            this.saveToConfigFiles.Location = new System.Drawing.Point(472, 452);
+            this.saveToConfigFiles.Location = new System.Drawing.Point(424, 552);
             this.saveToConfigFiles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.saveToConfigFiles.Name = "saveToConfigFiles";
             this.saveToConfigFiles.Size = new System.Drawing.Size(172, 25);
@@ -368,179 +330,10 @@ namespace Graphical_Backup_Program
             this.groupsGroupBox.Controls.Add(this.checkBox0);
             this.groupsGroupBox.Location = new System.Drawing.Point(649, 13);
             this.groupsGroupBox.Name = "groupsGroupBox";
-            this.groupsGroupBox.Size = new System.Drawing.Size(153, 312);
+            this.groupsGroupBox.Size = new System.Drawing.Size(149, 312);
             this.groupsGroupBox.TabIndex = 11;
             this.groupsGroupBox.TabStop = false;
-            this.groupsGroupBox.Text = "Select Groups to Back up";
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 614);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(976, 22);
-            this.statusStrip1.TabIndex = 12;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(319, 17);
-            this.toolStripStatusLabel1.Text = "add some text like \"ready (to backup)\" or \"missing <field>\"";
-            // 
-            // checkBox0
-            // 
-            this.checkBox0.AutoSize = true;
-            this.checkBox0.Location = new System.Drawing.Point(6, 21);
-            this.checkBox0.Name = "checkBox0";
-            this.checkBox0.Size = new System.Drawing.Size(32, 19);
-            this.checkBox0.TabIndex = 0;
-            this.checkBox0.Text = "0";
-            this.checkBox0.UseVisualStyleBackColor = true;
-            // 
-            // textBox0
-            // 
-            this.textBox0.Location = new System.Drawing.Point(36, 18);
-            this.textBox0.Name = "textBox0";
-            this.textBox0.Size = new System.Drawing.Size(106, 23);
-            this.textBox0.TabIndex = 1;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(36, 47);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(106, 23);
-            this.textBox1.TabIndex = 3;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(6, 50);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(32, 19);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "1";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(36, 76);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(106, 23);
-            this.textBox2.TabIndex = 5;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(6, 79);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(32, 19);
-            this.checkBox2.TabIndex = 4;
-            this.checkBox2.Text = "2";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(36, 105);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(106, 23);
-            this.textBox3.TabIndex = 7;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(6, 108);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(32, 19);
-            this.checkBox3.TabIndex = 6;
-            this.checkBox3.Text = "3";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(36, 134);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(106, 23);
-            this.textBox4.TabIndex = 9;
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(6, 137);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(32, 19);
-            this.checkBox4.TabIndex = 8;
-            this.checkBox4.Text = "4";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(36, 163);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(106, 23);
-            this.textBox5.TabIndex = 11;
-            // 
-            // checkBox5
-            // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(6, 166);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(32, 19);
-            this.checkBox5.TabIndex = 10;
-            this.checkBox5.Text = "5";
-            this.checkBox5.UseVisualStyleBackColor = true;
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(36, 192);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(106, 23);
-            this.textBox6.TabIndex = 13;
-            // 
-            // checkBox6
-            // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(6, 195);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(32, 19);
-            this.checkBox6.TabIndex = 12;
-            this.checkBox6.Text = "6";
-            this.checkBox6.UseVisualStyleBackColor = true;
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(36, 221);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(106, 23);
-            this.textBox7.TabIndex = 15;
-            // 
-            // checkBox7
-            // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.Location = new System.Drawing.Point(6, 224);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(32, 19);
-            this.checkBox7.TabIndex = 14;
-            this.checkBox7.Text = "7";
-            this.checkBox7.UseVisualStyleBackColor = true;
-            // 
-            // textBox8
-            // 
-            this.textBox8.Location = new System.Drawing.Point(36, 249);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(106, 23);
-            this.textBox8.TabIndex = 17;
-            // 
-            // checkBox8
-            // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.Location = new System.Drawing.Point(6, 252);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(32, 19);
-            this.checkBox8.TabIndex = 16;
-            this.checkBox8.Text = "8";
-            this.checkBox8.UseVisualStyleBackColor = true;
+            this.groupsGroupBox.Text = "Groups to Back up";
             // 
             // textBox9
             // 
@@ -559,15 +352,216 @@ namespace Graphical_Backup_Program
             this.checkBox9.Text = "9";
             this.checkBox9.UseVisualStyleBackColor = true;
             // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(36, 249);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(106, 23);
+            this.textBox8.TabIndex = 17;
+            // 
+            // checkBox8
+            // 
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.Location = new System.Drawing.Point(6, 252);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(32, 19);
+            this.checkBox8.TabIndex = 16;
+            this.checkBox8.Text = "8";
+            this.checkBox8.UseVisualStyleBackColor = true;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(36, 221);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(106, 23);
+            this.textBox7.TabIndex = 15;
+            // 
+            // checkBox7
+            // 
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.Location = new System.Drawing.Point(6, 224);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(32, 19);
+            this.checkBox7.TabIndex = 14;
+            this.checkBox7.Text = "7";
+            this.checkBox7.UseVisualStyleBackColor = true;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(36, 192);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(106, 23);
+            this.textBox6.TabIndex = 13;
+            // 
+            // checkBox6
+            // 
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.Location = new System.Drawing.Point(6, 195);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(32, 19);
+            this.checkBox6.TabIndex = 12;
+            this.checkBox6.Text = "6";
+            this.checkBox6.UseVisualStyleBackColor = true;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(36, 163);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(106, 23);
+            this.textBox5.TabIndex = 11;
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(6, 166);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(32, 19);
+            this.checkBox5.TabIndex = 10;
+            this.checkBox5.Text = "5";
+            this.checkBox5.UseVisualStyleBackColor = true;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(36, 134);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(106, 23);
+            this.textBox4.TabIndex = 9;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(6, 137);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(32, 19);
+            this.checkBox4.TabIndex = 8;
+            this.checkBox4.Text = "4";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(36, 105);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(106, 23);
+            this.textBox3.TabIndex = 7;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(6, 108);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(32, 19);
+            this.checkBox3.TabIndex = 6;
+            this.checkBox3.Text = "3";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(36, 76);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(106, 23);
+            this.textBox2.TabIndex = 5;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(6, 79);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(32, 19);
+            this.checkBox2.TabIndex = 4;
+            this.checkBox2.Text = "2";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(36, 47);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(106, 23);
+            this.textBox1.TabIndex = 3;
+            this.textBox1.Text = "...labelling groups";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(6, 50);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(32, 19);
+            this.checkBox1.TabIndex = 2;
+            this.checkBox1.Text = "1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // textBox0
+            // 
+            this.textBox0.Location = new System.Drawing.Point(36, 18);
+            this.textBox0.Name = "textBox0";
+            this.textBox0.Size = new System.Drawing.Size(106, 23);
+            this.textBox0.TabIndex = 1;
+            this.textBox0.Text = "Use these for...";
+            // 
+            // checkBox0
+            // 
+            this.checkBox0.AutoSize = true;
+            this.checkBox0.Location = new System.Drawing.Point(6, 21);
+            this.checkBox0.Name = "checkBox0";
+            this.checkBox0.Size = new System.Drawing.Size(32, 19);
+            this.checkBox0.TabIndex = 0;
+            this.checkBox0.Text = "0";
+            this.checkBox0.UseVisualStyleBackColor = true;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 614);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(976, 22);
+            this.statusStrip1.TabIndex = 12;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(319, 17);
+            this.toolStripStatusLabel1.Text = "add some text like \"ready (to backup)\" or \"missing <field>\"";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(649, 331);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Location = new System.Drawing.Point(284, 342);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 100);
+            this.groupBox1.TabIndex = 14;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "groupBox1";
+            // 
+            // zipCheckBox
+            // 
+            this.zipCheckBox.AutoSize = true;
+            this.zipCheckBox.Location = new System.Drawing.Point(245, 530);
+            this.zipCheckBox.Name = "zipCheckBox";
+            this.zipCheckBox.Size = new System.Drawing.Size(121, 19);
+            this.zipCheckBox.TabIndex = 0;
+            this.zipCheckBox.Text = "Compress Backup";
+            this.zipCheckBox.UseVisualStyleBackColor = true;
+            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(976, 636);
+            this.Controls.Add(this.zipCheckBox);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupsGroupBox);
             this.Controls.Add(this.saveToConfigFiles);
-            this.Controls.Add(this.backupMode);
             this.Controls.Add(this.modeBox);
             this.Controls.Add(this.pathsTextBox);
             this.Controls.Add(this.whereToBackupBox);
@@ -584,8 +578,6 @@ namespace Graphical_Backup_Program
             this.whereToBackupBox.PerformLayout();
             this.clearingFoldersGroupBox.ResumeLayout(false);
             this.clearingFoldersGroupBox.PerformLayout();
-            this.backupMode.ResumeLayout(false);
-            this.backupMode.PerformLayout();
             this.modeBox.ResumeLayout(false);
             this.modeBox.PerformLayout();
             this.groupsGroupBox.ResumeLayout(false);
@@ -612,9 +604,6 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.GroupBox modeBox;
         private System.Windows.Forms.RadioButton fileExplorerBtn;
         private System.Windows.Forms.RadioButton backupModeBtn;
-        private System.Windows.Forms.GroupBox backupMode;
-        private System.Windows.Forms.RadioButton dontCreateFolderBtn;
-        private System.Windows.Forms.RadioButton createTimestampFolderBtn;
         private System.Windows.Forms.Button clearPath2;
         private System.Windows.Forms.Button clearPath1;
         private System.Windows.Forms.CheckBox openPath2Box;
@@ -643,6 +632,9 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox zipCheckBox;
     }
 }
 
