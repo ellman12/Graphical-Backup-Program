@@ -69,13 +69,14 @@ namespace Graphical_Backup_Program
             this.textBox0 = new System.Windows.Forms.TextBox();
             this.checkBox0 = new System.Windows.Forms.CheckBox();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.zipCheckBox = new System.Windows.Forms.CheckBox();
             this.beginBackupBtn = new System.Windows.Forms.Button();
             this.sortBtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.urlCheckBox = new System.Windows.Forms.CheckBox();
+            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.whereToBackupBox.SuspendLayout();
             this.clearingFoldersGroupBox.SuspendLayout();
             this.groupsGroupBox.SuspendLayout();
@@ -480,19 +481,20 @@ namespace Graphical_Backup_Program
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.toolStripStatusLabel,
+            this.progressBar});
+            this.statusStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.statusStrip.Location = new System.Drawing.Point(0, 405);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(822, 22);
             this.statusStrip.TabIndex = 12;
             this.statusStrip.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // toolStripStatusLabel
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(668, 17);
-            this.toolStripStatusLabel1.Text = "add some text like \"ready (to backup)\" or \"missing <field>\". Also display total (" +
-    "estimated) backup size and a progress bar too?";
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(95, 17);
+            this.toolStripStatusLabel.Text = "Ready to Backup";
             // 
             // zipCheckBox
             // 
@@ -552,6 +554,12 @@ namespace Graphical_Backup_Program
             this.urlCheckBox.Text = "Open URL on Completion:";
             this.urlCheckBox.UseVisualStyleBackColor = true;
             // 
+            // progressBar
+            // 
+            this.progressBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(150, 16);
+            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -610,7 +618,7 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.TextBox textBox0;
         private System.Windows.Forms.CheckBox checkBox0;
         private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.CheckBox checkBox9;
         private System.Windows.Forms.TextBox textBox8;
@@ -637,6 +645,7 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.CheckBox urlCheckBox;
+        private System.Windows.Forms.ToolStripProgressBar progressBar;
     }
 }
 
