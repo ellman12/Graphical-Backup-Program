@@ -525,11 +525,6 @@ namespace Graphical_Backup_Program
             //File.WriteAllText(_projectDirectory + "/Config.txt", fileText);
         }
 
-        private void deselectAllBtn_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ToggleAllChecks(bool toggled)
         {
             checkBox0.Checked = toggled;
@@ -550,7 +545,7 @@ namespace Graphical_Backup_Program
             ToggleAllChecks(true);
         }
 
-        private void deselectAllBtn_Click_1(object sender, EventArgs e)
+        private void deselectAllBtn_Click(object sender, EventArgs e)
         {
             ToggleAllChecks(false);
         }
