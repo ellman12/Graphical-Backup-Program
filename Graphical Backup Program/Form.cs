@@ -472,52 +472,6 @@ namespace Graphical_Backup_Program
             path2TextBox.Text = "";
         }
 
-        private void backupModeBtn_CheckedChanged(object sender, EventArgs e)
-        {
-            if (pathsTextBox.Text == String.Empty || (path1TextBox.Text == String.Empty && path2TextBox.Text == String.Empty) || (path1CheckBox.Checked == false && path2CheckBox.Checked == false))
-            {
-                //allPathsBtn.Enabled = false;
-                //commonPathsBtn.Enabled = false;
-            }
-            else
-            {
-                //allPathsBtn.Enabled = true;
-                //commonPathsBtn.Enabled = true;
-            }
-
-            path1CheckBox.Enabled = true;
-            path1TextBox.Enabled = true;
-            path2CheckBox.Enabled = true;
-            path2TextBox.Enabled = true;
-            clearPath1.Enabled = true;
-            clearPath2.Enabled = true;
-            openPath1Box.Enabled = true;
-            openPath2Box.Enabled = true;
-            whereToBackupBox.Enabled = true;
-            clearingFoldersGroupBox.Enabled = true;
-            autoClearRadio.Enabled = true;
-            clearWithPromptRadio.Enabled = true;
-            dontClearRadio.Enabled = true;
-        }
-
-        private void fileExplorerBtn_CheckedChanged(object sender, EventArgs e)
-        {
-            //Disable controls that don't make sense with this enabled.
-            path1CheckBox.Enabled = false;
-            path1TextBox.Enabled = false;
-            path2CheckBox.Enabled = false;
-            path2TextBox.Enabled = false;
-            clearPath1.Enabled = false;
-            clearPath2.Enabled = false;
-            openPath1Box.Enabled = false;
-            openPath2Box.Enabled = false;
-            whereToBackupBox.Enabled = false;
-            clearingFoldersGroupBox.Enabled = false;
-            autoClearRadio.Enabled = false;
-            clearWithPromptRadio.Enabled = false;
-            dontClearRadio.Enabled = false;
-        }
-
         private void SaveToConfigFiles()
         {
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
