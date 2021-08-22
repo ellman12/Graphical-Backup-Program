@@ -75,7 +75,7 @@ namespace Graphical_Backup_Program
             this.beginBackupBtn = new System.Windows.Forms.Button();
             this.sortBtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.urlTextBox = new System.Windows.Forms.TextBox();
             this.urlCheckBox = new System.Windows.Forms.CheckBox();
             this.whereToBackupBox.SuspendLayout();
             this.clearingFoldersGroupBox.SuspendLayout();
@@ -545,12 +545,12 @@ namespace Graphical_Backup_Program
             this.button1.Text = "Clear";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // textBox10
+            // urlTextBox
             // 
-            this.textBox10.Location = new System.Drawing.Point(173, 325);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(263, 23);
-            this.textBox10.TabIndex = 9;
+            this.urlTextBox.Location = new System.Drawing.Point(173, 325);
+            this.urlTextBox.Name = "urlTextBox";
+            this.urlTextBox.Size = new System.Drawing.Size(263, 23);
+            this.urlTextBox.TabIndex = 9;
             // 
             // urlCheckBox
             // 
@@ -571,7 +571,7 @@ namespace Graphical_Backup_Program
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(822, 427);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox10);
+            this.Controls.Add(this.urlTextBox);
             this.Controls.Add(this.urlCheckBox);
             this.Controls.Add(this.sortBtn);
             this.Controls.Add(this.beginBackupBtn);
@@ -648,7 +648,7 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.Button beginBackupBtn;
         private System.Windows.Forms.Button sortBtn;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox urlTextBox;
         private System.Windows.Forms.CheckBox urlCheckBox;
         private System.Windows.Forms.ToolStripProgressBar progressBar;
     }

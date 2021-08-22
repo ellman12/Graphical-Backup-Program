@@ -409,32 +409,56 @@ namespace Graphical_Backup_Program
             else
                 pathsTextBox.Text = File.ReadAllText(_projectDirectory + "/paths.txt");
 
-            if (!File.Exists(_projectDirectory + "/Config.txt"))
+            if (!File.Exists(_projectDirectory + "/config.txt"))
             {
-                FileStream file = File.Create(_projectDirectory + "/Config.txt");
+                FileStream file = File.Create(_projectDirectory + "/config.txt");
                 file.Close();
             }
 
             //Read in config stuff. Is this extremely stupid and sub-optimal? Yes. Does it work? Also yes.
-            string configFileTxt = File.ReadAllText(_projectDirectory + "/Config.txt");
+            string configFileTxt = File.ReadAllText(_projectDirectory + "/config.txt");
 
             //If config file has no text, write default values to file.
             if (configFileTxt == String.Empty)
             {
-                File.WriteAllText(_projectDirectory + "/Config.txt", "True\r\n\r\nFalse\r\n\r\nFalse\r\nTrue\r\nFalse\r\nTrue\r\nFalse\r\nTrue\r\nFalse");
-                configFileTxt = "True\r\n\r\nFalse\r\n\r\nFalse\r\nTrue\r\nFalse\r\nTrue\r\nFalse\r\nTrue\r\nFalse";
+                const string defaultConfigValues = "false\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nUse these for...\r\n...labeling groups\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\ntrue\r\n\r\ntrue\r\nfalse\r\n\r\nfalse\r\nfalse\r\n\r\nfalse\r\nfalse\r\ntrue\r\nfalse";
+                File.WriteAllText(_projectDirectory + "/config.txt", defaultConfigValues);
+                configFileTxt = defaultConfigValues;
             }
 
             string[] config = configFileTxt.Split("\r\n");
-            path1CheckBox.Checked = Boolean.Parse(config[0]);
-            path1TextBox.Text = config[1];
-            path2CheckBox.Checked = Boolean.Parse(config[2]);
-            path2TextBox.Text = config[3];
-            autoClearRadio.Checked = Boolean.Parse(config[4]);
-            clearWithPromptRadio.Checked = Boolean.Parse(config[5]);
-            dontClearRadio.Checked = Boolean.Parse(config[6]);
-            //backupModeBtn.Checked = Boolean.Parse(config[7]);
-            //fileExplorerBtn.Checked = Boolean.Parse(config[8]);
+            checkBox0.Checked = Boolean.Parse(config[0]);
+            checkBox1.Checked = Boolean.Parse(config[1]);
+            checkBox2.Checked = Boolean.Parse(config[2]);
+            checkBox3.Checked = Boolean.Parse(config[3]);
+            checkBox4.Checked = Boolean.Parse(config[4]);
+            checkBox5.Checked = Boolean.Parse(config[5]);
+            checkBox6.Checked = Boolean.Parse(config[6]);
+            checkBox7.Checked = Boolean.Parse(config[7]);
+            checkBox8.Checked = Boolean.Parse(config[8]);
+            checkBox9.Checked = Boolean.Parse(config[9]);
+            textBox0.Text = config[10];
+            textBox1.Text = config[11];
+            textBox2.Text = config[12];
+            textBox3.Text = config[13];
+            textBox4.Text = config[14];
+            textBox5.Text = config[15];
+            textBox6.Text = config[16];
+            textBox7.Text = config[17];
+            textBox8.Text = config[18];
+            textBox9.Text = config[19];
+            path1CheckBox.Checked = Boolean.Parse(config[20]);
+            path1TextBox.Text = config[21];
+            openPath1Box.Checked = Boolean.Parse(config[22]);
+            path2CheckBox.Checked = Boolean.Parse(config[23]);
+            path2TextBox.Text = config[24];
+            openPath2Box.Checked = Boolean.Parse(config[25]);
+            urlCheckBox.Checked = Boolean.Parse(config[26]);
+            urlTextBox.Text = config[27];
+            zipCheckBox.Checked = Boolean.Parse(config[28]);
+            autoClearRadio.Checked = Boolean.Parse(config[29]);
+            clearWithPromptRadio.Checked = Boolean.Parse(config[30]);
+            dontClearRadio.Checked = Boolean.Parse(config[31]);
 
             if (pathsTextBox.Text == String.Empty || (path1TextBox.Text == String.Empty && path2TextBox.Text == String.Empty) || (path1CheckBox.Checked == false && path2CheckBox.Checked == false))
             {
@@ -457,9 +481,9 @@ namespace Graphical_Backup_Program
         //On exit, save config stuff for next time.
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //pathsTextBox.Text = File.ReadAllText(_projectDirectory + "/paths.txt"); //Don't want log stuff written to paths.txt
-            //File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
-            //SaveToConfigFiles();
+            //TODO: delete this line below me
+            pathsTextBox.Text = File.ReadAllText(_projectDirectory + "/paths.txt"); //Don't want log stuff written to paths.txt
+            SaveToConfigFiles();
         }
 
         private void clearPath1_Click(object sender, EventArgs e)
@@ -475,8 +499,8 @@ namespace Graphical_Backup_Program
         private void SaveToConfigFiles()
         {
             File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
-            //string fileText = path1CheckBox.Checked + "\r\n" + path1TextBox.Text + "\r\n" + path2CheckBox.Checked + "\r\n" + path2TextBox.Text + "\r\n" + autoClearRadio.Checked + "\r\n" + clearWithPromptRadio.Checked + "\r\n" + dontClearRadio.Checked + "\r\n" + backupModeBtn.Checked + "\r\n" + fileExplorerBtn.Checked + "\r\n" + createTimestampFolderBtn.Checked + "\r\n" + dontCreateFolderBtn.Checked;
-            //File.WriteAllText(_projectDirectory + "/Config.txt", fileText);
+            string fileText = checkBox0.Checked + "\r\n" + checkBox1.Checked + "\r\n" + checkBox2.Checked + "\r\n" + checkBox3.Checked + "\r\n" + checkBox4.Checked + "\r\n" + checkBox5.Checked + "\r\n" + checkBox6.Checked + "\r\n" + checkBox7.Checked + "\r\n" + checkBox8.Checked + "\r\n" + checkBox9.Checked + "\r\n" + textBox0.Text + "\r\n" + textBox1.Text + "\r\n" + textBox2.Text + "\r\n" + textBox3.Text + "\r\n" + textBox4.Text + "\r\n" + textBox5.Text + "\r\n" + textBox6.Text + "\r\n" + textBox7.Text + "\r\n" + textBox8.Text + "\r\n" + textBox9.Text + "\r\n" + path1CheckBox.Checked + "\r\n" + path1TextBox.Text + "\r\n" + openPath1Box.Checked + "\r\n" + path2CheckBox.Checked + "\r\n" + path2TextBox.Text + "\r\n" + openPath2Box.Checked + "\r\n" + urlCheckBox.Checked + "\r\n" + urlTextBox.Text + "\r\n" + zipCheckBox.Checked + "\r\n" + autoClearRadio.Checked + "\r\n" + clearWithPromptRadio.Checked + "\r\n" + dontClearRadio.Checked;
+            File.WriteAllText(_projectDirectory + "/config.txt", fileText);
         }
 
         private void ToggleAllChecks(bool toggled)

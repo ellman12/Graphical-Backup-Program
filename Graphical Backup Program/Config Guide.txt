@@ -1,11 +1,33 @@
-path1Checked
-path1Text
-path2Checked
-path2Text
-autoClearRadioChecked
-clearWithPromptRadioChecked
-dontClearRadioChecked
-normalModeChecked
-explorerModeChecked
-createTimestampChecked
-dontCreateChecked
+checkBox0.Checked = false
+checkBox1.Checked = false
+checkBox2.Checked = false
+checkBox3.Checked = false
+checkBox4.Checked = false
+checkBox5.Checked = false
+checkBox6.Checked = false
+checkBox7.Checked = false
+checkBox8.Checked = false
+checkBox9.Checked = false
+textBox0.Text = "Use these for..."
+textBox1.Text = "...labelling groups"
+textBox2.Text = ""
+textBox3.Text = ""
+textBox4.Text = ""
+textBox5.Text = ""
+textBox6.Text = ""
+textBox7.Text = ""
+textBox8.Text = ""
+textBox9.Text = ""
+path1CheckBox.Checked = true
+path1TextBox.Text = ""
+openPath1Box.Checked = true
+path2CheckBox.Checked = false
+path2TextBox.Text = ""
+openPath2Box.Checked = false
+urlCheckBox.Checked = false
+urlTextBox.Text = ""
+zipCheckBox.Checked = false
+autoClearRadio.Checked = false
+clearWithPromptRadio.Checked = true
+dontClearRadio.Checked = false
+//Default values are specified after the '='
