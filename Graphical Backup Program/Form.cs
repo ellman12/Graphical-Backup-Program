@@ -529,5 +529,30 @@ namespace Graphical_Backup_Program
         {
 
         }
+
+        private void ToggleAllChecks(bool toggled)
+        {
+            checkBox0.Checked = toggled;
+            checkBox1.Checked = toggled;
+            checkBox2.Checked = toggled;
+            checkBox3.Checked = toggled;
+            checkBox4.Checked = toggled;
+            checkBox5.Checked = toggled;
+            checkBox6.Checked = toggled;
+            checkBox7.Checked = toggled;
+            checkBox8.Checked = toggled;
+            checkBox9.Checked = toggled;
+        }
+
+        //Checks all group boxes.
+        private void selectAllBtn_Click(object sender, EventArgs e)
+        {
+            ToggleAllChecks(true);
+        }
+
+        private void deselectAllBtn_Click_1(object sender, EventArgs e)
+        {
+            ToggleAllChecks(false);
+        }
     }
 }

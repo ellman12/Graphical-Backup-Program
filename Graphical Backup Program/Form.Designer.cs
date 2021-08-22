@@ -296,6 +296,7 @@ namespace Graphical_Backup_Program
             this.deselectAllBtn.TabIndex = 15;
             this.deselectAllBtn.Text = "Deselect All";
             this.deselectAllBtn.UseVisualStyleBackColor = true;
+            this.deselectAllBtn.Click += new System.EventHandler(this.deselectAllBtn_Click_1);
             // 
             // textBox9
             // 
@@ -329,6 +330,7 @@ namespace Graphical_Backup_Program
             this.selectAllBtn.TabIndex = 13;
             this.selectAllBtn.Text = "Select All";
             this.selectAllBtn.UseVisualStyleBackColor = true;
+            this.selectAllBtn.Click += new System.EventHandler(this.selectAllBtn_Click);
             // 
             // checkBox8
             // 
