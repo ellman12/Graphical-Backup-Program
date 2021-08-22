@@ -10,7 +10,7 @@ namespace Graphical_Backup_Program
 {
     public partial class Form : System.Windows.Forms.Form
     {
-        private string _logText = "";
+        //private string _logText = "";
         //private string _backupType = ""; //Either "Common" or "Full"
         private readonly string _projectDirectory;
 
@@ -30,21 +30,21 @@ namespace Graphical_Backup_Program
 
         private void LogAppend(string text)
         {
-            _logText += text;
+            //_logText += text;
         }
 
         //Used in the foreach loops in the 2 backup button functions for determining which action to take.
         private void CopyOrOpenAndLog(string trimmedPath, string timestamp)
         {
-            if (backupModeBtn.Checked)
-            {
-                //Copy each item to path1 and/or path2, as long as the box is checked AND the TextBox isn't blank.
-                //if (path1CheckBox.Checked && path1TextBox.Text != String.Empty)
-                //CopyAndLog(trimmedPath, path1TextBox.Text, 1, timestamp);
+            //if (backupModeBtn.Checked)
+            //{
+            //Copy each item to path1 and/or path2, as long as the box is checked AND the TextBox isn't blank.
+            //if (path1CheckBox.Checked && path1TextBox.Text != String.Empty)
+            //CopyAndLog(trimmedPath, path1TextBox.Text, 1, timestamp);
 
-                //if (path2CheckBox.Checked && path2TextBox.Text != String.Empty)
-                //CopyAndLog(trimmedPath, path2TextBox.Text, 2, timestamp);
-            }
+            //if (path2CheckBox.Checked && path2TextBox.Text != String.Empty)
+            //CopyAndLog(trimmedPath, path2TextBox.Text, 2, timestamp);
+            //}
             //else if (fileExplorerBtn.Checked)
             //OpenInExplorer(trimmedPath);
         }
@@ -131,8 +131,8 @@ namespace Graphical_Backup_Program
             //            }
         }
 
-    //When backup completes, open path1 and/or path2 in File Explorer if user checks the box to copy stuff there and to open it in File Explorer.
-    private void ShowPath1And2(string timestamp)
+        //When backup completes, open path1 and/or path2 in File Explorer if user checks the box to copy stuff there and to open it in File Explorer.
+        private void ShowPath1And2(string timestamp)
         {
             //            if (fileExplorerBtn.Checked) return;
 
@@ -433,8 +433,8 @@ namespace Graphical_Backup_Program
             autoClearRadio.Checked = Boolean.Parse(config[4]);
             clearWithPromptRadio.Checked = Boolean.Parse(config[5]);
             dontClearRadio.Checked = Boolean.Parse(config[6]);
-            backupModeBtn.Checked = Boolean.Parse(config[7]);
-            fileExplorerBtn.Checked = Boolean.Parse(config[8]);
+            //backupModeBtn.Checked = Boolean.Parse(config[7]);
+            //fileExplorerBtn.Checked = Boolean.Parse(config[8]);
 
             if (pathsTextBox.Text == String.Empty || (path1TextBox.Text == String.Empty && path2TextBox.Text == String.Empty) || (path1CheckBox.Checked == false && path2CheckBox.Checked == false))
             {
@@ -447,11 +447,11 @@ namespace Graphical_Backup_Program
                 //commonPathsBtn.Enabled = true;
             }
 
-            if (fileExplorerBtn.Checked)
-            {
-                //allPathsBtn.Enabled = true;
-                //commonPathsBtn.Enabled = true;
-            }
+            //if (fileExplorerBtn.Checked)
+            //{
+            //allPathsBtn.Enabled = true;
+            //commonPathsBtn.Enabled = true;
+            //}
         }
 
         //On exit, save config stuff for next time.
