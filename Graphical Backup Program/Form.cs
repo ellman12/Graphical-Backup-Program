@@ -21,7 +21,7 @@ namespace Graphical_Backup_Program
             //The folder structure for where the .exe is stored varies between these two.
             //If you're compiling and running this through Visual Studio 2019, this ↓ needs to be used. If you're running this .exe outside of VS, use this ↓.
             _projectDirectory = Debugger.IsAttached ? Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName : Environment.CurrentDirectory;
-            
+
             _configFilePath = _projectDirectory + "/config.txt"; //I added these cuz all the "_projectDirectory + "/config.txt"" everywhere seemed inefficient and dumb.
             _pathsFilePath = _projectDirectory + "/paths.txt";
 
@@ -211,45 +211,44 @@ namespace Graphical_Backup_Program
         //Yells at the user if they try to be an idiot and put the same path for path1 and 2 (but only if they're both checked).
         private bool SamePaths()
         {
-            //            if (path1CheckBox.Checked && path2CheckBox.Checked)
-            //            {
-            //                if (path1TextBox.Text == path2TextBox.Text)
-            //                {
-            //                    MessageBox.Show("You cannot have the same path for path1 and path2!", "Error: Duplicate Paths", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //                    return true;
-            //                }
-            //            }
+            if (path1CheckBox.Checked && path2CheckBox.Checked)
+            {
+                if (path1TextBox.Text == path2TextBox.Text)
+                {
+                    MessageBox.Show("You cannot have the same path for path1 and path2!", "Error: Duplicate Paths", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return true;
+                }
+            }
             return false;
         }
 
         //Returns true if path1 or path2 is a file instead of a folder (as long as they're checked though).
         private bool Path1Or2Invalid()
         {
+            if (path1CheckBox.Checked && Path.HasExtension(path1TextBox.Text))
+            {
+                MessageBox.Show("path1 cannot be a file!", "Error: File Path Specified for path1", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return true;
+            }
+
+            if (path2CheckBox.Checked && Path.HasExtension(path2TextBox.Text))
+            {
+                MessageBox.Show("path2 cannot be a file!", "Error: File Path Specified for path2", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return true;
+            }
+
+            if (path1CheckBox.Checked && path1TextBox.Text == String.Empty)
+            {
+                MessageBox.Show("If you want to copy items to path1, enter a folder path. If not, uncheck the box.", "Error: No folder path specified for path1 but box checked", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return true;
+            }
+
+            if (path2CheckBox.Checked && path2TextBox.Text == String.Empty)
+            {
+                MessageBox.Show("If you want to copy items to path2, enter a folder path. If not, uncheck the box.", "Error: No folder path specified for path2 but box checked", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return true;
+            }
             return false;
-            //            if (path1CheckBox.Checked && Path.HasExtension(path1TextBox.Text))
-            //            {
-            //                MessageBox.Show("path1 cannot be a file!", "Error: File Path Specified for path1", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //                return true;
-            //            }
-
-            //            if (path2CheckBox.Checked && Path.HasExtension(path2TextBox.Text))
-            //            {
-            //                MessageBox.Show("path2 cannot be a file!", "Error: File Path Specified for path2", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //                return true;
-            //            }
-
-            //            if (path1CheckBox.Checked && path1TextBox.Text == String.Empty)
-            //            {
-            //                MessageBox.Show("If you want to copy items to path1, enter a folder path. If not, uncheck the box.", "Error: No folder path specified for path1 but box checked", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //                return true;
-            //            }
-
-            //            if (path2CheckBox.Checked && path2TextBox.Text == String.Empty)
-            //            {
-            //                MessageBox.Show("If you want to copy items to path2, enter a folder path. If not, uncheck the box.", "Error: No folder path specified for path2 but box checked", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //                return true;
-            //            }
-            //            return false;
         }
 
         private void AllPathsBtn_Click(object sender, EventArgs e)
@@ -356,49 +355,34 @@ namespace Graphical_Backup_Program
             //ShowPath1And2(timestamp);
         }
 
+        //For path1/2 CheckBoxes
         private void CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            //If both of these are disabled, don't allow user to push buttons cuz that doesn't make any sense.
+            //If both of these are disabled, don't allow user to push backup btn cuz that doesn't make any sense.
             if (path1CheckBox.Checked == false && path2CheckBox.Checked == false)
-            {
-                //                allPathsBtn.Enabled = false;
-                //                commonPathsBtn.Enabled = false;
-            }
+                backupBtn.Enabled = false;
             else
-            {
-                //                allPathsBtn.Enabled = true;
-                //                commonPathsBtn.Enabled = true;
-            }
+                backupBtn.Enabled = true;
         }
 
+        //For path1/2 TextBoxes
         private void PathTextBox_TextChanged(object sender, EventArgs e)
         {
-            //If both of these are blank, don't allow user to push buttons cuz that doesn't make any sense.
+            //If both of these are blank, don't allow user to push backup btn cuz that doesn't make any sense.
             if (path1TextBox.Text == String.Empty && path2TextBox.Text == String.Empty)
-            {
-                //allPathsBtn.Enabled = false;
-                //commonPathsBtn.Enabled = false;
-            }
+                backupBtn.Enabled = false;
             else
-            {
-                //allPathsBtn.Enabled = true;
-                //commonPathsBtn.Enabled = true;
-            }
+                backupBtn.Enabled = true;
         }
 
         private void PathsTextBox_TextChanged(object sender, EventArgs e)
         {
-            //Don't allow buttons to be pressed if the paths TextBox is empty.
+            //Don't allow backup button to be pressed if the paths TextBox is empty.
             if (pathsTextBox.Text == String.Empty)
-            {
-                //allPathsBtn.Enabled = false;
-                //commonPathsBtn.Enabled = false;
-            }
+                backupBtn.Enabled = false;
             else
-            {
-                //allPathsBtn.Enabled = true;
-                //commonPathsBtn.Enabled = true;
-            }
+                backupBtn.Enabled = true;
+
         }
 
         //On startup, assign GUI controls values from files, and disable any controls, if necessary.
@@ -423,7 +407,7 @@ namespace Graphical_Backup_Program
             {
                 const string defaultConfigValues = "false\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nUse these for...\r\n...labeling groups\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\ntrue\r\n\r\ntrue\r\nfalse\r\n\r\nfalse\r\nfalse\r\n\r\nfalse\r\nfalse\r\ntrue\r\nfalse";
                 File.WriteAllText(_configFilePath, defaultConfigValues);
-                configFileTxt = defaultConfigValues;
+                configFileTxt = defaultConfigValues; //Process like normal, even though technically it didn't read anything in from the file.
             }
 
             string[] config = configFileTxt.Split("\r\n");
@@ -461,21 +445,9 @@ namespace Graphical_Backup_Program
             dontClearRadio.Checked = Boolean.Parse(config[31]);
 
             if (pathsTextBox.Text == String.Empty || (path1TextBox.Text == String.Empty && path2TextBox.Text == String.Empty) || (path1CheckBox.Checked == false && path2CheckBox.Checked == false))
-            {
-                //allPathsBtn.Enabled = false;
-                //commonPathsBtn.Enabled = false;
-            }
+                backupBtn.Enabled = false;
             else
-            {
-                //allPathsBtn.Enabled = true;
-                //commonPathsBtn.Enabled = true;
-            }
-
-            //if (fileExplorerBtn.Checked)
-            //{
-            //allPathsBtn.Enabled = true;
-            //commonPathsBtn.Enabled = true;
-            //}
+                backupBtn.Enabled = true;
         }
 
         //On exit, save config stuff for next time.
@@ -488,12 +460,12 @@ namespace Graphical_Backup_Program
 
         private void clearPath1_Click(object sender, EventArgs e)
         {
-            path1TextBox.Text = "";
+            path1TextBox.Text = String.Empty;
         }
 
         private void clearPath2_Click(object sender, EventArgs e)
         {
-            path2TextBox.Text = "";
+            path2TextBox.Text = String.Empty;
         }
 
         private void SaveToConfigFiles()

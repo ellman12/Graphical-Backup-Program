@@ -72,7 +72,7 @@ namespace Graphical_Backup_Program
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.zipCheckBox = new System.Windows.Forms.CheckBox();
-            this.beginBackupBtn = new System.Windows.Forms.Button();
+            this.backupBtn = new System.Windows.Forms.Button();
             this.sortBtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.urlTextBox = new System.Windows.Forms.TextBox();
@@ -517,14 +517,14 @@ namespace Graphical_Backup_Program
             this.zipCheckBox.Text = "Compress Backup";
             this.zipCheckBox.UseVisualStyleBackColor = true;
             // 
-            // beginBackupBtn
+            // backupBtn
             // 
-            this.beginBackupBtn.Location = new System.Drawing.Point(618, 361);
-            this.beginBackupBtn.Name = "beginBackupBtn";
-            this.beginBackupBtn.Size = new System.Drawing.Size(200, 39);
-            this.beginBackupBtn.TabIndex = 15;
-            this.beginBackupBtn.Text = "Backup";
-            this.beginBackupBtn.UseVisualStyleBackColor = true;
+            this.backupBtn.Location = new System.Drawing.Point(618, 361);
+            this.backupBtn.Name = "backupBtn";
+            this.backupBtn.Size = new System.Drawing.Size(200, 39);
+            this.backupBtn.TabIndex = 15;
+            this.backupBtn.Text = "Backup";
+            this.backupBtn.UseVisualStyleBackColor = true;
             // 
             // sortBtn
             // 
@@ -574,7 +574,7 @@ namespace Graphical_Backup_Program
             this.Controls.Add(this.urlTextBox);
             this.Controls.Add(this.urlCheckBox);
             this.Controls.Add(this.sortBtn);
-            this.Controls.Add(this.beginBackupBtn);
+            this.Controls.Add(this.backupBtn);
             this.Controls.Add(this.zipCheckBox);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.groupsGroupBox);
@@ -645,7 +645,7 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.Button selectAllBtn;
         private System.Windows.Forms.CheckBox zipCheckBox;
         private System.Windows.Forms.Button deselectAllBtn;
-        private System.Windows.Forms.Button beginBackupBtn;
+        private System.Windows.Forms.Button backupBtn;
         private System.Windows.Forms.Button sortBtn;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox urlTextBox;
