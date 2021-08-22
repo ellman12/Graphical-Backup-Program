@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -10,20 +10,20 @@ namespace Graphical_Backup_Program
 {
     public partial class Form : System.Windows.Forms.Form
     {
-        //private string _logText = "";
-        //private string _backupType = ""; //Either "Common" or "Full"
         private readonly string _projectDirectory;
+        private readonly string _configFilePath;
+        private readonly string _pathsFilePath;
 
         public Form()
         {
             //https://stackoverflow.com/questions/1343053/detecting-if-a-program-was-run-by-visual-studio-as-opposed-to-run-from-windows
             //https://stackoverflow.com/a/11882118
-            //The folder structure for where the .exe is stored varies between these 2.
-            //If you're compiling and running this through Visual Studio 2019, this needs to be used.
-            if (Debugger.IsAttached)
-                _projectDirectory = Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName;
-            else //Else, use this one.
-                _projectDirectory = Environment.CurrentDirectory;
+            //The folder structure for where the .exe is stored varies between these two.
+            //If you're compiling and running this through Visual Studio 2019, this ↓ needs to be used. If you're running this .exe outside of VS, use this ↓.
+            _projectDirectory = Debugger.IsAttached ? Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName : Environment.CurrentDirectory;
+            
+            _configFilePath = _projectDirectory + "/config.txt"; //I added these cuz all the "_projectDirectory + "/config.txt"" everywhere seemed inefficient and dumb.
+            _pathsFilePath = _projectDirectory + "/paths.txt";
 
             InitializeComponent();
         }
@@ -259,7 +259,7 @@ namespace Graphical_Backup_Program
             //            if (Path1Or2Invalid()) return;
 
             //            TextBoxLabel.Hide();
-            //            File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
+            //            File.WriteAllText(_pathsFilePath, pathsTextBox.Text);
             //            if (ClearFolders() == false) //Cancel the backup and clearing of folders.
             //                return;
 
@@ -311,7 +311,7 @@ namespace Graphical_Backup_Program
             //if (Path1Or2Invalid()) return;
 
             //TextBoxLabel.Hide();
-            //File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
+            //File.WriteAllText(_pathsFilePath, pathsTextBox.Text);
             //if (ClearFolders() == false)
             //    return;
 
@@ -404,25 +404,25 @@ namespace Graphical_Backup_Program
         //On startup, assign GUI controls values from files, and disable any controls, if necessary.
         private void Form_Shown(object sender, EventArgs e)
         {
-            if (!File.Exists(_projectDirectory + "/paths.txt"))
-                File.Create(_projectDirectory + "/paths.txt");
+            if (!File.Exists(_pathsFilePath))
+                File.Create(_pathsFilePath);
             else
-                pathsTextBox.Text = File.ReadAllText(_projectDirectory + "/paths.txt");
+                pathsTextBox.Text = File.ReadAllText(_pathsFilePath);
 
-            if (!File.Exists(_projectDirectory + "/config.txt"))
+            if (!File.Exists(_configFilePath))
             {
-                FileStream file = File.Create(_projectDirectory + "/config.txt");
+                FileStream file = File.Create(_configFilePath);
                 file.Close();
             }
 
             //Read in config stuff. Is this extremely stupid and sub-optimal? Yes. Does it work? Also yes.
-            string configFileTxt = File.ReadAllText(_projectDirectory + "/config.txt");
+            string configFileTxt = File.ReadAllText(_configFilePath);
 
             //If config file has no text, write default values to file.
             if (configFileTxt == String.Empty)
             {
                 const string defaultConfigValues = "false\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nUse these for...\r\n...labeling groups\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\ntrue\r\n\r\ntrue\r\nfalse\r\n\r\nfalse\r\nfalse\r\n\r\nfalse\r\nfalse\r\ntrue\r\nfalse";
-                File.WriteAllText(_projectDirectory + "/config.txt", defaultConfigValues);
+                File.WriteAllText(_configFilePath, defaultConfigValues);
                 configFileTxt = defaultConfigValues;
             }
 
@@ -482,7 +482,7 @@ namespace Graphical_Backup_Program
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
             //TODO: delete this line below me
-            pathsTextBox.Text = File.ReadAllText(_projectDirectory + "/paths.txt"); //Don't want log stuff written to paths.txt
+            pathsTextBox.Text = File.ReadAllText(_pathsFilePath); //Don't want log stuff written to paths.txt
             SaveToConfigFiles();
         }
 
@@ -498,9 +498,9 @@ namespace Graphical_Backup_Program
 
         private void SaveToConfigFiles()
         {
-            File.WriteAllText(_projectDirectory + "/paths.txt", pathsTextBox.Text);
+            File.WriteAllText(_pathsFilePath, pathsTextBox.Text);
             string fileText = checkBox0.Checked + "\r\n" + checkBox1.Checked + "\r\n" + checkBox2.Checked + "\r\n" + checkBox3.Checked + "\r\n" + checkBox4.Checked + "\r\n" + checkBox5.Checked + "\r\n" + checkBox6.Checked + "\r\n" + checkBox7.Checked + "\r\n" + checkBox8.Checked + "\r\n" + checkBox9.Checked + "\r\n" + textBox0.Text + "\r\n" + textBox1.Text + "\r\n" + textBox2.Text + "\r\n" + textBox3.Text + "\r\n" + textBox4.Text + "\r\n" + textBox5.Text + "\r\n" + textBox6.Text + "\r\n" + textBox7.Text + "\r\n" + textBox8.Text + "\r\n" + textBox9.Text + "\r\n" + path1CheckBox.Checked + "\r\n" + path1TextBox.Text + "\r\n" + openPath1Box.Checked + "\r\n" + path2CheckBox.Checked + "\r\n" + path2TextBox.Text + "\r\n" + openPath2Box.Checked + "\r\n" + urlCheckBox.Checked + "\r\n" + urlTextBox.Text + "\r\n" + zipCheckBox.Checked + "\r\n" + autoClearRadio.Checked + "\r\n" + clearWithPromptRadio.Checked + "\r\n" + dontClearRadio.Checked;
-            File.WriteAllText(_projectDirectory + "/config.txt", fileText);
+            File.WriteAllText(_configFilePath, fileText);
         }
 
         private void ToggleAllChecks(bool toggled)
