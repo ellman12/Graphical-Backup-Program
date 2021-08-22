@@ -45,9 +45,6 @@ namespace Graphical_Backup_Program
             this.dontClearRadio = new System.Windows.Forms.RadioButton();
             this.clearWithPromptRadio = new System.Windows.Forms.RadioButton();
             this.autoClearRadio = new System.Windows.Forms.RadioButton();
-            this.modeBox = new System.Windows.Forms.GroupBox();
-            this.fileExplorerBtn = new System.Windows.Forms.RadioButton();
-            this.backupModeBtn = new System.Windows.Forms.RadioButton();
             this.groupsGroupBox = new System.Windows.Forms.GroupBox();
             this.deselectAllBtn = new System.Windows.Forms.Button();
             this.textBox9 = new System.Windows.Forms.TextBox();
@@ -81,7 +78,6 @@ namespace Graphical_Backup_Program
             this.urlCheckBox = new System.Windows.Forms.CheckBox();
             this.whereToBackupBox.SuspendLayout();
             this.clearingFoldersGroupBox.SuspendLayout();
-            this.modeBox.SuspendLayout();
             this.groupsGroupBox.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -103,7 +99,7 @@ namespace Graphical_Backup_Program
             this.pathsTextBox.Multiline = true;
             this.pathsTextBox.Name = "pathsTextBox";
             this.pathsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.pathsTextBox.Size = new System.Drawing.Size(641, 227);
+            this.pathsTextBox.Size = new System.Drawing.Size(641, 207);
             this.pathsTextBox.TabIndex = 3;
             this.pathsTextBox.WordWrap = false;
             this.pathsTextBox.TextChanged += new System.EventHandler(this.PathsTextBox_TextChanged);
@@ -118,7 +114,7 @@ namespace Graphical_Backup_Program
             this.whereToBackupBox.Controls.Add(this.path2CheckBox);
             this.whereToBackupBox.Controls.Add(this.path1TextBox);
             this.whereToBackupBox.Controls.Add(this.path1CheckBox);
-            this.whereToBackupBox.Location = new System.Drawing.Point(7, 300);
+            this.whereToBackupBox.Location = new System.Drawing.Point(7, 237);
             this.whereToBackupBox.Name = "whereToBackupBox";
             this.whereToBackupBox.Size = new System.Drawing.Size(641, 82);
             this.whereToBackupBox.TabIndex = 5;
@@ -218,9 +214,9 @@ namespace Graphical_Backup_Program
             this.clearingFoldersGroupBox.Controls.Add(this.dontClearRadio);
             this.clearingFoldersGroupBox.Controls.Add(this.clearWithPromptRadio);
             this.clearingFoldersGroupBox.Controls.Add(this.autoClearRadio);
-            this.clearingFoldersGroupBox.Location = new System.Drawing.Point(654, 354);
+            this.clearingFoldersGroupBox.Location = new System.Drawing.Point(12, 354);
             this.clearingFoldersGroupBox.Name = "clearingFoldersGroupBox";
-            this.clearingFoldersGroupBox.Size = new System.Drawing.Size(151, 92);
+            this.clearingFoldersGroupBox.Size = new System.Drawing.Size(394, 46);
             this.clearingFoldersGroupBox.TabIndex = 0;
             this.clearingFoldersGroupBox.TabStop = false;
             this.clearingFoldersGroupBox.Text = "Clearing Backup Folders";
@@ -229,7 +225,7 @@ namespace Graphical_Backup_Program
             // 
             this.dontClearRadio.AutoSize = true;
             this.dontClearRadio.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dontClearRadio.Location = new System.Drawing.Point(5, 71);
+            this.dontClearRadio.Location = new System.Drawing.Point(267, 22);
             this.dontClearRadio.Name = "dontClearRadio";
             this.dontClearRadio.Size = new System.Drawing.Size(125, 19);
             this.dontClearRadio.TabIndex = 3;
@@ -240,7 +236,7 @@ namespace Graphical_Backup_Program
             // 
             this.clearWithPromptRadio.AutoSize = true;
             this.clearWithPromptRadio.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.clearWithPromptRadio.Location = new System.Drawing.Point(5, 46);
+            this.clearWithPromptRadio.Location = new System.Drawing.Point(140, 22);
             this.clearWithPromptRadio.Name = "clearWithPromptRadio";
             this.clearWithPromptRadio.Size = new System.Drawing.Size(121, 19);
             this.clearWithPromptRadio.TabIndex = 2;
@@ -259,45 +255,6 @@ namespace Graphical_Backup_Program
             this.autoClearRadio.TabStop = true;
             this.autoClearRadio.Text = "Clear Automatically";
             this.autoClearRadio.UseVisualStyleBackColor = true;
-            // 
-            // modeBox
-            // 
-            this.modeBox.Controls.Add(this.fileExplorerBtn);
-            this.modeBox.Controls.Add(this.backupModeBtn);
-            this.modeBox.Location = new System.Drawing.Point(509, 387);
-            this.modeBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.modeBox.Name = "modeBox";
-            this.modeBox.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.modeBox.Size = new System.Drawing.Size(139, 64);
-            this.modeBox.TabIndex = 6;
-            this.modeBox.TabStop = false;
-            this.modeBox.Text = "GBP Mode";
-            // 
-            // fileExplorerBtn
-            // 
-            this.fileExplorerBtn.AutoSize = true;
-            this.fileExplorerBtn.Location = new System.Drawing.Point(5, 40);
-            this.fileExplorerBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.fileExplorerBtn.Name = "fileExplorerBtn";
-            this.fileExplorerBtn.Size = new System.Drawing.Size(134, 19);
-            this.fileExplorerBtn.TabIndex = 1;
-            this.fileExplorerBtn.Text = "Open in File Explorer";
-            this.fileExplorerBtn.UseVisualStyleBackColor = true;
-            this.fileExplorerBtn.CheckedChanged += new System.EventHandler(this.fileExplorerBtn_CheckedChanged);
-            // 
-            // backupModeBtn
-            // 
-            this.backupModeBtn.AutoSize = true;
-            this.backupModeBtn.Checked = true;
-            this.backupModeBtn.Location = new System.Drawing.Point(5, 18);
-            this.backupModeBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.backupModeBtn.Name = "backupModeBtn";
-            this.backupModeBtn.Size = new System.Drawing.Size(98, 19);
-            this.backupModeBtn.TabIndex = 0;
-            this.backupModeBtn.TabStop = true;
-            this.backupModeBtn.Text = "Backup Mode";
-            this.backupModeBtn.UseVisualStyleBackColor = true;
-            this.backupModeBtn.CheckedChanged += new System.EventHandler(this.backupModeBtn_CheckedChanged);
             // 
             // groupsGroupBox
             // 
@@ -524,7 +481,7 @@ namespace Graphical_Backup_Program
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip.Location = new System.Drawing.Point(0, 461);
+            this.statusStrip.Location = new System.Drawing.Point(0, 405);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(822, 22);
             this.statusStrip.TabIndex = 12;
@@ -540,34 +497,34 @@ namespace Graphical_Backup_Program
             // zipCheckBox
             // 
             this.zipCheckBox.AutoSize = true;
-            this.zipCheckBox.Location = new System.Drawing.Point(339, 265);
+            this.zipCheckBox.Location = new System.Drawing.Point(509, 327);
             this.zipCheckBox.Name = "zipCheckBox";
-            this.zipCheckBox.Size = new System.Drawing.Size(155, 19);
+            this.zipCheckBox.Size = new System.Drawing.Size(121, 19);
             this.zipCheckBox.TabIndex = 0;
-            this.zipCheckBox.Text = "Compress Backup to Zip";
+            this.zipCheckBox.Text = "Compress Backup";
             this.zipCheckBox.UseVisualStyleBackColor = true;
             // 
             // beginBackupBtn
             // 
-            this.beginBackupBtn.Location = new System.Drawing.Point(7, 254);
+            this.beginBackupBtn.Location = new System.Drawing.Point(618, 361);
             this.beginBackupBtn.Name = "beginBackupBtn";
-            this.beginBackupBtn.Size = new System.Drawing.Size(160, 38);
+            this.beginBackupBtn.Size = new System.Drawing.Size(200, 39);
             this.beginBackupBtn.TabIndex = 15;
             this.beginBackupBtn.Text = "Backup";
             this.beginBackupBtn.UseVisualStyleBackColor = true;
             // 
             // sortBtn
             // 
-            this.sortBtn.Location = new System.Drawing.Point(173, 254);
+            this.sortBtn.Location = new System.Drawing.Point(412, 361);
             this.sortBtn.Name = "sortBtn";
-            this.sortBtn.Size = new System.Drawing.Size(160, 38);
+            this.sortBtn.Size = new System.Drawing.Size(200, 39);
             this.sortBtn.TabIndex = 16;
             this.sortBtn.Text = "Sort Paths";
             this.sortBtn.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(436, 385);
+            this.button1.Location = new System.Drawing.Point(442, 324);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(61, 25);
@@ -577,7 +534,7 @@ namespace Graphical_Backup_Program
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(167, 386);
+            this.textBox10.Location = new System.Drawing.Point(173, 325);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(263, 23);
             this.textBox10.TabIndex = 9;
@@ -588,7 +545,7 @@ namespace Graphical_Backup_Program
             this.urlCheckBox.Checked = true;
             this.urlCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.urlCheckBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.urlCheckBox.Location = new System.Drawing.Point(7, 388);
+            this.urlCheckBox.Location = new System.Drawing.Point(13, 327);
             this.urlCheckBox.Name = "urlCheckBox";
             this.urlCheckBox.Size = new System.Drawing.Size(165, 19);
             this.urlCheckBox.TabIndex = 8;
@@ -599,7 +556,7 @@ namespace Graphical_Backup_Program
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(822, 483);
+            this.ClientSize = new System.Drawing.Size(822, 427);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox10);
             this.Controls.Add(this.urlCheckBox);
@@ -608,7 +565,6 @@ namespace Graphical_Backup_Program
             this.Controls.Add(this.zipCheckBox);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.groupsGroupBox);
-            this.Controls.Add(this.modeBox);
             this.Controls.Add(this.pathsTextBox);
             this.Controls.Add(this.whereToBackupBox);
             this.Controls.Add(this.clearingFoldersGroupBox);
@@ -625,8 +581,6 @@ namespace Graphical_Backup_Program
             this.whereToBackupBox.PerformLayout();
             this.clearingFoldersGroupBox.ResumeLayout(false);
             this.clearingFoldersGroupBox.PerformLayout();
-            this.modeBox.ResumeLayout(false);
-            this.modeBox.PerformLayout();
             this.groupsGroupBox.ResumeLayout(false);
             this.groupsGroupBox.PerformLayout();
             this.statusStrip.ResumeLayout(false);
@@ -648,9 +602,6 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.RadioButton dontClearRadio;
         private System.Windows.Forms.RadioButton clearWithPromptRadio;
         private System.Windows.Forms.RadioButton autoClearRadio;
-        private System.Windows.Forms.GroupBox modeBox;
-        private System.Windows.Forms.RadioButton fileExplorerBtn;
-        private System.Windows.Forms.RadioButton backupModeBtn;
         private System.Windows.Forms.Button clearPath2;
         private System.Windows.Forms.Button clearPath1;
         private System.Windows.Forms.CheckBox openPath2Box;
