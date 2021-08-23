@@ -467,9 +467,7 @@ namespace Graphical_Backup_Program
         //On exit, save config stuff for next time.
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //TODO: delete this line below me
-            pathsTextBox.Text = File.ReadAllText(_pathsFilePath); //Don't want log stuff written to paths.txt
-            SaveToConfigFiles();
+            SaveToFiles();
         }
 
         private void clearPath1_Click(object sender, EventArgs e)
@@ -482,11 +480,11 @@ namespace Graphical_Backup_Program
             path2TextBox.Text = String.Empty;
         }
 
-        private void SaveToConfigFiles()
+        private void SaveToFiles()
         {
             File.WriteAllText(_pathsFilePath, pathsTextBox.Text);
-            string fileText = checkBox0.Checked + "\r\n" + checkBox1.Checked + "\r\n" + checkBox2.Checked + "\r\n" + checkBox3.Checked + "\r\n" + checkBox4.Checked + "\r\n" + checkBox5.Checked + "\r\n" + checkBox6.Checked + "\r\n" + checkBox7.Checked + "\r\n" + checkBox8.Checked + "\r\n" + checkBox9.Checked + "\r\n" + textBox0.Text + "\r\n" + textBox1.Text + "\r\n" + textBox2.Text + "\r\n" + textBox3.Text + "\r\n" + textBox4.Text + "\r\n" + textBox5.Text + "\r\n" + textBox6.Text + "\r\n" + textBox7.Text + "\r\n" + textBox8.Text + "\r\n" + textBox9.Text + "\r\n" + path1CheckBox.Checked + "\r\n" + path1TextBox.Text + "\r\n" + openPath1Box.Checked + "\r\n" + path2CheckBox.Checked + "\r\n" + path2TextBox.Text + "\r\n" + openPath2Box.Checked + "\r\n" + urlCheckBox.Checked + "\r\n" + urlTextBox.Text + "\r\n" + zipCheckBox.Checked + "\r\n" + autoClearRadio.Checked + "\r\n" + clearWithPromptRadio.Checked + "\r\n" + dontClearRadio.Checked;
-            File.WriteAllText(_configFilePath, fileText);
+            string configFileText = checkBox0.Checked + "\r\n" + checkBox1.Checked + "\r\n" + checkBox2.Checked + "\r\n" + checkBox3.Checked + "\r\n" + checkBox4.Checked + "\r\n" + checkBox5.Checked + "\r\n" + checkBox6.Checked + "\r\n" + checkBox7.Checked + "\r\n" + checkBox8.Checked + "\r\n" + checkBox9.Checked + "\r\n" + textBox0.Text + "\r\n" + textBox1.Text + "\r\n" + textBox2.Text + "\r\n" + textBox3.Text + "\r\n" + textBox4.Text + "\r\n" + textBox5.Text + "\r\n" + textBox6.Text + "\r\n" + textBox7.Text + "\r\n" + textBox8.Text + "\r\n" + textBox9.Text + "\r\n" + path1CheckBox.Checked + "\r\n" + path1TextBox.Text + "\r\n" + openPath1Box.Checked + "\r\n" + path2CheckBox.Checked + "\r\n" + path2TextBox.Text + "\r\n" + openPath2Box.Checked + "\r\n" + urlCheckBox.Checked + "\r\n" + urlTextBox.Text + "\r\n" + zipCheckBox.Checked + "\r\n" + autoClearRadio.Checked + "\r\n" + clearWithPromptRadio.Checked + "\r\n" + dontClearRadio.Checked;
+            File.WriteAllText(_configFilePath, configFileText);
         }
 
         private void ToggleAllChecks(bool toggled)
@@ -503,7 +501,6 @@ namespace Graphical_Backup_Program
             checkBox9.Checked = toggled;
         }
 
-        //Checks all group boxes.
         private void selectAllBtn_Click(object sender, EventArgs e)
         {
             ToggleAllChecks(true);
