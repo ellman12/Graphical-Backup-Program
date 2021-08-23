@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using FileSystem = Microsoft.VisualBasic.FileIO.FileSystem;
@@ -26,6 +27,19 @@ namespace Graphical_Backup_Program
             _pathsFilePath = _projectDirectory + "/paths.txt";
 
             InitializeComponent();
+        }
+
+        //Represents a single path in the paths TextBox plus its group number.
+        private readonly struct GroupPath
+        {
+            public readonly char group;
+            public readonly string path;
+
+            public GroupPath(char g, string p)
+            {
+                group = g;
+                path = p;
+            }
         }
 
         private void LogAppend(string text)
@@ -498,6 +512,36 @@ namespace Graphical_Backup_Program
         private void deselectAllBtn_Click(object sender, EventArgs e)
         {
             ToggleAllChecks(false);
+        }
+
+        private void SortBtn_Click(object sender, EventArgs e)
+        {
+            List<GroupPath> groupPaths = new();
+            List<GroupPath> otherGroupPaths = new(); //Stores GroupPaths that aren't legal, like "# I am illegal"
+            string[] lines = pathsTextBox.Text.Split("\r\n");
+
+            foreach (string line in lines)
+            {
+                if (line == String.Empty || line.Length < 3) continue;
+                char group = line[0];
+                string path = line[2..];
+
+                if (Char.GetNumericValue(group) >= 0 && Char.GetNumericValue(group) <= 9 && Char.IsNumber(line[0]))
+                    groupPaths.Insert(0, new(group, path));
+                else
+                    otherGroupPaths.Add(new(group, path));
+            }
+
+            //I love how simple this is. Found on StackOverflow somewhere.
+            groupPaths = groupPaths.OrderBy(g => g.group).ThenBy(g => g.path).ToList();
+            otherGroupPaths = otherGroupPaths.OrderBy(g => g.group).ThenBy(g => g.path).ToList();
+            pathsTextBox.Text = String.Empty;
+
+            foreach (GroupPath groupPath in groupPaths)
+                pathsTextBox.Text += groupPath.group + " " + groupPath.path + Environment.NewLine;
+
+            foreach (GroupPath groupPath in otherGroupPaths)
+                pathsTextBox.Text += groupPath.group + " " + groupPath.path + Environment.NewLine;
         }
     }
 }

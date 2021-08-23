@@ -534,6 +534,7 @@ namespace Graphical_Backup_Program
             this.sortBtn.TabIndex = 16;
             this.sortBtn.Text = "Sort Paths";
             this.sortBtn.UseVisualStyleBackColor = true;
+            this.sortBtn.Click += new System.EventHandler(this.SortBtn_Click);
             // 
             // button1
             // 
