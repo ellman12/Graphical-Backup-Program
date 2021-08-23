@@ -520,10 +520,11 @@ namespace Graphical_Backup_Program
             foreach (string line in lines)
             {
                 if (line == String.Empty || line.Length < 3) continue;
-                char group = line[0];
-                string path = line[2..];
+                string trimmed = line.Trim();
+                char group = trimmed[0];
+                string path = trimmed[2..];
 
-                if (Char.GetNumericValue(group) >= 0 && Char.GetNumericValue(group) <= 9 && Char.IsNumber(line[0]))
+                if (Char.GetNumericValue(group) >= 0 && Char.GetNumericValue(group) <= 9 && Char.IsNumber(trimmed[0]))
                     groupPaths.Insert(0, new(group, path));
                 else
                     otherGroupPaths.Add(new(group, path));
