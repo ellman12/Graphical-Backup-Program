@@ -525,7 +525,7 @@ namespace Graphical_Backup_Program
                 string path = trimmed[2..];
 
                 if (Char.GetNumericValue(group) >= 0 && Char.GetNumericValue(group) <= 9 && Char.IsNumber(trimmed[0]))
-                    groupPaths.Insert(0, new(group, path));
+                    groupPaths.Add(new(group, path));
                 else
                     otherGroupPaths.Add(new(group, path));
             }
