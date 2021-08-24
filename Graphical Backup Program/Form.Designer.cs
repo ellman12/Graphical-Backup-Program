@@ -69,7 +69,7 @@ namespace Graphical_Backup_Program
             this.textBox0 = new System.Windows.Forms.TextBox();
             this.checkBox0 = new System.Windows.Forms.CheckBox();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.stripLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.zipCheckBox = new System.Windows.Forms.CheckBox();
             this.backupBtn = new System.Windows.Forms.Button();
@@ -87,20 +87,21 @@ namespace Graphical_Backup_Program
             // 
             this.TextBoxLabel.AutoSize = true;
             this.TextBoxLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.TextBoxLabel.Location = new System.Drawing.Point(7, 3);
+            this.TextBoxLabel.Location = new System.Drawing.Point(8, 4);
             this.TextBoxLabel.Name = "TextBoxLabel";
-            this.TextBoxLabel.Size = new System.Drawing.Size(359, 15);
+            this.TextBoxLabel.Size = new System.Drawing.Size(451, 20);
             this.TextBoxLabel.TabIndex = 2;
             this.TextBoxLabel.Text = "Paths to Backup. Add a path to a group by adding 0-9 in front of it.";
             // 
             // pathsTextBox
             // 
             this.pathsTextBox.AcceptsReturn = true;
-            this.pathsTextBox.Location = new System.Drawing.Point(7, 21);
+            this.pathsTextBox.Location = new System.Drawing.Point(8, 28);
+            this.pathsTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pathsTextBox.Multiline = true;
             this.pathsTextBox.Name = "pathsTextBox";
             this.pathsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.pathsTextBox.Size = new System.Drawing.Size(641, 207);
+            this.pathsTextBox.Size = new System.Drawing.Size(732, 275);
             this.pathsTextBox.TabIndex = 3;
             this.pathsTextBox.WordWrap = false;
             this.pathsTextBox.TextChanged += new System.EventHandler(this.PathsTextBox_TextChanged);
@@ -115,9 +116,11 @@ namespace Graphical_Backup_Program
             this.whereToBackupBox.Controls.Add(this.path2CheckBox);
             this.whereToBackupBox.Controls.Add(this.path1TextBox);
             this.whereToBackupBox.Controls.Add(this.path1CheckBox);
-            this.whereToBackupBox.Location = new System.Drawing.Point(7, 237);
+            this.whereToBackupBox.Location = new System.Drawing.Point(8, 316);
+            this.whereToBackupBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.whereToBackupBox.Name = "whereToBackupBox";
-            this.whereToBackupBox.Size = new System.Drawing.Size(641, 82);
+            this.whereToBackupBox.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.whereToBackupBox.Size = new System.Drawing.Size(733, 109);
             this.whereToBackupBox.TabIndex = 5;
             this.whereToBackupBox.TabStop = false;
             this.whereToBackupBox.Text = "Where to Backup";
@@ -126,9 +129,10 @@ namespace Graphical_Backup_Program
             // 
             this.openPath2Box.AutoSize = true;
             this.openPath2Box.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.openPath2Box.Location = new System.Drawing.Point(502, 51);
+            this.openPath2Box.Location = new System.Drawing.Point(574, 68);
+            this.openPath2Box.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.openPath2Box.Name = "openPath2Box";
-            this.openPath2Box.Size = new System.Drawing.Size(138, 19);
+            this.openPath2Box.Size = new System.Drawing.Size(170, 24);
             this.openPath2Box.TabIndex = 7;
             this.openPath2Box.Text = "Open on Completion";
             this.openPath2Box.UseVisualStyleBackColor = true;
@@ -139,19 +143,19 @@ namespace Graphical_Backup_Program
             this.openPath1Box.Checked = true;
             this.openPath1Box.CheckState = System.Windows.Forms.CheckState.Checked;
             this.openPath1Box.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.openPath1Box.Location = new System.Drawing.Point(502, 20);
+            this.openPath1Box.Location = new System.Drawing.Point(574, 27);
+            this.openPath1Box.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.openPath1Box.Name = "openPath1Box";
-            this.openPath1Box.Size = new System.Drawing.Size(138, 19);
+            this.openPath1Box.Size = new System.Drawing.Size(170, 24);
             this.openPath1Box.TabIndex = 6;
             this.openPath1Box.Text = "Open on Completion";
             this.openPath1Box.UseVisualStyleBackColor = true;
             // 
             // clearPath2
             // 
-            this.clearPath2.Location = new System.Drawing.Point(435, 48);
-            this.clearPath2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.clearPath2.Location = new System.Drawing.Point(497, 64);
             this.clearPath2.Name = "clearPath2";
-            this.clearPath2.Size = new System.Drawing.Size(61, 25);
+            this.clearPath2.Size = new System.Drawing.Size(70, 33);
             this.clearPath2.TabIndex = 5;
             this.clearPath2.Text = "Clear";
             this.clearPath2.UseVisualStyleBackColor = true;
@@ -159,10 +163,9 @@ namespace Graphical_Backup_Program
             // 
             // clearPath1
             // 
-            this.clearPath1.Location = new System.Drawing.Point(435, 17);
-            this.clearPath1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.clearPath1.Location = new System.Drawing.Point(497, 23);
             this.clearPath1.Name = "clearPath1";
-            this.clearPath1.Size = new System.Drawing.Size(61, 25);
+            this.clearPath1.Size = new System.Drawing.Size(70, 33);
             this.clearPath1.TabIndex = 4;
             this.clearPath1.Text = "Clear";
             this.clearPath1.UseVisualStyleBackColor = true;
@@ -170,9 +173,10 @@ namespace Graphical_Backup_Program
             // 
             // path2TextBox
             // 
-            this.path2TextBox.Location = new System.Drawing.Point(87, 49);
+            this.path2TextBox.Location = new System.Drawing.Point(99, 65);
+            this.path2TextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.path2TextBox.Name = "path2TextBox";
-            this.path2TextBox.Size = new System.Drawing.Size(342, 23);
+            this.path2TextBox.Size = new System.Drawing.Size(390, 27);
             this.path2TextBox.TabIndex = 3;
             this.path2TextBox.TextChanged += new System.EventHandler(this.PathTextBox_TextChanged);
             // 
@@ -180,9 +184,10 @@ namespace Graphical_Backup_Program
             // 
             this.path2CheckBox.AutoSize = true;
             this.path2CheckBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.path2CheckBox.Location = new System.Drawing.Point(6, 51);
+            this.path2CheckBox.Location = new System.Drawing.Point(7, 68);
+            this.path2CheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.path2CheckBox.Name = "path2CheckBox";
-            this.path2CheckBox.Size = new System.Drawing.Size(84, 19);
+            this.path2CheckBox.Size = new System.Drawing.Size(102, 24);
             this.path2CheckBox.TabIndex = 2;
             this.path2CheckBox.Text = "Use Path 2:";
             this.path2CheckBox.UseVisualStyleBackColor = true;
@@ -190,9 +195,10 @@ namespace Graphical_Backup_Program
             // 
             // path1TextBox
             // 
-            this.path1TextBox.Location = new System.Drawing.Point(87, 18);
+            this.path1TextBox.Location = new System.Drawing.Point(99, 24);
+            this.path1TextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.path1TextBox.Name = "path1TextBox";
-            this.path1TextBox.Size = new System.Drawing.Size(342, 23);
+            this.path1TextBox.Size = new System.Drawing.Size(390, 27);
             this.path1TextBox.TabIndex = 1;
             this.path1TextBox.TextChanged += new System.EventHandler(this.PathTextBox_TextChanged);
             // 
@@ -202,9 +208,10 @@ namespace Graphical_Backup_Program
             this.path1CheckBox.Checked = true;
             this.path1CheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.path1CheckBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.path1CheckBox.Location = new System.Drawing.Point(6, 20);
+            this.path1CheckBox.Location = new System.Drawing.Point(7, 27);
+            this.path1CheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.path1CheckBox.Name = "path1CheckBox";
-            this.path1CheckBox.Size = new System.Drawing.Size(84, 19);
+            this.path1CheckBox.Size = new System.Drawing.Size(102, 24);
             this.path1CheckBox.TabIndex = 0;
             this.path1CheckBox.Text = "Use Path 1:";
             this.path1CheckBox.UseVisualStyleBackColor = true;
@@ -215,9 +222,11 @@ namespace Graphical_Backup_Program
             this.clearingFoldersGroupBox.Controls.Add(this.dontClearRadio);
             this.clearingFoldersGroupBox.Controls.Add(this.clearWithPromptRadio);
             this.clearingFoldersGroupBox.Controls.Add(this.autoClearRadio);
-            this.clearingFoldersGroupBox.Location = new System.Drawing.Point(12, 354);
+            this.clearingFoldersGroupBox.Location = new System.Drawing.Point(14, 472);
+            this.clearingFoldersGroupBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.clearingFoldersGroupBox.Name = "clearingFoldersGroupBox";
-            this.clearingFoldersGroupBox.Size = new System.Drawing.Size(394, 46);
+            this.clearingFoldersGroupBox.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.clearingFoldersGroupBox.Size = new System.Drawing.Size(450, 61);
             this.clearingFoldersGroupBox.TabIndex = 0;
             this.clearingFoldersGroupBox.TabStop = false;
             this.clearingFoldersGroupBox.Text = "Clearing Backup Folders";
@@ -226,9 +235,10 @@ namespace Graphical_Backup_Program
             // 
             this.dontClearRadio.AutoSize = true;
             this.dontClearRadio.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dontClearRadio.Location = new System.Drawing.Point(267, 22);
+            this.dontClearRadio.Location = new System.Drawing.Point(305, 29);
+            this.dontClearRadio.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dontClearRadio.Name = "dontClearRadio";
-            this.dontClearRadio.Size = new System.Drawing.Size(125, 19);
+            this.dontClearRadio.Size = new System.Drawing.Size(156, 24);
             this.dontClearRadio.TabIndex = 3;
             this.dontClearRadio.Text = "Don\'t Clear Folders";
             this.dontClearRadio.UseVisualStyleBackColor = true;
@@ -237,9 +247,10 @@ namespace Graphical_Backup_Program
             // 
             this.clearWithPromptRadio.AutoSize = true;
             this.clearWithPromptRadio.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.clearWithPromptRadio.Location = new System.Drawing.Point(140, 22);
+            this.clearWithPromptRadio.Location = new System.Drawing.Point(160, 29);
+            this.clearWithPromptRadio.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.clearWithPromptRadio.Name = "clearWithPromptRadio";
-            this.clearWithPromptRadio.Size = new System.Drawing.Size(121, 19);
+            this.clearWithPromptRadio.Size = new System.Drawing.Size(149, 24);
             this.clearWithPromptRadio.TabIndex = 2;
             this.clearWithPromptRadio.Text = "Clear with Prompt";
             this.clearWithPromptRadio.UseVisualStyleBackColor = true;
@@ -249,9 +260,10 @@ namespace Graphical_Backup_Program
             this.autoClearRadio.AutoSize = true;
             this.autoClearRadio.Checked = true;
             this.autoClearRadio.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.autoClearRadio.Location = new System.Drawing.Point(5, 21);
+            this.autoClearRadio.Location = new System.Drawing.Point(6, 28);
+            this.autoClearRadio.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.autoClearRadio.Name = "autoClearRadio";
-            this.autoClearRadio.Size = new System.Drawing.Size(129, 19);
+            this.autoClearRadio.Size = new System.Drawing.Size(160, 24);
             this.autoClearRadio.TabIndex = 0;
             this.autoClearRadio.TabStop = true;
             this.autoClearRadio.Text = "Clear Automatically";
@@ -281,18 +293,21 @@ namespace Graphical_Backup_Program
             this.groupsGroupBox.Controls.Add(this.checkBox1);
             this.groupsGroupBox.Controls.Add(this.textBox0);
             this.groupsGroupBox.Controls.Add(this.checkBox0);
-            this.groupsGroupBox.Location = new System.Drawing.Point(654, 13);
+            this.groupsGroupBox.Location = new System.Drawing.Point(747, 17);
+            this.groupsGroupBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupsGroupBox.Name = "groupsGroupBox";
-            this.groupsGroupBox.Size = new System.Drawing.Size(160, 335);
+            this.groupsGroupBox.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupsGroupBox.Size = new System.Drawing.Size(183, 447);
             this.groupsGroupBox.TabIndex = 11;
             this.groupsGroupBox.TabStop = false;
             this.groupsGroupBox.Text = "Groups to Back up";
             // 
             // deselectAllBtn
             // 
-            this.deselectAllBtn.Location = new System.Drawing.Point(80, 306);
+            this.deselectAllBtn.Location = new System.Drawing.Point(91, 408);
+            this.deselectAllBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.deselectAllBtn.Name = "deselectAllBtn";
-            this.deselectAllBtn.Size = new System.Drawing.Size(77, 23);
+            this.deselectAllBtn.Size = new System.Drawing.Size(88, 31);
             this.deselectAllBtn.TabIndex = 15;
             this.deselectAllBtn.Text = "Deselect All";
             this.deselectAllBtn.UseVisualStyleBackColor = true;
@@ -300,33 +315,38 @@ namespace Graphical_Backup_Program
             // 
             // textBox9
             // 
-            this.textBox9.Location = new System.Drawing.Point(36, 278);
+            this.textBox9.Location = new System.Drawing.Point(41, 371);
+            this.textBox9.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(118, 23);
+            this.textBox9.Size = new System.Drawing.Size(134, 27);
             this.textBox9.TabIndex = 19;
             // 
             // checkBox9
             // 
             this.checkBox9.AutoSize = true;
-            this.checkBox9.Location = new System.Drawing.Point(6, 281);
+            this.checkBox9.Location = new System.Drawing.Point(7, 375);
+            this.checkBox9.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(32, 19);
+            this.checkBox9.Size = new System.Drawing.Size(39, 24);
             this.checkBox9.TabIndex = 18;
             this.checkBox9.Text = "9";
             this.checkBox9.UseVisualStyleBackColor = true;
+            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
             // 
             // textBox8
             // 
-            this.textBox8.Location = new System.Drawing.Point(36, 249);
+            this.textBox8.Location = new System.Drawing.Point(41, 332);
+            this.textBox8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(118, 23);
+            this.textBox8.Size = new System.Drawing.Size(134, 27);
             this.textBox8.TabIndex = 17;
             // 
             // selectAllBtn
             // 
-            this.selectAllBtn.Location = new System.Drawing.Point(3, 306);
+            this.selectAllBtn.Location = new System.Drawing.Point(3, 408);
+            this.selectAllBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.selectAllBtn.Name = "selectAllBtn";
-            this.selectAllBtn.Size = new System.Drawing.Size(77, 23);
+            this.selectAllBtn.Size = new System.Drawing.Size(88, 31);
             this.selectAllBtn.TabIndex = 13;
             this.selectAllBtn.Text = "Select All";
             this.selectAllBtn.UseVisualStyleBackColor = true;
@@ -335,202 +355,233 @@ namespace Graphical_Backup_Program
             // checkBox8
             // 
             this.checkBox8.AutoSize = true;
-            this.checkBox8.Location = new System.Drawing.Point(6, 252);
+            this.checkBox8.Location = new System.Drawing.Point(7, 336);
+            this.checkBox8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(32, 19);
+            this.checkBox8.Size = new System.Drawing.Size(39, 24);
             this.checkBox8.TabIndex = 16;
             this.checkBox8.Text = "8";
             this.checkBox8.UseVisualStyleBackColor = true;
+            this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
             // 
             // textBox7
             // 
-            this.textBox7.Location = new System.Drawing.Point(36, 221);
+            this.textBox7.Location = new System.Drawing.Point(41, 295);
+            this.textBox7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(118, 23);
+            this.textBox7.Size = new System.Drawing.Size(134, 27);
             this.textBox7.TabIndex = 15;
             // 
             // checkBox7
             // 
             this.checkBox7.AutoSize = true;
-            this.checkBox7.Location = new System.Drawing.Point(6, 224);
+            this.checkBox7.Location = new System.Drawing.Point(7, 299);
+            this.checkBox7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(32, 19);
+            this.checkBox7.Size = new System.Drawing.Size(39, 24);
             this.checkBox7.TabIndex = 14;
             this.checkBox7.Text = "7";
             this.checkBox7.UseVisualStyleBackColor = true;
+            this.checkBox7.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
             // 
             // textBox6
             // 
-            this.textBox6.Location = new System.Drawing.Point(36, 192);
+            this.textBox6.Location = new System.Drawing.Point(41, 256);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(118, 23);
+            this.textBox6.Size = new System.Drawing.Size(134, 27);
             this.textBox6.TabIndex = 13;
             // 
             // checkBox6
             // 
             this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(6, 195);
+            this.checkBox6.Location = new System.Drawing.Point(7, 260);
+            this.checkBox6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(32, 19);
+            this.checkBox6.Size = new System.Drawing.Size(39, 24);
             this.checkBox6.TabIndex = 12;
             this.checkBox6.Text = "6";
             this.checkBox6.UseVisualStyleBackColor = true;
+            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(36, 163);
+            this.textBox5.Location = new System.Drawing.Point(41, 217);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(118, 23);
+            this.textBox5.Size = new System.Drawing.Size(134, 27);
             this.textBox5.TabIndex = 11;
             // 
             // checkBox5
             // 
             this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(6, 166);
+            this.checkBox5.Location = new System.Drawing.Point(7, 221);
+            this.checkBox5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(32, 19);
+            this.checkBox5.Size = new System.Drawing.Size(39, 24);
             this.checkBox5.TabIndex = 10;
             this.checkBox5.Text = "5";
             this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(36, 134);
+            this.textBox4.Location = new System.Drawing.Point(41, 179);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(118, 23);
+            this.textBox4.Size = new System.Drawing.Size(134, 27);
             this.textBox4.TabIndex = 9;
             // 
             // checkBox4
             // 
             this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(6, 137);
+            this.checkBox4.Location = new System.Drawing.Point(7, 183);
+            this.checkBox4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(32, 19);
+            this.checkBox4.Size = new System.Drawing.Size(39, 24);
             this.checkBox4.TabIndex = 8;
             this.checkBox4.Text = "4";
             this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(36, 105);
+            this.textBox3.Location = new System.Drawing.Point(41, 140);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(118, 23);
+            this.textBox3.Size = new System.Drawing.Size(134, 27);
             this.textBox3.TabIndex = 7;
             // 
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(6, 108);
+            this.checkBox3.Location = new System.Drawing.Point(7, 144);
+            this.checkBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(32, 19);
+            this.checkBox3.Size = new System.Drawing.Size(39, 24);
             this.checkBox3.TabIndex = 6;
             this.checkBox3.Text = "3";
             this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(36, 76);
+            this.textBox2.Location = new System.Drawing.Point(41, 101);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(118, 23);
+            this.textBox2.Size = new System.Drawing.Size(134, 27);
             this.textBox2.TabIndex = 5;
             // 
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(6, 79);
+            this.checkBox2.Location = new System.Drawing.Point(7, 105);
+            this.checkBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(32, 19);
+            this.checkBox2.Size = new System.Drawing.Size(39, 24);
             this.checkBox2.TabIndex = 4;
             this.checkBox2.Text = "2";
             this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(36, 47);
+            this.textBox1.Location = new System.Drawing.Point(41, 63);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(118, 23);
+            this.textBox1.Size = new System.Drawing.Size(134, 27);
             this.textBox1.TabIndex = 3;
             this.textBox1.Text = "...labelling groups";
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(6, 50);
+            this.checkBox1.Location = new System.Drawing.Point(7, 67);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(32, 19);
+            this.checkBox1.Size = new System.Drawing.Size(39, 24);
             this.checkBox1.TabIndex = 2;
             this.checkBox1.Text = "1";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
             // 
             // textBox0
             // 
-            this.textBox0.Location = new System.Drawing.Point(36, 18);
+            this.textBox0.Location = new System.Drawing.Point(41, 24);
+            this.textBox0.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox0.Name = "textBox0";
-            this.textBox0.Size = new System.Drawing.Size(118, 23);
+            this.textBox0.Size = new System.Drawing.Size(134, 27);
             this.textBox0.TabIndex = 1;
             this.textBox0.Text = "Use these for...";
             // 
             // checkBox0
             // 
             this.checkBox0.AutoSize = true;
-            this.checkBox0.Location = new System.Drawing.Point(6, 21);
+            this.checkBox0.Location = new System.Drawing.Point(7, 28);
+            this.checkBox0.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox0.Name = "checkBox0";
-            this.checkBox0.Size = new System.Drawing.Size(32, 19);
+            this.checkBox0.Size = new System.Drawing.Size(39, 24);
             this.checkBox0.TabIndex = 0;
             this.checkBox0.Text = "0";
             this.checkBox0.UseVisualStyleBackColor = true;
+            this.checkBox0.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
             // 
             // statusStrip
             // 
             this.statusStrip.GripMargin = new System.Windows.Forms.Padding(0);
+            this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel,
+            this.stripLabel,
             this.progressBar});
             this.statusStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.statusStrip.Location = new System.Drawing.Point(0, 405);
+            this.statusStrip.Location = new System.Drawing.Point(0, 542);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(822, 22);
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
+            this.statusStrip.Size = new System.Drawing.Size(939, 27);
             this.statusStrip.SizingGrip = false;
             this.statusStrip.TabIndex = 12;
             this.statusStrip.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel
+            // stripLabel
             // 
-            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(95, 17);
-            this.toolStripStatusLabel.Text = "Ready to Backup";
+            this.stripLabel.Name = "stripLabel";
+            this.stripLabel.Size = new System.Drawing.Size(120, 21);
+            this.stripLabel.Text = "Ready to Backup";
             // 
             // progressBar
             // 
             this.progressBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.progressBar.Margin = new System.Windows.Forms.Padding(1, 3, 0, 3);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(160, 16);
+            this.progressBar.Size = new System.Drawing.Size(183, 21);
             // 
             // zipCheckBox
             // 
             this.zipCheckBox.AutoSize = true;
-            this.zipCheckBox.Location = new System.Drawing.Point(509, 327);
+            this.zipCheckBox.Location = new System.Drawing.Point(582, 436);
+            this.zipCheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.zipCheckBox.Name = "zipCheckBox";
-            this.zipCheckBox.Size = new System.Drawing.Size(121, 19);
+            this.zipCheckBox.Size = new System.Drawing.Size(148, 24);
             this.zipCheckBox.TabIndex = 0;
             this.zipCheckBox.Text = "Compress Backup";
             this.zipCheckBox.UseVisualStyleBackColor = true;
             // 
             // backupBtn
             // 
-            this.backupBtn.Location = new System.Drawing.Point(618, 361);
+            this.backupBtn.Location = new System.Drawing.Point(706, 481);
+            this.backupBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.backupBtn.Name = "backupBtn";
-            this.backupBtn.Size = new System.Drawing.Size(200, 39);
+            this.backupBtn.Size = new System.Drawing.Size(229, 52);
             this.backupBtn.TabIndex = 15;
             this.backupBtn.Text = "Backup";
             this.backupBtn.UseVisualStyleBackColor = true;
             // 
             // sortBtn
             // 
-            this.sortBtn.Location = new System.Drawing.Point(412, 361);
+            this.sortBtn.Location = new System.Drawing.Point(471, 481);
+            this.sortBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.sortBtn.Name = "sortBtn";
-            this.sortBtn.Size = new System.Drawing.Size(200, 39);
+            this.sortBtn.Size = new System.Drawing.Size(229, 52);
             this.sortBtn.TabIndex = 16;
             this.sortBtn.Text = "Sort Paths";
             this.sortBtn.UseVisualStyleBackColor = true;
@@ -538,19 +589,19 @@ namespace Graphical_Backup_Program
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(442, 324);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button1.Location = new System.Drawing.Point(505, 432);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(61, 25);
+            this.button1.Size = new System.Drawing.Size(70, 33);
             this.button1.TabIndex = 10;
             this.button1.Text = "Clear";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // urlTextBox
             // 
-            this.urlTextBox.Location = new System.Drawing.Point(173, 325);
+            this.urlTextBox.Location = new System.Drawing.Point(198, 433);
+            this.urlTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.urlTextBox.Name = "urlTextBox";
-            this.urlTextBox.Size = new System.Drawing.Size(263, 23);
+            this.urlTextBox.Size = new System.Drawing.Size(300, 27);
             this.urlTextBox.TabIndex = 9;
             // 
             // urlCheckBox
@@ -559,18 +610,19 @@ namespace Graphical_Backup_Program
             this.urlCheckBox.Checked = true;
             this.urlCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.urlCheckBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.urlCheckBox.Location = new System.Drawing.Point(13, 327);
+            this.urlCheckBox.Location = new System.Drawing.Point(15, 436);
+            this.urlCheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.urlCheckBox.Name = "urlCheckBox";
-            this.urlCheckBox.Size = new System.Drawing.Size(165, 19);
+            this.urlCheckBox.Size = new System.Drawing.Size(203, 24);
             this.urlCheckBox.TabIndex = 8;
             this.urlCheckBox.Text = "Open URL on Completion:";
             this.urlCheckBox.UseVisualStyleBackColor = true;
             // 
             // Form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(822, 427);
+            this.ClientSize = new System.Drawing.Size(939, 569);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.urlTextBox);
             this.Controls.Add(this.urlCheckBox);
@@ -585,6 +637,7 @@ namespace Graphical_Backup_Program
             this.Controls.Add(this.TextBoxLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "Form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -624,7 +677,7 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.TextBox textBox0;
         private System.Windows.Forms.CheckBox checkBox0;
         private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private System.Windows.Forms.ToolStripStatusLabel stripLabel;
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.CheckBox checkBox9;
         private System.Windows.Forms.TextBox textBox8;

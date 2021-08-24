@@ -4,8 +4,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using FileSystem = Microsoft.VisualBasic.FileIO.FileSystem;
+using Timer = System.Threading.Timer;
 
 namespace Graphical_Backup_Program
 {
@@ -382,21 +384,12 @@ namespace Graphical_Backup_Program
         //For path1/2 TextBoxes
         private void PathTextBox_TextChanged(object sender, EventArgs e)
         {
-            //If both of these are blank, don't allow user to push backup btn cuz that doesn't make any sense.
-            if (path1TextBox.Text == String.Empty && path2TextBox.Text == String.Empty)
-                backupBtn.Enabled = false;
-            else
-                backupBtn.Enabled = true;
+            UpdateControls();
         }
 
         private void PathsTextBox_TextChanged(object sender, EventArgs e)
         {
-            //Don't allow backup button to be pressed if the paths TextBox is empty.
-            if (pathsTextBox.Text == String.Empty)
-                backupBtn.Enabled = false;
-            else
-                backupBtn.Enabled = true;
-
+            UpdateControls();
         }
 
         //On startup, assign GUI controls values from files, and disable any controls, if necessary.
@@ -458,10 +451,16 @@ namespace Graphical_Backup_Program
             clearWithPromptRadio.Checked = Boolean.Parse(config[30]);
             dontClearRadio.Checked = Boolean.Parse(config[31]);
 
-            if (pathsTextBox.Text == String.Empty || (path1TextBox.Text == String.Empty && path2TextBox.Text == String.Empty) || (path1CheckBox.Checked == false && path2CheckBox.Checked == false))
-                backupBtn.Enabled = false;
-            else
-                backupBtn.Enabled = true;
+            //if (pathsTextBox.Text == String.Empty || (path1TextBox.Text == String.Empty && path2TextBox.Text == String.Empty) || (path1CheckBox.Checked == false && path2CheckBox.Checked == false))
+            //{
+            //    backupBtn.Enabled = false;
+            //    stripLabel.Text = "Enter at least 1 path to begin backup.";
+            //}
+            //else
+            //{
+            //    backupBtn.Enabled = true;
+            //    stripLabel.Text = "Ready to backup";
+            //}
         }
 
         //On exit, save config stuff for next time.
@@ -473,11 +472,13 @@ namespace Graphical_Backup_Program
         private void clearPath1_Click(object sender, EventArgs e)
         {
             path1TextBox.Text = String.Empty;
+            UpdateControls();
         }
 
         private void clearPath2_Click(object sender, EventArgs e)
         {
             path2TextBox.Text = String.Empty;
+            UpdateControls();
         }
 
         private void SaveToFiles()
@@ -504,11 +505,13 @@ namespace Graphical_Backup_Program
         private void selectAllBtn_Click(object sender, EventArgs e)
         {
             ToggleAllChecks(true);
+            UpdateControls();
         }
 
         private void deselectAllBtn_Click(object sender, EventArgs e)
         {
             ToggleAllChecks(false);
+            UpdateControls();
         }
 
         private void SortBtn_Click(object sender, EventArgs e)
@@ -540,6 +543,42 @@ namespace Graphical_Backup_Program
 
             foreach (GroupPath groupPath in otherGroupPaths)
                 pathsTextBox.Text += groupPath.group + " " + groupPath.path + Environment.NewLine;
+        }
+
+        //Determines what text to put in the StatusStrip label and if the Backup Button needs to be disabled.
+        private void UpdateControls()
+        {
+            if (pathsTextBox.Text == String.Empty)
+            {
+                stripLabel.Text = "Enter at least 1 path in the big TextBox that you want backed up.";
+                backupBtn.Enabled = false;
+            }
+
+            //I don't like how long this is and how inefficient it seems.
+            else if (checkBox0.Checked == false && checkBox1.Checked == false && checkBox2.Checked == false && checkBox3.Checked == false && checkBox4.Checked == false && checkBox5.Checked == false && checkBox6.Checked == false && checkBox7.Checked == false && checkBox8.Checked == false && checkBox9.Checked == false)
+            {
+                stripLabel.Text = "At least one group needs to be checked to begin backup";
+                backupBtn.Enabled = false;
+            }
+
+            //If both of these are blank, don't allow user to push backup btn cuz that doesn't make any sense.
+            else if (path1TextBox.Text == String.Empty && path2TextBox.Text == String.Empty)
+            {
+                stripLabel.Text = "Enter 1 or 2 paths where backup should be stored";
+                backupBtn.Enabled = false;
+            }
+
+            else
+            {
+                stripLabel.Text = "Ready to begin backup";
+                backupBtn.Enabled = true;
+            }
+        }
+
+        //When any of the 10 group CheckBoxes are (un)checked.
+        private void checkBox_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateControls();
         }
     }
 }
