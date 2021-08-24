@@ -15,6 +15,8 @@ namespace Graphical_Backup_Program
         private readonly string _projectDirectory;
         private readonly string _configFilePath;
         private readonly string _pathsFilePath;
+        private readonly string _logFilePath;
+        private const string dividerLine = "------------------------------------------------------------------------";
 
         public Form()
         {
@@ -26,6 +28,7 @@ namespace Graphical_Backup_Program
 
             _configFilePath = _projectDirectory + "/config.txt"; //I added these cuz all the "_projectDirectory + "/config.txt"" everywhere seemed inefficient and dumb.
             _pathsFilePath = _projectDirectory + "/paths.txt";
+            _logFilePath = _projectDirectory + "/GBP.log";
 
             InitializeComponent();
         }
@@ -45,7 +48,7 @@ namespace Graphical_Backup_Program
 
         private void LogAppend(string text)
         {
-            //_logText += text;
+            File.AppendAllText(_logFilePath, text);
         }
 
         //Copies path 1 and/or 2 as long as user wants this.
@@ -79,12 +82,12 @@ namespace Graphical_Backup_Program
                 }
                 catch (DirectoryNotFoundException e)
                 {
-                    //LogAppend("ERROR when trying to copy file " + src + "\r\nCould not find path. Did you enter the path correctly?\r\n" + e.Message + Environment.NewLine);
+                    LogAppend("ERROR when trying to copy file " + src + "\r\nCould not find path. Did you enter the path correctly?\r\n" + e.Message + Environment.NewLine);
                     return;
                 }
                 catch (IOException e)
                 {
-                    //LogAppend("ERROR when trying to copy file " + src + "\r\nMost likely the path already exists\r\n" + e.Message + Environment.NewLine);
+                    LogAppend("ERROR when trying to copy file " + src + "\r\nMost likely the path already exists\r\n" + e.Message + Environment.NewLine);
                     return;
                 }
                 catch (Exception e)
@@ -92,10 +95,10 @@ namespace Graphical_Backup_Program
                     LogAppend("ERROR: " + e.Message);
                 }
 
-                //if (File.Exists(finalDest))
-                //LogAppend("\r\nSuccessfully copied file " + src + " to path" + pathNum + "\r\n");
-                //else
-                //LogAppend("\r\nERROR. File " + src + " was NOT successfully copied to path" + pathNum + "\r\n");
+                if (File.Exists(finalDest))
+                    LogAppend("\r\nSuccessfully copied file " + src + " to path" + pathNum + "\r\n");
+                else
+                    LogAppend("\r\nERROR. File " + src + " was NOT successfully copied to path" + pathNum + "\r\n");
             }
             else //if a folder
             {
@@ -112,23 +115,23 @@ namespace Graphical_Backup_Program
                 }
                 catch (DirectoryNotFoundException e)
                 {
-                    //LogAppend("ERROR when trying to copy folder " + src + "\r\nCould not find path. Did you enter the path correctly?\r\n" + e.Message + Environment.NewLine);
+                    LogAppend("ERROR when trying to copy folder " + src + "\r\nCould not find path. Did you enter the path correctly?\r\n" + e.Message + Environment.NewLine);
                     return;
                 }
                 catch (IOException e)
                 {
-                    //LogAppend("ERROR when trying to copy folder " + src + "\r\nMost likely the path already exists\r\n\r\n" + e.Message + Environment.NewLine);
+                    LogAppend("ERROR when trying to copy folder " + src + "\r\nMost likely the path already exists\r\n\r\n" + e.Message + Environment.NewLine);
                     return;
                 }
                 catch (Exception e)
                 {
-                    //LogAppend("ERROR: " + e.Message);
+                    LogAppend("ERROR: " + e.Message);
                 }
 
-                //if (Directory.Exists(fullPath))
-                //    LogAppend("\r\nSuccessfully copied folder " + src + " to path" + pathNum + "\r\n");
-                //else
-                //    LogAppend("\r\nERROR. Folder " + src + " was NOT successfully copied to path" + pathNum + "\r\n");
+                if (Directory.Exists(fullPath))
+                    LogAppend("\r\nSuccessfully copied folder " + src + " to path" + pathNum + "\r\n");
+                else
+                    LogAppend("\r\nERROR. Folder " + src + " was NOT successfully copied to path" + pathNum + "\r\n");
             }
         }
 
@@ -287,6 +290,7 @@ namespace Graphical_Backup_Program
 
             backupBtn.Enabled = false;
             string timestamp = DateTime.Now.ToString("M-d-yyyy hh;mm;ss tt"); //'/' and ':' won't work in paths because Windows.
+            File.WriteAllText(_logFilePath, "GBP backup " + timestamp + "\n" + dividerLine);
             stripLabel.Text = "Backing up...";
 
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
@@ -316,6 +320,7 @@ namespace Graphical_Backup_Program
             backupBtn.Enabled = true;
             stripLabel.Text = "Backup completed. Ready to begin next backup.";
             ShowPath1AndOr2(timestamp);
+            LogAppend(dividerLine);
         }
 
         //For path1/2 CheckBoxes
@@ -350,6 +355,12 @@ namespace Graphical_Backup_Program
             if (!File.Exists(_configFilePath))
             {
                 FileStream file = File.Create(_configFilePath);
+                file.Close();
+            }
+
+            if (!File.Exists(_logFilePath))
+            {
+                FileStream file = File.Create(_logFilePath);
                 file.Close();
             }
 
