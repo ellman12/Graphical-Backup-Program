@@ -4,7 +4,8 @@ v2.0 completely revamps and overhauls a lot of GBP
 	Added StatusStrip with a label with useful info and a progress bar
 
 TODO:
-implement backup btn
+clearing folders
+logging and log file. Variable for storing log file path: _logFilePath = .../GBP.log
 
 • Changed from common and uncommon paths to "groups". Now instead of specifying 'c' or 'u', you specify a number 0-9. You can then check which ones you want backed up. There is also the ability to label what each group is.
 • Removed GroupBox that toggles the creation of a timestamp folder because I have no idea why you wouldn't want that.

@@ -221,7 +221,7 @@ namespace Graphical_Backup_Program
         }
 
         //Returns true if path1 or path2 is a file instead of a folder (as long as they're checked though).
-        private bool Path1Or2Invalid()
+        private bool Path1AndOr2Invalid()
         {
             if (path1CheckBox.Checked && Path.HasExtension(path1TextBox.Text))
             {
@@ -249,110 +249,6 @@ namespace Graphical_Backup_Program
             return false;
         }
 
-        private void AllPathsBtn_Click(object sender, EventArgs e)
-        {
-            //            //Idiot-proofing
-            //            if (SamePaths()) return;
-            //            if (Path1Or2Invalid()) return;
-
-            //            TextBoxLabel.Hide();
-            //            File.WriteAllText(_pathsFilePath, pathsTextBox.Text);
-            //            if (ClearFolders() == false) //Cancel the backup and clearing of folders.
-            //                return;
-
-            //            allPathsBtn.Enabled = true;
-            //            commonPathsBtn.Enabled = true;
-            //            resetBtn.Enabled = false;
-
-            //            _backupType = "Full";
-            //            string timestamp = ""; //Create timestamp if needed.
-            //            if (createTimestampFolderBtn.Checked)
-            //                timestamp = DateTime.Now.ToString("M-d-yyyy hh;mm;ss tt"); //'/' and ':' won't work in paths because Windows.
-
-            //            //When user wants to begin copying all C and U paths, go through line by line and determine which ones are marked C or U.
-            //            string[] allPaths = pathsTextBox.Text.Split("\r\n");
-            //            pathsTextBox.Text = backupModeBtn.Checked ? "Backing up all items..." : "Opening all items in File Explorer...";
-            //            pathsTextBox.Text += "\r\n---------------------------------------------------------------------------------------------------------------------------------";
-
-            //            List<Thread> threads = new();
-            //            foreach (string path in allPaths)
-            //            {
-            //                string trimmedPath = path.Substring(2); //path without char and ' '.
-
-            //                if (Char.ToLower(path[0]) is 'c' or 'u')
-            //                {
-            //                    Thread t = new(() => CopyOrOpenAndLog(trimmedPath, timestamp));
-            //                    t.Start();
-            //                    threads.Add(t);
-            //                }
-            //                else if (Char.ToLower(path[0]) is not '#')
-            //                    LogAppend($"\r\nGBP cannot understand this line: \"{path}\"\r\n");
-            //            }
-
-            //            foreach (Thread thread in threads) //Wait for all threads to finish.
-            //                thread.Join();
-
-            //            LogAppend("---------------------------------------------------------------------------------------------------------------------------------\r\n");
-            //            LogAppend(backupModeBtn.Checked ? "Backup completed" : "Opened all items");
-            //            pathsTextBox.Text += _logText;
-            //            allPathsBtn.Enabled = false;
-            //            commonPathsBtn.Enabled = false;
-            //            resetBtn.Enabled = true;
-            //            ShowPath1And2(timestamp);
-        }
-
-        private void CommonPathsBtn_Click(object sender, EventArgs e)
-        {
-            ////Idiot-proofing
-            //if (SamePaths()) return;
-            //if (Path1Or2Invalid()) return;
-
-            //TextBoxLabel.Hide();
-            //File.WriteAllText(_pathsFilePath, pathsTextBox.Text);
-            //if (ClearFolders() == false)
-            //    return;
-
-            //allPathsBtn.Enabled = true;
-            //commonPathsBtn.Enabled = true;
-            //resetBtn.Enabled = false;
-
-            //_backupType = "Common";
-            //string timestamp = "";
-            //if (createTimestampFolderBtn.Checked)
-            //    timestamp = DateTime.Now.ToString("M-d-yyyy hh;mm;ss tt"); //'/' and ':' won't work in paths because Windows.
-
-            ////When user wants to begin copying just the Common Paths, go through line by line and determine which ones are marked 'common' (c).
-            //string[] allPaths = pathsTextBox.Text.Split("\r\n");
-            //pathsTextBox.Text = backupModeBtn.Checked ? "Backing up just common items..." : "Opening just common items in File Explorer...";
-            //pathsTextBox.Text += "\r\n---------------------------------------------------------------------------------------------------------------------------------";
-
-            //List<Thread> threads = new();
-            //foreach (string path in allPaths)
-            //{
-            //    string trimmedPath = path.Substring(2); //path without char and ' '.
-
-            //    if (Char.ToLower(path[0]) is 'c')
-            //    {
-            //        Thread t = new(() => CopyOrOpenAndLog(trimmedPath, timestamp));
-            //        t.Start();
-            //        threads.Add(t);
-            //    }
-            //    else if (Char.ToLower(path[0]) is not '#' and not 'u')
-            //        LogAppend($"\r\nGBP cannot understand this line: \"{path}\"\r\n");
-            //}
-
-            //foreach (Thread thread in threads) //Wait for all threads to finish.
-            //    thread.Join();
-
-            //LogAppend("---------------------------------------------------------------------------------------------------------------------------------\r\n");
-            //LogAppend(backupModeBtn.Checked ? "Common items backup completed" : "Opened all common items");
-            //pathsTextBox.Text += _logText;
-            //allPathsBtn.Enabled = false;
-            //commonPathsBtn.Enabled = false;
-            //resetBtn.Enabled = true;
-            //ShowPath1And2(timestamp);
-        }
-
         //Returns true if a group is checked. 
         private bool GroupChecked(char group)
         {
@@ -371,7 +267,7 @@ namespace Graphical_Backup_Program
         {
             //Idiot-proofing
             if (SamePaths()) return;
-            if (Path1Or2Invalid()) return;
+            if (Path1AndOr2Invalid()) return;
 
             File.WriteAllText(_pathsFilePath, pathsTextBox.Text);
             if (ClearFolders() == false)
@@ -399,12 +295,12 @@ namespace Graphical_Backup_Program
                     LogAppend($"\r\nGBP cannot understand this line: \"{path}\"\r\n");
             }
 
-            //foreach (Thread thread in threads) //Wait for all threads to finish.
-                //thread.Join();
+            foreach (Thread thread in threads) //Wait for all threads to finish.
+                thread.Join();
 
             backupBtn.Enabled = true;
             stripLabel.Text = "Backup completed. Ready to begin next backup.";
-            //ShowPath1AndOr2(timestamp);
+            ShowPath1AndOr2(timestamp);
         }
 
         //For path1/2 CheckBoxes
