@@ -152,58 +152,59 @@ namespace Graphical_Backup_Program
             }
         }
 
-        //        //Delete a single directory, ignoring exception about it not existing/found.
-        //        private void DeleteDirectory(string dir)
-        //        {
-        //            try
-        //            {
-        //                Directory.Delete(dir, true);
-        //            }
-        //            catch (UnauthorizedAccessException e)
-        //            {
-        //                MessageBox.Show("An error occurred: " + e.Message);
-        //            }
-        //            catch (DirectoryNotFoundException)
-        //            {
-        //                //Ignore error lol ;)
-        //            }
-        //        }
+        //Delete a single directory, ignoring exception about it not existing/found.
+        private void DeleteDirectory(string dir)
+        {
+            try
+            {
+                Directory.Delete(dir, true);
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                MessageBox.Show("An error occurred: " + e.Message);
+            }
+            catch (DirectoryNotFoundException)
+            {
+                //Ignore error lol ;)
+            }
+        }
 
-        //        private void DeletePath1AndOr2(bool clrPath1, bool clrPath2)
-        //        {
-        //            if (clrPath1)
-        //                DeleteDirectory(path1TextBox.Text);
-        //            if (clrPath2)
-        //                DeleteDirectory(path2TextBox.Text);
+        private void DeletePath1AndOr2(bool clrPath1, bool clrPath2)
+        {
+            if (clrPath1)
+                DeleteDirectory(path1TextBox.Text);
+            if (clrPath2)
+                DeleteDirectory(path2TextBox.Text);
+        }
 
         //Does something based on which of the 3 buttons is selected.
-        //Returns false if user presses 'Cancel'; true otherwise (false is what really matters).
+        //Returns false if user presses 'Cancel'; true otherwise (false is what really matters; signals program to not proceed with clearing).
         private bool ClearFolders()
         {
-            //            bool clrPath1 = false, clrPath2 = false;
-            //            if (path1CheckBox.Checked && path1TextBox.Text != String.Empty) clrPath1 = true;
-            //            if (path2CheckBox.Checked && path2TextBox.Text != String.Empty) clrPath2 = true;
+            bool clrPath1 = false, clrPath2 = false;
+            if (path1CheckBox.Checked && path1TextBox.Text != String.Empty) clrPath1 = true;
+            if (path2CheckBox.Checked && path2TextBox.Text != String.Empty) clrPath2 = true;
 
-            //            if (autoClearRadio.Checked) //Clear them without any prompt/warning.
-            //            {
-            //                DeletePath1AndOr2(clrPath1, clrPath2);
-            //            }
-            //            else if (clearWithPromptRadio.Checked)
-            //            {
-            //                string text = "";
-            //                if (clrPath1 && clrPath2) text = "Clear path1 and path2 before backing up?";
-            //                else if (clrPath1) text = "Clear just path1 before backing up?";
-            //                else if (clrPath2) text = "Clear just path2 before backing up?";
-            //                DialogResult dialogResult = MessageBox.Show(text, "Clear Folders", MessageBoxButtons.YesNoCancel);
+            if (autoClearRadio.Checked) //Clear them without any prompt/warning.
+            {
+                DeletePath1AndOr2(clrPath1, clrPath2);
+            }
+            else if (clearWithPromptRadio.Checked)
+            {
+                string text = "";
+                if (clrPath1 && clrPath2) text = "Clear path1 and path2 before backing up?";
+                else if (clrPath1) text = "Clear just path1 before backing up?";
+                else if (clrPath2) text = "Clear just path2 before backing up?";
+                DialogResult dialogResult = MessageBox.Show(text, "Clear Folders", MessageBoxButtons.YesNoCancel);
 
-            //                if (dialogResult == DialogResult.Yes) //https://stackoverflow.com/a/3036851
-            //                {
-            //                    DeletePath1AndOr2(clrPath1, clrPath2);
-            //                }
-            //                else if (dialogResult == DialogResult.Cancel)
-            //                    return false; //Signify pressing 'cancel' button.
-            //            }
-            return true;
+                if (dialogResult == DialogResult.Yes) //https://stackoverflow.com/a/3036851
+                {
+                    DeletePath1AndOr2(clrPath1, clrPath2); //User confirmed that they do want to clear path1/2, so do it.
+                }
+                else if (dialogResult == DialogResult.Cancel)
+                    return false; //Signify pressing 'cancel' button.
+            }
+            return true; //True means no errors happened or whatever.
         }
 
         //Yells at the user if they try to be an idiot and put the same path for path1 and 2 (but only if they're both checked).
@@ -220,7 +221,6 @@ namespace Graphical_Backup_Program
             return false;
         }
 
-        //Returns true if path1 or path2 is a file instead of a folder (as long as they're checked though).
         private bool Path1AndOr2Invalid()
         {
             if (path1CheckBox.Checked && Path.HasExtension(path1TextBox.Text))
@@ -249,7 +249,7 @@ namespace Graphical_Backup_Program
             return false;
         }
 
-        //Returns true if a group is checked. 
+        //Returns true if a specified group is checked. 
         private bool GroupChecked(char group)
         {
             if (group == '0' && checkBox0.Checked || group == '1' && checkBox1.Checked || group == '2' && checkBox2.Checked || group == '3' && checkBox3.Checked || group == '4' && checkBox4.Checked || group == '5' && checkBox5.Checked || group == '6' && checkBox6.Checked || group == '7' && checkBox7.Checked || group == '8' && checkBox8.Checked || group == '9' && checkBox9.Checked)
@@ -282,8 +282,11 @@ namespace Graphical_Backup_Program
 
             foreach (string path in allPaths)
             {
-                char group = path[0];
-                string trimmedPath = path.Trim()[2..];
+                if (path == String.Empty) continue;
+
+                string trimmedPath = path.Trim();
+                char group = trimmedPath[0];
+                trimmedPath = trimmedPath[2..];
 
                 if (GroupChecked(group) && ValidGroupChar(group))
                 {
