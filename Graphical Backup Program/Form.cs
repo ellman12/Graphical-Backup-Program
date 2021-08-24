@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,7 +17,7 @@ namespace Graphical_Backup_Program
         private readonly string _configFilePath;
         private readonly string _pathsFilePath;
         private readonly string _logFilePath;
-        private const string dividerLine = "------------------------------------------------------------------------------------------------------";
+        private const string dividerLine = "---------------------------------------------------------------------------------------------------";
 
         public Form()
         {
@@ -278,6 +279,27 @@ namespace Graphical_Backup_Program
             return (Char.GetNumericValue(group) >= 0 && Char.GetNumericValue(group) <= 9 && Char.IsNumber(group));
         }
 
+        //Thank you StackOverflow, very cool. https://stackoverflow.com/a/43232486
+        private void OpenUrl(string url)
+        {
+            try
+            {
+                Process.Start(url);
+            }
+            catch
+            {
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    url = url.Replace("&", "^&");
+                    Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                    Process.Start("xdg-open", url);
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                    Process.Start("open", url);
+            }
+        }
+
         private void BackupBtn_Click(object sender, EventArgs e)
         {
             //Idiot-proofing
@@ -317,11 +339,14 @@ namespace Graphical_Backup_Program
             foreach (Thread thread in threads) //Wait for all threads to finish.
                 thread.Join();
 
+            if (urlCheckBox.Checked && urlTextBox.Text != String.Empty)
+                OpenUrl(urlTextBox.Text);
+
             backupBtn.Enabled = true;
-            stripLabel.Text = "Backup completed. Ready to begin next backup.";
+            stripLabel.Text = "Backup completed. Ready to exit or begin next backup.";
             ShowPath1AndOr2(timestamp);
             LogAppend(dividerLine);
-            Process.Start("notepad.exe", _logFilePath);
+            Process.Start("notepad.exe", _logFilePath); //Open log in Notepad.
         }
 
         //For path1/2 CheckBoxes
@@ -527,6 +552,11 @@ namespace Graphical_Backup_Program
         private void GroupCheckBoxes_CheckedChanged(object sender, EventArgs e)
         {
             UpdateControls();
+        }
+
+        private void UrlClearBtn_Click(object sender, EventArgs e)
+        {
+            urlTextBox.Text = String.Empty;
         }
     }
 }

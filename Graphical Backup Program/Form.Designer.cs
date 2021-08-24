@@ -74,7 +74,7 @@ namespace Graphical_Backup_Program
             this.zipCheckBox = new System.Windows.Forms.CheckBox();
             this.backupBtn = new System.Windows.Forms.Button();
             this.sortBtn = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.urlClearBtn = new System.Windows.Forms.Button();
             this.urlTextBox = new System.Windows.Forms.TextBox();
             this.urlCheckBox = new System.Windows.Forms.CheckBox();
             this.whereToBackupBox.SuspendLayout();
@@ -588,14 +588,15 @@ namespace Graphical_Backup_Program
             this.sortBtn.UseVisualStyleBackColor = true;
             this.sortBtn.Click += new System.EventHandler(this.SortBtn_Click);
             // 
-            // button1
+            // urlClearBtn
             // 
-            this.button1.Location = new System.Drawing.Point(505, 432);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(70, 33);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Clear";
-            this.button1.UseVisualStyleBackColor = true;
+            this.urlClearBtn.Location = new System.Drawing.Point(505, 432);
+            this.urlClearBtn.Name = "urlClearBtn";
+            this.urlClearBtn.Size = new System.Drawing.Size(70, 33);
+            this.urlClearBtn.TabIndex = 10;
+            this.urlClearBtn.Text = "Clear";
+            this.urlClearBtn.UseVisualStyleBackColor = true;
+            this.urlClearBtn.Click += new System.EventHandler(this.UrlClearBtn_Click);
             // 
             // urlTextBox
             // 
@@ -624,7 +625,7 @@ namespace Graphical_Backup_Program
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(939, 569);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.urlClearBtn);
             this.Controls.Add(this.urlTextBox);
             this.Controls.Add(this.urlCheckBox);
             this.Controls.Add(this.sortBtn);
@@ -702,7 +703,7 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.Button deselectAllBtn;
         private System.Windows.Forms.Button backupBtn;
         private System.Windows.Forms.Button sortBtn;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button urlClearBtn;
         private System.Windows.Forms.TextBox urlTextBox;
         private System.Windows.Forms.CheckBox urlCheckBox;
         private System.Windows.Forms.ToolStripProgressBar progressBar;
