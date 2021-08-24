@@ -140,10 +140,10 @@ namespace Graphical_Backup_Program
         private void ShowPath1AndOr2(string timestamp)
         {
             if (path1CheckBox.Checked && openPath1Box.Checked)
-                OpenInExplorer(Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp));
+                OpenInExplorer(zipCheckBox.Checked ? Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp + ".zip") : Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp));
 
             if (path2CheckBox.Checked && openPath2Box.Checked)
-                OpenInExplorer(Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp));
+                OpenInExplorer(zipCheckBox.Checked ? Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp + ".zip") : Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp));
         }
 
         //Open an item in Explorer. https://stackoverflow.com/a/13680458
