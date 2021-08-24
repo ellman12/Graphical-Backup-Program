@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using FileSystem = Microsoft.VisualBasic.FileIO.FileSystem;
 
@@ -140,10 +140,10 @@ namespace Graphical_Backup_Program
         private void ShowPath1AndOr2(string timestamp)
         {
             if (path1CheckBox.Checked && openPath1Box.Checked)
-                OpenInExplorer(Path.Combine(path1TextBox.Text, "GBP backup " + timestamp));
+                OpenInExplorer(Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp));
 
             if (path2CheckBox.Checked && openPath2Box.Checked)
-                OpenInExplorer(Path.Combine(path1TextBox.Text, "GBP backup " + timestamp));
+                OpenInExplorer(Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp));
         }
 
         //Open an item in Explorer. https://stackoverflow.com/a/13680458
@@ -341,6 +341,27 @@ namespace Graphical_Backup_Program
 
             if (urlCheckBox.Checked && urlTextBox.Text != String.Empty)
                 OpenUrl(urlTextBox.Text);
+
+            if (zipCheckBox.Checked)
+            {
+                if (path1CheckBox.Checked && path1TextBox.Text != "")
+                {
+                    string path1BackupPath = Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp);
+                    string path1ZipPath = Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp + ".zip");
+                    ZipFile.CreateFromDirectory(path1BackupPath, path1ZipPath);
+                    if (File.Exists(path1ZipPath))
+                        LogAppend("\nSuccessfully compressed path1\n");
+                }
+
+                if (path2CheckBox.Checked && path2TextBox.Text != "")
+                {
+                    string path2BackupPath = Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp);
+                    string path2ZipPath = Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp) + ".zip";
+                    ZipFile.CreateFromDirectory(path2BackupPath, path2ZipPath);
+                    if (File.Exists(path2ZipPath))
+                        LogAppend("\nSuccessfully compressed path2\n");
+                }
+            }
 
             backupBtn.Enabled = true;
             stripLabel.Text = "Backup completed. Ready to exit or begin next backup.";
