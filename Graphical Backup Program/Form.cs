@@ -191,11 +191,23 @@ namespace Graphical_Backup_Program
             }
             else if (clearWithPromptRadio.Checked)
             {
-                string text = "";
-                if (clrPath1 && clrPath2) text = "Clear path1 and path2 before backing up?";
-                else if (clrPath1) text = "Clear just path1 before backing up?";
-                else if (clrPath2) text = "Clear just path2 before backing up?";
-                DialogResult dialogResult = MessageBox.Show(text, "Clear Folders", MessageBoxButtons.YesNoCancel);
+                string text = "", caption = "";
+                if (clrPath1 && clrPath2)
+                {
+                    text = $"Clear path1 ({path1TextBox.Text})\nand path2 ({path2TextBox.Text})\nbefore backing up?";
+                    caption = "Clear path1 AND path2?";
+                }
+                else if (clrPath1)
+                {
+                    text = $"Clear path1 ({path1TextBox.Text}) before backing up?";
+                    caption = "Clear path1?";
+                }
+                else if (clrPath2)
+                {
+                    text = $"Clear path2 ({path2TextBox.Text}) before backing up?";
+                    caption = "Clear path2?";
+                }
+                DialogResult dialogResult = MessageBox.Show(text, caption, MessageBoxButtons.YesNoCancel);
 
                 if (dialogResult == DialogResult.Yes) //https://stackoverflow.com/a/3036851
                 {
@@ -270,7 +282,7 @@ namespace Graphical_Backup_Program
             if (Path1AndOr2Invalid()) return;
 
             File.WriteAllText(_pathsFilePath, pathsTextBox.Text);
-            if (ClearFolders() == false)
+            if (ClearFolders() == false) //If user presses 'cancel' when asked if they want to clear, abort the entire process.
                 return;
 
             backupBtn.Enabled = false;
