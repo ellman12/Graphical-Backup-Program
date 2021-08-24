@@ -371,6 +371,11 @@ namespace Graphical_Backup_Program
             //ShowPath1And2(timestamp);
         }
 
+        private void BackupBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
         //For path1/2 CheckBoxes
         private void Path12CheckBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -450,17 +455,6 @@ namespace Graphical_Backup_Program
             autoClearRadio.Checked = Boolean.Parse(config[29]);
             clearWithPromptRadio.Checked = Boolean.Parse(config[30]);
             dontClearRadio.Checked = Boolean.Parse(config[31]);
-
-            //if (pathsTextBox.Text == String.Empty || (path1TextBox.Text == String.Empty && path2TextBox.Text == String.Empty) || (path1CheckBox.Checked == false && path2CheckBox.Checked == false))
-            //{
-            //    backupBtn.Enabled = false;
-            //    stripLabel.Text = "Enter at least 1 path to begin backup.";
-            //}
-            //else
-            //{
-            //    backupBtn.Enabled = true;
-            //    stripLabel.Text = "Ready to backup";
-            //}
         }
 
         //On exit, save config stuff for next time.
@@ -579,11 +573,6 @@ namespace Graphical_Backup_Program
         private void GroupCheckBoxes_CheckedChanged(object sender, EventArgs e)
         {
             UpdateControls();
-        }
-
-        private void BackupBtn_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
