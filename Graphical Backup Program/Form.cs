@@ -372,7 +372,7 @@ namespace Graphical_Backup_Program
         }
 
         //For path1/2 CheckBoxes
-        private void CheckBox_CheckedChanged(object sender, EventArgs e)
+        private void Path12CheckBox_CheckedChanged(object sender, EventArgs e)
         {
             //If both of these are disabled, don't allow user to push backup btn cuz that doesn't make any sense.
             if (path1CheckBox.Checked == false && path2CheckBox.Checked == false)
@@ -469,13 +469,13 @@ namespace Graphical_Backup_Program
             SaveToFiles();
         }
 
-        private void clearPath1_Click(object sender, EventArgs e)
+        private void ClearPath1_Click(object sender, EventArgs e)
         {
             path1TextBox.Text = String.Empty;
             UpdateControls();
         }
 
-        private void clearPath2_Click(object sender, EventArgs e)
+        private void ClearPath2_Click(object sender, EventArgs e)
         {
             path2TextBox.Text = String.Empty;
             UpdateControls();
@@ -502,13 +502,13 @@ namespace Graphical_Backup_Program
             checkBox9.Checked = toggled;
         }
 
-        private void selectAllBtn_Click(object sender, EventArgs e)
+        private void SelectAllBtn_Click(object sender, EventArgs e)
         {
             ToggleAllChecks(true);
             UpdateControls();
         }
 
-        private void deselectAllBtn_Click(object sender, EventArgs e)
+        private void DeselectAllBtn_Click(object sender, EventArgs e)
         {
             ToggleAllChecks(false);
             UpdateControls();
@@ -576,9 +576,14 @@ namespace Graphical_Backup_Program
         }
 
         //When any of the 10 group CheckBoxes are (un)checked.
-        private void checkBox_CheckedChanged(object sender, EventArgs e)
+        private void GroupCheckBoxes_CheckedChanged(object sender, EventArgs e)
         {
             UpdateControls();
+        }
+
+        private void BackupBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

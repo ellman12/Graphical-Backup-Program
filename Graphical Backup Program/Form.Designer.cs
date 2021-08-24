@@ -159,7 +159,7 @@ namespace Graphical_Backup_Program
             this.clearPath2.TabIndex = 5;
             this.clearPath2.Text = "Clear";
             this.clearPath2.UseVisualStyleBackColor = true;
-            this.clearPath2.Click += new System.EventHandler(this.clearPath2_Click);
+            this.clearPath2.Click += new System.EventHandler(this.ClearPath2_Click);
             // 
             // clearPath1
             // 
@@ -169,7 +169,7 @@ namespace Graphical_Backup_Program
             this.clearPath1.TabIndex = 4;
             this.clearPath1.Text = "Clear";
             this.clearPath1.UseVisualStyleBackColor = true;
-            this.clearPath1.Click += new System.EventHandler(this.clearPath1_Click);
+            this.clearPath1.Click += new System.EventHandler(this.ClearPath1_Click);
             // 
             // path2TextBox
             // 
@@ -191,7 +191,7 @@ namespace Graphical_Backup_Program
             this.path2CheckBox.TabIndex = 2;
             this.path2CheckBox.Text = "Use Path 2:";
             this.path2CheckBox.UseVisualStyleBackColor = true;
-            this.path2CheckBox.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
+            this.path2CheckBox.CheckedChanged += new System.EventHandler(this.Path12CheckBox_CheckedChanged);
             // 
             // path1TextBox
             // 
@@ -215,7 +215,7 @@ namespace Graphical_Backup_Program
             this.path1CheckBox.TabIndex = 0;
             this.path1CheckBox.Text = "Use Path 1:";
             this.path1CheckBox.UseVisualStyleBackColor = true;
-            this.path1CheckBox.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
+            this.path1CheckBox.CheckedChanged += new System.EventHandler(this.Path12CheckBox_CheckedChanged);
             // 
             // clearingFoldersGroupBox
             // 
@@ -311,7 +311,7 @@ namespace Graphical_Backup_Program
             this.deselectAllBtn.TabIndex = 15;
             this.deselectAllBtn.Text = "Deselect All";
             this.deselectAllBtn.UseVisualStyleBackColor = true;
-            this.deselectAllBtn.Click += new System.EventHandler(this.deselectAllBtn_Click);
+            this.deselectAllBtn.Click += new System.EventHandler(this.DeselectAllBtn_Click);
             // 
             // textBox9
             // 
@@ -331,7 +331,7 @@ namespace Graphical_Backup_Program
             this.checkBox9.TabIndex = 18;
             this.checkBox9.Text = "9";
             this.checkBox9.UseVisualStyleBackColor = true;
-            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
+            this.checkBox9.CheckedChanged += new System.EventHandler(this.GroupCheckBoxes_CheckedChanged);
             // 
             // textBox8
             // 
@@ -350,7 +350,7 @@ namespace Graphical_Backup_Program
             this.selectAllBtn.TabIndex = 13;
             this.selectAllBtn.Text = "Select All";
             this.selectAllBtn.UseVisualStyleBackColor = true;
-            this.selectAllBtn.Click += new System.EventHandler(this.selectAllBtn_Click);
+            this.selectAllBtn.Click += new System.EventHandler(this.SelectAllBtn_Click);
             // 
             // checkBox8
             // 
@@ -362,7 +362,7 @@ namespace Graphical_Backup_Program
             this.checkBox8.TabIndex = 16;
             this.checkBox8.Text = "8";
             this.checkBox8.UseVisualStyleBackColor = true;
-            this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
+            this.checkBox8.CheckedChanged += new System.EventHandler(this.GroupCheckBoxes_CheckedChanged);
             // 
             // textBox7
             // 
@@ -382,7 +382,7 @@ namespace Graphical_Backup_Program
             this.checkBox7.TabIndex = 14;
             this.checkBox7.Text = "7";
             this.checkBox7.UseVisualStyleBackColor = true;
-            this.checkBox7.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
+            this.checkBox7.CheckedChanged += new System.EventHandler(this.GroupCheckBoxes_CheckedChanged);
             // 
             // textBox6
             // 
@@ -402,7 +402,7 @@ namespace Graphical_Backup_Program
             this.checkBox6.TabIndex = 12;
             this.checkBox6.Text = "6";
             this.checkBox6.UseVisualStyleBackColor = true;
-            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
+            this.checkBox6.CheckedChanged += new System.EventHandler(this.GroupCheckBoxes_CheckedChanged);
             // 
             // textBox5
             // 
@@ -422,7 +422,7 @@ namespace Graphical_Backup_Program
             this.checkBox5.TabIndex = 10;
             this.checkBox5.Text = "5";
             this.checkBox5.UseVisualStyleBackColor = true;
-            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
+            this.checkBox5.CheckedChanged += new System.EventHandler(this.GroupCheckBoxes_CheckedChanged);
             // 
             // textBox4
             // 
@@ -442,7 +442,7 @@ namespace Graphical_Backup_Program
             this.checkBox4.TabIndex = 8;
             this.checkBox4.Text = "4";
             this.checkBox4.UseVisualStyleBackColor = true;
-            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.GroupCheckBoxes_CheckedChanged);
             // 
             // textBox3
             // 
@@ -462,7 +462,7 @@ namespace Graphical_Backup_Program
             this.checkBox3.TabIndex = 6;
             this.checkBox3.Text = "3";
             this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.GroupCheckBoxes_CheckedChanged);
             // 
             // textBox2
             // 
@@ -482,7 +482,7 @@ namespace Graphical_Backup_Program
             this.checkBox2.TabIndex = 4;
             this.checkBox2.Text = "2";
             this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.GroupCheckBoxes_CheckedChanged);
             // 
             // textBox1
             // 
@@ -503,7 +503,7 @@ namespace Graphical_Backup_Program
             this.checkBox1.TabIndex = 2;
             this.checkBox1.Text = "1";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.GroupCheckBoxes_CheckedChanged);
             // 
             // textBox0
             // 
@@ -524,7 +524,7 @@ namespace Graphical_Backup_Program
             this.checkBox0.TabIndex = 0;
             this.checkBox0.Text = "0";
             this.checkBox0.UseVisualStyleBackColor = true;
-            this.checkBox0.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
+            this.checkBox0.CheckedChanged += new System.EventHandler(this.GroupCheckBoxes_CheckedChanged);
             // 
             // statusStrip
             // 
@@ -575,6 +575,7 @@ namespace Graphical_Backup_Program
             this.backupBtn.TabIndex = 15;
             this.backupBtn.Text = "Backup";
             this.backupBtn.UseVisualStyleBackColor = true;
+            this.backupBtn.Click += new System.EventHandler(this.BackupBtn_Click);
             // 
             // sortBtn
             // 
