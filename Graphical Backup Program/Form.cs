@@ -16,7 +16,7 @@ namespace Graphical_Backup_Program
         private readonly string _configFilePath;
         private readonly string _pathsFilePath;
         private readonly string _logFilePath;
-        private const string dividerLine = "------------------------------------------------------------------------";
+        private const string dividerLine = "------------------------------------------------------------------------------------------------------";
 
         public Form()
         {
@@ -321,6 +321,7 @@ namespace Graphical_Backup_Program
             stripLabel.Text = "Backup completed. Ready to begin next backup.";
             ShowPath1AndOr2(timestamp);
             LogAppend(dividerLine);
+            Process.Start("notepad.exe", _logFilePath);
         }
 
         //For path1/2 CheckBoxes
