@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FileSystem = Microsoft.VisualBasic.FileIO.FileSystem;
-using Timer = System.Threading.Timer;
 
 namespace Graphical_Backup_Program
 {
@@ -49,150 +48,133 @@ namespace Graphical_Backup_Program
             //_logText += text;
         }
 
-        //Used in the foreach loops in the 2 backup button functions for determining which action to take.
-        private void CopyOrOpenAndLog(string trimmedPath, string timestamp)
+        //Copies path 1 and/or 2 as long as user wants this.
+        private void CopyPath1AndOr2(string trimmedPath, string timestamp)
         {
-            //if (backupModeBtn.Checked)
-            //{
             //Copy each item to path1 and/or path2, as long as the box is checked AND the TextBox isn't blank.
-            //if (path1CheckBox.Checked && path1TextBox.Text != String.Empty)
-            //CopyAndLog(trimmedPath, path1TextBox.Text, 1, timestamp);
+            if (path1CheckBox.Checked && path1TextBox.Text != String.Empty)
+                CopyAndLog(trimmedPath, path1TextBox.Text, 1, timestamp);
 
-            //if (path2CheckBox.Checked && path2TextBox.Text != String.Empty)
-            //CopyAndLog(trimmedPath, path2TextBox.Text, 2, timestamp);
-            //}
-            //else if (fileExplorerBtn.Checked)
-            //OpenInExplorer(trimmedPath);
+            if (path2CheckBox.Checked && path2TextBox.Text != String.Empty)
+                CopyAndLog(trimmedPath, path2TextBox.Text, 2, timestamp);
         }
 
         //Used for copying a single item to path1 and/or path2, and for putting some log output in the paths TextBox. pathNum is either 1 or 2.
         private void CopyAndLog(string src, string dest, int pathNum, string timestamp)
         {
-            //            src = src.Trim(); //Remove pesky whitespace from start and end of path.
+            src = src.Trim(); //Remove pesky whitespace from start and end of path.
+            dest = Path.Combine(dest, "GBP Backup " + timestamp);
 
-            //            //If user wants stuff to be copied to a special timestamp folder, this is where it's done at.
-            //            //It also marks this backup folder as a "Common" or "Full" backup.
-            //            if (createTimestampFolderBtn.Checked)
-            //            {
-            //                if (_backupType is "Common")
-            //                    dest = Path.Combine(dest, "GBP Backup " + timestamp + " (Common Items)");
-            //                else if (_backupType is "Full")
-            //                    dest = Path.Combine(dest, "GBP Backup " + timestamp + " (All Items)");
-            //            }
+            if (Path.HasExtension(src)) //if a file
+            {
+                string srcFileName = Path.GetFileName(src);
+                string finalDest = Path.Combine(dest, srcFileName);
 
-            //            if (Path.HasExtension(src)) //if a file
-            //            {
-            //                string srcFileName = Path.GetFileName(src);
-            //                string finalDest = Path.Combine(dest, srcFileName);
+                if (!Directory.Exists(dest))
+                    Directory.CreateDirectory(dest);
 
-            //                if (!Directory.Exists(dest))
-            //                    Directory.CreateDirectory(dest);
+                try
+                {
+                    File.Copy(src, finalDest);
+                }
+                catch (DirectoryNotFoundException e)
+                {
+                    //LogAppend("ERROR when trying to copy file " + src + "\r\nCould not find path. Did you enter the path correctly?\r\n" + e.Message + Environment.NewLine);
+                    return;
+                }
+                catch (IOException e)
+                {
+                    //LogAppend("ERROR when trying to copy file " + src + "\r\nMost likely the path already exists\r\n" + e.Message + Environment.NewLine);
+                    return;
+                }
+                catch (Exception e)
+                {
+                    LogAppend("ERROR: " + e.Message);
+                }
 
-            //                try
-            //                {
-            //                    File.Copy(src, finalDest);
-            //                }
-            //                catch (DirectoryNotFoundException e)
-            //                {
-            //                    LogAppend("ERROR when trying to copy file " + src + "\r\nCould not find path. Did you enter the path correctly?\r\n" + e.Message + Environment.NewLine);
-            //                    return;
-            //                }
-            //                catch (IOException e)
-            //                {
-            //                    LogAppend("ERROR when trying to copy file " + src + "\r\nMost likely the path already exists\r\n" + e.Message + Environment.NewLine);
-            //                    return;
-            //                }
-            //                catch (Exception e)
-            //                {
-            //                    LogAppend("ERROR: " + e.Message);
-            //                }
+                //if (File.Exists(finalDest))
+                //LogAppend("\r\nSuccessfully copied file " + src + " to path" + pathNum + "\r\n");
+                //else
+                //LogAppend("\r\nERROR. File " + src + " was NOT successfully copied to path" + pathNum + "\r\n");
+            }
+            else //if a folder
+            {
+                //Get the name of the folder and copy stuff there. CopyDirectory() doesn't do that automatically for some reason... https://stackoverflow.com/a/5229311
+                string dirName = new DirectoryInfo(src).Name;
+                string fullPath = Path.Combine(dest, dirName);
 
-            //                if (File.Exists(finalDest))
-            //                    LogAppend("\r\nSuccessfully copied file " + src + " to path" + pathNum + "\r\n");
-            //                else
-            //                    LogAppend("\r\nERROR. File " + src + " was NOT successfully copied to path" + pathNum + "\r\n");
-            //            }
-            //            else //if a folder
-            //            {
-            //                //Get the name of the folder and copy stuff there. CopyDirectory() doesn't do that automatically for some reason... https://stackoverflow.com/a/5229311
-            //                string dirName = new DirectoryInfo(src).Name;
-            //                string fullPath = Path.Combine(dest, dirName);
+                if (!Directory.Exists(dest))
+                    Directory.CreateDirectory(dest);
 
-            //                if (!Directory.Exists(dest))
-            //                    Directory.CreateDirectory(dest);
+                try
+                {
+                    FileSystem.CopyDirectory(src, fullPath); //https://docs.microsoft.com/en-us/dotnet/api/microsoft.visualbasic.fileio.filesystem.copydirectory?view=net-5.0
+                }
+                catch (DirectoryNotFoundException e)
+                {
+                    //LogAppend("ERROR when trying to copy folder " + src + "\r\nCould not find path. Did you enter the path correctly?\r\n" + e.Message + Environment.NewLine);
+                    return;
+                }
+                catch (IOException e)
+                {
+                    //LogAppend("ERROR when trying to copy folder " + src + "\r\nMost likely the path already exists\r\n\r\n" + e.Message + Environment.NewLine);
+                    return;
+                }
+                catch (Exception e)
+                {
+                    //LogAppend("ERROR: " + e.Message);
+                }
 
-            //                try
-            //                {
-            //                    FileSystem.CopyDirectory(src, fullPath); //https://docs.microsoft.com/en-us/dotnet/api/microsoft.visualbasic.fileio.filesystem.copydirectory?view=net-5.0
-            //                }
-            //                catch (DirectoryNotFoundException e)
-            //                {
-            //                    LogAppend("ERROR when trying to copy folder " + src + "\r\nCould not find path. Did you enter the path correctly?\r\n" + e.Message + Environment.NewLine);
-            //                    return;
-            //                }
-            //                catch (IOException e)
-            //                {
-            //                    LogAppend("ERROR when trying to copy folder " + src + "\r\nMost likely the path already exists\r\n\r\n" + e.Message + Environment.NewLine);
-            //                    return;
-            //                }
-            //                catch (Exception e)
-            //                {
-            //                    LogAppend("ERROR: " + e.Message);
-            //                }
-
-            //                if (Directory.Exists(fullPath))
-            //                    LogAppend("\r\nSuccessfully copied folder " + src + " to path" + pathNum + "\r\n");
-            //                else
-            //                    LogAppend("\r\nERROR. Folder " + src + " was NOT successfully copied to path" + pathNum + "\r\n");
-            //            }
+                //if (Directory.Exists(fullPath))
+                //    LogAppend("\r\nSuccessfully copied folder " + src + " to path" + pathNum + "\r\n");
+                //else
+                //    LogAppend("\r\nERROR. Folder " + src + " was NOT successfully copied to path" + pathNum + "\r\n");
+            }
         }
 
         //When backup completes, open path1 and/or path2 in File Explorer if user checks the box to copy stuff there and to open it in File Explorer.
-        private void ShowPath1And2(string timestamp)
+        private void ShowPath1AndOr2(string timestamp)
         {
-            //            if (fileExplorerBtn.Checked) return;
+            if (path1CheckBox.Checked && openPath1Box.Checked)
+                OpenInExplorer(Path.Combine(path1TextBox.Text, "GBP backup " + timestamp));
 
-            //            if (path1CheckBox.Checked && openPath1Box.Checked)
-            //                OpenInExplorer(createTimestampFolderBtn.Checked ? Path.Combine(path1TextBox.Text, "GBP backup " + timestamp) : path1TextBox.Text);
-
-            //            if (path2CheckBox.Checked && openPath2Box.Checked)
-            //                OpenInExplorer(createTimestampFolderBtn.Checked ? Path.Combine(path2TextBox.Text, "GBP backup " + timestamp) : path2TextBox.Text);
+            if (path2CheckBox.Checked && openPath2Box.Checked)
+                OpenInExplorer(Path.Combine(path1TextBox.Text, "GBP backup " + timestamp));
         }
 
         //Open an item in Explorer. https://stackoverflow.com/a/13680458
         private void OpenInExplorer(string path)
         {
-            //            if (path != String.Empty)
-            //            {
-            //                path = Path.GetFullPath(path);
-            //                Process.Start("explorer.exe", $"/select,\"{path}\"");
-            //            }
-            //        }
-
-            //        //Delete a single directory, ignoring exception about it not existing/found.
-            //        private void DeleteDirectory(string dir)
-            //        {
-            //            try
-            //            {
-            //                Directory.Delete(dir, true);
-            //            }
-            //            catch (UnauthorizedAccessException e)
-            //            {
-            //                MessageBox.Show("An error occurred: " + e.Message);
-            //            }
-            //            catch (DirectoryNotFoundException)
-            //            {
-            //                //Ignore error lol ;)
-            //            }
-            //        }
-
-            //        private void DeletePath1AndOr2(bool clrPath1, bool clrPath2)
-            //        {
-            //            if (clrPath1)
-            //                DeleteDirectory(path1TextBox.Text);
-            //            if (clrPath2)
-            //                DeleteDirectory(path2TextBox.Text);
+            if (path != String.Empty)
+            {
+                path = Path.GetFullPath(path);
+                Process.Start("explorer.exe", $"/select,\"{path}\"");
+            }
         }
+
+        //        //Delete a single directory, ignoring exception about it not existing/found.
+        //        private void DeleteDirectory(string dir)
+        //        {
+        //            try
+        //            {
+        //                Directory.Delete(dir, true);
+        //            }
+        //            catch (UnauthorizedAccessException e)
+        //            {
+        //                MessageBox.Show("An error occurred: " + e.Message);
+        //            }
+        //            catch (DirectoryNotFoundException)
+        //            {
+        //                //Ignore error lol ;)
+        //            }
+        //        }
+
+        //        private void DeletePath1AndOr2(bool clrPath1, bool clrPath2)
+        //        {
+        //            if (clrPath1)
+        //                DeleteDirectory(path1TextBox.Text);
+        //            if (clrPath2)
+        //                DeleteDirectory(path2TextBox.Text);
 
         //Does something based on which of the 3 buttons is selected.
         //Returns false if user presses 'Cancel'; true otherwise (false is what really matters).
@@ -371,9 +353,58 @@ namespace Graphical_Backup_Program
             //ShowPath1And2(timestamp);
         }
 
+        //Returns true if a group is checked. 
+        private bool GroupChecked(char group)
+        {
+            if (group == '0' && checkBox0.Checked || group == '1' && checkBox1.Checked || group == '2' && checkBox2.Checked || group == '3' && checkBox3.Checked || group == '4' && checkBox4.Checked || group == '5' && checkBox5.Checked || group == '6' && checkBox6.Checked || group == '7' && checkBox7.Checked || group == '8' && checkBox8.Checked || group == '9' && checkBox9.Checked)
+                return true;
+            return false;
+        }
+
+        //Returns true if group is a number 0-9.
+        private bool ValidGroupChar(char group)
+        {
+            return (Char.GetNumericValue(group) >= 0 && Char.GetNumericValue(group) <= 9 && Char.IsNumber(group));
+        }
+
         private void BackupBtn_Click(object sender, EventArgs e)
         {
+            //Idiot-proofing
+            if (SamePaths()) return;
+            if (Path1Or2Invalid()) return;
 
+            File.WriteAllText(_pathsFilePath, pathsTextBox.Text);
+            if (ClearFolders() == false)
+                return;
+
+            backupBtn.Enabled = false;
+            string timestamp = DateTime.Now.ToString("M-d-yyyy hh;mm;ss tt"); //'/' and ':' won't work in paths because Windows.
+            stripLabel.Text = "Backing up...";
+
+            string[] allPaths = pathsTextBox.Text.Split("\r\n");
+            List<Thread> threads = new();
+
+            foreach (string path in allPaths)
+            {
+                char group = path[0];
+                string trimmedPath = path.Trim()[2..];
+
+                if (GroupChecked(group) && ValidGroupChar(group))
+                {
+                    Thread t = new(() => CopyPath1AndOr2(trimmedPath, timestamp));
+                    t.Start();
+                    threads.Add(t);
+                }
+                else if (Char.ToLower(path[0]) != '#') //# are used for comments
+                    LogAppend($"\r\nGBP cannot understand this line: \"{path}\"\r\n");
+            }
+
+            //foreach (Thread thread in threads) //Wait for all threads to finish.
+                //thread.Join();
+
+            backupBtn.Enabled = true;
+            stripLabel.Text = "Backup completed. Ready to begin next backup.";
+            //ShowPath1AndOr2(timestamp);
         }
 
         //For path1/2 CheckBoxes
