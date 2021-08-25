@@ -147,7 +147,7 @@ namespace Graphical_Backup_Program
         }
 
         //Open an item in Explorer. https://stackoverflow.com/a/13680458
-        private void OpenInExplorer(string path)
+        private static void OpenInExplorer(string path)
         {
             if (path != String.Empty)
             {
@@ -157,7 +157,7 @@ namespace Graphical_Backup_Program
         }
 
         //Delete a single directory, ignoring exception about it not existing/found.
-        private void DeleteDirectory(string dir)
+        private static void DeleteDirectory(string dir)
         {
             try
             {
@@ -274,13 +274,13 @@ namespace Graphical_Backup_Program
         }
 
         //Returns true if group is a number 0-9.
-        private bool ValidGroupChar(char group)
+        private static bool ValidGroupChar(char group)
         {
             return (Char.GetNumericValue(group) >= 0 && Char.GetNumericValue(group) <= 9 && Char.IsNumber(group));
         }
 
         //Thank you StackOverflow, very cool. https://stackoverflow.com/a/43232486
-        private void OpenUrl(string url)
+        private static void OpenUrl(string url)
         {
             try
             {
@@ -386,9 +386,95 @@ namespace Graphical_Backup_Program
             UpdateControls();
         }
 
+        private static double GetFileSize(string path)
+        {
+            double size = 0;
+
+            try
+            {
+                size = new FileInfo(path).Length; //https://stackoverflow.com/questions/1380839/how-do-you-get-the-file-size-in-c/20863065
+            }
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show("Could not find file " + path, "Cannot Find File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return size;
+        }
+
+        private static double GetFolderSize(string path)
+        {
+            double size = 0;
+
+            try
+            {
+                DirectoryInfo di = new(path); //https://stackoverflow.com/questions/12166404/how-do-i-get-folder-size-in-c
+                size += di.EnumerateFiles("*", SearchOption.AllDirectories).Sum(fi => fi.Length);
+            }
+            catch (DirectoryNotFoundException)
+            {
+                MessageBox.Show("Could not find folder " + path, "Cannot Find Folder", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return size;
+        }
+
+        //The big TextBox.
         private void PathsTextBox_TextChanged(object sender, EventArgs e)
         {
             UpdateControls();
+        }
+
+        private void UpdateBackupSize()
+        {
+            double backupSize = 0;
+            foreach (string line in pathsTextBox.Text.Split("\r\n"))
+            {
+                if (line == String.Empty) continue;
+                string path = line[2..];
+
+                if (Path.HasExtension(path))
+                    backupSize += GetFileSize(path);
+                else
+                    backupSize += GetFolderSize(path);
+            }
+
+            string unit;
+            double convertedBackupSize;
+
+            if (backupSize >= 1100000000000)
+            {
+                unit = "TB";
+                convertedBackupSize = backupSize / 1100000000000;
+            }
+            else if (backupSize >= 1074000000)
+            {
+                unit = "GB";
+                convertedBackupSize = backupSize / 1074000000;
+            }
+            else if (backupSize >= 1049000)
+            {
+                unit = "MB";
+                convertedBackupSize = backupSize / 1049000;
+            }
+            else if (backupSize >= 1024)
+            {
+                unit = "KB";
+                convertedBackupSize = backupSize / 1024;
+            }
+            else
+            {
+                unit = "bytes";
+                convertedBackupSize = backupSize;
+            }
+
+            numberLabel.Text = Math.Round(convertedBackupSize, 3).ToString();
+            unitLabel.Text = unit;
+        }
+
+        private void PathsTextBox_Leave(object sender, EventArgs e)
+        {
+            UpdateBackupSize();
         }
 
         //On startup, assign GUI controls values from files, and disable any controls, if necessary.
@@ -455,6 +541,8 @@ namespace Graphical_Backup_Program
             autoClearRadio.Checked = Boolean.Parse(config[29]);
             clearWithPromptRadio.Checked = Boolean.Parse(config[30]);
             dontClearRadio.Checked = Boolean.Parse(config[31]);
+
+            UpdateBackupSize();
         }
 
         //On exit, save config stuff for next time.

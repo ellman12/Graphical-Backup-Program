@@ -4,12 +4,17 @@ v2.0 completely revamps and overhauls a lot of GBP
 	Added StatusStrip with a label with useful info and a progress bar
 • Improved text of clearing folders MessageBoxes
 
-TODO:
-progress bar
+*Zipping
+* Check Git Log to veryify I document every change
+* backup size displayed
 
 • Changed from common and uncommon paths to "groups". Now instead of specifying 'c' or 'u', you specify a number 0-9. You can then check which ones you want backed up. There is also the ability to label what each group is.
 • Removed GroupBox that toggles the creation of a timestamp folder because I have no idea why you wouldn't want that (and because I was running out of GUI space).
 • Add a feature to automatically open a URL like to Google Drive when a backup finishes.
+
+TODO:
+progress bar
+
 • Gonna have to update README
 Try WaitCursor and explore other properties
 Log should output to a file now. Open in either Notepad or a Form or something on completion
