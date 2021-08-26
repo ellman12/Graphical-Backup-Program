@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -300,6 +300,11 @@ namespace Graphical_Backup_Program
             }
         }
 
+        private void RunProgressBar(string timestamp)
+        {
+
+        }
+
         private void BackupBtn_Click(object sender, EventArgs e)
         {
             //Idiot-proofing
@@ -318,6 +323,14 @@ namespace Graphical_Backup_Program
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
             List<Thread> threads = new();
 
+            //if (path1CheckBox.Checked && path1TextBox.Text != String.Empty)
+            //    if (!Directory.Exists(Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp)))
+            //        Directory.CreateDirectory(Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp));
+
+            //if (path2CheckBox.Checked && path2TextBox.Text != String.Empty)
+            //    if (!Directory.Exists(Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp)))
+            //        Directory.CreateDirectory(Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp));
+
             foreach (string path in allPaths)
             {
                 if (path == String.Empty) continue;
@@ -335,6 +348,50 @@ namespace Graphical_Backup_Program
                 else if (Char.ToLower(path[0]) != '#') //# are used for comments
                     LogAppend($"\r\nGBP cannot understand this line: \"{path}\"\r\n");
             }
+
+            //Thread.Sleep(1000);
+
+            progressBar.Minimum = 0;
+            progressBar.Maximum = 100;
+
+            //if (path1CheckBox.Checked && path1TextBox.Text != String.Empty && path2CheckBox.Checked && path2TextBox.Text != String.Empty)
+            //{
+            //    double currentSize = 0;
+            //    double path1 = 0, path2 = 0;
+            //    double finalSize = UpdateBackupSize() * 2;
+            //    while (currentSize < finalSize)
+            //    {
+            //        path1 = (GetFolderSize(Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp)));
+            //        path2 = GetFolderSize(Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp));
+            //        currentSize = path1 + path2;
+            //        int progress = Convert.ToInt32((currentSize / finalSize) * 100);
+            //        progressBar.Value = progress;
+            //    }
+            //}
+
+            if (path1CheckBox.Checked && path1TextBox.Text != String.Empty)
+            {
+                double currentSize = 0;
+                double finalSize = UpdateBackupSize();
+                while (currentSize < finalSize)
+                {
+                    currentSize = GetFolderSize(Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp));
+                    int progress = Convert.ToInt32((currentSize / finalSize) * 100);
+                    progressBar.Value = progress;
+                }
+            }
+
+            //if (path2CheckBox.Checked && path2TextBox.Text != String.Empty)
+            //{
+            //    double currentSize = 0;
+            //    double finalSize = UpdateBackupSize();
+            //    while (currentSize < finalSize)
+            //    {
+            //        currentSize = GetFolderSize(Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp));
+            //        int progress = Convert.ToInt32((currentSize / finalSize) * 100);
+            //        progressBar.Value = progress;
+            //    }
+            //}
 
             foreach (Thread thread in threads) //Wait for all threads to finish.
                 thread.Join();
@@ -425,7 +482,7 @@ namespace Graphical_Backup_Program
             UpdateControls();
         }
 
-        private void UpdateBackupSize()
+        private long UpdateBackupSize()
         {
             double backupSize = 0;
             foreach (string line in pathsTextBox.Text.Split("\r\n"))
@@ -470,6 +527,8 @@ namespace Graphical_Backup_Program
 
             numberLabel.Text = Math.Round(convertedBackupSize, 3).ToString();
             unitLabel.Text = unit;
+
+            return Convert.ToInt64(backupSize);
         }
 
         private void PathsTextBox_Leave(object sender, EventArgs e)
