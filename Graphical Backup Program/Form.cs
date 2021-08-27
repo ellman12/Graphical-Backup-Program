@@ -139,7 +139,7 @@ namespace Graphical_Backup_Program
         //When backup completes, open path1 and/or path2 in File Explorer if user checks the box to copy stuff there and to open it in File Explorer.
         private void ShowPath1AndOr2(string timestamp)
         {
-            if (path1CheckBox.Checked && openPath1Box.Checked)
+            if (path1CheckBox.Checked && openOnComplete.Checked)
                 OpenInExplorer(zipCheckBox.Checked ? Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp + ".zip") : Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp));
 
             if (path2CheckBox.Checked && openPath2Box.Checked)
@@ -223,43 +223,17 @@ namespace Graphical_Backup_Program
             return true; //True means no errors happened or whatever.
         }
 
-        //Yells at the user if they try to be an idiot and put the same path for path1 and 2 (but only if they're both checked).
-        private bool SamePaths()
+        private bool BackupPathInvalid()
         {
-            if (path1CheckBox.Checked && path2CheckBox.Checked)
-            {
-                if (path1TextBox.Text == path2TextBox.Text)
-                {
-                    MessageBox.Show("You cannot have the same path for path1 and path2!", "Error: Duplicate Paths", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private bool Path1AndOr2Invalid()
-        {
-            if (path1CheckBox.Checked && Path.HasExtension(path1TextBox.Text))
+            if (path1Btn.Checked && Path.HasExtension(path1TextBox.Text))
             {
                 MessageBox.Show("path1 cannot be a file!", "Error: File Path Specified for path1", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return true;
             }
 
-            if (path2CheckBox.Checked && Path.HasExtension(path2TextBox.Text))
+            if (path2Btn.Checked && Path.HasExtension(path2TextBox.Text))
             {
                 MessageBox.Show("path2 cannot be a file!", "Error: File Path Specified for path2", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return true;
-            }
-
-            if (path1CheckBox.Checked && path1TextBox.Text == String.Empty)
-            {
-                MessageBox.Show("If you want to copy items to path1, enter a folder path. If not, uncheck the box.", "Error: No folder path specified for path1 but box checked", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return true;
-            }
-
-            if (path2CheckBox.Checked && path2TextBox.Text == String.Empty)
-            {
-                MessageBox.Show("If you want to copy items to path2, enter a folder path. If not, uncheck the box.", "Error: No folder path specified for path2 but box checked", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return true;
             }
             return false;
@@ -308,8 +282,8 @@ namespace Graphical_Backup_Program
         private void BackupBtn_Click(object sender, EventArgs e)
         {
             //Idiot-proofing
-            if (SamePaths()) return;
-            if (Path1AndOr2Invalid()) return;
+            //if (SamePaths()) return;
+            if (BackupPathInvalid()) return;
 
             File.WriteAllText(_pathsFilePath, pathsTextBox.Text);
             if (ClearFolders() == false) //If user presses 'cancel' when asked if they want to clear, abort the entire process.
@@ -564,7 +538,7 @@ namespace Graphical_Backup_Program
             //If config file has no text, write default values to file.
             if (configFileTxt == String.Empty)
             {
-                const string defaultConfigValues = "false\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nUse these for...\r\n...labeling groups\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\ntrue\r\n\r\ntrue\r\nfalse\r\n\r\nfalse\r\nfalse\r\n\r\nfalse\r\nfalse\r\ntrue\r\nfalse";
+                const string defaultConfigValues = "false\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\ntrue\r\n\r\nfalse\r\n\r\ntrue\r\nfalse\r\n\r\nfalse";
                 File.WriteAllText(_configFilePath, defaultConfigValues);
                 configFileTxt = defaultConfigValues; //Process like normal, even though technically it didn't read anything in from the file.
             }
@@ -590,18 +564,14 @@ namespace Graphical_Backup_Program
             textBox7.Text = config[17];
             textBox8.Text = config[18];
             textBox9.Text = config[19];
-            path1CheckBox.Checked = Boolean.Parse(config[20]);
+            path1Btn.Checked = Boolean.Parse(config[20]);
             path1TextBox.Text = config[21];
-            openPath1Box.Checked = Boolean.Parse(config[22]);
-            path2CheckBox.Checked = Boolean.Parse(config[23]);
-            path2TextBox.Text = config[24];
-            openPath2Box.Checked = Boolean.Parse(config[25]);
-            urlCheckBox.Checked = Boolean.Parse(config[26]);
-            urlTextBox.Text = config[27];
-            zipCheckBox.Checked = Boolean.Parse(config[28]);
-            autoClearRadio.Checked = Boolean.Parse(config[29]);
-            clearWithPromptRadio.Checked = Boolean.Parse(config[30]);
-            dontClearRadio.Checked = Boolean.Parse(config[31]);
+            path2Btn.Checked = Boolean.Parse(config[22]);
+            path2TextBox.Text = config[23];
+            openOnComplete.Checked = Boolean.Parse(config[24]);
+            urlCheckBox.Checked = Boolean.Parse(config[25]);
+            urlTextBox.Text = config[26];
+            zipCheckBox.Checked = Boolean.Parse(config[27]);
 
             UpdateBackupSize();
         }
@@ -627,7 +597,7 @@ namespace Graphical_Backup_Program
         private void SaveToFiles()
         {
             File.WriteAllText(_pathsFilePath, pathsTextBox.Text);
-            string configFileText = checkBox0.Checked + "\r\n" + checkBox1.Checked + "\r\n" + checkBox2.Checked + "\r\n" + checkBox3.Checked + "\r\n" + checkBox4.Checked + "\r\n" + checkBox5.Checked + "\r\n" + checkBox6.Checked + "\r\n" + checkBox7.Checked + "\r\n" + checkBox8.Checked + "\r\n" + checkBox9.Checked + "\r\n" + textBox0.Text + "\r\n" + textBox1.Text + "\r\n" + textBox2.Text + "\r\n" + textBox3.Text + "\r\n" + textBox4.Text + "\r\n" + textBox5.Text + "\r\n" + textBox6.Text + "\r\n" + textBox7.Text + "\r\n" + textBox8.Text + "\r\n" + textBox9.Text + "\r\n" + path1CheckBox.Checked + "\r\n" + path1TextBox.Text + "\r\n" + openPath1Box.Checked + "\r\n" + path2CheckBox.Checked + "\r\n" + path2TextBox.Text + "\r\n" + openPath2Box.Checked + "\r\n" + urlCheckBox.Checked + "\r\n" + urlTextBox.Text + "\r\n" + zipCheckBox.Checked + "\r\n" + autoClearRadio.Checked + "\r\n" + clearWithPromptRadio.Checked + "\r\n" + dontClearRadio.Checked;
+            string configFileText = checkBox0.Checked + "\r\n" + checkBox1.Checked + "\r\n" + checkBox2.Checked + "\r\n" + checkBox3.Checked + "\r\n" + checkBox4.Checked + "\r\n" + checkBox5.Checked + "\r\n" + checkBox6.Checked + "\r\n" + checkBox7.Checked + "\r\n" + checkBox8.Checked + "\r\n" + checkBox9.Checked + "\r\n" + textBox0.Text + "\r\n" + textBox1.Text + "\r\n" + textBox2.Text + "\r\n" + textBox3.Text + "\r\n" + textBox4.Text + "\r\n" + textBox5.Text + "\r\n" + textBox6.Text + "\r\n" + textBox7.Text + "\r\n" + textBox8.Text + "\r\n" + textBox9.Text + "\r\n" + path1Btn.Checked + "\r\n" + path1TextBox.Text + "\r\n" + path2Btn.Checked + "\r\n" + path2TextBox.Text + "\r\n" + openOnComplete.Checked + "\r\n" + urlCheckBox.Checked + "\r\n" + urlTextBox.Text + "\r\n" + zipCheckBox.Checked;
             File.WriteAllText(_configFilePath, configFileText);
         }
 

@@ -33,10 +33,10 @@ namespace Graphical_Backup_Program
             this.TextBoxLabel = new System.Windows.Forms.Label();
             this.pathsTextBox = new System.Windows.Forms.TextBox();
             this.whereToBackupBox = new System.Windows.Forms.GroupBox();
-            this.usePath2Btn = new System.Windows.Forms.RadioButton();
-            this.usePath1Btn = new System.Windows.Forms.RadioButton();
+            this.path2Btn = new System.Windows.Forms.RadioButton();
+            this.path1Btn = new System.Windows.Forms.RadioButton();
             this.zipCheckBox = new System.Windows.Forms.CheckBox();
-            this.openPath1Box = new System.Windows.Forms.CheckBox();
+            this.openOnComplete = new System.Windows.Forms.CheckBox();
             this.clearPath2 = new System.Windows.Forms.Button();
             this.clearPath1 = new System.Windows.Forms.Button();
             this.path2TextBox = new System.Windows.Forms.TextBox();
@@ -104,10 +104,10 @@ namespace Graphical_Backup_Program
             // 
             // whereToBackupBox
             // 
-            this.whereToBackupBox.Controls.Add(this.usePath2Btn);
-            this.whereToBackupBox.Controls.Add(this.usePath1Btn);
+            this.whereToBackupBox.Controls.Add(this.path2Btn);
+            this.whereToBackupBox.Controls.Add(this.path1Btn);
             this.whereToBackupBox.Controls.Add(this.zipCheckBox);
-            this.whereToBackupBox.Controls.Add(this.openPath1Box);
+            this.whereToBackupBox.Controls.Add(this.openOnComplete);
             this.whereToBackupBox.Controls.Add(this.clearPath2);
             this.whereToBackupBox.Controls.Add(this.clearPath1);
             this.whereToBackupBox.Controls.Add(this.path2TextBox);
@@ -119,27 +119,27 @@ namespace Graphical_Backup_Program
             this.whereToBackupBox.TabStop = false;
             this.whereToBackupBox.Text = "Where to Backup";
             // 
-            // usePath2Btn
+            // path2Btn
             // 
-            this.usePath2Btn.AutoSize = true;
-            this.usePath2Btn.Location = new System.Drawing.Point(6, 51);
-            this.usePath2Btn.Name = "usePath2Btn";
-            this.usePath2Btn.Size = new System.Drawing.Size(83, 19);
-            this.usePath2Btn.TabIndex = 18;
-            this.usePath2Btn.Text = "Use Path 2:";
-            this.usePath2Btn.UseVisualStyleBackColor = true;
+            this.path2Btn.AutoSize = true;
+            this.path2Btn.Location = new System.Drawing.Point(6, 51);
+            this.path2Btn.Name = "path2Btn";
+            this.path2Btn.Size = new System.Drawing.Size(83, 19);
+            this.path2Btn.TabIndex = 18;
+            this.path2Btn.Text = "Use Path 2:";
+            this.path2Btn.UseVisualStyleBackColor = true;
             // 
-            // usePath1Btn
+            // path1Btn
             // 
-            this.usePath1Btn.AutoSize = true;
-            this.usePath1Btn.Checked = true;
-            this.usePath1Btn.Location = new System.Drawing.Point(6, 20);
-            this.usePath1Btn.Name = "usePath1Btn";
-            this.usePath1Btn.Size = new System.Drawing.Size(83, 19);
-            this.usePath1Btn.TabIndex = 17;
-            this.usePath1Btn.TabStop = true;
-            this.usePath1Btn.Text = "Use Path 1:";
-            this.usePath1Btn.UseVisualStyleBackColor = true;
+            this.path1Btn.AutoSize = true;
+            this.path1Btn.Checked = true;
+            this.path1Btn.Location = new System.Drawing.Point(6, 20);
+            this.path1Btn.Name = "path1Btn";
+            this.path1Btn.Size = new System.Drawing.Size(83, 19);
+            this.path1Btn.TabIndex = 17;
+            this.path1Btn.TabStop = true;
+            this.path1Btn.Text = "Use Path 1:";
+            this.path1Btn.UseVisualStyleBackColor = true;
             // 
             // zipCheckBox
             // 
@@ -152,18 +152,18 @@ namespace Graphical_Backup_Program
             this.zipCheckBox.Text = "Compress Backup";
             this.zipCheckBox.UseVisualStyleBackColor = true;
             // 
-            // openPath1Box
+            // openOnComplete
             // 
-            this.openPath1Box.AutoSize = true;
-            this.openPath1Box.Checked = true;
-            this.openPath1Box.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.openPath1Box.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.openPath1Box.Location = new System.Drawing.Point(502, 20);
-            this.openPath1Box.Name = "openPath1Box";
-            this.openPath1Box.Size = new System.Drawing.Size(138, 19);
-            this.openPath1Box.TabIndex = 6;
-            this.openPath1Box.Text = "Open on Completion";
-            this.openPath1Box.UseVisualStyleBackColor = true;
+            this.openOnComplete.AutoSize = true;
+            this.openOnComplete.Checked = true;
+            this.openOnComplete.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.openOnComplete.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.openOnComplete.Location = new System.Drawing.Point(502, 20);
+            this.openOnComplete.Name = "openOnComplete";
+            this.openOnComplete.Size = new System.Drawing.Size(138, 19);
+            this.openOnComplete.TabIndex = 6;
+            this.openOnComplete.Text = "Open on Completion";
+            this.openOnComplete.UseVisualStyleBackColor = true;
             // 
             // clearPath2
             // 
@@ -572,7 +572,7 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.TextBox path1TextBox;
         private System.Windows.Forms.Button clearPath2;
         private System.Windows.Forms.Button clearPath1;
-        private System.Windows.Forms.CheckBox openPath1Box;
+        private System.Windows.Forms.CheckBox openOnComplete;
         private System.Windows.Forms.GroupBox groupsGroupBox;
         private System.Windows.Forms.TextBox textBox0;
         private System.Windows.Forms.CheckBox checkBox0;
@@ -606,8 +606,8 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.ToolStripStatusLabel numberLabel;
         private System.Windows.Forms.ToolStripStatusLabel backupSizeLabelLabel;
         private System.Windows.Forms.ToolStripStatusLabel unitLabel;
-        private System.Windows.Forms.RadioButton usePath2Btn;
-        private System.Windows.Forms.RadioButton usePath1Btn;
+        private System.Windows.Forms.RadioButton path2Btn;
+        private System.Windows.Forms.RadioButton path1Btn;
         private System.Windows.Forms.CheckBox zipCheckBox;
     }
 }
