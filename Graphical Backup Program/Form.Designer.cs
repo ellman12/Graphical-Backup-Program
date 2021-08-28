@@ -66,7 +66,6 @@ namespace Graphical_Backup_Program
             this.checkBox0 = new System.Windows.Forms.CheckBox();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.stripLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.backupSizeLabelLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.numberLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.unitLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -74,6 +73,7 @@ namespace Graphical_Backup_Program
             this.sortBtn = new System.Windows.Forms.Button();
             this.urlTextBox = new System.Windows.Forms.TextBox();
             this.urlCheckBox = new System.Windows.Forms.CheckBox();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.whereToBackupBox.SuspendLayout();
             this.groupsGroupBox.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -442,12 +442,11 @@ namespace Graphical_Backup_Program
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.stripLabel,
-            this.progressBar,
             this.backupSizeLabelLabel,
             this.numberLabel,
             this.unitLabel});
             this.statusStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.statusStrip.Location = new System.Drawing.Point(0, 360);
+            this.statusStrip.Location = new System.Drawing.Point(0, 362);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(822, 22);
             this.statusStrip.SizingGrip = false;
@@ -462,14 +461,6 @@ namespace Graphical_Backup_Program
             this.stripLabel.Spring = true;
             this.stripLabel.Text = "Ready to Backup";
             this.stripLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // progressBar
-            // 
-            this.progressBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.progressBar.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(160, 16);
-            this.progressBar.Step = 16;
             // 
             // backupSizeLabelLabel
             // 
@@ -531,11 +522,19 @@ namespace Graphical_Backup_Program
             this.urlCheckBox.Text = "Open URL on Completion:";
             this.urlCheckBox.UseVisualStyleBackColor = true;
             // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(654, 367);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(160, 15);
+            this.progressBar.TabIndex = 17;
+            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(822, 382);
+            this.ClientSize = new System.Drawing.Size(822, 384);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.urlTextBox);
             this.Controls.Add(this.urlCheckBox);
             this.Controls.Add(this.sortBtn);
@@ -602,13 +601,13 @@ namespace Graphical_Backup_Program
         private System.Windows.Forms.Button sortBtn;
         private System.Windows.Forms.TextBox urlTextBox;
         private System.Windows.Forms.CheckBox urlCheckBox;
-        private System.Windows.Forms.ToolStripProgressBar progressBar;
         private System.Windows.Forms.ToolStripStatusLabel numberLabel;
         private System.Windows.Forms.ToolStripStatusLabel backupSizeLabelLabel;
         private System.Windows.Forms.ToolStripStatusLabel unitLabel;
         private System.Windows.Forms.RadioButton path2Btn;
         private System.Windows.Forms.RadioButton path1Btn;
         private System.Windows.Forms.CheckBox zipCheckBox;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }
 

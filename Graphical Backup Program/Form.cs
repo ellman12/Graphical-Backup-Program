@@ -290,20 +290,6 @@ namespace Graphical_Backup_Program
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
             List<Thread> threads = new();
 
-            //if (path1Btn.Checked && path1TextBox.Text != String.Empty)
-            //{
-            //    if (!Directory.Exists(Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp)))
-            //    {
-            //        Directory.CreateDirectory(Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp));
-            //        File.WriteAllText(Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp, "I am temp.txt"), "some stuff");
-            //    }
-            //}
-            //else if (path2Btn.Checked && path2TextBox.Text != String.Empty)
-            //{
-            //    if (!Directory.Exists(Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp)))
-            //        Directory.CreateDirectory(Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp));
-            //}
-
             foreach (string path in allPaths)
             {
                 if (path == String.Empty) continue;
@@ -322,10 +308,29 @@ namespace Graphical_Backup_Program
                     LogAppend($"\r\nGBP cannot understand this line: \"{path}\"\r\n");
             }
 
+            if (path1Btn.Checked && path1TextBox.Text != String.Empty)
+            {
+                if (!Directory.Exists(Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp)))
+                    Directory.CreateDirectory(Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp));
+            }
+            else if (path2Btn.Checked && path2TextBox.Text != String.Empty)
+            {
+                if (!Directory.Exists(Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp)))
+                    Directory.CreateDirectory(Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp));
+            }
+
+            string backupPath = "";
             if (path1Btn.Checked && path1TextBox.Text != "")
-                RunProgressBar(path1TextBox.Text, timestamp);
+                backupPath = path1TextBox.Text;
             else if (path2Btn.Checked && path2TextBox.Text != "")
-                RunProgressBar(path2TextBox.Text, timestamp);
+                backupPath = path2TextBox.Text;
+
+            Thread pThread = new(() => { progressBar.BeginInvoke(new Action(() => { RunProgressBar(backupPath, timestamp); })); });
+            pThread.Start();
+
+            //This kind stranger's answer from long ago is how I finally got this stupid damn progress bar working after so, so very many hours... https://stackoverflow.com/a/1239662
+            while (pThread.IsAlive)
+                Application.DoEvents();
 
             foreach (Thread thread in threads) //Wait for all threads to finish.
                 thread.Join();
