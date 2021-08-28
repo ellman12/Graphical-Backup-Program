@@ -6,6 +6,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using FileSystem = Microsoft.VisualBasic.FileIO.FileSystem;
 
@@ -52,18 +53,15 @@ namespace Graphical_Backup_Program
             File.AppendAllText(_logFilePath, text);
         }
 
-        //Copies path 1 and/or 2 as long as user wants this.
-        private void CopyPath1AndOr2(string trimmedPath, string timestamp)
+        private void CopyBackupPath(string trimmedPath, string timestamp)
         {
-            //Copy each item to path1 and/or path2, as long as the box is checked AND the TextBox isn't blank.
-            if (path1CheckBox.Checked && path1TextBox.Text != String.Empty)
+            if (path1Btn.Checked && path1TextBox.Text != String.Empty)
                 CopyAndLog(trimmedPath, path1TextBox.Text, 1, timestamp);
-
-            if (path2CheckBox.Checked && path2TextBox.Text != String.Empty)
+            else if (path2Btn.Checked && path2TextBox.Text != String.Empty)
                 CopyAndLog(trimmedPath, path2TextBox.Text, 2, timestamp);
         }
 
-        //Used for copying a single item to path1 and/or path2, and for putting some log output in the paths TextBox. pathNum is either 1 or 2.
+        //Used for copying a single item to path1 or path2, and for putting some log output in the paths TextBox. pathNum is either 1 or 2.
         private void CopyAndLog(string src, string dest, int pathNum, string timestamp)
         {
             src = src.Trim(); //Remove pesky whitespace from start and end of path.
@@ -137,16 +135,18 @@ namespace Graphical_Backup_Program
         }
 
         //When backup completes, open path1 and/or path2 in File Explorer if user checks the box to copy stuff there and to open it in File Explorer.
-        private void ShowPath1AndOr2(string timestamp)
+        private void ShowBackupPath(string timestamp)
         {
-            if (path1CheckBox.Checked && openOnComplete.Checked)
-                OpenInExplorer(zipCheckBox.Checked ? Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp + ".zip") : Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp));
-
-            if (path2CheckBox.Checked && openPath2Box.Checked)
-                OpenInExplorer(zipCheckBox.Checked ? Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp + ".zip") : Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp));
+            if (openOnComplete.Checked)
+            {
+                if (path1Btn.Checked)
+                    OpenInExplorer(zipCheckBox.Checked ? Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp + ".zip") : Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp));
+                else if (path2Btn.Checked)
+                    OpenInExplorer(zipCheckBox.Checked ? Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp + ".zip") : Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp));
+            }
         }
 
-        //Open an item in Explorer. https://stackoverflow.com/a/13680458
+        //Open (and highlight) an item in Explorer. https://stackoverflow.com/a/13680458
         private static void OpenInExplorer(string path)
         {
             if (path != String.Empty)
@@ -183,43 +183,31 @@ namespace Graphical_Backup_Program
 
         //Does something based on which of the 3 buttons is selected.
         //Returns false if user presses 'Cancel'; true otherwise (false is what really matters; signals program to not proceed with clearing).
-        private bool ClearFolders()
+        private bool ClearFolder()
         {
             bool clrPath1 = false, clrPath2 = false;
-            if (path1CheckBox.Checked && path1TextBox.Text != String.Empty) clrPath1 = true;
-            if (path2CheckBox.Checked && path2TextBox.Text != String.Empty) clrPath2 = true;
+            if (path1Btn.Checked && path1TextBox.Text != String.Empty) clrPath1 = true;
+            if (path2Btn.Checked && path2TextBox.Text != String.Empty) clrPath2 = true;
 
-            if (autoClearRadio.Checked) //Clear them without any prompt/warning.
+            string text = "", caption = "";
+            if (clrPath1)
             {
-                DeletePath1AndOr2(clrPath1, clrPath2);
+                text = $"Clear path1 ({path1TextBox.Text}) before backing up?";
+                caption = "Clear path1?";
             }
-            else if (clearWithPromptRadio.Checked)
+            else if (clrPath2)
             {
-                string text = "", caption = "";
-                if (clrPath1 && clrPath2)
-                {
-                    text = $"Clear path1 ({path1TextBox.Text})\nand path2 ({path2TextBox.Text})\nbefore backing up?";
-                    caption = "Clear path1 AND path2?";
-                }
-                else if (clrPath1)
-                {
-                    text = $"Clear path1 ({path1TextBox.Text}) before backing up?";
-                    caption = "Clear path1?";
-                }
-                else if (clrPath2)
-                {
-                    text = $"Clear path2 ({path2TextBox.Text}) before backing up?";
-                    caption = "Clear path2?";
-                }
-                DialogResult dialogResult = MessageBox.Show(text, caption, MessageBoxButtons.YesNoCancel);
+                text = $"Clear path2 ({path2TextBox.Text}) before backing up?";
+                caption = "Clear path2?";
+            }
 
-                if (dialogResult == DialogResult.Yes) //https://stackoverflow.com/a/3036851
-                {
-                    DeletePath1AndOr2(clrPath1, clrPath2); //User confirmed that they do want to clear path1/2, so do it.
-                }
-                else if (dialogResult == DialogResult.Cancel)
-                    return false; //Signify pressing 'cancel' button.
-            }
+            DialogResult dialogResult = MessageBox.Show(text, caption, MessageBoxButtons.YesNoCancel);
+
+            if (dialogResult == DialogResult.Yes) //https://stackoverflow.com/a/3036851
+                DeletePath1AndOr2(clrPath1, clrPath2); //User confirmed that they do want to clear path1/2, so do it.
+            else if (dialogResult == DialogResult.Cancel)
+                return false; //Signify pressing 'cancel' button.
+
             return true; //True means no errors happened or whatever.
         }
 
@@ -262,31 +250,36 @@ namespace Graphical_Backup_Program
             }
             catch
             {
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                {
-                    url = url.Replace("&", "^&");
-                    Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
-                }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                    Process.Start("xdg-open", url);
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-                    Process.Start("open", url);
+                //if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                //{
+                url = url.Replace("&", "^&");
+                Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+                //}
+                //else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                //Process.Start("xdg-open", url);
+                //else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                //Process.Start("open", url);
             }
         }
 
-        private void RunProgressBar(string timestamp)
+        private void RunProgressBar(string backupPath, string timestamp)
         {
-
+            double currentSize = 0;
+            double finalSize = UpdateBackupSize();
+            while (currentSize < finalSize)
+            {
+                currentSize = GetFolderSize(Path.Combine(backupPath, "GBP Backup " + timestamp));
+                int progress = Convert.ToInt32((currentSize / finalSize) * 100);
+                progressBar.Value = progress;
+            }
         }
 
         private void BackupBtn_Click(object sender, EventArgs e)
         {
-            //Idiot-proofing
-            //if (SamePaths()) return;
-            if (BackupPathInvalid()) return;
-
+            if (BackupPathInvalid()) return; //Idiot-proofing
             File.WriteAllText(_pathsFilePath, pathsTextBox.Text);
-            if (ClearFolders() == false) //If user presses 'cancel' when asked if they want to clear, abort the entire process.
+
+            if (ClearFolder() == false) //If user presses 'cancel' when asked if they want to clear, abort the entire process.
                 return;
 
             backupBtn.Enabled = false;
@@ -297,13 +290,19 @@ namespace Graphical_Backup_Program
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
             List<Thread> threads = new();
 
-            //if (path1CheckBox.Checked && path1TextBox.Text != String.Empty)
+            //if (path1Btn.Checked && path1TextBox.Text != String.Empty)
+            //{
             //    if (!Directory.Exists(Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp)))
+            //    {
             //        Directory.CreateDirectory(Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp));
-
-            //if (path2CheckBox.Checked && path2TextBox.Text != String.Empty)
+            //        File.WriteAllText(Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp, "I am temp.txt"), "some stuff");
+            //    }
+            //}
+            //else if (path2Btn.Checked && path2TextBox.Text != String.Empty)
+            //{
             //    if (!Directory.Exists(Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp)))
             //        Directory.CreateDirectory(Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp));
+            //}
 
             foreach (string path in allPaths)
             {
@@ -315,7 +314,7 @@ namespace Graphical_Backup_Program
 
                 if (GroupChecked(group) && ValidGroupChar(group))
                 {
-                    Thread t = new(() => CopyPath1AndOr2(trimmedPath, timestamp));
+                    Thread t = new(() => CopyBackupPath(trimmedPath, timestamp));
                     t.Start();
                     threads.Add(t);
                 }
@@ -323,49 +322,10 @@ namespace Graphical_Backup_Program
                     LogAppend($"\r\nGBP cannot understand this line: \"{path}\"\r\n");
             }
 
-            //Thread.Sleep(3000);
-
-            progressBar.Minimum = 0;
-            progressBar.Maximum = 100;
-
-            if (path1CheckBox.Checked && path1TextBox.Text != String.Empty && path2CheckBox.Checked && path2TextBox.Text != String.Empty)
-            {
-                double currentSize = 0;
-                double path1 = 0, path2 = 0;
-                double finalSize = UpdateBackupSize() * 2;
-                while (currentSize < finalSize)
-                {
-                    path1 = (GetFolderSize(Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp)));
-                    path2 = GetFolderSize(Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp));
-                    currentSize = path1 + path2;
-                    int progress = Convert.ToInt32((currentSize / finalSize) * 100);
-                    progressBar.Value = progress;
-                }
-            }
-
-            if (path1CheckBox.Checked && path1TextBox.Text != String.Empty)
-            {
-                double currentSize = 0;
-                double finalSize = UpdateBackupSize();
-                while (currentSize < finalSize)
-                {
-                    currentSize = GetFolderSize(Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp));
-                    int progress = Convert.ToInt32((currentSize / finalSize) * 100);
-                    progressBar.Value = progress;
-                }
-            }
-
-            if (path2CheckBox.Checked && path2TextBox.Text != String.Empty)
-            {
-                double currentSize = 0;
-                double finalSize = UpdateBackupSize();
-                while (currentSize < finalSize)
-                {
-                    currentSize = GetFolderSize(Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp));
-                    int progress = Convert.ToInt32((currentSize / finalSize) * 100);
-                    progressBar.Value = progress;
-                }
-            }
+            if (path1Btn.Checked && path1TextBox.Text != "")
+                RunProgressBar(path1TextBox.Text, timestamp);
+            else if (path2Btn.Checked && path2TextBox.Text != "")
+                RunProgressBar(path2TextBox.Text, timestamp);
 
             foreach (Thread thread in threads) //Wait for all threads to finish.
                 thread.Join();
@@ -373,42 +333,33 @@ namespace Graphical_Backup_Program
             if (urlCheckBox.Checked && urlTextBox.Text != String.Empty)
                 OpenUrl(urlTextBox.Text);
 
-            if (zipCheckBox.Checked)
-            {
-                if (path1CheckBox.Checked && path1TextBox.Text != "")
-                {
-                    string path1BackupPath = Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp);
-                    string path1ZipPath = Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp + ".zip");
-                    ZipFile.CreateFromDirectory(path1BackupPath, path1ZipPath);
-                    if (File.Exists(path1ZipPath))
-                        LogAppend("\nSuccessfully compressed path1\n");
-                }
+            //TODO:
+            //if (zipCheckBox.Checked)
+            //{
+            //    if (path1CheckBox.Checked && path1TextBox.Text != "")
+            //    {
+            //        string path1BackupPath = Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp);
+            //        string path1ZipPath = Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp + ".zip");
+            //        ZipFile.CreateFromDirectory(path1BackupPath, path1ZipPath);
+            //        if (File.Exists(path1ZipPath))
+            //            LogAppend("\nSuccessfully compressed path1\n");
+            //    }
 
-                if (path2CheckBox.Checked && path2TextBox.Text != "")
-                {
-                    string path2BackupPath = Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp);
-                    string path2ZipPath = Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp) + ".zip";
-                    ZipFile.CreateFromDirectory(path2BackupPath, path2ZipPath);
-                    if (File.Exists(path2ZipPath))
-                        LogAppend("\nSuccessfully compressed path2\n");
-                }
-            }
+            //    if (path2CheckBox.Checked && path2TextBox.Text != "")
+            //    {
+            //        string path2BackupPath = Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp);
+            //        string path2ZipPath = Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp) + ".zip";
+            //        ZipFile.CreateFromDirectory(path2BackupPath, path2ZipPath);
+            //        if (File.Exists(path2ZipPath))
+            //            LogAppend("\nSuccessfully compressed path2\n");
+            //    }
+            //}
 
             backupBtn.Enabled = true;
             stripLabel.Text = "Backup completed. Ready to exit or begin next backup.";
-            ShowPath1AndOr2(timestamp);
+            ShowBackupPath(timestamp);
             LogAppend(dividerLine);
             Process.Start("notepad.exe", _logFilePath); //Open log in Notepad.
-        }
-
-        //For path1/2 CheckBoxes
-        private void Path12CheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            //If both of these are disabled, don't allow user to push backup btn cuz that doesn't make any sense.
-            if (path1CheckBox.Checked == false && path2CheckBox.Checked == false)
-                backupBtn.Enabled = false;
-            else
-                backupBtn.Enabled = true;
         }
 
         //For path1/2 TextBoxes
@@ -444,8 +395,6 @@ namespace Graphical_Backup_Program
             }
             catch (DirectoryNotFoundException)
             {
-                //Directory.CreateDirectory(path);
-                //;
                 MessageBox.Show("Could not find folder " + path, "Cannot Find Folder", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
@@ -538,7 +487,7 @@ namespace Graphical_Backup_Program
             //If config file has no text, write default values to file.
             if (configFileTxt == String.Empty)
             {
-                const string defaultConfigValues = "false\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\ntrue\r\n\r\nfalse\r\n\r\ntrue\r\nfalse\r\n\r\nfalse";
+                const string defaultConfigValues = "false\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nUse these for...\r\n...labeling groups\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\ntrue\r\n\r\nfalse\r\n\r\ntrue\r\nfalse\r\n\r\nfalse";
                 File.WriteAllText(_configFilePath, defaultConfigValues);
                 configFileTxt = defaultConfigValues; //Process like normal, even though technically it didn't read anything in from the file.
             }
