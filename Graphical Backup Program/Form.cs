@@ -209,22 +209,6 @@ namespace Graphical_Backup_Program
             return true; //True means no errors happened or whatever.
         }
 
-        private bool BackupPathInvalid()
-        {
-            if (path1Btn.Checked && Path.HasExtension(path1TextBox.Text))
-            {
-                MessageBox.Show("path1 cannot be a file!", "Error: File Path Specified for path1", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return true;
-            }
-
-            if (path2Btn.Checked && Path.HasExtension(path2TextBox.Text))
-            {
-                MessageBox.Show("path2 cannot be a file!", "Error: File Path Specified for path2", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return true;
-            }
-            return false;
-        }
-
         //Returns true if a specified group is checked. 
         private bool GroupChecked(char group)
         {
@@ -283,7 +267,6 @@ namespace Graphical_Backup_Program
 
         private void BackupBtn_Click(object sender, EventArgs e)
         {
-            if (BackupPathInvalid()) return; //Idiot-proofing
             File.WriteAllText(pathsFilePath, pathsTextBox.Text);
 
             if (ClearFolder() == false) //If user presses 'cancel' when asked if they want to clear, abort the entire process.
@@ -634,6 +617,18 @@ namespace Graphical_Backup_Program
             else if (path2Btn.Checked && path2TextBox.Text == "")
             {
                 stripLabel.Text = "Enter a backup path for path2";
+                backupBtn.Enabled = false;
+            }
+
+            else if (path1Btn.Checked && Path.HasExtension(path1TextBox.Text))
+            {
+                stripLabel.Text = "path1 cannot be a file!";
+                backupBtn.Enabled = false;
+            }
+
+            else if (path2Btn.Checked && Path.HasExtension(path2TextBox.Text))
+            {
+                stripLabel.Text = "path2 cannot be a file!";
                 backupBtn.Enabled = false;
             }
 

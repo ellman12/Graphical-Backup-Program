@@ -1,2 +1,1 @@
-check path1/2 box to make sure path exists. Remove check elsewhere??
 if a valid number is specified but isn't checked, properly ignore/log this. Either don't log or say ignoring this path cuz not checked
