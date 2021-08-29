@@ -1,4 +1,3 @@
-
-backup txt to backing up when working
-display path1/2 size as it's working
-implement psth 2 and both checked
+add an info icon to clear folder prompt
+timestamp class field, and maybe some others: try to reduce function params
+if a valid number is specified but isn't checked, properly ignore/log this. Either don't log or say ignoring this path cuz not checked
