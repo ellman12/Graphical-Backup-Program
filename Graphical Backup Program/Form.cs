@@ -624,10 +624,15 @@ namespace Graphical_Backup_Program
                 backupBtn.Enabled = false;
             }
 
-            //If both of these are blank, don't allow user to push backup btn cuz that doesn't make any sense.
-            else if (path1TextBox.Text == String.Empty && path2TextBox.Text == String.Empty)
+            else if (path1Btn.Checked && path1TextBox.Text == "")
             {
-                stripLabel.Text = "Enter 1 or 2 paths where backup should be stored";
+                stripLabel.Text = "Enter a backup path for path1";
+                backupBtn.Enabled = false;
+            }
+            
+            else if (path2Btn.Checked && path2TextBox.Text == "")
+            {
+                stripLabel.Text = "Enter a backup path for path2";
                 backupBtn.Enabled = false;
             }
 
@@ -647,6 +652,11 @@ namespace Graphical_Backup_Program
         private void UrlClearBtn_Click(object sender, EventArgs e)
         {
             urlTextBox.Text = String.Empty;
+        }
+
+        private void pathRadioBtn_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateControls();
         }
     }
 }

@@ -140,6 +140,7 @@ namespace Graphical_Backup_Program
             this.path1Btn.TabStop = true;
             this.path1Btn.Text = "Use Path 1:";
             this.path1Btn.UseVisualStyleBackColor = true;
+            this.path1Btn.CheckedChanged += new System.EventHandler(this.pathRadioBtn_CheckedChanged);
             // 
             // zipCheckBox
             // 
