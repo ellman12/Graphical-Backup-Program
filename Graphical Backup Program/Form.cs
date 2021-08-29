@@ -387,7 +387,7 @@ namespace Graphical_Backup_Program
             UpdateControls();
         }
 
-        private long UpdateBackupSize()
+        private double UpdateBackupSize()
         {
             double backupSize = 0;
             foreach (string line in pathsTextBox.Text.Split("\r\n"))
@@ -433,7 +433,7 @@ namespace Graphical_Backup_Program
             numberLabel.Text = Math.Round(convertedBackupSize, 3).ToString();
             unitLabel.Text = unit;
 
-            return Convert.ToInt64(backupSize);
+            return backupSize;
         }
 
         private void PathsTextBox_Leave(object sender, EventArgs e)
