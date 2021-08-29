@@ -232,15 +232,8 @@ namespace Graphical_Backup_Program
             }
             catch
             {
-                //if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                //{
                 url = url.Replace("&", "^&");
                 Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
-                //}
-                //else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                //Process.Start("xdg-open", url);
-                //else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-                //Process.Start("open", url);
             }
         }
 
@@ -268,7 +261,6 @@ namespace Graphical_Backup_Program
         private void BackupBtn_Click(object sender, EventArgs e)
         {
             File.WriteAllText(pathsFilePath, pathsTextBox.Text);
-
             if (ClearFolder() == false) //If user presses 'cancel' when asked if they want to clear, abort the entire process.
                 return;
 
@@ -342,7 +334,7 @@ namespace Graphical_Backup_Program
                 else if (path2Btn.Checked && path2TextBox.Text != "")
                     CompressBackup(path2TextBox.Text, 2);
             }
-            
+
             ShowBackupPath();
             backupBtn.Enabled = true;
             stripLabel.Text = "Backup completed. Ready to exit or begin next backup.";
@@ -616,7 +608,7 @@ namespace Graphical_Backup_Program
                 stripLabel.Text = "Enter a backup path for path1";
                 backupBtn.Enabled = false;
             }
-            
+
             else if (path2Btn.Checked && path2TextBox.Text == "")
             {
                 stripLabel.Text = "Enter a backup path for path2";
@@ -648,12 +640,7 @@ namespace Graphical_Backup_Program
             UpdateControls();
         }
 
-        private void UrlClearBtn_Click(object sender, EventArgs e)
-        {
-            urlTextBox.Text = String.Empty;
-        }
-
-        private void pathRadioBtn_CheckedChanged(object sender, EventArgs e)
+        private void PathRadioBtn_CheckedChanged(object sender, EventArgs e)
         {
             UpdateControls();
         }
