@@ -1,3 +1,2 @@
-if path btn checked but it's text empty, disable backup btn
-timestamp class field, and maybe some others: try to reduce function params
+check path1/2 box to make sure path exists. Remove check elsewhere??
 if a valid number is specified but isn't checked, properly ignore/log this. Either don't log or say ignoring this path cuz not checked

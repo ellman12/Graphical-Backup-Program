@@ -4,9 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using FileSystem = Microsoft.VisualBasic.FileIO.FileSystem;
 
@@ -14,10 +12,10 @@ namespace Graphical_Backup_Program
 {
     public partial class Form : System.Windows.Forms.Form
     {
-        private readonly string _projectDirectory;
-        private readonly string _configFilePath;
-        private readonly string _pathsFilePath;
-        private readonly string _logFilePath;
+        private string timestamp;
+        private readonly string configFilePath;
+        private readonly string pathsFilePath;
+        private readonly string logFilePath;
         private const string dividerLine = "---------------------------------------------------------------------------------------------------";
 
         public Form()
@@ -26,11 +24,11 @@ namespace Graphical_Backup_Program
             //https://stackoverflow.com/a/11882118
             //The folder structure for where the .exe is stored varies between these two.
             //If you're compiling and running this through Visual Studio 2019, this ↓ needs to be used. If you're running this .exe outside of VS, use this ↓.
-            _projectDirectory = Debugger.IsAttached ? Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName : Environment.CurrentDirectory;
+            string projectDirectory = Debugger.IsAttached ? Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName : Environment.CurrentDirectory;
 
-            _configFilePath = _projectDirectory + "/config.txt"; //I added these cuz all the "_projectDirectory + "/config.txt"" everywhere seemed inefficient and dumb.
-            _pathsFilePath = _projectDirectory + "/paths.txt";
-            _logFilePath = _projectDirectory + "/GBP.log";
+            configFilePath = projectDirectory + "/config.txt"; //I added these cuz all the "_projectDirectory + "/config.txt"" everywhere seemed inefficient and dumb.
+            pathsFilePath = projectDirectory + "/paths.txt";
+            logFilePath = projectDirectory + "/GBP.log";
 
             InitializeComponent();
         }
@@ -50,19 +48,19 @@ namespace Graphical_Backup_Program
 
         private void LogAppend(string text)
         {
-            File.AppendAllText(_logFilePath, text);
+            File.AppendAllText(logFilePath, text);
         }
 
-        private void CopyBackupPath(string trimmedPath, string timestamp)
+        private void CopyBackupPath(string trimmedPath)
         {
             if (path1Btn.Checked && path1TextBox.Text != String.Empty)
-                CopyAndLog(trimmedPath, path1TextBox.Text, 1, timestamp);
+                CopyAndLog(trimmedPath, path1TextBox.Text, 1);
             else if (path2Btn.Checked && path2TextBox.Text != String.Empty)
-                CopyAndLog(trimmedPath, path2TextBox.Text, 2, timestamp);
+                CopyAndLog(trimmedPath, path2TextBox.Text, 2);
         }
 
         //Used for copying a single item to path1 or path2, and for putting some log output in the paths TextBox. pathNum is either 1 or 2.
-        private void CopyAndLog(string src, string dest, int pathNum, string timestamp)
+        private void CopyAndLog(string src, string dest, int pathNum)
         {
             src = src.Trim(); //Remove pesky whitespace from start and end of path.
             dest = Path.Combine(dest, "GBP Backup " + timestamp);
@@ -135,7 +133,7 @@ namespace Graphical_Backup_Program
         }
 
         //When backup completes, open path1 and/or path2 in File Explorer if user checks the box to copy stuff there and to open it in File Explorer.
-        private void ShowBackupPath(string timestamp)
+        private void ShowBackupPath()
         {
             if (openOnComplete.Checked)
             {
@@ -262,7 +260,7 @@ namespace Graphical_Backup_Program
             }
         }
 
-        private void RunProgressBar(string backupPath, string timestamp)
+        private void RunProgressBar(string backupPath)
         {
             double currentSize = 0;
             double finalSize = UpdateBackupSize();
@@ -274,7 +272,7 @@ namespace Graphical_Backup_Program
             }
         }
 
-        private void CompressBackup(string textBoxText, string timestamp, int pathNum)
+        private void CompressBackup(string textBoxText, int pathNum)
         {
             string backupPath = Path.Combine(textBoxText, "GBP Backup " + timestamp);
             string zipPath = Path.Combine(textBoxText, "GBP Backup " + timestamp + ".zip");
@@ -286,14 +284,15 @@ namespace Graphical_Backup_Program
         private void BackupBtn_Click(object sender, EventArgs e)
         {
             if (BackupPathInvalid()) return; //Idiot-proofing
-            File.WriteAllText(_pathsFilePath, pathsTextBox.Text);
+            File.WriteAllText(pathsFilePath, pathsTextBox.Text);
 
             if (ClearFolder() == false) //If user presses 'cancel' when asked if they want to clear, abort the entire process.
                 return;
 
             backupBtn.Enabled = false;
-            string timestamp = DateTime.Now.ToString("M-d-yyyy hh;mm;ss tt"); //'/' and ':' won't work in paths because Windows.
-            File.WriteAllText(_logFilePath, "GBP Backup " + timestamp + "\n" + dividerLine);
+            progressBar.Value = 0;
+            timestamp = DateTime.Now.ToString("M-d-yyyy hh;mm;ss tt"); //'/' and ':' won't work in paths because Windows.
+            File.WriteAllText(logFilePath, "GBP Backup " + timestamp + "\n" + dividerLine);
             stripLabel.Text = "Backing up...";
 
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
@@ -309,7 +308,7 @@ namespace Graphical_Backup_Program
 
                 if (GroupChecked(group) && ValidGroupChar(group))
                 {
-                    Thread t = new(() => CopyBackupPath(trimmedPath, timestamp));
+                    Thread t = new(() => CopyBackupPath(trimmedPath));
                     t.Start();
                     threads.Add(t);
                 }
@@ -334,12 +333,14 @@ namespace Graphical_Backup_Program
             else if (path2Btn.Checked && path2TextBox.Text != "")
                 backupPath = path2TextBox.Text;
 
-            Thread pThread = new(() => { progressBar.BeginInvoke(new Action(() => { RunProgressBar(backupPath, timestamp); })); });
+            Thread pThread = new(() => { progressBar.BeginInvoke(new Action(() => { RunProgressBar(backupPath); })); });
             pThread.Start();
 
             //This kind stranger's answer from long ago is how I finally got this stupid damn progress bar working after so, so very many hours... https://stackoverflow.com/a/1239662
             while (pThread.IsAlive)
                 Application.DoEvents();
+
+            pThread.Join();
 
             foreach (Thread thread in threads) //Wait for all threads to finish.
                 thread.Join();
@@ -350,17 +351,17 @@ namespace Graphical_Backup_Program
             if (zipCheckBox.Checked)
             {
                 if (path1Btn.Checked && path1TextBox.Text != "")
-                    CompressBackup(path1TextBox.Text, timestamp, 1);
+                    CompressBackup(path1TextBox.Text, 1);
 
                 else if (path2Btn.Checked && path2TextBox.Text != "")
-                    CompressBackup(path2TextBox.Text, timestamp, 2);
+                    CompressBackup(path2TextBox.Text, 2);
             }
-
+            
+            ShowBackupPath();
             backupBtn.Enabled = true;
             stripLabel.Text = "Backup completed. Ready to exit or begin next backup.";
-            ShowBackupPath(timestamp);
             LogAppend(dividerLine);
-            Process.Start("notepad.exe", _logFilePath); //Open log in Notepad.
+            Process.Start("notepad.exe", logFilePath); //Open log in Notepad.
         }
 
         //For path1/2 TextBoxes
@@ -465,31 +466,31 @@ namespace Graphical_Backup_Program
         //On startup, assign GUI controls values from files, and disable any controls, if necessary.
         private void Form_Shown(object sender, EventArgs e)
         {
-            if (!File.Exists(_pathsFilePath))
-                File.Create(_pathsFilePath);
+            if (!File.Exists(pathsFilePath))
+                File.Create(pathsFilePath);
             else
-                pathsTextBox.Text = File.ReadAllText(_pathsFilePath);
+                pathsTextBox.Text = File.ReadAllText(pathsFilePath);
 
-            if (!File.Exists(_configFilePath))
+            if (!File.Exists(configFilePath))
             {
-                FileStream file = File.Create(_configFilePath);
+                FileStream file = File.Create(configFilePath);
                 file.Close();
             }
 
-            if (!File.Exists(_logFilePath))
+            if (!File.Exists(logFilePath))
             {
-                FileStream file = File.Create(_logFilePath);
+                FileStream file = File.Create(logFilePath);
                 file.Close();
             }
 
             //Read in config stuff. Is this extremely stupid and sub-optimal? Yes. Does it work? Also yes.
-            string configFileTxt = File.ReadAllText(_configFilePath);
+            string configFileTxt = File.ReadAllText(configFilePath);
 
             //If config file has no text, write default values to file.
             if (configFileTxt == String.Empty)
             {
                 const string defaultConfigValues = "false\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nfalse\r\nUse these for...\r\n...labeling groups\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\ntrue\r\n\r\nfalse\r\n\r\ntrue\r\nfalse\r\n\r\nfalse";
-                File.WriteAllText(_configFilePath, defaultConfigValues);
+                File.WriteAllText(configFilePath, defaultConfigValues);
                 configFileTxt = defaultConfigValues; //Process like normal, even though technically it didn't read anything in from the file.
             }
 
@@ -546,9 +547,9 @@ namespace Graphical_Backup_Program
 
         private void SaveToFiles()
         {
-            File.WriteAllText(_pathsFilePath, pathsTextBox.Text);
+            File.WriteAllText(pathsFilePath, pathsTextBox.Text);
             string configFileText = checkBox0.Checked + "\r\n" + checkBox1.Checked + "\r\n" + checkBox2.Checked + "\r\n" + checkBox3.Checked + "\r\n" + checkBox4.Checked + "\r\n" + checkBox5.Checked + "\r\n" + checkBox6.Checked + "\r\n" + checkBox7.Checked + "\r\n" + checkBox8.Checked + "\r\n" + checkBox9.Checked + "\r\n" + textBox0.Text + "\r\n" + textBox1.Text + "\r\n" + textBox2.Text + "\r\n" + textBox3.Text + "\r\n" + textBox4.Text + "\r\n" + textBox5.Text + "\r\n" + textBox6.Text + "\r\n" + textBox7.Text + "\r\n" + textBox8.Text + "\r\n" + textBox9.Text + "\r\n" + path1Btn.Checked + "\r\n" + path1TextBox.Text + "\r\n" + path2Btn.Checked + "\r\n" + path2TextBox.Text + "\r\n" + openOnComplete.Checked + "\r\n" + urlCheckBox.Checked + "\r\n" + urlTextBox.Text + "\r\n" + zipCheckBox.Checked;
-            File.WriteAllText(_configFilePath, configFileText);
+            File.WriteAllText(configFilePath, configFileText);
         }
 
         private void ToggleAllChecks(bool toggled)
