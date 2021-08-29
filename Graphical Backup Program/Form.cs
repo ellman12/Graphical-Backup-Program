@@ -201,7 +201,7 @@ namespace Graphical_Backup_Program
                 caption = "Clear path2?";
             }
 
-            DialogResult dialogResult = MessageBox.Show(text, caption, MessageBoxButtons.YesNoCancel);
+            DialogResult dialogResult = MessageBox.Show(text, caption, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
             if (dialogResult == DialogResult.Yes) //https://stackoverflow.com/a/3036851
                 DeletePath1AndOr2(clrPath1, clrPath2); //User confirmed that they do want to clear path1/2, so do it.
