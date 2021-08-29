@@ -13,6 +13,8 @@ namespace Graphical_Backup_Program
     public partial class Form : System.Windows.Forms.Form
     {
         private string timestamp;
+        private string logText;
+
         private readonly string configFilePath;
         private readonly string pathsFilePath;
         private readonly string logFilePath;
@@ -48,7 +50,7 @@ namespace Graphical_Backup_Program
 
         private void LogAppend(string text)
         {
-            File.AppendAllText(logFilePath, text);
+            logText += text;
         }
 
         private void CopyBackupPath(string trimmedPath)
@@ -267,7 +269,7 @@ namespace Graphical_Backup_Program
             backupBtn.Enabled = false;
             progressBar.Value = 0;
             timestamp = DateTime.Now.ToString("M-d-yyyy hh;mm;ss tt"); //'/' and ':' won't work in paths because Windows.
-            File.WriteAllText(logFilePath, "GBP Backup " + timestamp + "\n" + dividerLine);
+            logText = "GBP Backup " + timestamp + "\n" + dividerLine;
             stripLabel.Text = "Backing up...";
 
             string[] allPaths = pathsTextBox.Text.Split("\r\n");
@@ -339,6 +341,8 @@ namespace Graphical_Backup_Program
             backupBtn.Enabled = true;
             stripLabel.Text = "Backup completed. Ready to exit or begin next backup.";
             LogAppend(dividerLine);
+
+            File.WriteAllText(logFilePath, logText);
             Process.Start("notepad.exe", logFilePath); //Open log in Notepad.
         }
 
