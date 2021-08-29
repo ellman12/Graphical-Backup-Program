@@ -289,11 +289,14 @@ namespace Graphical_Backup_Program
                 char group = trimmedPath[0];
                 trimmedPath = trimmedPath[2..];
 
-                if (GroupChecked(group) && ValidGroupChar(group))
+                if (ValidGroupChar(group))
                 {
-                    Thread t = new(() => CopyBackupPath(trimmedPath));
-                    t.Start();
-                    threads.Add(t);
+                    if (GroupChecked(group))
+                    {
+                        Thread t = new(() => CopyBackupPath(trimmedPath));
+                        t.Start();
+                        threads.Add(t);
+                    }
                 }
                 else if (Char.ToLower(path[0]) != '#') //# are used for comments
                     LogAppend($"\r\nGBP cannot understand this line: \"{path}\"\r\n");
