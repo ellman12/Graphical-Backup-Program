@@ -1,4 +1,0 @@
-
-backup txt to backing up when working
-display path1/2 size as it's working
-implement psth 2 and both checked
