@@ -1,3 +1,0 @@
-dumb-ideas branch:
-Back up only 1 at a time
-Always show prompt if you want to clear folders
