@@ -1,4 +1,5 @@
 # Used for compiling GBP into an .exe to be shared with others and run outside of VS2019.
+# Run this in the root folder of the repo.
 Set-Location -Path "./Graphical Backup Program"
 Invoke-Expression "dotnet publish -o GBP -r win-x64 /p:PublishSingleFile=true"
 $compress = @{

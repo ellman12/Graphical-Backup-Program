@@ -5,6 +5,7 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>Graphical_Backup_Program</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>GBP Icon.ico</ApplicationIcon>
   </PropertyGroup>
 
 </Project>
