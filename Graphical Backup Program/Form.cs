@@ -248,6 +248,7 @@ namespace Graphical_Backup_Program
                 currentSize = GetFolderSize(Path.Combine(backupPath, "GBP Backup " + timestamp));
                 int progress = Convert.ToInt32((currentSize / finalSize) * 100);
                 progressBar.Value = progress;
+                TaskbarProgress.SetValue(Handle, progress, 100);
             }
         }
 
