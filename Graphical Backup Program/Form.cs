@@ -397,7 +397,7 @@ namespace Graphical_Backup_Program
             double backupSize = 0;
             foreach (string line in pathsTextBox.Text.Split("\r\n"))
             {
-                if (line == String.Empty) continue;
+                if (line == String.Empty || !GroupChecked(line[0])) continue;
                 string path = line[2..];
 
                 if (Path.HasExtension(path))
@@ -553,12 +553,14 @@ namespace Graphical_Backup_Program
         {
             ToggleAllChecks(true);
             UpdateControls();
+            UpdateBackupSize();
         }
 
         private void DeselectAllBtn_Click(object sender, EventArgs e)
         {
             ToggleAllChecks(false);
             UpdateControls();
+            UpdateBackupSize();
         }
 
         private void SortBtn_Click(object sender, EventArgs e)
@@ -643,6 +645,7 @@ namespace Graphical_Backup_Program
         private void GroupCheckBoxes_CheckedChanged(object sender, EventArgs e)
         {
             UpdateControls();
+            UpdateBackupSize();
         }
 
         private void PathRadioBtn_CheckedChanged(object sender, EventArgs e)
