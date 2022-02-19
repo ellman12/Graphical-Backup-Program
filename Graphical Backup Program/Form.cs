@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -232,6 +233,7 @@ namespace Graphical_Backup_Program
         /// </returns>
         private bool ClearFolder()
         {
+            //TODO: Rework the logic here. It is a bit redundant, and can probably be simplified.
             bool clrPath1 = false, clrPath2 = false;
             if (path1Btn.Checked && path1TextBox.Text != String.Empty) clrPath1 = true;
             if (path2Btn.Checked && path2TextBox.Text != String.Empty) clrPath2 = true;
@@ -239,18 +241,17 @@ namespace Graphical_Backup_Program
             string text = "", caption = "";
             if (clrPath1)
             {
-                text = $"Clear path1 ({path1TextBox.Text}) before backing up?";
+                text = $"Clear path1 ({path1TextBox.Text}) before backing up? This will delete all contents of \n{path1TextBox.Text}!!!";
                 caption = "Clear path1?";
             }
             else if (clrPath2)
             {
-                text = $"Clear path2 ({path2TextBox.Text}) before backing up?";
+                text = $"Clear path2 ({path2TextBox.Text}) before backing up? This will delete all contents of {path2TextBox.Text}!!!";
                 caption = "Clear path2?";
             }
 
             DialogResult dialogResult = MessageBox.Show(text, caption, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
-            //TODO: Make it clear to the user that they are not clearing the text box, they are actually deleting the folder
             if (dialogResult == DialogResult.Yes) //https://stackoverflow.com/a/3036851
                 DeletePath1AndOr2(clrPath1, clrPath2); //User confirmed that they do want to clear path1/2, so do it.
             else if (dialogResult == DialogResult.Cancel)
@@ -266,8 +267,7 @@ namespace Graphical_Backup_Program
         /// <returns>True if checked, false if not</returns>
         private bool GroupChecked(char group)
         {
-            //TODO: Convert to tertiary return statement
-            if (group == '0' && checkBox0.Checked ||
+			return group == '0' && checkBox0.Checked ||
                     group == '1' && checkBox1.Checked ||
                     group == '2' && checkBox2.Checked ||
                     group == '3' && checkBox3.Checked ||
@@ -276,17 +276,15 @@ namespace Graphical_Backup_Program
                     group == '6' && checkBox6.Checked ||
                     group == '7' && checkBox7.Checked ||
                     group == '8' && checkBox8.Checked ||
-                    group == '9' && checkBox9.Checked)
-                return true;
-            return false;
-        }
+                    group == '9' && checkBox9.Checked;
+		}
 
-        /// <summary>
-        /// Quick check to make sure the group number is valid
-        /// </summary>
-        /// <param name="group">The group to check</param>
-        /// <returns>True if valid, false if not</returns>
-        private static bool ValidGroupChar(char group)
+		/// <summary>
+		/// Quick check to make sure the group number is valid
+		/// </summary>
+		/// <param name="group">The group to check</param>
+		/// <returns>True if valid, false if not</returns>
+		private static bool ValidGroupChar(char group)
         {
             return (Char.GetNumericValue(group) >= 0 && Char.GetNumericValue(group) <= 9 && Char.IsNumber(group));
         }
@@ -297,16 +295,20 @@ namespace Graphical_Backup_Program
         /// <param name="url">The URL to attempt at opening</param>
         private static void OpenUrl(string url)
         {
-            //TODO: Better handle any exceptions
-            try
-            {
-                Process.Start(url);
-            }
-            catch
-            {
-                url = url.Replace("&", "^&");
-                Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
-            }
+			url = url.Replace("&", "^&"); //This is needed because command prompt needs to know that an ampersand in the url var is not to be parsed as a second command; it is part of the url
+
+			if (url.StartsWith("http://"))
+			{
+                MessageBox.Show("The URL is not going to a secure version of the website, please double check the website loads as HTTPS", "SSL Site Not Requested", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			}
+
+			else if (!url.StartsWith("https://"))
+			{
+                url = $"https://{url}";
+			}
+
+            //TODO: Possible malicious code execution point? are we parsing url well enough to prevent naughty commands?
+            Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
         }
 
         /// <summary>
@@ -447,21 +449,18 @@ namespace Graphical_Backup_Program
         /// </summary>
         /// <param name="path">The path of the file</param>
         /// <returns>Size in bytes</returns>
-        private static double GetFileSize(string path)
+        private static long GetFileSize(string path)
         {
-            //TODO: change return type from double to long so we match what get's returned by our FileInfo().Length call
-            double size = 0;
-
-            try
+			if (File.Exists(path))
             {
-                size = new FileInfo(path).Length;
+                return new FileInfo(path).Length;
             }
-            catch (FileNotFoundException)
-            {
+
+			else
+			{
                 MessageBox.Show("Could not find file " + path, "Cannot Find File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
             }
-
-            return size;
         }
 
         /// <summary>
@@ -470,22 +469,33 @@ namespace Graphical_Backup_Program
         /// </summary>
         /// <param name="path">The folder with the files to get the sizes</param>
         /// <returns>Size in bytes</returns>
-        private static double GetFolderSize(string path)
+        private static long GetFolderSize(string path)
         {
-            //TODO: change return type from double to long so we match what get's returned by our FileInfo().Length call
-            double size = 0;
-
             try
             {
-                DirectoryInfo di = new(path); //
-                size += di.EnumerateFiles("*", SearchOption.AllDirectories).Sum(fi => fi.Length);
-            }
-            catch (DirectoryNotFoundException)
-            {
-                MessageBox.Show("Could not find folder " + path, "Cannot Find Folder", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DirectoryInfo di = new(path);
+
+				if (di.Exists)
+				{
+                    return di.EnumerateFiles("*", SearchOption.AllDirectories).Sum(fi => fi.Length);
+                }
+
+				else
+				{
+                    MessageBox.Show("Could not find folder " + path, "Cannot Find Folder", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
 
-            return size;
+			catch (UnauthorizedAccessException ex)
+			{
+                string errorPath = ex.Message;
+                errorPath = errorPath.Substring(ex.Message.IndexOf('\'') + 1);
+                errorPath = errorPath.Substring(0, errorPath.IndexOf('\''));
+
+                MessageBox.Show("The user or program does not have permission to enter " + errorPath, "Unauthorized Access", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+
+            return 0;
         }
 
         /// <summary>
@@ -690,7 +700,6 @@ namespace Graphical_Backup_Program
             checkBox9.Checked = toggled;
         }
 
-        //TODO: Change the event call to CheckedChanged and just call to ToggleAllChecks to the value of the SelectAllBtn.Checked
         /// <summary>
         /// Sets all checkBoxes to true
         /// </summary>
