@@ -14,28 +14,40 @@ namespace Graphical_Backup_Program
     {
         private string timestamp;
         private string logText;
-
-        private readonly string configFilePath;
-        private readonly string pathsFilePath;
-        private readonly string logFilePath;
+        /// <summary>
+        /// Provides reference/context to which directory this program is running from. If debugger is attached, set directory to base project directory. Else, set it to regular filepath of exe<para/>
+        /// <see href="https://stackoverflow.com/questions/1343053/detecting-if-a-program-was-run-by-visual-studio-as-opposed-to-run-from-windows">Check if debugger is attached</see><para/>
+        /// <see href="https://stackoverflow.com/a/11882118">Setting the directory depending on context (debugging or standalone exe)</see>
+        /// </summary>
+        private string projectDirectory { get { return Debugger.IsAttached ? Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName : Environment.CurrentDirectory; } }
+        /// <summary>
+        /// Reference to the config file location
+        /// </summary>
+        private string configFilePath { get { return projectDirectory + "/config.txt"; } }
+        /// <summary>
+        /// Reference to the paths file location
+        /// </summary>
+        private string pathsFilePath { get { return projectDirectory + "/paths.txt"; } }
+        /// <summary>
+        /// Reference to the log file
+        /// </summary>
+        private string logFilePath { get { return projectDirectory + "/GBP.log"; } }
+        /// <summary>
+        /// Divider line for use in the log file
+        /// </summary>
         private const string dividerLine = "---------------------------------------------------------------------------------------------------";
 
+        /// <summary>
+        /// Program.cs enters here. Initialize components.
+        /// </summary>
         public Form()
         {
-            //https://stackoverflow.com/questions/1343053/detecting-if-a-program-was-run-by-visual-studio-as-opposed-to-run-from-windows
-            //https://stackoverflow.com/a/11882118
-            //The folder structure for where the .exe is stored varies between these two.
-            //If you're compiling and running this through Visual Studio 2019, this ↓ needs to be used. If you're running this .exe outside of VS, use this ↓.
-            string projectDirectory = Debugger.IsAttached ? Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName : Environment.CurrentDirectory;
-
-            configFilePath = projectDirectory + "/config.txt"; //I added these cuz all the "_projectDirectory + "/config.txt"" everywhere seemed inefficient and dumb.
-            pathsFilePath = projectDirectory + "/paths.txt";
-            logFilePath = projectDirectory + "/GBP.log";
-
             InitializeComponent();
         }
 
-        //Represents a single path in the paths TextBox plus its group number.
+        /// <summary>
+        /// Represents a single path in the paths TextBox plus its group number.
+        /// </summary>
         private readonly struct GroupPath
         {
             public readonly char group;
@@ -48,11 +60,19 @@ namespace Graphical_Backup_Program
             }
         }
 
+        /// <summary>
+        /// Append new text to the log
+        /// </summary>
+        /// <param name="text">The text to be appended</param>
         private void LogAppend(string text)
         {
             logText += text;
         }
 
+        /// <summary>
+        /// Verifies which path to back up to, and that the path string is not empty
+        /// </summary>
+        /// <param name="trimmedPath">The path without the group number at the beginning</param>
         private void CopyBackupPath(string trimmedPath)
         {
             if (path1Btn.Checked && path1TextBox.Text != String.Empty)
@@ -61,7 +81,12 @@ namespace Graphical_Backup_Program
                 CopyAndLog(trimmedPath, path2TextBox.Text, 2);
         }
 
-        //Used for copying a single item to path1 or path2, and for putting some log output in the paths TextBox. pathNum is either 1 or 2.
+        /// <summary>
+        /// Used for copying a single item to path1 or path2, and for putting some log output in the paths TextBox. pathNum is either 1 or 2.
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="dest"></param>
+        /// <param name="pathNum"></param>
         private void CopyAndLog(string src, string dest, int pathNum)
         {
             src = src.Trim(); //Remove pesky whitespace from start and end of path.
@@ -134,19 +159,26 @@ namespace Graphical_Backup_Program
             }
         }
 
-        //When backup completes, open path1 and/or path2 in File Explorer if user checks the box to copy stuff there and to open it in File Explorer.
+        /// <summary>
+        /// When backup completes, open path1 and/or path2 in File Explorer if user checks the box to copy stuff there and to open it in File Explorer.
+        /// </summary>
         private void ShowBackupPath()
         {
             if (openOnComplete.Checked)
             {
                 if (path1Btn.Checked)
                     OpenInExplorer(zipCheckBox.Checked ? Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp + ".zip") : Path.Combine(path1TextBox.Text, "GBP Backup " + timestamp));
+
                 else if (path2Btn.Checked)
                     OpenInExplorer(zipCheckBox.Checked ? Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp + ".zip") : Path.Combine(path2TextBox.Text, "GBP Backup " + timestamp));
             }
         }
 
-        //Open (and highlight) an item in Explorer. https://stackoverflow.com/a/13680458
+        /// <summary>
+        /// Open (and highlight) an item in Explorer.<para/>
+        /// <see href="https://stackoverflow.com/a/13680458">Link to source.</see>
+        /// </summary>
+        /// <param name="path">The file path that needs to be opened</param>
         private static void OpenInExplorer(string path)
         {
             if (path != String.Empty)
@@ -156,7 +188,12 @@ namespace Graphical_Backup_Program
             }
         }
 
-        //Delete a single directory, ignoring exception about it not existing/found.
+        /// <summary>
+        /// Delete a single directory, ignoring exception about it not existing/found.
+        /// </summary>
+        /// <param name="dir">The directory to be deleted</param>
+        /// <exception cref="UnauthorizedAccessException"/>
+        /// <exception cref="DirectoryNotFoundException"/>
         private static void DeleteDirectory(string dir)
         {
             try
@@ -173,6 +210,11 @@ namespace Graphical_Backup_Program
             }
         }
 
+        /// <summary>
+        /// If either/both clear path(s) are true, call DeleteDirectory() to delete all files in that directory
+        /// </summary>
+        /// <param name="clrPath1">If files and folders in path 1 need to be deleted</param>
+        /// <param name="clrPath2">If files and folders in path 2 need to be deleted</param>
         private void DeletePath1AndOr2(bool clrPath1, bool clrPath2)
         {
             if (clrPath1)
@@ -181,8 +223,13 @@ namespace Graphical_Backup_Program
                 DeleteDirectory(path2TextBox.Text);
         }
 
-        //Does something based on which of the 3 buttons is selected.
-        //Returns false if user presses 'Cancel'; true otherwise (false is what really matters; signals program to not proceed with clearing).
+        /// <summary>
+        /// Prompts the user with Yes/No/Cancel MessageBox if they would like to delete the contents of the folder defined by whichever path TextBox is checked
+        /// </summary>
+        /// <returns>
+        /// True if the user accepted deletion of the contents of the folder before backup, or declined deletion before backup.<para/>
+        /// False if the user cancels the backup.
+        /// </returns>
         private bool ClearFolder()
         {
             bool clrPath1 = false, clrPath2 = false;
@@ -203,6 +250,7 @@ namespace Graphical_Backup_Program
 
             DialogResult dialogResult = MessageBox.Show(text, caption, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
+            //TODO: Make it clear to the user that they are not clearing the text box, they are actually deleting the folder
             if (dialogResult == DialogResult.Yes) //https://stackoverflow.com/a/3036851
                 DeletePath1AndOr2(clrPath1, clrPath2); //User confirmed that they do want to clear path1/2, so do it.
             else if (dialogResult == DialogResult.Cancel)
@@ -211,23 +259,45 @@ namespace Graphical_Backup_Program
             return true; //True means no errors happened or whatever.
         }
 
-        //Returns true if a specified group is checked. 
+        /// <summary>
+        /// Checks if a group is checkmarked/enabled
+        /// </summary>
+        /// <param name="group">The group to check</param>
+        /// <returns>True if checked, false if not</returns>
         private bool GroupChecked(char group)
         {
-            if (group == '0' && checkBox0.Checked || group == '1' && checkBox1.Checked || group == '2' && checkBox2.Checked || group == '3' && checkBox3.Checked || group == '4' && checkBox4.Checked || group == '5' && checkBox5.Checked || group == '6' && checkBox6.Checked || group == '7' && checkBox7.Checked || group == '8' && checkBox8.Checked || group == '9' && checkBox9.Checked)
+            //TODO: Convert to tertiary return statement
+            if (group == '0' && checkBox0.Checked ||
+                    group == '1' && checkBox1.Checked ||
+                    group == '2' && checkBox2.Checked ||
+                    group == '3' && checkBox3.Checked ||
+                    group == '4' && checkBox4.Checked ||
+                    group == '5' && checkBox5.Checked ||
+                    group == '6' && checkBox6.Checked ||
+                    group == '7' && checkBox7.Checked ||
+                    group == '8' && checkBox8.Checked ||
+                    group == '9' && checkBox9.Checked)
                 return true;
             return false;
         }
 
-        //Returns true if group is a number 0-9.
+        /// <summary>
+        /// Quick check to make sure the group number is valid
+        /// </summary>
+        /// <param name="group">The group to check</param>
+        /// <returns>True if valid, false if not</returns>
         private static bool ValidGroupChar(char group)
         {
             return (Char.GetNumericValue(group) >= 0 && Char.GetNumericValue(group) <= 9 && Char.IsNumber(group));
         }
 
-        //Thank you StackOverflow, very cool. https://stackoverflow.com/a/43232486
+        /// <summary>
+        /// Opens a link in the default browser. Also checks for invalid ampersand char in URL, and attempts to correct it. <see href="https://stackoverflow.com/a/43232486">Reference for opening url in browser</see>
+        /// </summary>
+        /// <param name="url">The URL to attempt at opening</param>
         private static void OpenUrl(string url)
         {
+            //TODO: Better handle any exceptions
             try
             {
                 Process.Start(url);
@@ -239,6 +309,10 @@ namespace Graphical_Backup_Program
             }
         }
 
+        /// <summary>
+        /// Updates progress bar based on size of backup folder against the size of the folder to be backed up
+        /// </summary>
+        /// <param name="backupPath"></param>
         private void RunProgressBar(string backupPath)
         {
             double currentSize = 0;
@@ -252,6 +326,11 @@ namespace Graphical_Backup_Program
             }
         }
 
+        /// <summary>
+        /// Creates a compressed backup after all files/folders are copied to the backup folder
+        /// </summary>
+        /// <param name="textBoxText">Path of the Backup folder</param>
+        /// <param name="pathNum">Only used in the log file to explain which pathTextBox was selected when backup was created</param>
         private void CompressBackup(string textBoxText, int pathNum)
         {
             string backupPath = Path.Combine(textBoxText, "GBP Backup " + timestamp);
@@ -261,6 +340,11 @@ namespace Graphical_Backup_Program
                 LogAppend("\nSuccessfully compressed backup of path" + pathNum + '\n');
         }
 
+        /// <summary>
+        /// Ask the user if they want to delete the contents of the backup folder, then proceeds to create the backup if ClearFolder() returns true
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackupBtn_Click(object sender, EventArgs e)
         {
             File.WriteAllText(pathsFilePath, pathsTextBox.Text);
@@ -347,19 +431,30 @@ namespace Graphical_Backup_Program
             Process.Start("notepad.exe", logFilePath); //Open log in Notepad.
         }
 
-        //For path1/2 TextBoxes
+        /// <summary>
+        /// Calls UpdateControls() when one of the two PathTextBoxes are changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PathTextBox_TextChanged(object sender, EventArgs e)
         {
             UpdateControls();
         }
 
+        /// <summary>
+        /// Gets the file size in bytes<para/>
+        /// <see href="https://stackoverflow.com/questions/1380839/how-do-you-get-the-file-size-in-c/20863065">Get file size</see>
+        /// </summary>
+        /// <param name="path">The path of the file</param>
+        /// <returns>Size in bytes</returns>
         private static double GetFileSize(string path)
         {
+            //TODO: change return type from double to long so we match what get's returned by our FileInfo().Length call
             double size = 0;
 
             try
             {
-                size = new FileInfo(path).Length; //https://stackoverflow.com/questions/1380839/how-do-you-get-the-file-size-in-c/20863065
+                size = new FileInfo(path).Length;
             }
             catch (FileNotFoundException)
             {
@@ -369,13 +464,20 @@ namespace Graphical_Backup_Program
             return size;
         }
 
+        /// <summary>
+        /// Gets the file sizes of all files in a folder<para/>
+        /// <see href="https://stackoverflow.com/questions/12166404/how-do-i-get-folder-size-in-c">Get size of files in folder</see>
+        /// </summary>
+        /// <param name="path">The folder with the files to get the sizes</param>
+        /// <returns>Size in bytes</returns>
         private static double GetFolderSize(string path)
         {
+            //TODO: change return type from double to long so we match what get's returned by our FileInfo().Length call
             double size = 0;
 
             try
             {
-                DirectoryInfo di = new(path); //https://stackoverflow.com/questions/12166404/how-do-i-get-folder-size-in-c
+                DirectoryInfo di = new(path); //
                 size += di.EnumerateFiles("*", SearchOption.AllDirectories).Sum(fi => fi.Length);
             }
             catch (DirectoryNotFoundException)
@@ -386,12 +488,20 @@ namespace Graphical_Backup_Program
             return size;
         }
 
-        //The big TextBox.
+        /// <summary>
+        /// Calls UpdateControls() when the user changes something in the big PathsTextBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PathsTextBox_TextChanged(object sender, EventArgs e)
         {
             UpdateControls();
         }
 
+        /// <summary>
+        /// Gets the size of the backup as the user currently has it configured. Updates status strip with backup size, including setting the unit of measurement based on size.
+        /// </summary>
+        /// <returns>Backup size in bytes</returns>
         private double UpdateBackupSize()
         {
             double backupSize = 0;
@@ -441,12 +551,21 @@ namespace Graphical_Backup_Program
             return backupSize;
         }
 
+        /// <summary>
+        /// Event for when the user deselects the Paths To Backup TextBox, will call UpdateBackupSize()
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PathsTextBox_Leave(object sender, EventArgs e)
         {
             UpdateBackupSize();
         }
 
-        //On startup, assign GUI controls values from files, and disable any controls, if necessary.
+        /// <summary>
+        /// On startup, assign GUI controls values from files, and disable any controls, if necessary.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form_Shown(object sender, EventArgs e)
         {
             if (!File.Exists(pathsFilePath))
@@ -466,6 +585,7 @@ namespace Graphical_Backup_Program
                 file.Close();
             }
 
+            //TODO: Potentially convert the config file to XML for better usability/readability
             //Read in config stuff. Is this extremely stupid and sub-optimal? Yes. Does it work? Also yes.
             string configFileTxt = File.ReadAllText(configFilePath);
 
@@ -510,24 +630,41 @@ namespace Graphical_Backup_Program
             UpdateBackupSize();
         }
 
-        //On exit, save config stuff for next time.
+        /// <summary>
+        /// Calls SaveToFiles() before quitting application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
             SaveToFiles();
         }
 
+        /// <summary>
+        /// Clear the path1TextBox text, and UpdateControls()
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClearPath1_Click(object sender, EventArgs e)
         {
             path1TextBox.Text = String.Empty;
             UpdateControls();
         }
 
+        /// <summary>
+        /// Clear the path2TextBox text, and UpdateControls()
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClearPath2_Click(object sender, EventArgs e)
         {
             path2TextBox.Text = String.Empty;
             UpdateControls();
         }
 
+        /// <summary>
+        /// Save to the paths file, and save to the config file
+        /// </summary>
         private void SaveToFiles()
         {
             File.WriteAllText(pathsFilePath, pathsTextBox.Text);
@@ -535,6 +672,10 @@ namespace Graphical_Backup_Program
             File.WriteAllText(configFilePath, configFileText);
         }
 
+        /// <summary>
+        /// Sets all checkBoxes to true or false
+        /// </summary>
+        /// <param name="toggled">What to set the checkBoxes to</param>
         private void ToggleAllChecks(bool toggled)
         {
             checkBox0.Checked = toggled;
@@ -549,6 +690,12 @@ namespace Graphical_Backup_Program
             checkBox9.Checked = toggled;
         }
 
+        //TODO: Change the event call to CheckedChanged and just call to ToggleAllChecks to the value of the SelectAllBtn.Checked
+        /// <summary>
+        /// Sets all checkBoxes to true
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectAllBtn_Click(object sender, EventArgs e)
         {
             ToggleAllChecks(true);
@@ -556,6 +703,11 @@ namespace Graphical_Backup_Program
             UpdateBackupSize();
         }
 
+        /// <summary>
+        /// Sets all checkBoxes to false
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeselectAllBtn_Click(object sender, EventArgs e)
         {
             ToggleAllChecks(false);
@@ -594,7 +746,9 @@ namespace Graphical_Backup_Program
                 pathsTextBox.Text += groupPath.group + " " + groupPath.path + Environment.NewLine;
         }
 
-        //Determines what text to put in the StatusStrip label and if the Backup Button needs to be disabled.
+        /// <summary>
+        /// Determines what text to put in the StatusStrip label and if the Backup Button needs to be disabled
+        /// </summary>
         private void UpdateControls()
         {
             if (pathsTextBox.Text == String.Empty)
@@ -641,13 +795,22 @@ namespace Graphical_Backup_Program
             }
         }
 
-        //When any of the 10 group CheckBoxes are (un)checked.
+        /// <summary>
+        /// When any of the 10 group CheckBoxes are (un)checked. Calls UpdateControls() and UpdateBackupSize()
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GroupCheckBoxes_CheckedChanged(object sender, EventArgs e)
         {
             UpdateControls();
             UpdateBackupSize();
         }
 
+        /// <summary>
+        /// Calls UpdateControls() when the checked PathsRadioBtn changes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PathRadioBtn_CheckedChanged(object sender, EventArgs e)
         {
             UpdateControls();
