@@ -12,6 +12,7 @@
 
 # Graphical-Backup-Program files to ignore
 Graphical Backup Program/Paths.txt
+Graphical Backup Program/config.txt
 .vs/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
