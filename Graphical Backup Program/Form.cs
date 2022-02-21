@@ -477,7 +477,7 @@ namespace Graphical_Backup_Program
 
 				if (di.Exists)
 				{
-                    return di.EnumerateFiles("*", SearchOption.AllDirectories).Sum(fi => fi.Length);
+                    return di.SafeGetFileInfosRecursive("*").Sum(x => x.Length);
                 }
 
 				else
@@ -823,6 +823,34 @@ namespace Graphical_Backup_Program
         private void PathRadioBtn_CheckedChanged(object sender, EventArgs e)
         {
             UpdateControls();
+        }
+    }
+
+    public static class MyExtensions
+	{
+        /// <summary>
+        /// Extension to get FileInfo of all files/subfolders SAFELY since <![CDATA[IEnumerable<FileInfo>]]>.EnumerateFiles() completely collapses on first exception thrown with no way to handle the individual exception.<para/>
+        /// <see href="https://stackoverflow.com/a/15179942">Error on getting DirectoryInfo with GetFileSystemInfos()</see>
+        /// </summary>
+        /// <param name="di">Makes this method an extension of <![CDATA[IEnumerable<FileInfo>]]> so we can call it just like a built-in method</param>
+        /// <param name="searchPattern">The search pattern for which files need to be enumerated</param>
+        /// <returns>Enumerable collection of FileInfo based on searchPattern, starting in the directory of this object</returns>
+        public static IEnumerable<FileInfo> SafeGetFileInfosRecursive(this DirectoryInfo di, string searchPattern)
+        {
+            try
+            {
+                return di
+                    .EnumerateFiles(searchPattern)
+                    .Concat(
+                        di
+                            .EnumerateDirectories()
+                            .SelectMany(x => x.SafeGetFileInfosRecursive(searchPattern))
+                    );
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return Enumerable.Empty<FileInfo>();
+            }
         }
     }
 }
